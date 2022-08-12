@@ -36,12 +36,12 @@ class Weathertop(UniquePlace):
 
         @param player:  The current player.
         """
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         
         print ("Even though you have no personal connection with the place,"
         " you \nfeel a strong sense of nostalgia at Weathertop.")
-        raw_input("Press enter to continue. ")
+        input("Press enter to continue. ")
 
         #Solicit user input
         choice = self._choice()
@@ -50,25 +50,24 @@ class Weathertop(UniquePlace):
         if choice == "camp":
             self._camp(player)
         elif choice == "keep moving":
-            print "You continue in your quest."
-            print ""
+            print("You continue in your quest.")
+            print("")
 
     def _choice(self):
         """
         Solicits user choice
         """
-        print \
-"""
+        print("""
 You are spent after a day of travel. Would you like
 to camp the night at Weathertop?
 \t\"Yes I would like to camp.\"       - 'camp'
 \t\"No I would like to keep moving.\" - 'keep moving'
-""" 
+""") 
         choice = None
         acceptable = ["camp", "keep moving"]
         while choice not in acceptable:
-            choice = raw_input("Choice? ")
-        print ""
+            choice = input("Choice? ")
+        print("")
         
         return choice
         
@@ -89,12 +88,12 @@ to camp the night at Weathertop?
                 
             print ("Alas, peaceful rest was never to be. After all, you are a" 
             " man \nhunted.")
-            print ""
+            print("")
             
         #Peaceful rest
         else:
-            print "You enjoy a relaxing stay among ancient ruins."
+            print("You enjoy a relaxing stay among ancient ruins.")
             amountHealing = player.getMaxHp() - player.getHp()
             player.heal(amountHealing)
-            print "You wake up relaxed and ready to go!"
-            print ""
+            print("You wake up relaxed and ready to go!")
+            print("")

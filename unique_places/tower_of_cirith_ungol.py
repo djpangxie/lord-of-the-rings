@@ -51,13 +51,13 @@ class TowerOfCirithUngol(UniquePlace):
         @param player:   The current player.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         
         print ("As you climb the path of Cirith Ungol, you stare at the"
             " ghastly city of Minas \nMorgul.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Solicit user choice
         choice = self._choice()
@@ -66,8 +66,8 @@ class TowerOfCirithUngol(UniquePlace):
         if choice == "yes":
             self._shelobClef(player)
         else:
-            print "You live to fight another day."
-            print ""
+            print("You live to fight another day.")
+            print("")
             return
         
     def _choice(self):
@@ -75,13 +75,13 @@ class TowerOfCirithUngol(UniquePlace):
         Determines if user wants to attack or run.
         """
         #Solicit user choice
-        print "To continue, you must go through the Shelob's Clef."
+        print("To continue, you must go through the Shelob's Clef.")
         choice = None
         acceptable = ["yes", "no"]
         while choice not in acceptable:
-            choice = raw_input("Would you like to continue? Choices:"
+            choice = input("Would you like to continue? Choices:"
                 " 'yes' and 'no.' ")
-        print ""
+        print("")
         
         return choice
 
@@ -94,23 +94,23 @@ class TowerOfCirithUngol(UniquePlace):
         #Story
         print ("As you enter into Shelob's Clef, you are surrounded by a"
             " supernatural darkness and \nthe stench of rotting corpses.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
-        print "...."
-        raw_input("Press enter to continue. ")
-        print ""
+        print("....")
+        input("Press enter to continue. ")
+        print("")
         
         #If Phial of Galadriel in inventory
         if phialOfGaladriel in player.getInventory():
-            print "Galadriel's phial lights up the entire chamber."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("Galadriel's phial lights up the entire chamber.")
+            input("Press enter to continue. ")
+            print("")
             
             print ("The light gives you strength... and Shelob backs away,"
             " afraid of the light.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
             
             #Call next action sequence
             self._cirithUngol(player)
@@ -124,9 +124,9 @@ class TowerOfCirithUngol(UniquePlace):
             if not result:
                 return
             
-        print "You encounter a thick spider web."
-        raw_input("Press enter to hack through the web. ")
-        print ""
+        print("You encounter a thick spider web.")
+        input("Press enter to hack through the web. ")
+        print("")
         
         #A potential encounter with Shelob
         shelobAppearance = random.random()
@@ -136,9 +136,9 @@ class TowerOfCirithUngol(UniquePlace):
             if not result:
                 return
                 
-        print "...."
-        raw_input("Press enter to continue. ")
-        print ""
+        print("....")
+        input("Press enter to continue. ")
+        print("")
         
         #A potential encounter with Shelob
         shelobAppearance = random.random()
@@ -147,9 +147,9 @@ class TowerOfCirithUngol(UniquePlace):
             if not result:
                 return
                 
-        print "You encounter a thick spider web."
-        raw_input("Press enter to hack through the web. ")
-        print ""
+        print("You encounter a thick spider web.")
+        input("Press enter to hack through the web. ")
+        print("")
         
         #A potential encounter with Shelob
         shelobAppearance = random.random()
@@ -159,9 +159,9 @@ class TowerOfCirithUngol(UniquePlace):
             if not result:
                 return
                 
-        print "...."
-        raw_input("Press enter to continue. ")
-        print ""
+        print("....")
+        input("Press enter to continue. ")
+        print("")
         
         #A potential encounter with Shelob
         shelobAppearance = random.random()
@@ -171,9 +171,9 @@ class TowerOfCirithUngol(UniquePlace):
             if not result:
                 return
                 
-        print "You have emerged through the darkness!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You have emerged through the darkness!")
+        input("Press enter to continue. ")
+        print("")
         
         #Call next action sequence
         self._cirithUngol(player)
@@ -189,14 +189,14 @@ class TowerOfCirithUngol(UniquePlace):
         if successfulEscape < constants.CIRITH_UNGOL_EVASION_PROB:
             print ("You manage to sneak through the Tower of Cirith Ungol and"
                 " are now in the heart \nof Mordor.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
         #If player gets detected
         else:
             print ("As you attempt to sneak through the rest of the passage,"
                 " you are discovered \nby an orc patrol.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
             result = battle(player, constants.BattleEngineContext.STORY, 
                 self._wave2)
             if not result:
@@ -205,8 +205,8 @@ class TowerOfCirithUngol(UniquePlace):
             #Story
             print ("You make it into Mordor and Sauron has been alerted of"
                 " your presence.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
         
         #Create port for quest completion
         self._createPort("east")

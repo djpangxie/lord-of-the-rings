@@ -106,14 +106,13 @@ nenya = Charm("Nenya", "Elven Ring of Water", 0, 280, 0, 0, 500)
 vilya = Charm("Vilya", "Elven Ring of Air", 0, 265, 0, 15, 0)
 elvenRings = [narya, nenya, vilya]
 
-#Shop weapons
-#Eriador Shops
-walkingStick = Weapon("Walking Stick", "Offensive properties", 2, 4, 1)
-gardenShovel = Weapon("Garden Shovel", 
-    "The best weapon we could find...", 3, 5, 2)
-gardenSythe = Weapon("Garden Sythe", "Very intimidating", 3, 7, 4)
-shortSword = Weapon("Short Sword", "Hobbit-sized", 3, 8, 5)
-hobbitElite = Weapon("Elite Hobbit Battle Gear", "Basically, rocks", 2, 12, 6)
+#商店武器
+#伊利雅德的商店
+walkingStick = Weapon("手杖", "进攻属性", 2, 4, 1)
+gardenShovel = Weapon("花园铲", "我们能找到的最好的武器...", 3, 5, 2)
+gardenSythe = Weapon("花园环路", "非常吓人", 3, 7, 4)
+shortSword = Weapon("短剑", "霍比特人标配", 3, 8, 5)
+hobbitElite = Weapon("精英霍比特人战斗装备", "基本上是石子", 2, 12, 6)
 
 eriadorWeaponsDist = {
     walkingStick: [0, 2],
@@ -171,11 +170,11 @@ gondorWeaponsDist = {
     gondorianLongbow: [16, 20],
 }
 
-#Shop armor
-#Eriador Shops
-farmerShawl = Armor("Farmer's Shawls", "Protection from the sun", 4, 8, 1)
-travelCloak = Armor("Travel Cloak", "A dark shroud", 3, 12, 1)
-leatherCloak = Armor("Leather Cloak", "Stuffy", 5, 14, 2)
+#商店盔甲
+#伊利雅德的商店
+farmerShawl = Armor("农夫的披肩", "防晒用的", 4, 8, 1)
+travelCloak = Armor("旅行披风", "一条黑暗的裹尸布", 3, 12, 1)
+leatherCloak = Armor("皮斗篷", "穿起来真的很窒闷", 5, 14, 2)
 
 eriadorArmorDist = {
     farmerShawl: [0, 2],
@@ -226,11 +225,11 @@ gondorArmorDist = {
     eliteGondorianArmor: [17, 20]
 }
 
-#Shop potions
-#Eriador shops
-hobbitTea = Potion("Hobbit Tea", "Bay leaf", 1, 4, 4)
-shireWater = Potion("Shire Water", "From the Brandywine", 1, 6, 6)
-shireWater2 = Potion("Shire Water", "From the Shirebourne", 1, 8, 10)
+#商店药水
+#伊利雅德的商店
+hobbitTea = Potion("霍比特茶", "主要是月桂叶", 1, 4, 4)
+shireWater = Potion("夏尔水", "产自白兰地", 1, 6, 6)
+shireWater2 = Potion("夏尔水", "产自夏尔伯恩", 1, 8, 10)
 
 eriadorPotionDist = {
     hobbitTea: [0, 2],
@@ -271,76 +270,65 @@ gondorPotionDist = {
     advancedElixir: [14, 20]
 }
 
-#Total shop weapons distributions
+#商店武器总分布
 shopWeaponDist = {
     constants.RegionType.ERIADOR: eriadorWeaponsDist,
     constants.RegionType.RHOVANION: rhovanionWeaponsDist,
     constants.RegionType.ROHAN: rohanWeaponsDist,
     constants.RegionType.GONDOR: gondorWeaponsDist}
 
-#Total shop armor distributions
+#商店盔甲总分布
 shopArmorDist = {
     constants.RegionType.ERIADOR: eriadorArmorDist,
     constants.RegionType.RHOVANION: rhovanionArmorDist,
     constants.RegionType.ROHAN: rohanArmorDist,
     constants.RegionType.GONDOR: gondorArmorDist}
     
-#Total shop potion distributions
+#商店药水总分布
 shopPotionDist = {
     constants.RegionType.ERIADOR: eriadorPotionDist,
     constants.RegionType.RHOVANION: rhovanionPotionDist,
     constants.RegionType.ROHAN: rohanPotionDist,
     constants.RegionType.GONDOR: gondorPotionDist}
     
-#Low-level unique weapons
-guthwine = Weapon("Guthwine", "Eomer's sword. Stolen goods", 8, 142, 22)
-herugrim = Weapon("Herugrim", 
-"Theoden's sword. Will attract negative attention", 8, 136, 26)
-orchrist = Weapon("Orcrist", "Sindarin: 'Goblin Cleaver", 15, 160, 24)
+#低级独特武器
+guthwine = Weapon("古丝温", "伊奥梅尔的剑。赃物", 8, 142, 22)
+herugrim = Weapon("西鲁格因", "希优顿的剑。会引起负面的关注", 8, 136, 26)
+orchrist = Weapon("欧克力斯特", "辛达语：兽咬剑", 15, 160, 24)
 
-#Low-level unique armor
-tarhelmCrown = Armor("Tarnhelm Crown", "Straight from Tristram", 6, 86, 3)
-snowclash = Armor("Snowclash Battle Belt", "Straight from Tristram", 5, 92, 4)
-razortail = Armor("Razortail Sharkskin", "Straight from Tristram", 8, 102, 4)
-nightsmoke = Armor("Nightsmoke", "Straight from Tristram", 4, 114, 5)
-peasantCrown = Armor("Peasant Crown", "Straight from Tristram", 4, 85, 4)
-crownOfThieves = Armor("Crown of Thieves", "Straight from Tristram", 5, 76, 3)
+#低级独特盔甲
+tarhelmCrown = Armor("塔恩海姆王冠", "直接来自特里斯特拉姆", 6, 86, 3)
+snowclash = Armor("雪崩战斗腰带", "直接来自特里斯特拉姆", 5, 92, 4)
+razortail = Armor("刺尾鲨鱼皮", "直接来自特里斯特拉姆", 8, 102, 4)
+nightsmoke = Armor("夜烟", "直接来自特里斯特拉姆", 4, 114, 5)
+peasantCrown = Armor("农夫王冠", "直接来自特里斯特拉姆", 4, 85, 4)
+crownOfThieves = Armor("盗贼之冠", "直接来自特里斯特拉姆", 5, 76, 3)
 
-#High-level unique weapons
+#精英级独特武器
 glamdring = Weapon("Glamdring", "Foe Hammer", 6, 162, 72)
 anglachel = Weapon("Anglachel", "Iron of the Flaming Star", 6, 170, 76)
 angrist = Weapon("Angrist", "Iron Cleaver", 5, 174, 80)
 anguirel = Weapon("Anguriel", "Iron of Eternity", 6, 172, 82)
-belthronding = Weapon("Belthronding", "A bow wielded by Beleg Cuthalion", 
-5, 176, 76)
+belthronding = Weapon("Belthronding", "A bow wielded by Beleg Cuthalion", 5, 176, 76)
 dramborleg = Weapon("Dramborleg", "Thudder Sharp", 6, 160, 78)
-scepterOfAnnuminas = Weapon("Scepter of Annuminas", 
-"Held by the Kings of Arnor", 6, 232, 96)
+scepterOfAnnuminas = Weapon("Scepter of Annuminas", "Held by the Kings of Arnor", 6, 232, 96)
 
-#High-level unique armor
-helmOfHador = Armor("Helm of Hador", 
-"A helmet owned by the Royal House of Hador", 5, 140, 12)
-harlequinCrestShako = Armor("Harlequin Crest Shako", 
-"Straight from Tristram", 6, 162, 10)
+#精英级独特盔甲
+helmOfHador = Armor("Helm of Hador", "A helmet owned by the Royal House of Hador", 5, 140, 12)
+harlequinCrestShako = Armor("Harlequin Crest Shako", "Straight from Tristram", 6, 162, 10)
 templarsMight = Armor("Templar's Might", "Straight from Tristram", 6, 152, 12)
 tyraelsMight = Armor("Tyrael's Might", "Straight from Tristram", 6, 170, 14)
 
-#Elite-level unique items
+#精英级独特物品
 aeglos = Weapon("Aeglos", "A spear wielded by Gil-galad", 6, 220, 152)
 ananruth = Weapon("Aranruth", "King's Ire", 5, 242, 146)
 ringil = Weapon("Ringil", "Cold Spark", 8, 248, 156)
 grond = Weapon("Grond", "Morgoth's Mace", 30, 653, 340)
-crownOfElendil = Armor("Crown of Elendil", 
-    "A brilliant crown worn by the Kings of Gondor", 6, 220, 16)
-ironCrown = Armor("Iron Crown", "Forged by Morgoth to hold the Silmaril", 
-    10, 316, 22)
+crownOfElendil = Armor("Crown of Elendil", "A brilliant crown worn by the Kings of Gondor", 6, 220, 16)
+ironCrown = Armor("Iron Crown", "Forged by Morgoth to hold the Silmaril", 10, 316, 22)
 
-lowLevelFindableUniques = [guthwine, herugrim, orchrist, tarhelmCrown, 
-    snowclash, razortail, nightsmoke, peasantCrown, crownOfThieves]
+lowLevelFindableUniques = [guthwine, herugrim, orchrist, tarhelmCrown, snowclash, razortail, nightsmoke, peasantCrown, crownOfThieves]
 
-highLevelFindableUniques = [glamdring, anglachel, angrist, anguirel, 
-    belthronding, dramborleg, scepterOfAnnuminas, helmOfHador, 
-    harlequinCrestShako, templarsMight, tyraelsMight]
+highLevelFindableUniques = [glamdring, anglachel, angrist, anguirel, belthronding, dramborleg, scepterOfAnnuminas, helmOfHador, harlequinCrestShako, templarsMight, tyraelsMight]
 
-eliteLevelFindableUniques = [aeglos, ananruth, ringil, grond, crownOfElendil, 
-    ironCrown]
+eliteLevelFindableUniques = [aeglos, ananruth, ringil, grond, crownOfElendil, ironCrown]

@@ -38,24 +38,24 @@ class TomBombadilHouse(UniquePlace):
         @param player:  The current player.
         """
         #Story
-        print self._greetings
+        print(self._greetings)
         
         print ("\"I am Tom Bombadil. My wife Goldberry and I live in these"
             " forests.\"")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         print ("\"I can tell that you are on a long journey and are carrying"
             " something that \nmust be kept safe. I would like to leave you with"
             " a gift if you would like to \naccept it.\"")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         for item in self._gift:
             if player.addToInventory(item):
                 self._gift.remove(item)
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
-        print "\"Thank you for visiting me in these forests.\""
+        print("\"Thank you for visiting me in these forests.\"")

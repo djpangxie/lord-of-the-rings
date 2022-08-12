@@ -3,35 +3,36 @@
 import constants
 from commands.command_words import CommandWords
 
+
 class Parser(object):
     """
-    Parses user input, searching for registered commands.
+    解析用户输入，搜索已注册的命令。
     """
+
     def __init__(self, commandWords):
         """
-        Initializes parser.
+        初始化解析器。
 
-        @param commandWords:     List of commands.
+        @param commandWords:     命令列表
         """
         if not commandWords:
-            errorMsg = "Parser must be initialized with CommandWords object."
+            errorMsg = "解析器必须用CommandWords对象进行初始化。"
             raise AssertionError(errorMsg)
 
         self._commandWords = commandWords
 
     def getNextCommand(self):
         """
-        Retrieves next command from user.
+        检索用户的下一条命令。
         """
-        userInput = raw_input(constants.COMMAND_PROMPT)
+        userInput = input(constants.COMMAND_PROMPT)
         userInput = userInput.strip().lower()
 
         while not self._commandRecognized(userInput):
-            print ("Command '%s' not recognized. Type 'help' for help." 
-            % userInput)
-            print ""
+            print(("命令'%s'无法识别。键入'help'查看帮助" % userInput))
+            print("")
 
-            userInput = raw_input(constants.COMMAND_PROMPT)
+            userInput = input(constants.COMMAND_PROMPT)
             userInput = userInput.strip().lower()
 
         command = self._commandWords.getCommand(userInput)
@@ -39,13 +40,12 @@ class Parser(object):
 
     def _commandRecognized(self, name):
         """
-        Helper method to determine if user
-        specified known command.
+        帮助方法，用于确定用户是否指定了已知的命令。
 
-        @param name:        Command's name 
-        @return:            True if recognized, False otherwise.
+        @param name:        命令的名称
+        @return:            如果被识别，则为True，否则为False
         """
-        #Make sure name is not None
+        # 确保名称不是None
         if not name:
             return False
 

@@ -190,8 +190,8 @@ class Player(object):
         if currentLevel != potentialNewLevel:
             numberLevelUp = potentialNewLevel - currentLevel
             self._level = potentialNewLevel
-            print "\n%s leveled up! %s is now level %s!" \
-                  % (self._name, self._name, self._level)
+            print("\n%s leveled up! %s is now level %s!" \
+                  % (self._name, self._name, self._level))
                   
             #Updates player level and stats
             for level in range(numberLevelUp):
@@ -364,20 +364,20 @@ class Player(object):
         
         #Item cannot already be inventory
         if item in inventory:
-            print "Item already in inventory."
+            print("Item already in inventory.")
         
         #Check inventory weight restriction
         itemWeight = item.getWeight()
         inventoryWeight = inventory.getWeight()
         
         if itemWeight + inventoryWeight > self._weightLimit:
-            print "You are overburdened."
+            print("You are overburdened.")
             return False
         
         #Successful execution
         inventory.addItem(item)
         sortItems(inventory)
-        print "Added %s to inventory." % item.getName()
+        print("Added %s to inventory." % item.getName())
         return True
             
     def removeFromInventory(self, item):
@@ -558,17 +558,17 @@ class Player(object):
         choice = None
         
         #Solicit user input
-        print "You may move to the following:"
+        print("You may move to the following:")
         for space in spaces:
-            print "\t-%s" % space.getName()
+            print("\t-%s" % space.getName())
             acceptableChoices[space] = space.getName()
-        print ""
+        print("")
         
-        while choice not in acceptableChoices.values():
-            choice = raw_input("Where would you like to go? ")
+        while choice not in list(acceptableChoices.values()):
+            choice = input("Where would you like to go? ")
 
         #Move to new space
-        for pair in acceptableChoices.items():
+        for pair in list(acceptableChoices.items()):
             if choice in pair:
                 space = pair[0]
                 break

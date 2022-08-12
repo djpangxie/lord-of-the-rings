@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
@@ -30,33 +30,33 @@ class CheckEquipmentCommand(Command):
         equipment = self._player.getEquipped()
         
         #Prints currently equipped items
-        print "%s's currently equipped items:\n" % playerName
+        print("%s's currently equipped items:\n" % playerName)
         
         for item in equipment:
             itemName = item.getName()
             if isinstance(item, Weapon):
                 attack = item.getAttack()
-                print "\tWeapon: %s." % itemName
-                print "\t%s yields a %s attack bonus." % (itemName, attack)
+                print("\tWeapon: %s." % itemName)
+                print("\t%s yields a %s attack bonus." % (itemName, attack))
             elif isinstance(item, Armor):
                 defense = item.getDefense()
-                print "\tArmor: %s." % itemName
-                print "\t%s yields a %s defense bonus." % (itemName, defense)
+                print("\tArmor: %s." % itemName)
+                print("\t%s yields a %s defense bonus." % (itemName, defense))
             elif isinstance(item, Charm):
                 attack = item.getAttack()
                 defense = item.getDefense()
                 hp = item.getHp()
-                print "\tCharm: %s:" % itemName
+                print("\tCharm: %s:" % itemName)
                 if item.getAttack():
-                    print "\t%s yields a %s attack bonus." % (itemName, 
-                    attack)
+                    print("\t%s yields a %s attack bonus." % (itemName, 
+                    attack))
                 if item.getDefense():
-                    print "\t%s yields a %s defense bonus." % (itemName, 
-                    defense)
+                    print("\t%s yields a %s defense bonus." % (itemName, 
+                    defense))
                 if item.getHp():
-                    print "\t%s yields a %s HP bonus." % (itemName, hp)
+                    print("\t%s yields a %s HP bonus." % (itemName, hp))
             else:
                 errorMsg = ("CheckEquipmentCommand command given invalid item" 
                 " type.")
                 raise AssertionError(errorMsg)
-            print ""
+            print("")

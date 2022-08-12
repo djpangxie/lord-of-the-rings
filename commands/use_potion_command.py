@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from items.potion import Potion
 from items.item_set import ItemSet
 
@@ -33,24 +33,24 @@ class UsePotionCommand(Command):
             if isinstance(item, Potion):
                 potions.addItem(item)
         if potions.count() == 0:
-            print "%s has no potions." % self._player.getName()
+            print("%s has no potions." % self._player.getName())
             return
         
         #User prompt
-        print "%s currently has:" % self._player.getName()
+        print("%s currently has:" % self._player.getName())
         for potion in potions:
-            print "\t%s with %s healing power." % (potion.getName(), 
-            potion.getHealing())
-        print ""
+            print("\t%s with %s healing power." % (potion.getName(), 
+            potion.getHealing()))
+        print("")
     
         choice = None
         while True:
-            choice = raw_input("Which potion would you like to use? ")
+            choice = input("Which potion would you like to use? ")
             if potions.containsItemWithName(choice):
                 break
             else:
-                print "%s does not have that potion." % self._player.getName()
-                print ""
+                print("%s does not have that potion." % self._player.getName())
+                print("")
 
         #Healing mechanics
         potionChoice = potions.getItemByName(choice)
@@ -63,6 +63,6 @@ class UsePotionCommand(Command):
         
         inventory.removeItem(potionChoice)
         
-        print "%s was healed by %s! %s's health is now %s." \
+        print("%s was healed by %s! %s's health is now %s." \
         % (self._player.getName(), healed, self._player.getName(), 
-        self._player.getHp())
+        self._player.getHp()))

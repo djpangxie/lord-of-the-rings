@@ -86,11 +86,11 @@ class MinasMorgul(UniquePlace):
         @param player:   The current player.
         """
         #Story
-        print self._greetings
-        print ""
-        print "The haunted city of Minas Morgul chills your bones."
-        raw_input("Press enter to continue. ")
-        print ""
+        print(self._greetings)
+        print("")
+        print("The haunted city of Minas Morgul chills your bones.")
+        input("Press enter to continue. ")
+        print("")
         
         #Solicit user choice
         choice = self._choice()
@@ -112,9 +112,9 @@ class MinasMorgul(UniquePlace):
         choice = None
         acceptable = ["frontal assault", "run"]
         while choice not in acceptable:
-            choice = raw_input("What do you want to do? Choices: 'frontal" 
+            choice = input("What do you want to do? Choices: 'frontal" 
                 " assault' or 'run.' ")
-        print ""
+        print("")
         
         return choice
         
@@ -127,21 +127,21 @@ class MinasMorgul(UniquePlace):
         #Wave 1
         print ("Witch-King: \"Time for tea and crumpets. Please keep to the" 
             " left and don't \ntouch any of the artifacts.\" ")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave)
         if not result:
             return
         
-        print "Witch-King: \"Hmm. You appear to not like my tea. How Rude....\"" 
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Witch-King: \"Hmm. You appear to not like my tea. How Rude....\"") 
+        input("Press enter to continue. ")
+        print("")
         
         #Wave 2
-        print "Witch-King: \"Perhaps you will like this instead....\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Witch-King: \"Perhaps you will like this instead....\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
         if not result:
@@ -158,21 +158,21 @@ class MinasMorgul(UniquePlace):
         """
         print ("You have taken the city of Minas Morgul and secured the" 
             " western route into Mordor!")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if len(self._loot) != 0:
-            print "You quickly loot the battle field."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("You quickly loot the battle field.")
+            input("Press enter to continue. ")
+            print("")
             for item in self._loot:
                 if player.addToInventory(item):
                     self._loot.remove(item)
-            print ""
+            print("")
         
-        print "You quickly move on, knowing that Sauron is on the move too."
-        print ""
+        print("You quickly move on, knowing that Sauron is on the move too.")
+        print("")
         
         self._createPort("east")
         
@@ -186,12 +186,12 @@ class MinasMorgul(UniquePlace):
         #Battle enemies
         print ("As you rush out of the area, a large number of enemies catch" 
         " up to you.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)
         if not result:
             return
             
-        print "You narrowly escape your enemies."
-        print ""
+        print("You narrowly escape your enemies.")
+        print("")

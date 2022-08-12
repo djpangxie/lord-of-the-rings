@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class UnequipCommand(Command):
     """
@@ -27,24 +27,24 @@ class UnequipCommand(Command):
 
         #If no items to unequip
         if equipped.count() == 0:
-            print "No items to unequip."
+            print("No items to unequip.")
             return
 
         #User prompt
-        print "%s may unequip:" % self._player.getName()
+        print("%s may unequip:" % self._player.getName())
         for item in equipped:
-            print "\t%s" % item.getName()
-        print ""
+            print("\t%s" % item.getName())
+        print("")
         
-        itemToUnequip = raw_input("Which item do you want to unequip? \n")
+        itemToUnequip = input("Which item do you want to unequip? \n")
         itemEquipment = equipped.getItemByName(itemToUnequip)
         
         #Check if item is currently equipped
         if not itemEquipment:
-            print ""
-            print "%s is not currently equipped!" % itemToUnequip
+            print("")
+            print("%s is not currently equipped!" % itemToUnequip)
             return
 
         #Unequips player with item
         statement = self._player.unequip(itemEquipment)
-        print statement
+        print(statement)

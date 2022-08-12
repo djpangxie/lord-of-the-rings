@@ -84,11 +84,11 @@ class Isenmouthe(UniquePlace):
         
         @param player:   The current player.
         """
-        print self._greetings
-        print ""
-        print "You see several armies approaching as you near the Isenmouthe."
-        raw_input("Press enter to continue. ")
-        print ""
+        print(self._greetings)
+        print("")
+        print("You see several armies approaching as you near the Isenmouthe.")
+        input("Press enter to continue. ")
+        print("")
         
         #Run battle action sequence
         self._battle(player)
@@ -100,18 +100,18 @@ class Isenmouthe(UniquePlace):
         @param player:   The current player.
         """
         #Wave 1
-        print "Mouth of Sauron: \"You have overstayed your welcome.\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"You have overstayed your welcome.\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave)
         if not result:
             return
         
         #Wave 2
-        print "Mouth of Sauron: \"Time... to... DIE!!!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"Time... to... DIE!!!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
         if not result:
@@ -126,21 +126,21 @@ class Isenmouthe(UniquePlace):
         
         @param player:   The current player.
         """
-        print "You have secured the north-west route into Mordor!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You have secured the north-west route into Mordor!")
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if len(self._loot) != 0:
-            print "While looting the battlefield, you find strange items."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("While looting the battlefield, you find strange items.")
+            input("Press enter to continue. ")
+            print("")
             for item in self._loot:
                 if player.addToInventory(item):
                     self._loot.remove(item)
-            print ""
+            print("")
         
-        print "Welcome to the heart of Mordor!"
-        print ""
+        print("Welcome to the heart of Mordor!")
+        print("")
         
         self._createPort("south")

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class DropCommand(Command):
     """
@@ -27,13 +27,13 @@ class DropCommand(Command):
         inventory = self._player.getInventory()
         
         #Display inventory contents
-        print "The following may be dropped by %s:" % name
+        print("The following may be dropped by %s:" % name)
         for item in inventory:
-            print "\t%s" % item.getName()
-        print ""
+            print("\t%s" % item.getName())
+        print("")
         
-        itemToRemove = raw_input("Which item do you want to drop? \n")
-        print ""
+        itemToRemove = input("Which item do you want to drop? \n")
+        print("")
         
         #Create references
         equipped = self._player.getEquipped()
@@ -41,11 +41,11 @@ class DropCommand(Command):
 
         #Check if item is in inventory
         if not item:
-            print "%s is not in your inventory!" % itemToRemove
+            print("%s is not in your inventory!" % itemToRemove)
             return
 
-        print "Dropping %s" % itemToRemove
-        print "Unequipping %s" % itemToRemove
+        print("Dropping %s" % itemToRemove)
+        print("Unequipping %s" % itemToRemove)
         
         inventory.removeItem(item)
         

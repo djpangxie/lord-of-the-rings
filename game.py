@@ -14,135 +14,123 @@ from commands.enter_command import EnterCommand
 from items.unique_items import theOneRing
 import constants
 
+
 class Game(object):
     """
-    Prepares and executes turn-based game.
+    准备并执行回合制游戏。
     """
+
     def __init__(self):
         """
-        Initializes game.
+        初始化游戏。
         """
-        print "...Game Loading..."
-        print "..."
-        
-        #Initializes game objects
+        print("...游戏加载中...")
+        print("...")
+
+        # 初始化游戏对象
         self._world = game_loader.getWorld()
         self._shire = self._world[0]
         self._orodruin = self._world[26]
-        
+
         startingInventory = game_loader.getStartingInventory()
         self._player = game_loader.getPlayer(self._shire, startingInventory)
         self._commandList = game_loader.getCommandList(self._player)
-        
-        print "..."
-        print "$$$Loading Complete$$$"
-        
-        #Creates parser
+
+        print("...")
+        print("$$$加载完毕$$$")
+
+        # 创建解析器
         self._parser = Parser(self._commandList)
 
     def play(self):
         """
-        Executes main game loop.
+        执行游戏主循环。
         """
         splashScreen = """
         """
-        print splashScreen
-        print ("An adventure game where Russian tries to take on the hoards of" 
-        " Mordor.")
-        print ("A little help from Dear Ladd Jr., Miles, Seth, and C-$ along" 
-        " the way.")
-        print "...~Money~..."
-        print ""
-        print "(Type 'help' for a list of available commands)"
-        print ""
+        print(splashScreen)
+        print("这是一款冒险游戏，你需要为你的英雄收集各种装备以对抗魔多。")
+        print("一路走来，亲爱的小拉德、迈尔斯、塞思和C-$提供了一点帮助。")
+        print("...~Money~...")
+        print("")
+        print("(键入'help'来显示一个可用的命令列表)")
+        print("")
 
-        while(True):
+        while (True):
             self._nextTurn()
 
     def _nextTurn(self):
         """
-        Gets nextCommand from player. If nextCommand may be executed
-        successfully and involves a passing of time, there is a chance that a 
-        random battle will occur after nextCommand is executed.
-        
-        Commands with a chance of unsuccessful execution: the four movement 
-        commands.
+        从玩家那里获得下一个命令。如果nextCommand被成功执行，并且涉及到时间的流逝，那么在nextCommand被执行之后，有可能会发生一场随机的战斗。
+        有可能执行失败的指令：四个移动命令。
         """
-        #Executes next command
+        # 执行下一个命令
         nextCommand = self._parser.getNextCommand()
-        
+
         if nextCommand is not None:
-            #Check command execution
+            # 检查命令的执行情况
             if self._executionCheck(nextCommand):
-                #Then execute nextCommand
+                # 然后执行NextCommand
                 nextCommand.execute()
-                #If passing of time... chance a random battle will occur
+                # 如果时间流逝......有可能发生随机的战斗
                 if nextCommand.getTime():
                     self._battlePhase()
-            print ""
-            
+            print("")
+
         else:
-            errorMsg = "Failed to receive command from parser."
+            errorMsg = "从解析器接收命令失败。"
             raise AssertionError(errorMsg)
-        
-        #If player has won the game
+
+        # 如果玩家已经赢得了游戏
         if self._winningConditions():
-            print ("Congratulations! %s has saved Middle Earth!" 
-            % self._player.getName())
-            raw_input("Press enter to exit. ")
+            print(("尊敬的%s，恭喜你拯救了中土世界！" % self._player.getName()))
+            input("按下回车键退出。")
             sys.exit()
-            
+
     def _executionCheck(self, nextCommand):
         """
-        Checks if the user's command may be carried out. This only applies to 
-        the four movement commands.
-        
-        This method is intended to prevent random battles from occuring in 
-        instances where the command cannot be executed.
-        
-        @return:              True if command will be executed successfully and 
-                              False otherwise.
+        检查用户的命令是否可以被执行。这只适用于四个移动命令。
+        这个方法是为了防止在不能执行命令的情况下发生随机战斗。
+
+        @return:              如果命令将被成功执行，则为"True"，否则为"False"
         """
         space = self._player.getLocation()
-        
-        #Check movement commands
+
+        # 检查移动指令
         if isinstance(nextCommand, NorthCommand):
             if not self._player.canMoveNorth():
-                print "Cannot move north."
+                print("无法向北移动。")
                 return False
         elif isinstance(nextCommand, SouthCommand):
             if not self._player.canMoveSouth():
-                print "Cannot move south."
+                print("无法向南移动。")
                 return False
         elif isinstance(nextCommand, EastCommand):
             if not self._player.canMoveEast():
-                print "Cannot move east."
+                print("无法向东移动。")
                 return False
         elif isinstance(nextCommand, WestCommand):
             if not self._player.canMoveWest():
-                print "Cannot move west."
+                print("无法向西移动。")
                 return False
-        
+
         return True
 
     def _battlePhase(self):
         """
-        Evaluates if a random battle will occur. If so, battle_engine.battle()
-        is called to execute the battle.
+        评估是否会发生随机战斗。如果是的话，将调用battle_engine.battle()来执行战斗。
         """
         currentLocation = self._player.getLocation()
         battleProbability = currentLocation.getBattleProbability()
-        
-        #Determines if random battle will occur
+
+        # 确定是否会发生随机战斗
         if random.random() < battleProbability:
-            #Call on battle to resolve battle
-            battle_engine.battle(self._player, 
-            constants.BattleEngineContext.RANDOM)
-    
+            # 呼唤战斗，解决战斗
+            battle_engine.battle(self._player, constants.BattleEngineContext.RANDOM)
+
     def _winningConditions(self):
         """
-        Evaluates if player has won the game. Criteria for winning the game is 
-        that the OneRing has been dropped in the space, orodruin (Mount Doom). 
+        评估玩家是否已经赢得游戏。赢得游戏的标准是魔戒被丢在orodruin（末日火山）地区。
         """
         if self._orodruin.containsItem(theOneRing):
             return True

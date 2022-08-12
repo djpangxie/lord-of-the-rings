@@ -28,15 +28,15 @@ class OstInEdhil(UniquePlace):
         """
         healing = player.getMaxHp() - player.getHp()
         
-        print self._greetings
-        print ""
-        print "You decide that this is a good place to spend the night."
-        raw_input("Press enter to continue. ")
-        print ""
+        print(self._greetings)
+        print("")
+        print("You decide that this is a good place to spend the night.")
+        input("Press enter to continue. ")
+        print("")
             
         player.heal(healing)
-        print "%s was healed by %s!" % (player.getName(), healing)
-        print ""
+        print("%s was healed by %s!" % (player.getName(), healing))
+        print("")
 
-        print "You awaken refreshed and ready for a new day."
-        print ""
+        print("You awaken refreshed and ready for a new day.")
+        print("")

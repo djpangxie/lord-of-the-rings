@@ -37,17 +37,17 @@ class Derningle(UniquePlace):
         @param player:  The current player.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         print ("You find yourself deep within Fangorn Forest and it appears" 
             " as though the \ntrees are alive.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
 
         #Solicit user input for decision tree
-        print "You find yourself at a fork in the woods."
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You find yourself at a fork in the woods.")
+        input("Press enter to continue. ")
+        print("")
         choice = self._fork()
         
         #Implement user choice
@@ -60,12 +60,12 @@ class Derningle(UniquePlace):
             #Implement user choice
             if choice == "yes":
                 self._continueDestination(player)
-                print "You leave Fangorn blessed."
-                print ""
+                print("You leave Fangorn blessed.")
+                print("")
             else:
                 print ("You leave Fangorn in a hurry, feeling watched the" 
                 " entire time.")
-                print ""
+                print("")
             
     def _fork(self):
         """
@@ -74,9 +74,9 @@ class Derningle(UniquePlace):
         choice = None
         acceptable = ["left", "straight"]
         while choice not in acceptable:
-            choice = raw_input("What would you like to do? Options: 'left' or" 
+            choice = input("What would you like to do? Options: 'left' or" 
             " 'straight.' ")
-        print ""
+        print("")
         
         return choice
 
@@ -94,20 +94,20 @@ class Derningle(UniquePlace):
         #Story
         print ("You find yourself in a sunny pasture deep within the depths of"
         " Fangorn Forest.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         print ("You realize that you are not only fighting for yourself but" 
         " for beautiful places \nsuch as this. Great strength wells up within" 
         " your inner man.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Player gets experience increase
-        print "Player gains %s experience." % experienceIncrease
+        print("Player gains %s experience." % experienceIncrease)
         player.increaseExperience(experienceIncrease)
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
 
     def _straightDestination(self):
         """
@@ -118,16 +118,16 @@ class Derningle(UniquePlace):
         #Story
         print ("You find yourself in a dark passage in Fangorn and you feel" 
             " uneasy. You hear \nrustling about.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Solicit user choice
         choice = None
         acceptable = ["yes", "no"]
         while choice not in acceptable:
-            choice = raw_input("Would you like to continue venturing deeper" 
+            choice = input("Would you like to continue venturing deeper" 
                 " into the forest? \nOptions: 'yes' or 'no.' ")
-        print ""
+        print("")
         
         return choice
 
@@ -139,18 +139,18 @@ class Derningle(UniquePlace):
         @param player:  The current player.
         """
         #Story
-        print "You find yourself in an an opening surrounded by several ents!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You find yourself in an an opening surrounded by several ents!")
+        input("Press enter to continue. ")
+        print("")
 
-        print "Treebeard: \"Are you a little orc?\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Treebeard: \"Are you a little orc?\"")
+        input("Press enter to continue. ")
+        print("")
 
         print ("\"Ah I see. Please continue fighting for what is right and" 
             " receive this blessing \nfrom us.\"")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Player receives gift
         print ("\"Received three ent-draughts! These are legendary elixirs of" 
@@ -158,4 +158,4 @@ class Derningle(UniquePlace):
         for item in self._gift:
             if player.addToInventory(item):
                 self._gift.remove(item)
-        print ""
+        print("")

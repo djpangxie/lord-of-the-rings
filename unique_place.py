@@ -26,4 +26,4 @@ class UniquePlace(Place):
 
         @param player:  The current player.
         """
-        print self._greetings
+        print(self._greetings)

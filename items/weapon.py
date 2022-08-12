@@ -1,43 +1,42 @@
 #!/usr/bin/python
 
-from constants import ItemType 
+from constants import ItemType
 from items.item import Item
+
 
 class Weapon(Item):
     """
-    A child class of Item.
+    Weapon是Item的子类。
     
-    Weapon serves as the offensive item class of the game. Weapon 
-    has the defining parameter, attack, which adds to player attack 
-    to constitute player damage.
+    武器作为游戏中的攻击型物品类别，定义了一个attack属性，它增加玩家攻击以构成玩家伤害。
     """
+
     def __init__(self, name, description, weight, cost, attack):
         """
-        Initializes weapon class.
+        初始化武器对象。
 
-        @param name:          Name of weapon.
-        @param description:   Description of weapon.
-        @param weight:        Weight of weapon.
-        @param cost:          The cost of the weapon.
-        @param attack:        Attack stat of weapon. Player damage increases 
-                              by this amount when weapon is equipped.
+        @param name:          武器名字
+        @param description:   武器的描述
+        @param weight:        武器的重量
+        @param cost:          武器的价格
+        @param attack:        武器的攻击力。装备武器时，玩家伤害会增加此数量
         """
         Item.__init__(self, name, description, weight, cost)
-        
+
         self._attack = attack
-    
+
     def getAttack(self):
         """
-        Returns weapon attack stat.
+        返回武器的攻击力。
 
-        @return:    Weapon attack stat.
+        @return:    武器的攻击力
         """
         return self._attack
 
     def getType(self):
         """
-        Returns the item's type.
+        返回物品的类型。
 
-        @return: Item's type.
+        @return: 物品的类型
         """
         return ItemType.WEAPON

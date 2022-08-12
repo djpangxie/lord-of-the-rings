@@ -35,19 +35,19 @@ class Argonath(UniquePlace):
         maxHp = player.getMaxHp()
             
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         print ("As you gaze upon the kings of old, you think about the present"
             " age and its \ncurrent darkness.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
             
         #Player receives reward
         print ("You draw up deep reserves of strength within yourself to" 
             " finish the quest. \nMordor awaits.")
-        print "\n%s gains %s experience.\n" % (name, experienceIncrease)
+        print("\n%s gains %s experience.\n" % (name, experienceIncrease))
         player.increaseExperience(experienceIncrease)
         player.heal(maxHp)
         
-        raw_input("Press enter to leave. ")
-        print ""
+        input("Press enter to leave. ")
+        print("")

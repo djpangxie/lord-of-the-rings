@@ -10,35 +10,35 @@ def generateMenu(prompt, options, appendQuit = False):
     
     @return:             User choice.
      """
-    print prompt
-    print ""
+    print(prompt)
+    print("")
 
     if appendQuit:
         options.append("Quit")
 
     index = 1
     for option in options:
-        print "%s)\t%s" % (str(index), option) 
+        print("%s)\t%s" % (str(index), option)) 
         index += 1
 
-    choice = raw_input("Choice: ")
+    choice = input("Choice: ")
 
     return choice
 
 def sortItems(itemSet):
     """
-    Sorts items in an ItemSet.
-    
-    @param items:   The ItemSet to sort.
+    对 ItemSet 中的物品进行排序。
+
+    @param itemSet:   待排序的ItemSet对象
     """
-    #Import modules
+    #导入模块
     from items.weapon import Weapon
     from items.armor import Armor
     from items.charm import Charm
     from items.potion import Potion
     from items.item import Item
     
-    #Create variables
+    #创建变量
     itemsList = itemSet.getItems()
     sortedItems = []
     
@@ -49,19 +49,19 @@ def sortItems(itemSet):
     items = {}
     itemNames = []
     
-    #Weapon is first
+    #武器排第一
     for item in itemsList:
         if isinstance(item, Weapon):
             sortedItems.append(item)
             itemsList.remove(item)
     
-    #Armor is second
+    #盔甲排第二
     for item in itemsList:
         if isinstance(item, Armor):
             sortedItems.append(item)
             itemsList.remove(item)
             
-    #Sort charms by name
+    #接着按名称排序饰品
     for item in itemsList:
         if isinstance(item, Charm):
             charmName = item.getName()
@@ -69,7 +69,7 @@ def sortItems(itemSet):
             charms[charmName] = item
             itemsList.remove(item)
             
-    #Sort potions by name
+    #再接着按名称排序药水
     for item in itemsList:
         if isinstance(item, Potion):
             potionName = item.getName()
@@ -77,7 +77,7 @@ def sortItems(itemSet):
             potions[potionName] = item
             itemsList.remove(item)
             
-    #The remaining items are Items
+    #剩下的物品放最后
     for item in itemsList:
         itemName = item.getName()
         itemNames.append(itemName)

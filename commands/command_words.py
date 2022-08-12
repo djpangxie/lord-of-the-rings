@@ -49,7 +49,7 @@ class CommandWords(object):
 
         @return:            List of all command names.
         """
-        names = self._commandWords.keys()
+        names = list(self._commandWords.keys())
         names.sort()
 
         return names
@@ -77,5 +77,5 @@ class CommandWords(object):
         @return:        True if command has been defined,
                         False otherwise.
         """
-        exists = name in self._commandWords.keys()
+        exists = name in list(self._commandWords.keys())
         return exists

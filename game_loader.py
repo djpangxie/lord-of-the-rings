@@ -53,25 +53,22 @@ import constants
 
 def getWorld():
     """
-    Creates Middle Earth. Middle Earth consists of a series of linked spaces. 
-    Spaces may have cities and unique places. Cities may have inns, squares, 
-    and shops.
-    
-    @return:    List of created spaces.
+    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特的地方。城市中可能有旅馆、广场和商店。
+
+    @return:    创建的地区列表。
     """
-    #Shire - Hobbiton
-    #Inn
-    description = "A place for strangers."
-    greeting = "Welcome to our inn! I'm Sally of the Tokinsville Baggins Clan."
-    sallyInn = Inn("Sally's Inn", description, greeting, 5)
-    #Shop
-    description = "Exotic selection by hobbit standards."
-    greeting = "We have strange wares."
-    sallyShop = Shop("Sally's Shop", description, greeting, 
-        constants.RegionType.ERIADOR, 4, 0)
-    #Square
-    description = "Lots of hobbits, mostly gossip."
-    greeting = "Did you hear the latest news?"
+    #夏尔 - 霍比特人的故乡
+    #旅店
+    description = "为旅客提供休息的地方。"
+    greeting = "欢迎光临我们的旅店！我是托金斯维尔·巴金斯家族的萨利。"
+    sallyInn = Inn("萨利的旅店", description, greeting, 5)
+    #商店
+    description = "按照霍比特人的标准，这是很奇特的选择。"
+    greeting = "我们有奇特的商品。"
+    sallyShop = Shop("萨利的商店", description, greeting, constants.RegionType.ERIADOR, 4, 0)
+    #广场
+    description = "很多霍比特人，大多是闲话家常。"
+    greeting = "你听到最新消息了吗？"
     talk = {
     "Lobelia Baggins": "Get lost!",
     "Naftel Took": "Going adventuring are ya? Here's my walking cane.",
@@ -82,7 +79,7 @@ def getWorld():
     }
     hobbitonSquare = Square("Hobbiton Square", description, greeting, talk, 
     items.unique_items.hobbitonSquareItems)
-    #City
+    #城市
     description = """Hobbiton is a village in the central regions of the Shire 
     within the borders of the Westfarthing. Hobbiton is located on both sides 
     of the Water approximately a mile northwest of the neighboring village of 
@@ -104,8 +101,8 @@ def getWorld():
     shire = Space("Shire", description, constants.RegionType.ERIADOR, 
         battleProbability = constants.SpaceSpawnProb.shire, city = hobbiton)
 
-    #The Old Forest - Tom Bombadil's House
-    #Unique Place
+    #老林子 - 汤姆·庞巴迪的家
+    #独特的地方
     description = ("The house of a mysterious and powerful being who dwells in"
     " the valley \nof Withywindle.")
     greeting = """
@@ -114,7 +111,7 @@ def getWorld():
     """
     tomBombadil = TomBombadilHouse("Tom Bombadil's House", description, 
     greeting)
-    #The Old Forest
+    #老林子
     description = """
     The Old Forest is one of the few surviving primordial forests which 
     covered most of Eriador before the Second Age. The Old Forest has been 
@@ -125,12 +122,12 @@ def getWorld():
         battleProbability = constants.SpaceSpawnProb.oldForest, 
         uniquePlace = tomBombadil)
 
-    #The Weather Hills - Weathertop
-    #Unique Place
+    #风云丘陵 - 风云顶
+    #独特的地方
     description = "Once a great watchtower, guarding an entire region."
     greeting = "The Weathertop ruins whisper of its former glory."
     weathertop = Weathertop("Weathertop", description, greeting)
-    #The Weather Hills
+    #风云丘陵
     description = """
     Weather Hills is the name among Men for the range of hills that lay in 
     central Eriador and in ancient times marked part of the border between the 
@@ -989,9 +986,9 @@ def getWorld():
     
 def getStartingInventory():
     """
-    Generate's player's starting inventory.
+    生成玩家的起始库存。
 
-    @return:   A list of the items.
+    @return:   库存的列表。
     """
     startingInventory = items.unique_items.startingInventory
     
@@ -999,9 +996,9 @@ def getStartingInventory():
 
 def getPlayer(world, startingInventory):
     """
-    Create player and give player starting inventory and equipment.
+    创建玩家并给玩家提供起始库存和装备。
 
-    @return:     A fully-loaded player
+    @return:     初始化完成的玩家对象
     """
     player = Player("Russian", world)
 
@@ -1014,11 +1011,11 @@ def getPlayer(world, startingInventory):
     
 def getCommandList(player):
     """
-    Generates the list of commands used in the game.
+    生成游戏中使用的命令列表。
 
-    @return:   The commandWords object, which stores the game's commands.
+    @return:   用于存储游戏的命令的commandWords对象
     """
-    #Create commandWords object
+    #创建commandWords对象
     commandWords = CommandWords()
     
     #Commands

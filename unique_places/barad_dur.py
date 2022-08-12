@@ -104,12 +104,12 @@ class BaradDur(UniquePlace):
         @param player:   The player object.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         print ("A host of figures rise up to meet you as you approach Barad"
             " Dur.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Calls the battle sequence
         self._battle(player)
@@ -120,44 +120,44 @@ class BaradDur(UniquePlace):
         
         @param player:   The player object.
         """
-        print "Orc Commander I: \"We're having a blast upstairs! Slumber party!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Orc Commander I: \"We're having a blast upstairs! Slumber party!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave)
         if not result:
             return
             
-        print ("Orc Commander II: \"Didn't you read the sign? No %ss" 
-            " allowed.\"" % player.getName())
-        raw_input("Press enter to continue. ")
-        print ""
+        print(("Orc Commander II: \"Didn't you read the sign? No %ss" 
+            " allowed.\"" % player.getName()))
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
         if not result:
             return
             
-        print "Mouth of Sauron: \"You want ANOTHER slumber party?!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"You want ANOTHER slumber party?!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)
         if not result:
             return
             
-        print "Nazgul: \"AAAAEEEEEEEEEEE!!!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Nazgul: \"AAAAEEEEEEEEEEE!!!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave4)
         if not result:
             return
             
-        print ("Lance of the Elite Four: \"I've been waiting for you, %s! I" 
+        print(("Lance of the Elite Four: \"I've been waiting for you, %s! I" 
             " knew \nthat you, with your skills, would eventually reach me here.\"" 
-            % player.getName())
-        raw_input("Press enter to continue. ")
-        print ""
+            % player.getName()))
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave5)
         if not result:
@@ -173,26 +173,26 @@ class BaradDur(UniquePlace):
         @param player:   The player object.
         """
         #Story
-        print "You have defeated Lance, the Pokemon League champion!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You have defeated Lance, the Pokemon League champion!")
+        input("Press enter to continue. ")
+        print("")
         
-        print "Congratulations on your accomplishments!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Congratulations on your accomplishments!")
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if len(self._loot) != 0:
             print ("While looting the battlefield, you find several" 
                 " interesting items. The tower itself remains locked, however.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
             for item in self._loot:
                 if player.addToInventory(item):
                     self._loot.remove(item)
-            print ""
+            print("")
         
         #Story
-        print "You set off for other ventures within the Dark Land."
-        raw_input("Press enter to leave. ")
-        print ""
+        print("You set off for other ventures within the Dark Land.")
+        input("Press enter to leave. ")
+        print("")

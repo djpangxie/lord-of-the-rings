@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class EastCommand(Command):
     """
@@ -25,15 +25,15 @@ class EastCommand(Command):
         """
         #Make sure that exit exists
         if not self._player.canMoveEast():
-            print "Cannot move East."
+            print("Cannot move East.")
             return
 
         #User graphic
-        print "--------------------------------"
-        print "         Moving East"
-        print "      ----------------->        "
-        print ""
-        print "--------------------------------"
+        print("--------------------------------")
+        print("         Moving East")
+        print("      ----------------->        ")
+        print("")
+        print("--------------------------------")
         
         #Actual move execution and user output
         self._player.moveEast()
@@ -42,5 +42,5 @@ class EastCommand(Command):
         name = space.getName()
         description = space.getDescription()
         
-        print "Welcome to %s." % name 
-        print description
+        print("Welcome to %s." % name) 
+        print(description)

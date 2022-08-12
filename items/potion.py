@@ -3,40 +3,41 @@
 from items.item import Item
 from constants import ItemType
 
+
 class Potion(Item):
     """
-    Potions are a child class of Item. 
+    Potion是Item的子类。
     
-    Potions are a one-time use item that serve to heal player. Potions 
-    heal according to their defining parameter, healing. 
+    药水是一种一次性使用的物品，用于治疗玩家。
+    药水根据它们的healing参数的数值进行治疗。
     """
+
     def __init__(self, name, description, weight, cost, healing):
         """
-        Initializes potions class.
+        初始化药水对象。
 
-        @param name:          Name of portion.
-        @param description:   Description of potion.
-        @param weight:        Weight of weapon.
-        @param cost:          The cost of the potion.
-        @param healing:       Healing stat of potion. Player may heal at most 
-                              this amount upon use.
+        @param name:         药水名称
+        @param description:  药水的描述
+        @param weight:       药水的重量
+        @param cost:         药水的价格
+        @param healing:      药水的治疗量。使用时，玩家最多可以获得这个量的治疗
         """
         Item.__init__(self, name, description, weight, cost)
-        
+
         self._healing = healing
-        
+
     def getHealing(self):
         """
-        Returns potion healing value.
+        返回药水的治疗量。
 
-        @return: Potion healing value.
+        @return: 药水的治疗量
         """
         return self._healing
 
     def getType(self):
         """
-        Returns the item's type.
+        返回物品的类型。
 
-        @return: Item's type.
+        @return: 物品的类型
         """
         return ItemType.POTION

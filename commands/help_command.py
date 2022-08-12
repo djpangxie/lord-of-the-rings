@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class HelpCommand(Command):
     """
@@ -22,11 +22,11 @@ class HelpCommand(Command):
         Run Help command.
         """
         #Print header
-        print "--------------------------------"
-        print "Lord of the Rings Adventure Game"
-        print "--------------------------------"
-        print "The following commands may be used during the game:"
-        print ""
+        print("--------------------------------")
+        print("Lord of the Rings Adventure Game")
+        print("--------------------------------")
+        print("The following commands may be used during the game:")
+        print("")
 
         #Print help for each defined command
         words = self._commandWords
@@ -35,4 +35,4 @@ class HelpCommand(Command):
         for name in names:
             command = words.getCommand(name)
             explanation = command.getExplanation()
-            print "%s\t\t\t%s" % (name, explanation)
+            print("%s\t\t\t%s" % (name, explanation))

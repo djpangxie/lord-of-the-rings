@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class PickUpCommand(Command):
     """
@@ -28,16 +28,16 @@ class PickUpCommand(Command):
         locationItems = location.getItems()
 
         #User prompt
-        print "The following may be picked up by %s:" % name
+        print("The following may be picked up by %s:" % name)
         for item in locationItems:
-            print "\t%s" % item.getName()
-        print ""
+            print("\t%s" % item.getName())
+        print("")
         
-        itemToAdd = raw_input("Which item do you want to pick up? ")
+        itemToAdd = input("Which item do you want to pick up? ")
         item = locationItems.getItemByName(itemToAdd)
         
         if not item:
-            print "%s does not contain item." % location.getName()
+            print("%s does not contain item." % location.getName())
             return
 
         #Successful execution

@@ -5,18 +5,17 @@ import constants
 
 class Inn(Building):
     """
-    Inns inherit from Building.
-    
-    Inns are buildings that allow player to heal for a price.
+    旅店派生自建筑。
+    旅店是允许玩家有偿治疗的建筑地点。
     """
     def __init__(self, name, description, greetings, cost):
         """
-        Initializes the inn.
+        初始化旅店
 
-        @param name:         The name of the inn.
-        @param description:  The description of the inn.
-        @param greetings:    The greetings the user gets as he enters the inn.
-        @param cost:         The cost of using the inn.
+        @param name:         旅店的名字
+        @param description:  旅店的描述
+        @param greetings:    玩家进入旅店时得到的问候
+        @param cost:         使用旅店的费用
         """
         Building.__init__(self, name, description, greetings)
         
@@ -30,16 +29,16 @@ class Inn(Building):
         """
         cost = self.getCost()
 
-        print ""
-        print "- - - %s - - -" % self.getName()
-        print self._greetings
-        print "Cost to stay: %s." % cost
+        print("")
+        print("- - - %s - - -" % self.getName())
+        print(self._greetings)
+        print("Cost to stay: %s." % cost)
 
         #Determine player choice
         choice = None
         while choice != "no":
-            print ""
-            choice = raw_input("Would you like to stay for the night?" 
+            print("")
+            choice = input("Would you like to stay for the night?" 
             " Response: 'yes' or 'no.' ")
             
             #Heal option   
@@ -49,37 +48,37 @@ class Inn(Building):
                     player.decreaseMoney(cost)
                     #Actual healing operation
                     self._heal(player)
-                    print "%s was healed at %s cost! %s has %s %s remaining." \
+                    print("%s was healed at %s cost! %s has %s %s remaining." \
                           % (player.getName(), cost, player.getName(), 
-                          player.getMoney(), constants.CURRENCY)
+                          player.getMoney(), constants.CURRENCY))
                 #Not enough money
                 else:
-                    print "%s doesn't have enough money." % player.getName()
-                raw_input("Press enter to continue. ")
+                    print("%s doesn't have enough money." % player.getName())
+                input("Press enter to continue. ")
                 return
                 
             #Non-use option
             elif choice == "no":
-                print "Thanks for coming to %s." % self._name
-                raw_input("Press enter to continue. ")
+                print("Thanks for coming to %s." % self._name)
+                input("Press enter to continue. ")
                 
             #For invalid input
             else:
-                print "'What?'"
+                print("'What?'")
     
     def getCost(self):
         """
-        Returns inn cost.
+        返回旅店的费用。
         
-        @return:    Cost of using inn.
+        @return:    一个整数值表示的使用旅店的花费
         """
         return self._cost
 
     def _heal(self, player):
         """
-        Heals player to maxHp.
+        治愈玩家至最大生命值。
 
-        @param player:    The player object.
+        @param player:    玩家对象
         """
         maxHp = player.getMaxHp()
         hp = player.getHp()

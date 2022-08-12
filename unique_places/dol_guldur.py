@@ -88,8 +88,8 @@ class DolGuldur(UniquePlace):
         
         @param player:   The current player.
         """
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         
         #Solicit user choice
         choice = self._choice()
@@ -107,9 +107,9 @@ class DolGuldur(UniquePlace):
         choice = None
         acceptable = ["frontal assault", "escape"]
         while choice not in acceptable:
-            choice = raw_input("What do you want to do? Choices: 'frontal" 
+            choice = input("What do you want to do? Choices: 'frontal" 
                 " assault' or 'escape.' ")
-        print ""
+        print("")
         
         return choice
         
@@ -142,22 +142,22 @@ class DolGuldur(UniquePlace):
         #Story
         print ("Although you have taken the tower of Dol Guldur, a deep sense" 
             " of evil still \nlingers over the land.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if len(self._loot) != 0:
-            print "While looking around, you find several items."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("While looking around, you find several items.")
+            input("Press enter to continue. ")
+            print("")
             for item in self._loot:
                 if player.addToInventory(item):
                     self._loot.remove(item)
-            print ""
+            print("")
         
         #Story
-        print "You leave with a sense of foreboding."
-        print ""
+        print("You leave with a sense of foreboding.")
+        print("")
         
     def _run(self, player):
         """
@@ -165,13 +165,13 @@ class DolGuldur(UniquePlace):
         
         @param player:   The current player.
         """
-        print "You find yourself surrounded."
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You find yourself surrounded.")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)
         if not result:
             return
         
-        print "You escape with your life!"
-        print ""
+        print("You escape with your life!")
+        print("")

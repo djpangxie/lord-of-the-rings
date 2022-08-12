@@ -110,13 +110,13 @@ class Moria(UniquePlace):
         @param player:   The current player.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         
         print ("You enter into a once-glorious hall, moving quickly among" 
             " the shadows.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Generate length of time spent in Moria
         timeInMoria = random.randrange(15, 25)
@@ -135,9 +135,9 @@ class Moria(UniquePlace):
             battleOccurence = result[1]
                         
             #Execute action sequence
-            print statement
-            raw_input("Press enter to continue. ")
-            print ""
+            print(statement)
+            input("Press enter to continue. ")
+            print("")
             
             if battleOccurence:
                 result = battle(player, constants.BattleEngineContext.RANDOM)
@@ -145,9 +145,9 @@ class Moria(UniquePlace):
                     return
         
         #Ending sequence
-        print "You emerge from the Mines!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You emerge from the Mines!")
+        input("Press enter to continue. ")
+        print("")
         
         self._createPort("east")
         
@@ -226,11 +226,11 @@ class Moria(UniquePlace):
         chance = random.random()
         if self._loot and chance < constants.MORIA_ITEM_FIND_PROB:
             item = random.choice(self._loot)
-            print ("You found %s while venturing through the Mines of Moria!" 
-                % item.getName())
+            print(("You found %s while venturing through the Mines of Moria!" 
+                % item.getName()))
             
             if player.addToInventory(item):
                 self._loot.remove(item)
             
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")

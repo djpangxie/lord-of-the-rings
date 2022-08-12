@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class SouthCommand(Command):
     """
@@ -25,16 +25,16 @@ class SouthCommand(Command):
         """
         #Make sure that exit exists
         if not self._player.canMoveSouth():
-            print "Cannot move South."
+            print("Cannot move South.")
             return
 
         #User graphic
-        print "--------------------------------"
-        print "         Moving South"
-        print "              ||                "
-        print "              ||                "
-        print "              \/                "
-        print ""
+        print("--------------------------------")
+        print("         Moving South")
+        print("              ||                ")
+        print("              ||                ")
+        print("              \/                ")
+        print("")
         
         #Actual move execution and user output
         self._player.moveSouth()
@@ -43,5 +43,5 @@ class SouthCommand(Command):
         name = space.getName()
         description = space.getDescription()
         
-        print "Welcome to %s." % name 
-        print description
+        print("Welcome to %s." % name) 
+        print(description)

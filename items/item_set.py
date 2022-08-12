@@ -4,35 +4,34 @@ from items.item import Item
 
 class ItemSet(object):
     """
-    A collection of items.
+    物品的集合。
     """
     def __init__(self, itemSet=None):
         """
-        Initializes an ItemSet object.
+        初始化一个 ItemSet 对象。
 
-        @keyword itemSet:     (Optional) A single Item object or a
-                               list of Item objects.
+        @keyword itemSet:     (可选的)单个 Item 对象或 Item 对象列表
         """
         self._items = []
         self._weight = 0
 
-        #Received single item
+        #收到的单件物品
         if isinstance(itemSet, Item):
             self.addItem(itemSet)
             
-        #Received set of items
+        #收到的一组物品
         elif isinstance(itemSet, list):
             self.addItems(itemSet)
 
     def addItem(self, item):
         """
-        Adds an item.
+        添加一个物品。
 
         @param item:    An item.
         """
-        #Check preconditions
+        #检查前提条件
         if not isinstance(item, Item):
-            errorMsg = "ItemSet.addItem() passed non-Item object."
+            errorMsg = "ItemSet.addItem() 传入的参数不是单件物品。"
             raise AssertionError(errorMsg)
 
         self._items.append(item)
@@ -40,29 +39,29 @@ class ItemSet(object):
         
     def addItems(self, items):
         """
-        Adds a list of items.
+        添加一组物品。
         
         @param items:    List of items.
         """
-        #Check preconditions
-        errorMsg = "ItemSet.addItems() given something other than a list."
+        #检查前提条件
+        errorMsg = "ItemSet.addItems() 传入的参数不是一组物品。"
         if not isinstance(items, list):
             raise AssertionError(errorMsg)
             
-        errorMsg = "ItemSet.addItems() given a list containing a non-Item object."
+        errorMsg = "ItemSet.addItems() 传入的一组物品中有的不是物品。"
         for item in items:
             if not isinstance(item, Item):
                 raise AssertionError(errorMsg)
         
-        #Add items in list to ItemSet
+        #将列表中的项目添加到 ItemSet
         for item in items:
             self.addItem(item)
             
     def getItems(self):
         """
-        Returns list of items contained by ItemSet.
+        返回ItemSet中所包含的物品列表。
 
-        @return:     List of items contained by ItemSet.
+        @return:     ItemSet中所包含的物品列表
         """
         return self._items
 
@@ -92,7 +91,7 @@ class ItemSet(object):
         
     def clearItems(self):
         """
-        Clears items stored in ItemSet.
+        清空ItemSet中所包含的物品列表。
         """
         self._items = []
         self._weight = 0

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from space import Space
 from cities.city import City
 from unique_place import UniquePlace
@@ -32,9 +32,9 @@ class MapCommand(Command):
         location = self._player.getLocation()
         exits = location.getExits()
 
-        print "Your map is more a set of notes and instructions...."
-        print ""
-        print "From %s, you may go to the following:" % location.getName()
+        print("Your map is more a set of notes and instructions....")
+        print("")
+        print("From %s, you may go to the following:" % location.getName())
         
         #List details for each space in NSEW order
         if exits[constants.Direction.NORTH]:
@@ -93,27 +93,27 @@ class MapCommand(Command):
         """
         #For current space
         spaceName = space.getName()
-        print "\tTo the %s: %s." % (direction, spaceName)
+        print("\tTo the %s: %s." % (direction, spaceName))
         
         #If a city/cities exist for a particular space
         if space.getCity():
             cities = space.getCity()
             if isinstance(cities, City):
                 cityName = cities.getName()
-                print "\t--%s is in %s." % (cityName, spaceName)
+                print("\t--%s is in %s." % (cityName, spaceName))
             elif isinstance(cities, list):
                 for city in cities:
                     cityName = city.getName()
-                    print "\t--%s is in %s." % (cityName, spaceName)
+                    print("\t--%s is in %s." % (cityName, spaceName))
                     
         #If a unique place/unique places exist for a particular space
         if space.getUniquePlace():
             uniquePlaces = space.getUniquePlace()
             if isinstance(uniquePlaces, UniquePlace):
                 uniquePlaceName = uniquePlaces.getName()
-                print "\t--%s is in %s." % (uniquePlaceName, spaceName)
+                print("\t--%s is in %s." % (uniquePlaceName, spaceName))
             elif isinstance(uniquePlaces, list):
                 for uniquePlace in uniquePlaces:
                     uniquePlaceName = uniquePlace.getName()
-                    print "\t--%s is in %s." % (uniquePlaceName, spaceName)
-        print ""
+                    print("\t--%s is in %s." % (uniquePlaceName, spaceName))
+        print("")

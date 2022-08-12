@@ -32,9 +32,9 @@ from monsters.troll_ii import Troll_II
 from monsters.black_numernorian_ii import BlackNumernorian_II
 
 """
-Constants used in Lord of the Rings.
+指环王中使用的常量。
 """
-#Game constants
+#游戏常量
 COMMAND_PROMPT           = "> "
 CURRENCY                 = "rubles"
 SPACES_WITH_UNIQUE_ITEMS = 4
@@ -77,16 +77,16 @@ SELL_LOSS_PERCENTAGE = .5
 WEAPON_COST          = 1
 ARMOR_COST           = 2
 
-#Item type enumeration
+#物品类型的列举
 class ItemType(object):
     """
-    Enumerated typing for items. 
+    物品类型。
     """
-    GENERIC = 1
-    ARMOR   = 2
-    WEAPON  = 3
-    POTION  = 4
-    CHARM   = 5
+    GENERIC = 1 # 通用
+    ARMOR   = 2 # 盔甲
+    WEAPON  = 3 # 武器
+    POTION  = 4 # 药水
+    CHARM   = 5 # 饰品
 
 #Direction enumeration
 class Direction(object):
@@ -98,20 +98,20 @@ class Direction(object):
     EAST  = 'east'
     WEST  = 'west'
 
-#Region type enumeration
+#地区类型的列举
 class RegionType(object):
     """
-    The region types in Middle Earth.
+    中土世界的地区类型。
     """
-    ERIADOR       = 1
-    BARROW_DOWNS  = 2
-    HIGH_PASS     = 3
-    ENEDWAITH     = 4
-    MORIA         = 5
-    RHOVANION     = 6
-    ROHAN         = 7
-    GONDOR        = 8
-    MORDOR        = 8
+    ERIADOR       = 1 # 伊利雅德
+    BARROW_DOWNS  = 2 # 巴拉多
+    HIGH_PASS     = 3 #
+    ENEDWAITH     = 4 # 伊宁威治
+    MORIA         = 5 # 墨瑞亚
+    RHOVANION     = 6 # 罗马尼安
+    ROHAN         = 7 # 洛汗
+    GONDOR        = 8 # 刚铎
+    MORDOR        = 8 # 魔多
 
 #Region base spawn
 class RegionBaseSpawn(object):
@@ -472,18 +472,18 @@ class BattleEngine(object):
     STANDARD_DEVIATION      = 3
     MONEY_CONSTANT          = 3
 
-#Shop factory probability constants
+#商店的生成概率常数
 class ShopFactoryConstants(object):
     """
-    Constants used in shop factory item type generation.
+    商店物品类型生成中使用的常量。
     """
-    WEAPON_UPPER_LIMIT = .25
-    ARMOR_UPPER_LIMIT  = .5
-    POTION_UPPER_LIMIT = .975
-    STANDARD_DEVIATION = 2.5
-    QUALITY_MINIMUM    = 0
-    QUALITY_MAXIMUM    = 20
-    UNIQUE_QUALITY_REQ = 10
+    WEAPON_UPPER_LIMIT = .25 # 商店刷武器的概率 25%
+    ARMOR_UPPER_LIMIT  = .5 # 商店刷盔甲的概率 25%
+    POTION_UPPER_LIMIT = .975 # 商店刷药水的概率 47.5%
+    STANDARD_DEVIATION = 2.5 # 商品品质分布的标准差
+    QUALITY_MINIMUM    = 0 # 商品品质的最低值
+    QUALITY_MAXIMUM    = 20 # 商品品质的最高值
+    UNIQUE_QUALITY_REQ = 10 # 会生成高于该品质物品的商店才会生成低级独特物品
 
 #Unique Place constants
 """

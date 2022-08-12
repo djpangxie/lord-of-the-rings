@@ -317,7 +317,7 @@ class SpaceTest(unittest.TestCase):
         space = Space("West Emnet", "Horses for riding", "Rohan")
 
         errorMsg = "space.getRegion() should return 'Rohan.'"
-        self.assertEquals(space.getRegion(), "Rohan", errorMsg)
+        self.assertEqual(space.getRegion(), "Rohan", errorMsg)
 
     def testCities(self):
         from space import Space
@@ -2926,8 +2926,8 @@ class monsterFactory(unittest.TestCase):
         constants.RegionMonsterDistribution = MagicMock(HIGH_PASS = {Goblin: .5,
             GreatGoblin: 1})
         monstersHighPass = getMonsters(5000, constants.RegionType.HIGH_PASS, 0)
-        print monstersEriador
-        print monstersHighPass
+        print(monstersEriador)
+        print(monstersHighPass)
         numberGoblin = 0
         numberGreatGoblin = 0
         for monster in monstersHighPass:

@@ -84,12 +84,12 @@ class City(Place):
         buildings = self.getBuildings()
         #If there is one building
         if isinstance(buildings, Building):
-            print "\t%s" % buildings.getName()
+            print("\t%s" % buildings.getName())
         #If there are multiple buildings
         elif isinstance(buildings, list):
             for building in buildings:
-                print "\t%s" % building.getName()
-        print ""
+                print("\t%s" % building.getName())
+        print("")
         
     def enter(self, player):  
         """
@@ -99,35 +99,35 @@ class City(Place):
         """
         buildingDictionary = self._createDictionaryOfBuildings()
 
-        print "Entering %s!" % self.getName()
-        print "%s" % self.getDescription()
-        print "%s" % self.getGreetings()
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Entering %s!" % self.getName())
+        print("%s" % self.getDescription())
+        print("%s" % self.getGreetings())
+        input("Press enter to continue. ")
+        print("")
         
         while True:
-            print "You have found the following:"
+            print("You have found the following:")
             
             #Print list of buildings
             self._printBuildings()
             
-            print "To go to a building type its name. Otherwise, type 'leave'"
-            command = raw_input("Where would you like to go?\n")
+            print("To go to a building type its name. Otherwise, type 'leave'")
+            command = input("Where would you like to go?\n")
             
             #If player chooses to leave the city
             if command == 'leave':
-                print ""
-                print "Leaving %s." % self.getName()
+                print("")
+                print("Leaving %s." % self.getName())
                 return
                 
             #For other choices
-            if command in buildingDictionary.keys():
+            if command in list(buildingDictionary.keys()):
             
                 #Enter building
                 buildingDictionary[command].enter(player)
                 
                 #Prompt for next action
-                print "\nYou are now back in %s." % self.getName()
-                print ""
+                print("\nYou are now back in %s." % self.getName())
+                print("")
             else:
-                print "\nI did not recognize %s. Try again.\n" % command
+                print("\nI did not recognize %s. Try again.\n" % command)

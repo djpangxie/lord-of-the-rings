@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
@@ -40,20 +40,20 @@ class EquipCommand(Command):
         
         #If no equippable items
         if equippable.count() == 0:
-            print "No equippable items in inventory."
+            print("No equippable items in inventory.")
             return
 
         #User prompt   
-        print "%s may equip:" % self._player.getName()
+        print("%s may equip:" % self._player.getName())
         for item in equippable:
-            print "\t%s" % item.getName()
-        print ""
-        itemToEquip = raw_input("Which item do you want to equip? ")
+            print("\t%s" % item.getName())
+        print("")
+        itemToEquip = input("Which item do you want to equip? ")
 
         #Attempt to equip item
         item = inventory.getItemByName(itemToEquip)
         if item:
             statement = self._player.equip(item)
-            print statement
+            print(statement)
         else:
-            print "Item not in inventory."
+            print("Item not in inventory.")

@@ -2,29 +2,28 @@
 
 from constants import ItemType
 
+
 class Item(object):
     """
-    A generic item. May be held by a player, exist in a room, etc.
-
-    Item has various child classes such as Weapon and Armor.
+    一个通用物品。可能由玩家持有，存在于房间等。
+    物品有各种子类，例如武器和盔甲。
     """
+
     def __init__(self, name, description, weight, cost):
         """
-        Initializes an item object.
+        初始化一个物品对象
 
-        @param name:          Name of item.
-        @param description:   Description of item.
-        @param weight:        Weight of item.
+        @param name:          物品的名字
+        @param description:   物品的描述
+        @param weight:        物品的重量
         """
         if (not name) or (not description):
-            raise AssertionError("Item must have a name and description.")
+            raise AssertionError("物品必须有名称和描述。")
         if weight < 0:
-            errorMsg = ("Invalid weight for item (%s); weight cannot be a" 
-            " negative number." % weight)
+            errorMsg = ("物品重量无效 (%s); 重量不能为负数。" % weight)
             raise AssertionError(errorMsg)
         if cost < 0:
-            errorMsg = ("Invalid cost for item (%s); cost cannot be a negative" 
-            " number." % cost)
+            errorMsg = ("无效的物品费用 (%s); 费用不能是负数。" % cost)
             raise AssertionError(errorMsg)
 
         self._name = name
@@ -34,44 +33,42 @@ class Item(object):
 
     def getName(self):
         """
-        Gets item's name.
+        获取物品的名称。
 
-        @return: Item's name.
+        @return: 物品的名称
         """
         return self._name
 
     def getDescription(self):
         """
-        Gets item's description.
+        获取物品的描述。
 
-        @return: Item's description.
+        @return: 物品的描述
         """
         return self._description
 
     def getWeight(self):
         """
-        Gets item's weight.
+        获取物品的重量。
 
-        @return: Item's weight.
+        @return: 物品的重量
         """
         return self._weight
-        
+
     def getCost(self):
         """
-        Returns weapon cost.
+        返回物品的价格。
 
-        @return:    Weapon cost.
+        @return:    物品的价格
         """
         return self._cost
 
     def getType(self):
         """
-        Returns the item's type.
+        返回物品的类型。
 
-        @attention: This method I{must} be overridden 
-        by all subclasses of Item. (A new ItemType
-        must also be defined in constants.py.)
+        @attention: 这个方法必须被Item的所有子类重写(一个新的ItemType也必须在constants.py中定义)
 
-        @return: Item's type.
+        @return: 物品的类型
         """
         return ItemType.GENERIC

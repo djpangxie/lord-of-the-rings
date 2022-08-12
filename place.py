@@ -73,8 +73,8 @@ class Place(object):
             outgoingOnly = False)
         string = "%s is now accessible to the %s" % (self._targetSpace.getName(), 
             direction)
-        print string.upper()
-        print ""
+        print(string.upper())
+        print("")
         
         #Update self._executed
         self._executed = True
@@ -85,4 +85,4 @@ class Place(object):
         
         @param player:  The current player.
         """
-        print "This enter method should be overridden by child class."
+        print("This enter method should be overridden by child class.")

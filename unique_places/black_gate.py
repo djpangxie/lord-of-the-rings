@@ -109,12 +109,12 @@ class BlackGate(UniquePlace):
         @param player:   The player object.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         print ("\"Several armies rise up to meet you as you approach the Black" 
             " Gate.\"")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Solicit user choice
         choice = self._choice()
@@ -134,9 +134,9 @@ class BlackGate(UniquePlace):
         choice = None
         acceptable = ["frontal assault", "run"]
         while choice not in acceptable:
-            choice = raw_input("What do you want to do? Choices: 'frontal" 
+            choice = input("What do you want to do? Choices: 'frontal" 
                 " assault' or 'run.' ")
-        print ""
+        print("")
         
         return choice
         
@@ -147,27 +147,27 @@ class BlackGate(UniquePlace):
         @param player:   The player object.
         """
         #Battle wave 1
-        print "Mouth of Sauron: \"I'm so glad you came! Slumber party!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"I'm so glad you came! Slumber party!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave)
         if not result:
             return
             
         #Battle wave 2
-        print "Mouth of Sauron: \"Hmm. You appear to not like our house.\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"Hmm. You appear to not like our house.\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
         if not result:
             return
             
         #Battle wave 3
-        print "Mouth of Sauron: \"Time to DIE!\""
-        raw_input("Press enter to continue. ")
-        print ""
+        print("Mouth of Sauron: \"Time to DIE!\"")
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)
         if not result:
@@ -185,26 +185,26 @@ class BlackGate(UniquePlace):
         #Story
         print ("You have taken the Black Gate and secured part of the" 
             " north-western route into \nMordor!")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if len(self._loot) != 0:
-            print "While looting the battlefield, you find many items."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("While looting the battlefield, you find many items.")
+            input("Press enter to continue. ")
+            print("")
             for item in self._loot:
                 if player.addToInventory(item):
                     self._loot.remove(item)
-            print ""
+            print("")
         
         #Story
-        print "You continue your quest for better night-time entertainment."
-        print ""
+        print("You continue your quest for better night-time entertainment.")
+        print("")
         self._createPort("east")
         
-        raw_input("Press enter to leave. ")
-        print ""
+        input("Press enter to leave. ")
+        print("")
         
     def _run(self, player):
         """
@@ -214,15 +214,15 @@ class BlackGate(UniquePlace):
         @param player:   The player object.
         """
         #Battle wave 4
-        print "The leading army catches up with you." 
-        raw_input("Press enter to continue. ")
-        print ""
+        print("The leading army catches up with you.") 
+        input("Press enter to continue. ")
+        print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave4)
         if not result:
             return
             
         #Story
-        print "You escape the rest of your pursuers!"
-        raw_input("Press enter to leave. ")
-        print ""
+        print("You escape the rest of your pursuers!")
+        input("Press enter to leave. ")
+        print("")

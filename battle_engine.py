@@ -47,16 +47,16 @@ def battle(player, context, monsters = None):
     #Main battle sequence
     while len(monsters) != 0:
         #Display enemy monsters
-        print "Monsters:"
+        print("Monsters:")
         for monster in monsters:
-            print "\t%s: %s" % (monster.getName(), monster.getDescription())
-        print ""
+            print("\t%s: %s" % (monster.getName(), monster.getDescription()))
+        print("")
         
         #Solicit user input
         choice = None
         acceptable = ["attack", "use potion", "run", "explode"]
         while choice not in acceptable:
-            choice = raw_input("You may: 'attack', 'use potion', 'run.' ")
+            choice = input("You may: 'attack', 'use potion', 'run.' ")
         
         #Player attack option
         if choice == 'attack':
@@ -70,13 +70,13 @@ def battle(player, context, monsters = None):
         elif choice == "run":
             if context == constants.BattleEngineContext.RANDOM:
                 if random.random() < constants.BattleEngine.RUN_PROBABILITY_SUCCESS:
-                    print "You ran away succesfully!"
-                    print ""
+                    print("You ran away succesfully!")
+                    print("")
                     return True
                 else:
-                    print "Your path is blocked!"
+                    print("Your path is blocked!")
             else:
-                print "Your path is blocked!"
+                print("Your path is blocked!")
                 
         #Code - eliminates all enemies
         elif choice == "explode":
@@ -84,16 +84,16 @@ def battle(player, context, monsters = None):
             earnings = [0, 0]
 
         #Break between player and monster phases
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
 
         #Monsters attack phase
         continueBattle = _monsterAttackPhase(player, monsters)
         
         #Escape sequence given battle loss
         if not continueBattle:
-            print ""
-            print "Gandalf bails you out."
+            print("")
+            print("Gandalf bails you out.")
             player.heal(1)
             
             return False
@@ -121,8 +121,8 @@ def _battleSetup(player, context):
         bonusDifficulty)
 
         #Declare battle
-        print "Zonkle-tronks! Wild monsters appeared!"
-        print ""
+        print("Zonkle-tronks! Wild monsters appeared!")
+        print("")
 
         return bonusDifficulty, monsters
     
@@ -134,9 +134,9 @@ def _battleSetup(player, context):
         bonusDifficulty = location.getBattleBonusDifficulty()
     
         #Display splash screen
-        print """
+        print("""
 ()==[:::::::::::::> ()==[:::::::::::::> ()==[:::::::::::::>
-"""
+""")
         return bonusDifficulty
     
     else:
@@ -214,22 +214,22 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
     experience = earnings[1]
 
     #Solicit attack target
-    target = raw_input("Whom? ")
-    print ""
+    target = input("Whom? ")
+    print("")
     #Find monster object
     for monster in monsters:
         if monster.getName() == target:
             #Carry out attack
             player.attack(monster)
-            print ("%s did %s damage to %s!" % (player.getName(), 
-            player.getTotalAttack(), monster.getName()))
+            print(("%s did %s damage to %s!" % (player.getName(), 
+            player.getTotalAttack(), monster.getName())))
             #If monster is still alive
             if monster.getHp() > 0:
-                print ("%s has %s hp remaining." % (monster.getName(), 
-                monster.getHp()))
+                print(("%s has %s hp remaining." % (monster.getName(), 
+                monster.getHp())))
             #If monster has died
             else:
-                print "%s" % monster.getDeathString()
+                print("%s" % monster.getDeathString())
                 #Generate earnings from winning battle
                 expIncrease = monster.getExperience() * (1 + bonusDifficulty)
                 experience += expIncrease
@@ -243,7 +243,7 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
             #No need to keep iterating through monsters
             break
     else:
-        print "%s looks at you in confusion." % player.getName()
+        print("%s looks at you in confusion." % player.getName())
         
     return money, experience
 
@@ -271,18 +271,18 @@ def _monsterAttackPhase(player, monsters):
     #Monsters attack
     for monster in monsters:
         monster.attack(player)
-        print ("%s %s for %s damage!" % (monster.getName(), 
-        monster.getAttackString(), monster.getAttack()))
-        print "%s has %s HP remaining." % (player.getName(), player.getHp())
+        print(("%s %s for %s damage!" % (monster.getName(), 
+        monster.getAttackString(), monster.getAttack())))
+        print("%s has %s HP remaining." % (player.getName(), player.getHp()))
         
         #Battle ends
         if player.getHp() == 0:
-            print ""
+            print("")
             return False
     
     if monsters:
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
     
     #Battle continuation
     return True
@@ -300,7 +300,7 @@ def _itemFind(player, experience):
     lowLevel = triangular(constants.ItemFind.lowLevel)
     if experience > lowLevel and lowLevelFindableUniques:
         item = random.choice(lowLevelFindableUniques)
-        print "You found %s!" % item.getName()
+        print("You found %s!" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
 
@@ -308,7 +308,7 @@ def _itemFind(player, experience):
     highLevel = triangular(constants.ItemFind.highLevel)
     if experience > highLevel and highLevelFindableUniques:
         item = random.choice(highLevelFindableUniques)
-        print "You found %s!" % item.getName()
+        print("You found %s!" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
             
@@ -316,7 +316,7 @@ def _itemFind(player, experience):
     eliteLevel = triangular(constants.ItemFind.eliteLevel)
     if experience > eliteLevel and eliteLevelFindableUniques:
         item = random.choice(eliteLevelFindableUniques)
-        print "You found %s!" % item.getName()
+        print("You found %s!" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
     
@@ -343,11 +343,11 @@ def _endSequence(player, earnings):
     bar = "$" * lengthBar
     
     #Victory sequence
-    print bar
-    print victoryDeclaration
-    print gainsDeclaration
+    print(bar)
+    print(victoryDeclaration)
+    print(gainsDeclaration)
     _itemFind(player, experience)
     player.increaseMoney(money)
     player.increaseExperience(experience)
-    print bar
-    print ""
+    print(bar)
+    print("")

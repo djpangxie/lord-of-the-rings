@@ -52,21 +52,21 @@ class Tharbad(UniquePlace):
         @param player:  The current player.
         """
         #Story
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
         
         print ("You gaze upon the ancient ruins of the once great city of" 
             " Tharbad and see some very strange sights.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
 
         #Solicit user input
         choice = None
         acceptable = ["explore", "leave"]
         while choice not in acceptable:
-            choice = raw_input("What would you like to do? Choices: 'explore'"
+            choice = input("What would you like to do? Choices: 'explore'"
                 " and 'leave.' ")
-            print ""
+            print("")
         
         #Execute user-dependent scripts
         if choice == "explore":
@@ -74,7 +74,7 @@ class Tharbad(UniquePlace):
         else:
             print ("You bid farewell to the ruins of Tharbad and continue on" 
                 " your journey.")
-            print ""
+            print("")
 
     def _explore(self, player):
         """
@@ -86,16 +86,16 @@ class Tharbad(UniquePlace):
         choice = None
         acceptable = ["ruined mill", "ancient bridge"]
         while choice not in acceptable:
-            choice = raw_input("Where would you like to explore? Options:"
+            choice = input("Where would you like to explore? Options:"
                 " 'ruined mill' and 'ancient bridge.' ")
-        print ""
+        print("")
 
         #If user chooses to explore ruined mill
         if choice == "ruined mill":
             print ("You find lots of rotting instruments and the remains of"
                 " farming equipment.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
             self._itemFind(player)
             self._chanceBattle(player)
 
@@ -104,8 +104,8 @@ class Tharbad(UniquePlace):
             print ("You find the ruins of the ancient North-South Road bridge"
                 " crossing. This was \nonce one of the greatest causeways in all"
                 " of Middle Earth.")
-            raw_input("Press enter to continue. ")
-            print ""
+            input("Press enter to continue. ")
+            print("")
             self._itemFind(player)
             self._chanceBattle(player)
 
@@ -113,15 +113,15 @@ class Tharbad(UniquePlace):
         choice = None
         acceptable = ["yes", "no"]
         while choice not in acceptable:
-            choice = raw_input("Would you like to keep exploring? Options:"
+            choice = input("Would you like to keep exploring? Options:"
                 " 'yes' and 'no.' ")
-        print ""
+        print("")
         
         if choice == "yes":
             self._explore(player)
         else:
-            print "You leave Tharbad with a sense of loss."
-            print ""
+            print("You leave Tharbad with a sense of loss.")
+            print("")
             
     def _chanceBattle(self, player):
         """
@@ -130,9 +130,9 @@ class Tharbad(UniquePlace):
         @param player:   The player object.
         """
         if random.random() < constants.THARBAD_BATTLE_PROB and self._monsters:
-            print "You hear some rustling in the shadows...."
-            raw_input("Press enter to continue. ")
-            print ""
+            print("You hear some rustling in the shadows....")
+            input("Press enter to continue. ")
+            print("")
             result = battle(player, constants.BattleEngineContext.STORY, 
                 self._monsters)
             if not result:
@@ -151,8 +151,8 @@ class Tharbad(UniquePlace):
         chance = random.random()
         #Determines if player finds item and which item player receives
         if chance < constants.THARBAD_ITEM_FIND_PROB:
-            print "You find something that may be of some value!"
+            print("You find something that may be of some value!")
             item = random.choice(self._loot)
             if player.addToInventory(item):
                 self._loot.remove(item)
-            print ""
+            print("")

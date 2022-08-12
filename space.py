@@ -94,7 +94,7 @@ class Space(object):
         """
         #Special prompt for theOneRing
         if item == theOneRing and self._name != "Orodruin":
-            print "\nYou see some strange men walk by."
+            print("\nYou see some strange men walk by.")
             return
             
         if isinstance(item, Item):
@@ -274,7 +274,7 @@ class Space(object):
 
         @return:            True if valid exit, False otherwise.
         """
-        availableExits = self._exits.keys()
+        availableExits = list(self._exits.keys())
         if exit not in availableExits:
             return False
             

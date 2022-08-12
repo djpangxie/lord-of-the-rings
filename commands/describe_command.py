@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from space import Space
 from player import Player
 from cities.city import City
@@ -37,42 +37,42 @@ class DescribeCommand(Command):
         uniquePlace = location.getUniquePlace()
         
         #Print space name and description
-        print "%s: %s" % (locationName, locationDescription)
+        print("%s: %s" % (locationName, locationDescription))
 
         #If there are no cities or uniquePlaces in space
         if not city and not uniquePlace:
-            print "%s has no places for you to enter." % locationName
+            print("%s has no places for you to enter." % locationName)
 
         #If there is at least one city or uniquePlace
         else:
-            print "\nThe following are contained in %s:\n" % locationName
+            print("\nThe following are contained in %s:\n" % locationName)
             
             #If space has one city:
             if isinstance(city, City):
                 cityName = city.getName()
-                print "%s:\n%s" % (cityName, city.getDescription())
+                print("%s:\n%s" % (cityName, city.getDescription()))
             
             #If space has multiple cities:
             elif isinstance(city, list):
                 for eachCity in city:
                     eachCityName = eachCity.getName()
-                    print "%s:\n%s" % (eachCityName, eachCity.getDescription())
+                    print("%s:\n%s" % (eachCityName, eachCity.getDescription()))
 
             #If space has one uniquePlace object
             if isinstance(uniquePlace, UniquePlace):
                 uniquePlaceName = uniquePlace.getName() 
-                print "%s:\n%s" % (uniquePlaceName, 
-                uniquePlace.getDescription())
+                print("%s:\n%s" % (uniquePlaceName, 
+                uniquePlace.getDescription()))
             
             #If space has multiple uniquePlaces
             if isinstance(uniquePlace, list):
                 for eachUniquePlace in uniquePlace:
                     eachUniquePlaceName = eachUniquePlace.getName()
-                    print "%s:\n%s" % (eachUniquePlaceName, 
-                    eachUniquePlace.getDescription())
+                    print("%s:\n%s" % (eachUniquePlaceName, 
+                    eachUniquePlace.getDescription()))
         
         #If space has items
         if len(itemsList) > 0:
-            print "The following items are in %s:" % locationName
+            print("The following items are in %s:" % locationName)
             for item in itemsList:
-                print "\t--%s." % item.getName()
+                print("\t--%s." % item.getName())

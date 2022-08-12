@@ -3,60 +3,59 @@
 from items.item import Item
 from constants import ItemType
 
+
 class Charm(Item):
     """
-    Charm is a child class of Item.
+    Charm是Item的子类。
 
-    Charms can modify any number of player attributes. The most prominent 
-    example of a charm in LotR is a Ring of Power, which may modify multiple
-    player stats.
+    饰品可以修改任意数量的玩家属性。在《指环王》的所有饰品中，最突出的例子是魔戒，它可以改变多个玩家的状态。
     """
+
     def __init__(self, name, description, weight, cost, attack, defense, hp):
         """
-        Initializes charm class.
+        初始化饰品对象。
 
-        @param name:         The name of the item.
-        @param description:  Charm description.
-        @param weight:       Charm weight.
-        @param attack:       Attack bonus given by charm.    
-        @param defense:      The defense stat of the charm. Reduces the amount
-                             of damage that player receives by this amount.
-        @param hp:           The hp bonus of the charm. 
+        @param name:         饰品名字
+        @param description:  饰品的描述
+        @param weight:       饰品的重量
+        @param attack:       饰品的攻击加成
+        @param defense:      饰品的防御加成
+        @param hp:           饰品的生命值加成
         """
         Item.__init__(self, name, description, weight, cost)
-        
+
         self._attack = attack
         self._defense = defense
         self._hp = hp
-        
+
     def getAttack(self):
         """
-        Returns the charm's attack stat bonus.
+        返回饰品的攻击加成。
 
-        @return:    Charm's attack bonus.
+        @return:    饰品的攻击加成
         """
         return self._attack
-        
+
     def getDefense(self):
         """
-        Returns the charm's defense stat bonus.
+        返回饰品的防御加成。
 
-        @return:    Charm's defense bonus.
+        @return:    防御加成
         """
         return self._defense
-    
+
     def getHp(self):
         """
-        Returns the charm's hp bonus.
+        返回饰品的生命值加成。
 
-        @return:    Charm's hp bonus.
+        @return:    饰品的生命值加成
         """
         return self._hp
 
     def getType(self):
         """
-        Returns the item's type.
+        返回物品的类型。
 
-        @return:   Item's type.
+        @return:   物品的类型
         """
-        return ItemType.charm
+        return ItemType.CHARM

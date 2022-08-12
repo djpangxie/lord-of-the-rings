@@ -3,40 +3,40 @@
 from items.item import Item
 from constants import ItemType
 
+
 class Armor(Item):
     """
-    Armor is a child class of Item.
+    Armor是Item的子类。
     
-    Armor serves as the class of defensive items in the game. It has a 
-    special attribute, "defense," which serves to reduce the damage that 
-    player receives.
+    盔甲是游戏中的防御型物品类别，定义了一个defense属性，可以减少玩家受到的伤害。
     """
+
     def __init__(self, name, description, weight, cost, defense):
         """
-        Initializes armor class.
+        初始化盔甲对象。
 
-        @param name:         The name of the piece of armor.
-        @param description:  Armor description.
-        @param weight:       Armor weight.
-        @param cost:         The cost of the armor.
-        @param defense:      The defense stat of the piece of armor. 
+        @param name:         盔甲名称
+        @param description:  盔甲的描述
+        @param weight:       盔甲的重量
+        @param cost:         盔甲的价格
+        @param defense:      盔甲的防御力
         """
         Item.__init__(self, name, description, weight, cost)
-        
+
         self._defense = defense
-        
+
     def getDefense(self):
         """
-        Returns the armor's defense stat.
+        返回盔甲的防御力。
 
-        @return:    Armor defense.
+        @return:    盔甲的防御力
         """
         return self._defense
 
     def getType(self):
         """
-        Returns the item's type.
+        返回物品的类型。
 
-        @return:   Item's type.
+        @return:   物品的类型
         """
         return ItemType.ARMOR

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 import constants
 
 class CheckMoneyCommand(Command):
@@ -27,4 +27,4 @@ class CheckMoneyCommand(Command):
         money = self._player.getMoney()
         name = self._player.getName()
 
-        print "%s currently has %s %s!" % (name, money, constants.CURRENCY)
+        print("%s currently has %s %s!" % (name, money, constants.CURRENCY))

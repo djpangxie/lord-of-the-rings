@@ -74,23 +74,23 @@ class Isenguard(UniquePlace):
 
         @param player:  The current player.
         """
-        print self._greetings
-        print ""
+        print(self._greetings)
+        print("")
 
         #Player goes through series of battles to take Isenguard
         if not self._battle(player):
             return
-        print ""
+        print("")
 
         #Player given option to summit Orthanc
         choice = self._summitPrompt()
-        print ""
+        print("")
         
         #Carry out user-dependent script
         if choice == "yes":
             self._summitOrthanc(player)
         else:
-            print "You continue on your journey."
+            print("You continue on your journey.")
         
     def _battle(self, player):
         """
@@ -101,46 +101,46 @@ class Isenguard(UniquePlace):
         #Wave 1
         print ("Immediately as you approach the Ring of Isenguard, you are" 
             " greeted with an a wave of Uruk....")
-        raw_input("Press enter to continue. ")
+        input("Press enter to continue. ")
         result = battle(player, constants.BattleEngineContext.STORY, self._wave)
         if not result:
             return False
-        print ""
+        print("")
         
         #Wave 2
         print ("As you gaze over bodies of your slain enemies, Sauroman the" 
             " Great Wizard appears.")
-        raw_input("Press enter to continue. ")
-        print ""
+        input("Press enter to continue. ")
+        print("")
         
         print ("Sauroman: \"You shouldn't have come, foolish one. Were you" 
             " haughty enough to think that you could take the Orthanc?\"")
-        raw_input("Press enter to continue. ")
+        input("Press enter to continue. ")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
         if not result:
             return False
-        print ""
+        print("")
         
         #Wave 3
-        print "Sauroman: \"You stupid fool....\""
-        raw_input("Press enter to continue. ")
+        print("Sauroman: \"You stupid fool....\"")
+        input("Press enter to continue. ")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)
         if not result:
             return False
-        print ""
+        print("")
 
         #Victory sequence
-        print "Isenguard has a new overseer this day."
-        print ""
+        print("Isenguard has a new overseer this day.")
+        print("")
         
         self._createPort("south")
         
         #Give player loot
         if self._keysOfOrthanc in self._loot:
-            print "You have gained the Keys of the Orthanc!"
-            print ""
+            print("You have gained the Keys of the Orthanc!")
+            print("")
             if player.addToInventory(self._keysOfOrthanc):
                 self._loot.remove(self._keysOfOrthanc)
         
@@ -153,9 +153,9 @@ class Isenguard(UniquePlace):
         """
         choice = None
         acceptable = ["yes", "no"]
-        print "Would you like to summit the Tower of Orthanc?"
+        print("Would you like to summit the Tower of Orthanc?")
         while choice not in acceptable:
-            choice = raw_input("Choice: 'yes' or 'no.' ")
+            choice = input("Choice: 'yes' or 'no.' ")
             
         return choice
 
@@ -166,17 +166,17 @@ class Isenguard(UniquePlace):
         @param player:  The current player.
         """
         #Summiting the Orthanc
-        print "You take a brief residence in the Tower of Orthanc!"
-        raw_input("Press enter to continue. ")
-        print ""
+        print("You take a brief residence in the Tower of Orthanc!")
+        input("Press enter to continue. ")
+        print("")
         
         #Give player loot
         if self._palatir in self._loot:
-            print "You found Sauroman's Palatir!"
+            print("You found Sauroman's Palatir!")
             if player.addToInventory(self._palatir):
                 self._loot.remove(self._palatir)
-        print ""
+        print("")
 
         #Story
-        print "Congratulations on your victory!"
-        print ""
+        print("Congratulations on your victory!")
+        print("")

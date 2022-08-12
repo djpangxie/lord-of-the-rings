@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
@@ -63,32 +63,32 @@ class CheckStatsCommand(Command):
                 armor = True
 
         #Print player stats
-        print "%s's stats: \n" % name
-        print "\t%s is level %s and has %s experience." % (name, level, 
-        experience)
-        print "\t%s's HP: %s/%s." % (name, hp, totalMaxHp)
-        print "\t%s gets a %s HP bonus from charms." % (name, charmHp)
-        print ""
+        print("%s's stats: \n" % name)
+        print("\t%s is level %s and has %s experience." % (name, level, 
+        experience))
+        print("\t%s's HP: %s/%s." % (name, hp, totalMaxHp))
+        print("\t%s gets a %s HP bonus from charms." % (name, charmHp))
+        print("")
         
         #For attack
-        print "\tCharacter-based attack is %s." % attack
+        print("\tCharacter-based attack is %s." % attack)
         if weapon:
-            print ("\tWeapons bonus is %s and charm bonus is %s." 
-            % (weaponsAttack, charmAttack))
-            print "\tTotal attack is %s." % totalAttack
+            print(("\tWeapons bonus is %s and charm bonus is %s." 
+            % (weaponsAttack, charmAttack)))
+            print("\tTotal attack is %s." % totalAttack)
         else:
-            print "\tWeapon: [Unequipped]."
-        print ""
+            print("\tWeapon: [Unequipped].")
+        print("")
         
         #For defense
         if armor:
-            print "\tArmor-based defense is %s." % armorDefense
-            print "\tCharm-based defense is %s." % charmDefense
-            print "\tTotal defense is %s." % totalDefense
+            print("\tArmor-based defense is %s." % armorDefense)
+            print("\tCharm-based defense is %s." % charmDefense)
+            print("\tTotal defense is %s." % totalDefense)
         else:
-            print "\tArmor:  [Unequipped]" 
-        print ""
+            print("\tArmor:  [Unequipped]") 
+        print("")
         
         #Player weight limit
-        print "\tPlayer weight limit is %s." % weightLimit
-        print ""
+        print("\tPlayer weight limit is %s." % weightLimit)
+        print("")

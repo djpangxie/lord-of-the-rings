@@ -2,19 +2,16 @@
 
 class Building(object):
     """
-    A generic building object, used for inheritance.
-    
-    Building children include inns, shops, and squares.
-    These classes have their own set of methods.
+    一个通用的建筑类，用于派生。建筑的子类包括旅店、商店和广场，这些子类有它们自己的一套方法。
     """
+
     def __init__(self, name, description, greetings):
         """
-        Initializes the building object.
+        初始化建筑对象。
 
-        @param name:           The name of the building.
-        @param description:    A description of the building.
-        @param greetings:      The greetings the user gets as (s)he enters
-                               building.
+        @param name:           建筑的名字
+        @param description:    建筑的描述
+        @param greetings:      玩家进入建筑时得到的问候
         """
         self._name = name
         self._description = description
@@ -22,36 +19,32 @@ class Building(object):
 
     def getName(self):
         """
-        Returns name of building.
+        返回该建筑的名字
 
-        @return:    The name of the building.
+        @return:    建筑的名字的字符串
         """
         return self._name
 
     def getDescription(self):
         """
-        Returns description of building.
+        返回该建筑的描述。
 
-        @return:    The description of the building.
+        @return:    建筑的描述的字符串
         """
         return self._description
 
     def greetings(self):
         """
-        Returns the string that is displayed as player enters 
-        the building.
+        返回玩家进入建筑物时显示的字符串。
 
-        @return:    The greetings player receives upon entering
-                    the building.
+        @return:    玩家在进入建筑物时收到的问候的字符串
         """
         return self._greetings
 
     def enter(self, player):
         """
-        Default enter method. By default, does nothing.
+        默认的输入方法。默认情况下，不做任何事情。这个方法应该被子类所重写。
 
-        This method should be overridden by child classes.
-
-        @param player:   The player object.
+        @param player:   玩家对象
         """
         pass

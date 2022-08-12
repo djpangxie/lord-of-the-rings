@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 import constants
 
 class QuitCommand(Command):
@@ -22,9 +22,9 @@ class QuitCommand(Command):
         Run Help command.
         """
         #Confirm quit
-        response = raw_input( "Are you sure you want to quit? (yes/no): ")
+        response = input( "Are you sure you want to quit? (yes/no): ")
         response = response.strip().lower()
 
         if 'yes' in response:
-            print "Exiting...."
+            print("Exiting....")
             exit(0)

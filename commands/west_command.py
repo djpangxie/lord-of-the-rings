@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from command import Command
+from .command import Command
 
 class WestCommand(Command):
     """
@@ -25,15 +25,15 @@ class WestCommand(Command):
         """
         #Make sure that exit exists
         if not self._player.canMoveWest():
-            print "Cannot move west."
+            print("Cannot move west.")
             return
 
         #User graphic
-        print "--------------------------------"
-        print "         Moving West"
-        print "      <-----------------        "
-        print ""
-        print "--------------------------------"
+        print("--------------------------------")
+        print("         Moving West")
+        print("      <-----------------        ")
+        print("")
+        print("--------------------------------")
 
         #Actual move execution and user output
         self._player.moveWest()
@@ -42,5 +42,5 @@ class WestCommand(Command):
         name = space.getName()
         description = space.getDescription()
         
-        print "Welcome to %s." % name 
-        print description
+        print("Welcome to %s." % name) 
+        print(description)
