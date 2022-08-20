@@ -8,25 +8,21 @@ from items.charm import Charm
 import constants
 
 """
-A storing place for some of the unique items of the game.
-
-For instance, "The One Ring."
+以下是游戏中的一些独特物品。例如：“至尊魔戒”"
 """
-#Items - Story
-#Starting Inventory
-sting = Weapon("Sting", "Elvish - made in Gondolin", 2, 22, 8)
-theOneRing = Item("The One Ring", "Very important", 6, 540)
-leatherCloak = Armor("Leather Cloak", "Travel tunic", 3, 8, 1)
-vodka = Potion("Vodka", "Good for health", 1, 4, 4)
+#剧情物品
+#初始库存
+sting = Weapon("刺针", "精灵语：刚多林制造", 2, 22, 8)
+theOneRing = Item("至尊魔戒", "非常重要", 6, 540)
+leatherCloak = Armor("皮斗篷", "旅行外衣", 3, 8, 1)
+vodka = Potion("伏特加", "有益健康", 1, 4, 4)
 startingInventory = [sting, theOneRing, leatherCloak, vodka]
 
-#Hobbiton Square
-walkingCane = Item("Walking Cane", "Dubiously helpful", 2, 2)
-tea = Potion("Tea", "A delightful refreshment", 1, 1, 4)
-newspaper = Item("The Shire Newspaper", "Mostly tabloids... about hobbits", 
-0, 0)
-hobbitonSquareItems = {"Naftel Took": walkingCane, 
-"Amaranth Brandybuck": [tea, newspaper]}
+#霍比屯广场
+walkingCane = Item("拐杖", "它的帮助作用值得怀疑", 2, 2)
+tea = Potion("茶", "令人愉快的茶点", 1, 1, 4)
+newspaper = Item("夏尔报纸", "主要是小报……关于霍比特人", 0, 0)
+hobbitonSquareItems = {"纳夫特尔·图克": walkingCane, "阿马兰斯·白兰地鹿": [tea, newspaper]}
 
 #Council of Elrond
 legolasHair = Item("Legolas' Hair", "Industrial applications", 0, 12)
@@ -228,7 +224,7 @@ gondorArmorDist = {
 #商店药水
 #伊利雅德的商店
 hobbitTea = Potion("霍比特茶", "主要是月桂叶", 1, 4, 4)
-shireWater = Potion("夏尔水", "产自白兰地", 1, 6, 6)
+shireWater = Potion("夏尔水", "产自白兰地河", 1, 6, 6)
 shireWater2 = Potion("夏尔水", "产自夏尔伯恩", 1, 8, 10)
 
 eriadorPotionDist = {
@@ -292,8 +288,8 @@ shopPotionDist = {
     constants.RegionType.GONDOR: gondorPotionDist}
     
 #低级独特武器
-guthwine = Weapon("古丝温", "伊奥梅尔的剑。赃物", 8, 142, 22)
-herugrim = Weapon("西鲁格因", "希优顿的剑。会引起负面的关注", 8, 136, 26)
+guthwine = Weapon("古丝温", "伊奥梅尔的佩剑。赃物", 8, 142, 22)
+herugrim = Weapon("西鲁格因", "希优顿的佩剑。会引起负面的关注", 8, 136, 26)
 orchrist = Weapon("欧克力斯特", "辛达语：兽咬剑", 15, 160, 24)
 
 #低级独特盔甲

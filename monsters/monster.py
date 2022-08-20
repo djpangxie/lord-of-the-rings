@@ -2,23 +2,18 @@
 
 class Monster(object):
     """
-    A generic monster to be used as a parent for specific future monster 
-    classes.
+    一个通用怪物类，用作特定怪物子类的父类。
     """
+
     def __init__(self, name, description, stats, attackString, deathString):
         """
-        Initializes a monster object.
+        初始化怪物对象。
 
-        @param name:          Name of monster.
-        @param description:   Description of monster.
-        @param stats:         3-element list of Monster stats including 
-                              attack, hp, and experience (in that order).
-        @param attackString:  The string displayed with an monster attack. For 
-                              instance, Miles "got really pissed and started 
-                              charging around."
-        @param deathString:   The string displayed with monster death. For 
-                              instance, "Miles decided that he's had enough 
-                              and went back home."
+        @param name:          怪物名称
+        @param description:   怪物的描述
+        @param stats:         怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
+        @param attackString:  怪物攻击时显示的字符串。例如：“迈尔斯非常生气，开始四处冲锋。”
+        @param deathString:   怪物死亡时显示的字符串。例如：“迈尔斯认为他受够了，就回家了。”
         """
         self._name = name
         self._description = description
@@ -27,76 +22,75 @@ class Monster(object):
         self._experience = stats[2]
         self._attackString = attackString
         self._deathString = deathString
-        
+
     def getName(self):
         """
-        Gets monster name.
+        获取怪物名称。
 
-        @return: Monster name.
+        @return: 怪物名称
         """
         return self._name
-    
+
     def getDescription(self):
         """
-        Gets monster's description.
+        获取怪物的描述。
 
-        @return: Monster description.
+        @return: 怪物的描述
         """
         return self._description
 
     def getHp(self):
         """
-        Get monster's HP.
+        获取怪物的HP
         
-        @return: Monster HP.
+        @return: 怪物的HP
         """
         return self._hp
-    
+
     def attack(self, target):
         """
-        Simulates attacking a given target.
+        模拟攻击给定目标。
 
-        @param target: Target to attack.
+        @param target: 攻击的目标
         """
         target.takeAttack(self._attack)
 
     def getAttack(self):
         """
-        Get monster's attack.
+        获取怪物的攻击力。
         
-        @return: Monster attack.
+        @return: 怪物的攻击力
         """
         return self._attack
-        
-    def takeAttack(self, attack): 
-        """
-        Simulates taking an attack.
-        HP cannot be less than zero.
 
-        @param attack: Amount of attack taken.
+    def takeAttack(self, attack):
+        """
+        模拟攻击。HP不能小于零。
+
+        @param attack: 受到的攻击量
         """
         self._hp = max(self._hp - attack, 0)
-        
+
     def getExperience(self):
         """
-        Gets monster's experience.
+        获取怪物的经验值。
 
-        @return: Monster experience.
+        @return: 怪物的经验值
         """
         return self._experience
 
     def getAttackString(self):
         """
-        Gets monster's attack string.
+        获取怪物攻击时显示的字符串。
 
-        @return: Monster attack string.
+        @return: 怪物攻击时显示的字符串
         """
         return self._attackString
 
     def getDeathString(self):
         """
-        Gets monster's death string.
+        获取怪物死亡时显示的字符串。
 
-        @return: Monster death string.
+        @return: 怪物死亡时显示的字符串
         """
         return self._deathString

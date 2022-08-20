@@ -6,36 +6,32 @@ from items.potion import Potion
 
 class TomBombadilHouse(UniquePlace):
     """
-    TomBombadil's House is a unique place in Old Forest. In Tokien's universe, 
-    Tom Bombadill is a mysterious mystic whose identity and purpose is never 
-    fully explained.
-    
-    If the player visits Tom Bombadil, he gets a chance to dialogue and 
-    receive some items.
+    汤姆·邦巴迪尔的家是一所位于老林子中的独特的地点
+    在托尔金的宇宙中，汤姆·邦巴迪尔是一个隐秘的神秘主义者，他的身份和目的从未被完全解释过。
+    如果玩家拜访汤姆·邦巴迪尔，他就有机会对话并获得一些物品。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Tom Bombadil's House.
+        初始化汤姆·邦巴迪尔的家
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特的地点名称
+        @param description:     独特的地点的描述
+        @param greetings:       玩家进入该独特的地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
         
-        #Spawn loot
-        description = "Has a secret, sharpened edge"
-        weapon = Weapon("Walking Cane", description, 4, 2, 2)
-        description = "Contains rare herbs"
-        potion = Potion("Forest Tonic", description, 1, 4, 6)
+        #生成战利品
+        description = "有一个秘密的锋利的刀口"
+        weapon = Weapon("短杖", description, 4, 2, 2)
+        description = "含有稀有草药"
+        potion = Potion("森林滋补品", description, 1, 4, 6)
         self._gift = [weapon, potion]
         
     def enter(self, player):
         """
-        Allows the user to dialogue with Tom Bombadil and receive gifts.
+        允许用户与汤姆·邦巴迪尔对话并获得礼物。
 
-        @param player:  The current player.
+        @param player:  当前玩家
         """
         #Story
         print(self._greetings)

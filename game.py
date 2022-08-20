@@ -130,7 +130,7 @@ class Game(object):
 
     def _winningConditions(self):
         """
-        评估玩家是否已经赢得游戏。赢得游戏的标准是魔戒被丢在orodruin（末日火山）地区。
+        评估玩家是否已经赢得游戏。赢得游戏的标准是至尊魔戒被丢在欧洛都因（末日火山）地区。
         """
         if self._orodruin.containsItem(theOneRing):
             return True

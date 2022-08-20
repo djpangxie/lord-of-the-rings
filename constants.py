@@ -88,10 +88,10 @@ class ItemType(object):
     POTION  = 4 # 药水
     CHARM   = 5 # 饰品
 
-#Direction enumeration
+#方向枚举
 class Direction(object):
     """
-    The cardinal directions.
+    主要方向。
     """
     NORTH = 'north'
     SOUTH = 'south'
@@ -104,8 +104,8 @@ class RegionType(object):
     中土世界的地区类型。
     """
     ERIADOR       = 1 # 伊利雅德
-    BARROW_DOWNS  = 2 # 巴拉多
-    HIGH_PASS     = 3 #
+    BARROW_DOWNS  = 2 # 古冢岗
+    HIGH_PASS     = 3 # 高隘口
     ENEDWAITH     = 4 # 伊宁威治
     MORIA         = 5 # 墨瑞亚
     RHOVANION     = 6 # 罗马尼安
@@ -128,27 +128,25 @@ class RegionBaseSpawn(object):
     GONDOR        = 8
     MORDOR        = 8
 
-#Space spawn probability
+#在地区中时发生随机战斗的概率
 class SpaceSpawnProb(object):
-    """
-    Used to store space spawn probabilities.
-    """
-    shire               = 0
-    oldForest           = .7
-    weatherHills        = .75
-    trollshaws          = .85
-    mistyMountainsNorth = .85
-    highPass            = 0
-    mirkwood            = .4
-    southernMirkwood    = .9
-    barrowDowns         = .85
-    bruinen             = .75
-    mitheithel          = .75
-    swanfleet           = .75
-    dunland             = .85
-    mistyMountainsSouth = 0
-    lorien              = .4
-    fangorn             = .4
+    """用于存储地区发生随机战斗的概率。"""
+    shire               = 0     # 夏尔
+    oldForest           = .7    # 老林子
+    weatherHills        = .75   # 风云丘陵
+    trollshaws          = .85   # 食人妖森林
+    mistyMountainsNorth = .85   # 迷雾山脉北部
+    highPass            = 0     # 高隘口
+    mirkwood            = .4    # 幽暗密林
+    southernMirkwood    = .9    # 幽暗密林南部
+    barrowDowns         = .85   # 古冢岗
+    bruinen             = .75   # 布茹伊能河
+    mitheithel          = .75   # 苍泉河
+    swanfleet           = .75   # 天鹅泽
+    dunland             = .85   # 黑蛮地
+    mistyMountainsSouth = 0     # 迷雾山脉南部
+    lorien              = .4    # 罗瑞恩
+    fangorn             = .4    # 范贡森林
     theWold             = .4
     fieldOfCelebrant    = .25
     calenardhon         = .95
@@ -161,7 +159,7 @@ class SpaceSpawnProb(object):
     deadMarshes         = .5
     udun                = .95
     cairAndros          = .8
-    orodruin            = .95
+    orodruin            = .95   # 欧洛都因（末日火山）
     anorien             = .75
     anduin              = .85
     ephelDuath          = .9
@@ -170,27 +168,25 @@ class SpaceSpawnProb(object):
     lossamarch          = .6
     ithilien            = .85
 
-#Space bonusDifficulty
+#地区的奖励难度
 class SpaceBonusDiff(object):
-    """
-    Used to store space bonus difficulty probabilities.
-    """
-    shire               = 0
-    oldForest           = 0
-    weatherHills        = 0
-    trollshaws          = .2
-    mistyMountainsNorth = 0
-    highPass            = 0
-    mirkwood            = 0
-    southernMirkwood    = .2
-    barrowDowns         = 0
-    bruinen             = 0
-    mitheithel          = .2
-    swanfleet           = .2
-    dunland             = 0
-    mistyMountainsSouth = 0
-    lorien              = 0
-    fangorn             = 0
+    """用于存储地区的奖励难度。"""
+    shire               = 0     # 夏尔
+    oldForest           = 0     # 老林子
+    weatherHills        = 0     # 风云丘陵
+    trollshaws          = .2    # 食人妖森林
+    mistyMountainsNorth = 0     # 迷雾山脉北部
+    highPass            = 0     # 高隘口
+    mirkwood            = 0     # 幽暗密林
+    southernMirkwood    = .2    # 幽暗密林南部
+    barrowDowns         = 0     # 古冢岗
+    bruinen             = 0     # 布茹伊能河
+    mitheithel          = .2    # 苍泉河
+    swanfleet           = .2    # 天鹅泽
+    dunland             = 0     # 黑蛮地
+    mistyMountainsSouth = 0     # 迷雾山脉南部
+    lorien              = 0     # 罗瑞恩
+    fangorn             = 0     # 范贡森林
     theWold             = -.3
     fieldOfCelebrant    = -.3
     calenardhon         = .5
@@ -203,7 +199,7 @@ class SpaceBonusDiff(object):
     deadMarshes         = .2
     udun                = .3
     cairAndros          = .2
-    orodruin            = .3
+    orodruin            = .3    # 欧洛都因（末日火山）
     anorien             = .3
     anduin              = 0
     ephelDuath          = .2
@@ -212,77 +208,73 @@ class SpaceBonusDiff(object):
     lossamarch          = 0
     ithilien            = .2
 
-#Monster names
+#怪物名称
 class MonsterNames(object):
-    """
-    Contains the names of the monsters in LotR.
-    """
-    BarrowWight         = "Barrow Wight"
-    Goblin              = "Goblin"
-    GreatGoblin         = "Great Goblin"
-    KingOfTheBarrows    = "King of the Barrows"
-    Nazgul              = "Nazgul"
-    Nazgul_II           = "Nazgul II"
-    Nazgul_III          = "Nazgul III"
-    Troll               = "Troll"
-    WargRider           = "Warg Rider"
-    UrukHai             = "Uruk Hai"
-    UrukHaiArcher       = "Uruk Hai Archer"
-    EliteUrukHai        = "Elite Uruk Hai"
-    Dunlending          = "Dunlending"
-    Orc                 = "Orc"
-    OrcArcher           = "Orcish Archer"
-    SiegeWorks          = "Siege Works"
-    DragonOfMordor      = "Dragon of Mordor"
-    CorsairOfUmbar      = "Corsair of Umbar"
-    ArmoredMumakil      = "Armored Mumakil"
-    BlackNumernorian    = "Black Numernorian"
-    EasterlingWarrior   = "Easterling Warrior"
-    Sauroman            = "Sauroman of Many Colors"
-    MouthOfSauron       = "Mouth Of Sauron"
-    WitchKing           = "Witch King"
-    Shelob              = "Shelob"
-    Balrog              = "Balrog"
-    Orc_II              = "Orc II"
-    OrcArcher_II        = "Orc Archer II"
-    Troll_II            = "Troll II"
-    BlackNumernorian_II = "Black Numernorian II"
+    """包含指环王中怪物的名称。"""
+    BarrowWight         = "古冢尸妖"
+    Goblin              = "半兽人"
+    GreatGoblin         = "巨型半兽人"
+    KingOfTheBarrows    = "尸妖王"
+    Nazgul              = "戒灵"
+    Nazgul_II           = "戒灵II"
+    Nazgul_III          = "戒灵III"
+    Troll               = "食人妖"
+    WargRider           = "座狼骑手"
+    UrukHai             = "乌鲁克族"
+    UrukHaiArcher       = "乌鲁克族弓手"
+    EliteUrukHai        = "乌鲁克族精英"
+    Dunlending          = "黑蛮地人"
+    Orc                 = "奥克"
+    OrcArcher           = "奥克弓手"
+    SiegeWorks          = "围城工事"
+    DragonOfMordor      = "魔多龙"
+    CorsairOfUmbar      = "昂巴海盗"
+    ArmoredMumakil      = "披甲毛象"
+    BlackNumernorian    = "黑努曼诺尔人"
+    EasterlingWarrior   = "伊斯特林战士"
+    Sauroman            = "反叛的萨鲁曼"
+    MouthOfSauron       = "索隆之口"
+    WitchKing           = "安格玛巫王"
+    Shelob              = "尸罗"
+    Balrog              = "炎魔"
+    Orc_II              = "奥克II"
+    OrcArcher_II        = "奥克弓手II"
+    Troll_II            = "食人妖II"
+    BlackNumernorian_II = "黑努曼诺尔人II"
     
-#Monster descriptions
+#怪物的描述
 class MonsterDescriptions(object):
-    """
-    Contains the descriptions of the monsters in LotR.
-    """
-    BarrowWight         = "A sad soul left haunting the Downs."
-    Goblin              = "\"Give me all of your stuff!\""
-    GreatGoblin         = "\"Give me ALL of your stuff!\""
-    KingOfTheBarrows    = "An intense, evil spirit."
+    """包含指环王中怪物的描述。"""
+    BarrowWight         = "一个悲伤的灵魂萦绕在此。"
+    Goblin              = "\"把你所有的东西都给我！\""
+    GreatGoblin         = "\"把你所有的东西都给我！！！\""
+    KingOfTheBarrows    = "一个极强的恶灵。"
     Nazgul              = "\"AAAAEEEEEEEEEEE!!!\""
-    Nazgul_II           = "Nazgul's older brother."
-    Nazgul_III          = "Now with dragon mount!"
-    Troll               = "\"Merrily I troll along.\""
-    WargRider           = "Likes riding... wargs."
-    UrukHai             = "\"You even lift bro?\""
-    UrukHaiArcher       = "Lifts over long distances."
-    EliteUrukHai        = "Bench press champion."
-    Dunlending          = "The original people of Middle Earth."
-    Orc                 = "Not very nice."
-    OrcArcher           = "A total j@ck@$$."
-    SiegeWorks          = "Completely useless in this situation."
-    DragonOfMordor      = "Distant cousin of Dragonite."
-    CorsairOfUmbar      = "Basically, pirates."
-    ArmoredMumakil      = "Armored elephants mounted with archers."
-    BlackNumernorian    = "Extremely powerful sorcerers."
-    EasterlingWarrior   = "From China."
-    Sauroman            = "Head of the White Council."
-    MouthOfSauron       = "Chief Emissary of Sauron."
-    WitchKing           = "Sauron's second in command."
-    Shelob              = "Last Child of Ungoliant"
-    Balrog              = "Durin's Bane"
-    Orc_II              = "Orc's older brother."
-    OrcArcher_II        = "Orc archer's older brother."
-    Troll_II            = "Troll's older brother."
-    BlackNumernorian_II = "Black numernorian's older brother."    
+    Nazgul_II           = "戒灵之长。"
+    Nazgul_III          = "现在有了龙坐骑！"
+    Troll               = "\"我快活地走着。\""
+    WargRider           = "喜欢骑…座狼。"
+    UrukHai             = "\"你提起过兄弟我？\""
+    UrukHaiArcher       = "拥有远程攻击的能力。"
+    EliteUrukHai        = "卧推冠军。"
+    Dunlending          = "中洲的原住民。。"
+    Orc                 = "不大好。"
+    OrcArcher           = "一个十足的混蛋。"
+    SiegeWorks          = "在这种情况下完全没用。"
+    DragonOfMordor      = "恶龙的远亲。"
+    CorsairOfUmbar      = "基本上就是海盗。"
+    ArmoredMumakil      = "载有弓箭手的装甲大象。"
+    BlackNumernorian    = "极为强大的巫师。"
+    EasterlingWarrior   = "来自中国。"
+    Sauroman            = "白道会的首领。"
+    MouthOfSauron       = "索隆的副手与特使。"
+    WitchKing           = "索隆手下最恐怖的奴仆。"
+    Shelob              = "乌苟立安特的最后一个子嗣。"
+    Balrog              = "都林的祸根。"
+    Orc_II              = "奥克之长。"
+    OrcArcher_II        = "奥克弓手之长。"
+    Troll_II            = "食人妖之长。"
+    BlackNumernorian_II = "黑努曼诺尔人之长。"
     
 #Monster attack strings
 class MonsterAttackStrings(object):
@@ -408,11 +400,10 @@ REGIONAL_MONSTER_DISTRIBUTION = {
                               SiegeWorks: [.95, 1]}
      }
 
-#Monster base stats
+#怪物基础数据
 """
-Monster base stats are the only paramater used in monster creation.
-Stats are a 3-element list whose elements are: hp, attack, and
-experience (in that order).
+怪物基础数据是创建怪物时使用的唯一参数。
+基础数据是一个有3个元素列表，分别表示：hp、攻击力和经验（按此顺序）。
 """
 MONSTER_STATS = {BarrowWight:          [18, 2, 6],
                  Goblin:               [28, 5, 12],

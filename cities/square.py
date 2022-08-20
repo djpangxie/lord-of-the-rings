@@ -5,24 +5,18 @@ from items.item import Item
 
 class Square(Building):
     """
-    Squares are children of Building and inhabit cities.
-    
-    Squares serve as public spaces that allow players to
-    interface with city folk.
+    广场派生于建筑，并位于城市之中。
+    广场作为公共空间，让玩家可以与城里人交流。
     """
-    def __init__(self, name, description, greetings, talk = None, 
-    items = None):
+    def __init__(self, name, description, greetings, talk = None, items = None):
         """
-        Initializes square object.
+        初始化广场对象。
 
-        @param name:           The name of the square.
-        @param description:    A description of the square.
-        @param greetings:      The greetings the user gets as he enters a 
-                               square.
-        @param talk:           A dictionary of names-responses used for 
-                               dialogue.
-        @param items:          Items that the player may receive for talking 
-                               to people.
+        @param name:           广场名称
+        @param description:    广场的描述
+        @param greetings:      玩家进入广场时得到的问候
+        @param talk:           用于对话的 人名-对话 的字典
+        @param items:          玩家与人交谈可能会收到的物品
         """
         Building.__init__(self, name, description, greetings)
 

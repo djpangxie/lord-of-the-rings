@@ -8,22 +8,20 @@ import random
 
 class Weathertop(UniquePlace):
     """
-    A unique place in Weather Hills. Here the user is given the option to camp.
-    If the user decides to camp, there is a chance that he gets attacked by
-    Nazgul. If this does not happen, player gets healed up to full health.
+    风云丘陵中的独特的地点。在这里，用户可以选择露营。
+    如果用户决定扎营，他就有可能受到戒灵的攻击；如果这没有发生，玩家将被恢复到完全健康。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Weathertop.
+        初始化风云顶。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特的地点名称
+        @param description:     独特的地点的描述
+        @param greetings:       玩家进入该独特的地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
-        #Generates Nazgul wave
+        #生成多只戒灵
         self._monsters = []
         numberNazgul = random.randrange(1, 8)
         for monster in range(numberNazgul):

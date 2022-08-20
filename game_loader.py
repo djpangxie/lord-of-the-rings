@@ -53,14 +53,14 @@ import constants
 
 def getWorld():
     """
-    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特的地方。城市中可能有旅馆、广场和商店。
+    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特的地点。城市中可能有旅馆、广场和商店。
 
     @return:    创建的地区列表。
     """
     #夏尔 - 霍比特人的故乡
     #旅店
     description = "为旅客提供休息的地方。"
-    greeting = "欢迎光临我们的旅店！我是托金斯维尔·巴金斯家族的萨利。"
+    greeting = "欢迎光临我们的旅店！我是托肯斯维尔-巴金斯家族的萨利。"
     sallyInn = Inn("萨利的旅店", description, greeting, 5)
     #商店
     description = "按照霍比特人的标准，这是很奇特的选择。"
@@ -70,63 +70,43 @@ def getWorld():
     description = "很多霍比特人，大多是闲话家常。"
     greeting = "你听到最新消息了吗？"
     talk = {
-    "Lobelia Baggins": "Get lost!",
-    "Naftel Took": "Going adventuring are ya? Here's my walking cane.",
-    "Amaranth Brandybuck": "Have some treats!",
-    "Balbo Baggins": ("The word on the street is that Lobelia is trying to" 
-    " acquire the \nBaggins estate!"),
-    "Ferdinand Took": "I wonder when Gandalf will visit?"
+    "洛比莉亚·萨克维尔-巴金斯": "走开！",
+    "纳夫特尔·图克": "去冒险是吗？请收下我的拐杖。",
+    "阿马兰斯·白兰地鹿": "吃点零食吧！",
+    "巴尔博·巴金斯": "街上的消息是，洛比莉亚正试图收购巴金斯的庄园！",
+    "费迪南德·图克": "我想知道甘道夫什么时候来？"
     }
-    hobbitonSquare = Square("Hobbiton Square", description, greeting, talk, 
-    items.unique_items.hobbitonSquareItems)
+    hobbitonSquare = Square("霍比屯广场", description, greeting, talk, items.unique_items.hobbitonSquareItems)
     #城市
-    description = """Hobbiton is a village in the central regions of the Shire 
-    within the borders of the Westfarthing. Hobbiton is located on both sides 
-    of the Water approximately a mile northwest of the neighboring village of 
-    Bywater.
+    description = "霍比屯是夏尔中部西区界内的一个村庄。它坐落在小河的两岸，距离东南方的邻村傍水镇约一英里。"
+    greeting = "\"你听说过这个消息吗？\""
+    hobbiton = City("霍比屯", description, greeting, [sallyInn, sallyShop, hobbitonSquare])
+    #夏尔
+    description = """夏尔分为北、南、东、西四个区；它的首府是位于西区的白岗上的大洞镇。大洞镇市长是夏尔的霍比特人当中唯一真正的官员。
+    夏尔主要依赖农业，其土地非常适合耕种。它的主要产物之一是烟斗草，其特别适合在远南部的温暖地区种植。
     """
-    greeting = "\"Have you heard the news?\""
-    hobbiton = City("Hobbiton", description, greeting, [sallyInn, sallyShop, 
-    hobbitonSquare])
-    #The Shire
-    description = """The Shire is divided into four farthings, North, South,
-    East and West; its chief town is Michel Delving on the White Downs in the
-    Westfarthing. The Mayor of Michel Delving is the most important of the
-    Shire-hobbits.
+    shire = Space("夏尔", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.shire, city = hobbiton)
 
-    The Shire is largely dependent on agriculture and its land is well-suited 
-    for farming. One of its chief products is Shire Leaf, grown especially in 
-    the warmer regions of the Southfarthing.
-    """
-    shire = Space("Shire", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.shire, city = hobbiton)
-
-    #老林子 - 汤姆·庞巴迪的家
-    #独特的地方
-    description = ("The house of a mysterious and powerful being who dwells in"
-    " the valley \nof Withywindle.")
+    #老林子 - 汤姆·邦巴迪尔的家
+    #独特的地点
+    description = "一所居住在柳条河山谷的神秘而强大的存在的房子。"
     greeting = """
-    \"Old Tom Bombadil is a merry fellow;
-    Bright blue his jacket is, and his boots are yellow.\"
+    \"老汤姆·邦巴迪尔是个快乐的人；
+    他的夹克是亮蓝色的，他的靴子是黄色的。\"
     """
-    tomBombadil = TomBombadilHouse("Tom Bombadil's House", description, 
-    greeting)
+    tomBombadil = TomBombadilHouse("汤姆·邦巴迪尔的家", description, greeting)
     #老林子
     description = """
-    The Old Forest is one of the few surviving primordial forests which 
-    covered most of Eriador before the Second Age. The Old Forest has been 
-    known to play tricks on travelers in response to its massive 
-    deforestation.
+    老林子是中洲为数不多的原始森林之一，在第二纪元之前覆盖了伊利雅德的大部分地区。
+    众所周知，老林子因霍比屯居民对其边界的焚毁而变得不欢迎外界之人并经常捉弄游客。
     """
-    oldForest = Space("Old Forest", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.oldForest, 
-        uniquePlace = tomBombadil)
+    oldForest = Space("老林子", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.oldForest, uniquePlace = tomBombadil)
 
     #风云丘陵 - 风云顶
-    #独特的地方
-    description = "Once a great watchtower, guarding an entire region."
-    greeting = "The Weathertop ruins whisper of its former glory."
-    weathertop = Weathertop("Weathertop", description, greeting)
+    #独特的地点
+    description = "这里曾经是一座伟大的瞭望塔，守护着整个地区。"
+    greeting = "风云顶废墟在低声诉说着它昔日的辉煌。"
+    weathertop = Weathertop("风云顶", description, greeting)
     #风云丘陵
     description = """
     Weather Hills is the name among Men for the range of hills that lay in 
@@ -677,14 +657,9 @@ def getWorld():
         battleProbability = constants.SpaceSpawnProb.cairAndros, 
         battleBonusDifficulty = constants.SpaceBonusDiff.cairAndros)
 
-    #Orodruin
-    description = """Mount Doom, also known as Orodruin and Amon Amarth, is
-    the volcano in Mordor where the One Ring was forged. It is the only place
-    that the One Ring may be destroyed.
-    """
-    orodruin = Space("Orodruin", description, constants.RegionType.MORDOR, 
-        battleProbability = constants.SpaceSpawnProb.orodruin, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.orodruin)
+    #欧洛都因（末日火山）
+    description = "末日火山，也被称为欧洛都因或阿蒙阿马斯，是魔多的火山，至尊魔戒是在这里锻造的。这是唯一可以摧毁至尊魔戒的地方。"
+    orodruin = Space("欧洛都因", description, constants.RegionType.MORDOR,battleProbability = constants.SpaceSpawnProb.orodruin, battleBonusDifficulty = constants.SpaceBonusDiff.orodruin)
 
     #Anorien - Minas Tirith
     #Inn
@@ -986,7 +961,7 @@ def getWorld():
     
 def getStartingInventory():
     """
-    生成玩家的起始库存。
+    生成玩家的初始库存。
 
     @return:   库存的列表。
     """

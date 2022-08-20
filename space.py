@@ -7,38 +7,22 @@ from items.unique_items import theOneRing
 
 class Space(object):
     """
-    A given location on the map. Connects with other spaces
-    to form larger geographic areas.
+    地图上的给定位置。与其他空间相连，形成更大的地理区域。
     """
-    def __init__(self, name, description, region, battleProbability = 0, 
-    battleBonusDifficulty = 0, items = None, city = None, uniquePlace = None):
+    def __init__(self, name, description, region, battleProbability = 0, battleBonusDifficulty = 0, items = None, city = None, uniquePlace = None):
         """
-        Initialize a Space object.
+        初始化地区对象
 
-        @param name:                   Name of space.
-        @param description:            Description of space.
-        @param battleProbability:      Probability between [0, 1] that a 
-                                       random battle will occur between 
-                                       successive game command executions.
-        @param battleBonusDifficulty:  Probability between [0, 1] that is used 
-                                       to determine battle bonus difficulty. 
-                                       This stat results in a percentage 
-                                       increase over default monster stats and 
-                                       number for any given space.
-                                       
-                                       For instance, if bonus difficulty is 
-                                       set to .5, space will spawn 50% more 
-                                       monsters with 150% base stats.
-                                       
-        @keyword items:                (Optional) Items found in the space.
-                                       May be a reference to a single item or 
-                                       an ItemSet.
-        @keyword city:                 (Optional) City objects in space. May 
-                                       be a reference to an individual object 
-                                       or a list.
-        @keyword uniquePlace:          (Optional) Reference to unique places 
-                                       in space. May be a reference to an 
-                                       individual object or a list.
+        @param name:                   地区名称
+        @param description:            地区的描述
+        @param region                  地区类型的列举常量
+        @param battleProbability:      在连续的游戏命令执行之间发生随机战斗的概率。在区间[0,1]之间
+        @param battleBonusDifficulty:  该地区的奖励难度，用于调整战斗与奖励的加成。在区间[0,1]之间
+                                       此统计数据会导致任何给定区域的默认怪物统计数据和数量的百分比增加
+                                       例如：如果奖励难度设置为0.5，该地区将产生50%更多具有150%基础属性的怪物
+        @keyword items:                (可选)在地区中能找到的物品。可以是单个Item对象或Item对象列表或ItemSet对象
+        @keyword city:                 (可选)地区中的城市。可以是单个对象或包含多个对象的列表
+        @keyword uniquePlace:          (可选)地区中独特的地点。可以是单个对象或包含多个对象的列表
         """
         self._exits = {Direction.NORTH : None,
                        Direction.SOUTH : None,
@@ -50,77 +34,78 @@ class Space(object):
         self._region = region
         self._battleProbability = battleProbability
         self._battleBonusDifficulty = battleBonusDifficulty
-        self._items = ItemSet()
+        self._items = ItemSet(items)
         self._city = city
         self._uniquePlace = uniquePlace
 
     def getName(self):
         """
-        Returns the name of the space.
+        返回地区名称。
 
-        @return:    Name of the space.
+        @return:    地区名称
         """
         return self._name
 
     def getDescription(self):
         """
-        Returns description of space.
+        返回地区的描述。
 
-        @return:    Description of space.
+        @return:    地区的描述
         """
         return self._description
         
     def getRegion(self):
         """
-        Returns the region of the space.
+        返回地区类型的列举常量。
         
-        @return:    The region of space.
+        @return:    地区类型的列举常量
         """
         return self._region
         
     def getItems(self):
         """
-        Returns a string of times.
+        返回在地区中能找到的物品。
 
-        @return:    Items in Space (as ItemSet).
+        @return:    在地区中能找到的物品的ItemSet对象
         """
         return self._items
         
     def addItem(self, item):
         """
-        Adds an item to the space.
+        添加一件或多件物品到该地区中。
 
-        @param item:    Item to add.
+        @param item:    要添加的一件或多件物品
         """
-        #Special prompt for theOneRing
+        #至尊魔戒的特别提醒
         if item == theOneRing and self._name != "Orodruin":
-            print("\nYou see some strange men walk by.")
+            print("\n你看到一些奇怪的人走过。")
             return
-            
+
         if isinstance(item, Item):
             self._items.addItem(item)
         elif isinstance(item, list):
             self._items.addItems(item)
+        elif isinstance(item, ItemSet):
+            self._items.addItems(item.getItems())
         else:
-            errorMsg = "space.AddItem() was given invalid item type."
+            errorMsg = "space.AddItem() 传入了无效的物品类型。"
             raise AssertionError(errorMsg)
 
     def removeItem(self, item):
         """
-        Removes an item from the space.
+        从该地区中删除一个物品。
 
-        @param item:    Item to remove.
+        @param item:    要删除的物品
         """
         self._items.removeItem(item)
 
     def containsItem(self, item):
         """
-        Determines if space contains an item.
+        判断地区中是否包含物品。
 
-        @param item:    Item object to search for.
+        @param item:    要搜索的Item对象
 
-        @return:    True if item is contained in 
-                    Space, False otherwise.
+        @return:    如果Item对象包含在该地区中，则返回True，否则返回False
         """
         return self._items.containsItem(item)
 
