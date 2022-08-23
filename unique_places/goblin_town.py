@@ -11,55 +11,50 @@ import random
 
 class GoblinTown(UniquePlace):
     """
-    GoblinTown is a unique place in High Pass. 
+    半兽人镇是高隘口中的独特地点。
     
-    The player has the opportunity to attempt to creep around GoblinTown or to 
-    go straight in. If the attempt to sneak is unsuccessful, player has to 
-    fight an enormous number of monsters all at once.
+    玩家有机会尝试从半兽人镇周围潜伏过去或直接攻入。
+    如果潜伏的尝试不成功，玩家必须同时与大量的怪物作战。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes GoblinTown.
+        初始化半兽人镇。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
-        #Spawn loot
-        description = "Good for goblins, terrible for humans"
-        weapon = Weapon("Goblin Blade", description, 3, 5, 6)
-        description = "Stolen from Erebor"
-        weapon2 = Weapon("Dwarven Axe", description, 4, 8, 12)
-        description = "Looks Gondorian... represents stolen goods"
-        weapon3 = Weapon("Poleaxe", description, 6, 12, 14)
-        self._loot = [weapon, weapon2, weapon3]
+        #生成战利品
+        weapon1 = Weapon("半兽人砍刀", "对精怪有益，对人类有害", 3, 5, 6)
+        weapon2 = Weapon("矮人战斧", "从孤山偷来的", 4, 8, 12)
+        weapon3 = Weapon("长柄斧", "看起来是从刚铎人那偷来的赃物", 6, 12, 14)
+        self._loot = [weapon1, weapon2, weapon3]
 
-        #Create three monster waves
+        #我们将有四波怪物
         self._wave = []
         self._wave2 = []
         self._wave3 = []
 
-        #Create monster wave #1
+        #创造第一波怪物
         for monster in range(2):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave.append(monster)
             
-        #Create monster wave #2
+        #创造第二波怪物
         for monster in range(8):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave2.append(monster)
 
-        #Create monster wave #3
+        #创造第三波怪物
         for monster in range(4):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave3.append(monster)
         monster = GreatGoblin(constants.MONSTER_STATS[GreatGoblin])
         self._wave3.append(monster)
     
-        #Create monster wave #4
+        #将前三波合为第四波怪物
         self._wave4 = self._wave + self._wave2 + self._wave3
 
     def enter(self, player):

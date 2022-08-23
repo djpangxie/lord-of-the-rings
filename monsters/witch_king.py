@@ -3,20 +3,21 @@
 from monsters.monster import Monster
 import constants
 
+
 class WitchKing(Monster):
     """
-    Inherits from Monster.
+    派生自Monster父类。
     
-    In Tolkien's universe, the Witch King is the leader of the Nazgul.
+    在托尔金的宇宙中，安格玛巫王是戒灵的领袖。
     """
+
     def __init__(self, stats):
         """
-        Initializes a WitchKing monster.
+        初始化安格玛巫王怪物。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.WitchKing, 
-        constants.MonsterDescriptions.WitchKing, stats, 
-        constants.MonsterAttackStrings.WitchKing, 
-        constants.MonsterDeathStrings.WitchKing)
+        Monster.__init__(self, constants.MonsterNames.WitchKing,
+                         constants.MonsterDescriptions.WitchKing, stats,
+                         constants.MonsterAttackStrings.WitchKing,
+                         constants.MonsterDeathStrings.WitchKing)

@@ -3,21 +3,21 @@
 from monsters.monster import Monster
 import constants
 
+
 class Troll(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, these were beasts of great strength but 
-    poor intellect.
+    派生自Monster父类。
+
+    在托尔金的宇宙中，食人妖都是力大无穷但智力低下的野兽。
     """
+
     def __init__(self, stats):
         """
-        Initializes a Troll monster.
+        初始化食人妖怪物。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.Troll, 
-        constants.MonsterDescriptions.Troll, stats, 
-        constants.MonsterAttackStrings.Troll, 
-        constants.MonsterDeathStrings.Troll)
+        Monster.__init__(self, constants.MonsterNames.Troll,
+                         constants.MonsterDescriptions.Troll, stats,
+                         constants.MonsterAttackStrings.Troll,
+                         constants.MonsterDeathStrings.Troll)

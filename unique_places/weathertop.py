@@ -8,16 +8,16 @@ import random
 
 class Weathertop(UniquePlace):
     """
-    风云丘陵中的独特的地点。在这里，用户可以选择露营。
+    风云丘陵中的独特地点。在这里，用户可以选择露营。
     如果用户决定扎营，他就有可能受到戒灵的攻击；如果这没有发生，玩家将被恢复到完全健康。
     """
     def __init__(self, name, description, greetings):
         """
         初始化风云顶。
         
-        @param name:            独特的地点名称
-        @param description:     独特的地点的描述
-        @param greetings:       玩家进入该独特的地点时得到的问候
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
         UniquePlace.__init__(self, name, description, greetings)
 

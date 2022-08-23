@@ -53,7 +53,7 @@ import constants
 
 def getWorld():
     """
-    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特的地点。城市中可能有旅馆、广场和商店。
+    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特地点。城市中可能有旅馆、广场和商店。
 
     @return:    创建的地区列表。
     """
@@ -71,9 +71,9 @@ def getWorld():
     greeting = "你听到最新消息了吗？"
     talk = {
     "洛比莉亚·萨克维尔-巴金斯": "走开！",
-    "纳夫特尔·图克": "去冒险是吗？请收下我的拐杖。",
+    "纳夫特尔·图克": "去冒险是吗？请收下我的手杖。",
     "阿马兰斯·白兰地鹿": "吃点零食吧！",
-    "巴尔博·巴金斯": "街上的消息是，洛比莉亚正试图收购巴金斯的庄园！",
+    "巴尔博·巴金斯": "街上的消息是，洛比莉亚正试图收购巴金斯家的袋底洞！",
     "费迪南德·图克": "我想知道甘道夫什么时候来？"
     }
     hobbitonSquare = Square("霍比屯广场", description, greeting, talk, items.unique_items.hobbitonSquareItems)
@@ -88,7 +88,7 @@ def getWorld():
     shire = Space("夏尔", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.shire, city = hobbiton)
 
     #老林子 - 汤姆·邦巴迪尔的家
-    #独特的地点
+    #独特地点
     description = "一所居住在柳条河山谷的神秘而强大的存在的房子。"
     greeting = """
     \"老汤姆·邦巴迪尔是个快乐的人；
@@ -103,168 +103,128 @@ def getWorld():
     oldForest = Space("老林子", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.oldForest, uniquePlace = tomBombadil)
 
     #风云丘陵 - 风云顶
-    #独特的地点
+    #独特地点
     description = "这里曾经是一座伟大的瞭望塔，守护着整个地区。"
     greeting = "风云顶废墟在低声诉说着它昔日的辉煌。"
     weathertop = Weathertop("风云顶", description, greeting)
     #风云丘陵
     description = """
-    Weather Hills is the name among Men for the range of hills that lay in 
-    central Eriador and in ancient times marked part of the border between the 
-    lands of Arthedain and Rhudaur. Weathertop, or Amon Sûl, lays at the 
-    southern end of this range.
+    风云丘陵是人类对位于伊利雅德中部的一系列山脉的叫法，这里在古代是雅西顿和鲁道尔之间边界的一部分。
+    风云顶，即阿蒙苏尔，位于该山脉的南端。
     """
-    weatherHills = Space("Weather Hills", description, 
-        constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.weatherHills, 
-        uniquePlace = weathertop)
+    weatherHills = Space("风云丘陵", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.weatherHills, uniquePlace = weathertop)
 
-    #Trollshaws
+    #食人妖森林
     description = """
-    Trollshaws are the upland woods that lay to the west of Rivendell and the 
-    Rivers Hoarwell and Loudwater. They were the haunt of Trolls, three of 
-    which waylaid Bilbo and his companions during the Quest of Erebor.
+    食人妖森林是埃利阿多东部一座小山丘上的茂密森林，它坐落在苍泉河与响水河之间、幽谷以西数日路程处。
+    这里是食人妖的出没地，山丘的高处有一个食人妖的洞穴，其中三只在孤山探险中拦住了比尔博和他的同伴。
     """
-    trollshaws = Space("Trollshaws", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.trollshaws, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.trollshaws)
+    trollshaws = Space("食人妖森林", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.trollshaws, battleBonusDifficulty = constants.SpaceBonusDiff.trollshaws)
 
-    #Misty Mountains North - Rivendell
-    #Inn
-    description = "A relaxing stay in the scenic Misty Mountains!"
-    greeting = "Welcome to Misty Mountain Inn! Let us host you tonight...."
-    mistyInn = Inn("Misty Mountain Inn", description, greeting, 5) 
-    #Shop
-    description = "New Elvenware! Look like your favorite elf!"
-    greeting = ("Welcome to ElvenWares! Here we have the latest in elven" 
-    " gadgetry.")
-    elvenWares = Shop("ElvenWares", description, greeting, 
-        constants.RegionType.RHOVANION, 5, 4)
-    #Square
-    description = "Hotshots only."
-    greeting = "We've been waiting for your arrival...."
+    #迷雾山脉北部 - 幽谷
+    #旅店
+    description = "在风景秀丽的迷雾山脉中度过轻松愉快的时光！"
+    greeting = "欢迎来到迷雾山脉客栈！今晚让我们为您服务......"
+    mistyInn = Inn("迷雾山脉客栈", description, greeting, 5)
+    #商店
+    description = "新的精灵器具! 看起来像你最喜欢的精灵！"
+    greeting = ("欢迎来到精灵商店！在这里，我们有最新的精灵小玩意。")
+    elvenWares = Shop("精灵商店", description, greeting, constants.RegionType.RHOVANION, 5, 4)
+    #广场
+    description = "仅限热点话题。"
+    greeting = "我们一直在等侯着你的到来...."
     talk = {
-    "Elrond": "The sword that was broken... now reforged!", 
-    "Legolas": "What do you think about my hair?", 
-    "Aragorn": "Check out these knife tricks!", 
-    "Gimli": "I bet I can eat more hotdogs than you.", 
-    "Gandalf": "Ahrekhabekamahna....",
-    "Bilbo": "Please take care of my things...."
+    "埃尔隆德": "曾经破碎的剑……现在重铸了！",
+    "莱戈拉斯": "你觉得我的头发怎么样？",
+    "阿拉贡": "看看这些刀法！",
+    "吉姆利": "我敢打赌我能比你吃更多的热狗。",
+    "甘道夫": "阿雷哈贝卡玛哈拉....",
+    "比尔博": "请照顾好我的东西......"
     }
-    councilOfElrond = Square("Council of Elrond", description, greeting, 
-    talk, items.unique_items.councilOfElrondItems)
-    #City
+    councilOfElrond = Square("埃尔隆德议会", description, greeting, talk, items.unique_items.councilOfElrondItems)
+    #城市
     description = """
-    Rivendell, also known as Imladris, is an Elven outpost in Middle-earth. It 
-    is also referred to as "The Last Homely House East of the Sea," a 
-    reference to Valinor, which is west of the Great Sea in Aman.
+    幽谷是半精灵埃尔隆德的领地。也是第三纪元精灵在中洲仅存的领地之一。
+    幽谷也被称为"大海以东最后的家园"。维林诺是精灵次东边的家园，它位于中洲以西的大海上的阿门洲。
     """
-    greeting = ("Rivendell is a sight for sore eyes and truly paradise in" 
-    " the mountains.")
-    rivendell = City("Rivendell", description, greeting, [mistyInn, 
-    elvenWares, councilOfElrond])
-    #Misty Mountains North
-    description = """The Misty Mountains or Mountains of Mist is a great
-    mountain range that lies between Eriador in the west and the Great River 
-    Anduin in the east. It runs 795 miles (1,280 kilometers) from Mount 
-    Gundabad in the far north to Methedras in the south.
+    greeting = ("幽谷是一个让人眼花缭乱的地方，是真正的山中天堂。")
+    rivendell = City("幽谷", description, greeting, [mistyInn, elvenWares, councilOfElrond])
+    #迷雾山脉北部
+    description = """迷雾山脉是一座巨大的山脉，位于西部的伊利雅德和东部的安都因河之间。
+    它从最北边的贡达巴德山到南边的美塞德拉斯，长达795英里（1280公里）。
     """
-    mistyMountainsNorth = Space("Misty Mountains", description, 
-        constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.mistyMountainsNorth, 
-        city = rivendell)
+    mistyMountainsNorth = Space("迷雾山脉北部", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.mistyMountainsNorth, city = rivendell)
 
-    #High Pass - Goblintown
-    #Unique Place
-    description = """Goblin-town is a Goblin dwelling which lies under the 
-    High Pass in the Misty Mountains and is ruled by the Great Goblin. 
-    Gullum's cave is deep beneath Goblin-town and is connected to the Goblins' 
-    tunnels.
+    #高隘口 - 半兽人镇
+    #独特地点
+    description = """半兽人镇是迷雾山脉中部山腹内的一座半兽人据点，一个被称作半兽人王的巨型半兽人统治着此地。
+    所谓半兽人镇，实际上是一系列错综复杂的洞窟和隧道系统，它们遍布于迷雾山脉的山腹之内，咕噜所待过的洞穴就位于其中深处。
     """
-    greeting = "\"What is better: subtlety or aggression?\""
-    goblinTown = GoblinTown("Goblin Town", description, greeting)
-    #High Pass
-    description = """The High Pass is a pass over the Misty Mountains. On its 
-    western end is the refuge of Rivendell. From there the Great East Road 
-    climbs into the mountains until it reaches Goblin-town.
-    
-    ***Mirkwood is accessible to the south through Goblin Town***
-    """
-    highPass = Space("High Pass", description, constants.RegionType.HIGH_PASS, 
-        battleProbability = constants.SpaceSpawnProb.highPass, 
-        uniquePlace = goblinTown)
+    greeting = "\"是潜伏过去还是直接攻入？\""
+    goblinTown = GoblinTown("半兽人镇", description, greeting)
+    #高隘口
+    description = """高隘口是少数几处可供跨越迷雾山脉的隘口之一，位于幽谷以东。
+    它的范围向西止于幽谷，从那里东大道向上蜿蜒入山，途中经过半兽人镇。
 
-    #Mirkwood - Elvenking's Halls
-    #Inn
-    description = "A woodland experience!"
-    greeting = "Welcome to Quenta Mutfak!"
-    sihirliMutfak = Inn("Quenta Mutfak", description, greeting, 5)
-    #Shop
-    description = "Your local ElvenWares!"
-    greeting = "Great variety of elven gadgetry available!"
-    elvenWares = Shop("ElvenWares", description, greeting, 
-        constants.RegionType.RHOVANION, 7, 10)
-    #Square
-    description = "\"Drinks on Thrandruil!\""
-    greeting = "You arrive to find a mass of drunken elves."
+    ***通过半兽人镇可以向南进入黑森林***
+    """
+    highPass = Space("高隘口", description, constants.RegionType.HIGH_PASS, battleProbability = constants.SpaceSpawnProb.highPass, uniquePlace = goblinTown)
+
+    #黑森林 - 精灵国王的宫殿
+    #旅店
+    description = "住在树林里的体验!"
+    greeting = "欢迎来到昆塔-穆特法克！"
+    sihirliMutfak = Inn("昆塔-穆特法克", description, greeting, 5)
+    #商店
+    description = "当地的精灵商店！"
+    greeting = "提供各种各样的精灵小玩意！"
+    elvenWares = Shop("精灵商店", description, greeting, constants.RegionType.RHOVANION, 7, 10)
+    #广场
+    description = "\"瑟兰杜伊的酒宴！\""
+    greeting = "你到达时发现有一大群喝得醉醺醺的精灵。"
     talk = {
-    "Cananthir": "Gaaalaaaagh....", 
-    "Curufin": "Don't mind Canathir, he's had a rough life", 
-    "Daeron": "Let's drink to Legolas!", 
-    "Ecthelion": "Glaaaaaaack....", 
-    "Earwen": "[Ignores you.]"
+    "卡兰希尔": "嘎啦嘎……",
+    "库茹芬": "别介意卡兰希尔，他的生活很艰难",
+    "戴隆": "让我们为莱戈拉斯干杯！",
+    "埃克塞理安": "嘎嘎嘎嘎……",
+    "埃雅玟": "[无视你。]"
     }
-    thePit = Square("The Pit", description, greeting, talk, 
-    items.unique_items.thePitItems)
-    #Square
-    description = "Thrandruil's throne room."
-    greeting = "\"What makes you think that you belong here?\""
+    thePit = Square("坑洞", description, greeting, talk, items.unique_items.thePitItems)
+    #广场
+    description = "瑟兰杜伊的金銮殿。"
+    greeting = "\"是什么让你觉得你属于这里？\""
     talk = {
-    "Thranduil": "Hmmph! I'm the King of Mirkwood!", 
-    "Angrod": ("Much gnashing of teeth here. You probably won't find what"
-    " you're looking for."), 
-    "Aredhel": "Hmmph! Humans!", 
-    "Argon": ("Hmmph! Didn't you know that you're wearing yesterday's"
-    " ElvenWare?"), 
-    "Beleg": "Hmmph! Dress in better ElvenWare!"
+    "瑟兰杜伊": "哼！我是统治黑森林王国的精灵王！",
+    "安格罗德": "这里的人对你几乎咬牙切齿，具体的原因你问问就知道了。",
+    "阿瑞蒂尔": "哼！人类！",
+    "阿尔巩": "哼！你不知道你身上的精灵甲已经落伍了吗？",
+    "贝烈格·库沙理安": "哼！你应该穿上更好的精灵甲！"
     }
-    elvenkingsThrone = Square("Elvenking's Throne", description, greeting, 
-    talk, items.unique_items.elvenkingsThroneItems)
-    #City
-    description = """Elvenking's Halls is the cave system in northern Mirkwood 
-    in which King Thranduil and many of the Elves of Mirkwood live.
+    elvenkingsThrone = Square("精灵王的宝座", description, greeting, talk, items.unique_items.elvenkingsThroneItems)
+    #城市
+    description = """精灵国王的宫殿坐落在距离黑森林东北部边缘仅有几英里之处，它事实上是一座巨大而复杂的洞穴。
+    这座宫殿是精灵国王瑟兰杜伊的住所、宝库和地牢，是黑森林王国对抗外敌的堡垒，但王国的臣民主要并不定居于此，而是生活在森林的深处。
     """
-    greeting = "You arrive to find a bustling network of caves."
-    elvenkingsHalls = City("Elvenking's Halls", description, greeting, 
-    [sihirliMutfak, elvenWares, thePit, elvenkingsThrone])
-    #Mirkwood
-    description = """Mirkwood or \"The Forest of Great Fear\" is a great 
-    forest in Rhovanion. Mirkwood was once called Greenwood the Great and 
-    later became the Wood of Greenleaves."""
-    mirkwood = Space("Mirkwood", description, constants.RegionType.RHOVANION, 
-        battleProbability = constants.SpaceSpawnProb.mirkwood, 
-        city = elvenkingsHalls)
+    greeting = "你来到这里后发现一个可供穿行且热闹非凡的洞穴网络。"
+    elvenkingsHalls = City("精灵国王的宫殿", description, greeting, [sihirliMutfak, elvenWares, thePit, elvenkingsThrone])
+    #黑森林
+    description = """黑森林在辛达语中被称为\"大恐怖之林\"，它是罗瓦尼安的一大片森林，其原名为大绿林；
+    第三纪元末年，因为邪恶力量的入侵，大绿林才被人们称为黑森林。索隆战败后，这里又被重新命名为绿叶森林。
+    """
+    mirkwood = Space("黑森林", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.mirkwood, city = elvenkingsHalls)
 
-    #Southern Mirkwood - Dol Guldur
-    #Unique Place
-    description = """Dol Guldur is Sauron's stronghold in Mirkwood. The hill 
-    itself is the highest point in the southwestern part of the forest.
+    #黑森林南部 - 多古尔都
+    #独特地点
+    description = """多古尔都是黑森林西南部的一座建有要塞的山丘，其周围裹着一片黑冷杉森林，那里的树木互相倾轧争斗，树枝腐败枯萎。
+    第三纪元中，多古尔都要塞一度是魔君索隆的藏身巢穴；索隆离开多古尔都之后，此地依然是他在北方最主要的据点之一，驻扎着戒灵和大量军队。
     """
-    greeting = ("You are overcome with an overwhelming sense of fear as you"
-    " approach the Citadel of Dol Guldur.")
-    dolGuldur = DolGuldur("Dol Guldur", description, greeting)
-    #The Old Forest
-    description = """
-    During the War of the Ring, Southern Mirkwood was occupied by Dol Guldur, 
-    Sauron's northern fortress.
-    """
-    southernMirkwood = Space("Southern Mirkwood", description, 
-        constants.RegionType.RHOVANION, 
-        battleProbability = constants.SpaceSpawnProb.southernMirkwood, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.southernMirkwood, 
-        uniquePlace = dolGuldur)
+    greeting = "当你接近多古尔都要塞时，你被一种压倒性的恐惧感所折服。"
+    dolGuldur = DolGuldur("多古尔都", description, greeting)
+    #黑森林南部
+    description = "在魔戒大战期间，黑森林南部被索隆的北方要塞多古尔都所占领。"
+    southernMirkwood = Space("黑森林南部", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.southernMirkwood, battleBonusDifficulty = constants.SpaceBonusDiff.southernMirkwood, uniquePlace = dolGuldur)
 
-    #Barrow Downs - Bree
+    #布理地区 - 布理
     #Inn
     description = "A quiet inn, tucked away in the outskirts of Bree."
     greeting = "\"Hi I'm Linda, the innkeeper.\""
@@ -295,7 +255,7 @@ def getWorld():
     greeting = "\"Nazgul have been visiting the area at night!\""
     bree = City("Bree", description, greeting, [lindasInn, hanksBattleGear, 
     prancingPony])
-    #Barrow Downs
+    #布理地区
     description = """Barrow-downs or Tyrn Gorthad is a series of low hills 
     east of the Shire, behind the Old Forest and west of the village of Bree. 
     Many of the hills are crowned with megaliths and barrows.
@@ -305,7 +265,7 @@ def getWorld():
         battleProbability = constants.SpaceSpawnProb.barrowDowns, 
         city = bree)
 
-    #Bruinen
+    #布茹伊能河
     description = """Bruinen or Loudwater is a river in eastern Eriador. It 
     begins with two tributaries flowing from the western slopes of the Misty 
     Mountains.
@@ -313,14 +273,14 @@ def getWorld():
     bruinen = Space("Bruinen", description, constants.RegionType.ERIADOR, 
         battleProbability = constants.SpaceSpawnProb.bruinen)
 
-    #Mitheithel - Tharbad
-    #Unique Place
+    #苍泉河 - 沙巴德
+    #独特地点
     description = ("Once a fortified town on the River Greyflood, Tharbad now" 
     " lies in ruins.")
     greeting = ("An eerie mist greets you as you enter the ruins of the once" 
     " great Tharbad....")
     tharbad = Tharbad("Tharbad", description, greeting)
-    #Mitheithel
+    #苍泉河
     description = """Mitheithel is the long river that rises in a place in the 
     icy north of Middle-earth called Hoarwell.
     """

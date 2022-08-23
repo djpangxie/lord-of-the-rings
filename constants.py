@@ -68,11 +68,11 @@ WEIGHT_LIMIT_STAT = 1.15
 Keys are player levels; values are the experience required to obtain its paired
 level.
 """
-LEVEL_EXP_REQUIREMENT = {1: 0, 2: 20, 3: 44, 4: 72, 5: 105, 6: 144, 7: 190, 
-8: 245, 9: 311, 10: 390, 11: 484, 12: 596, 13: 730, 14:890 , 15: 1082, 
+LEVEL_EXP_REQUIREMENT = {1: 0, 2: 20, 3: 44, 4: 72, 5: 105, 6: 144, 7: 190,
+8: 245, 9: 311, 10: 390, 11: 484, 12: 596, 13: 730, 14:890 , 15: 1082,
 16: 1312, 17: 1588, 18: 1919, 19: 2316, 20: 2792}
 
-#Item stat constants 
+#Item stat constants
 SELL_LOSS_PERCENTAGE = .5
 WEAPON_COST          = 1
 ARMOR_COST           = 2
@@ -104,7 +104,7 @@ class RegionType(object):
     中土世界的地区类型。
     """
     ERIADOR       = 1 # 伊利雅德
-    BARROW_DOWNS  = 2 # 古冢岗
+    BARROW_DOWNS  = 2 # 布理地区
     HIGH_PASS     = 3 # 高隘口
     ENEDWAITH     = 4 # 伊宁威治
     MORIA         = 5 # 墨瑞亚
@@ -137,11 +137,11 @@ class SpaceSpawnProb(object):
     trollshaws          = .85   # 食人妖森林
     mistyMountainsNorth = .85   # 迷雾山脉北部
     highPass            = 0     # 高隘口
-    mirkwood            = .4    # 幽暗密林
-    southernMirkwood    = .9    # 幽暗密林南部
-    barrowDowns         = .85   # 古冢岗
-    bruinen             = .75   # 布茹伊能河
-    mitheithel          = .75   # 苍泉河
+    mirkwood            = .4    # 黑森林
+    southernMirkwood    = .9    # 黑森林南部
+    barrowDowns         = .85   # 布理地区
+    bruinen             = .75   # 布茹伊能河（响水河）
+    mitheithel          = .75   # 米斯艾塞尔河（苍泉河）
     swanfleet           = .75   # 天鹅泽
     dunland             = .85   # 黑蛮地
     mistyMountainsSouth = 0     # 迷雾山脉南部
@@ -177,11 +177,11 @@ class SpaceBonusDiff(object):
     trollshaws          = .2    # 食人妖森林
     mistyMountainsNorth = 0     # 迷雾山脉北部
     highPass            = 0     # 高隘口
-    mirkwood            = 0     # 幽暗密林
-    southernMirkwood    = .2    # 幽暗密林南部
-    barrowDowns         = 0     # 古冢岗
-    bruinen             = 0     # 布茹伊能河
-    mitheithel          = .2    # 苍泉河
+    mirkwood            = 0     # 黑森林
+    southernMirkwood    = .2    # 黑森林南部
+    barrowDowns         = 0     # 布理地区
+    bruinen             = 0     # 布茹伊能河（响水河）
+    mitheithel          = .2    # 米斯艾塞尔河（苍泉河）
     swanfleet           = .2    # 天鹅泽
     dunland             = 0     # 黑蛮地
     mistyMountainsSouth = 0     # 迷雾山脉南部
@@ -213,7 +213,7 @@ class MonsterNames(object):
     """包含指环王中怪物的名称。"""
     BarrowWight         = "古冢尸妖"
     Goblin              = "半兽人"
-    GreatGoblin         = "巨型半兽人"
+    GreatGoblin         = "半兽人王"
     KingOfTheBarrows    = "尸妖王"
     Nazgul              = "戒灵"
     Nazgul_II           = "戒灵II"
@@ -225,9 +225,9 @@ class MonsterNames(object):
     EliteUrukHai        = "乌鲁克族精英"
     Dunlending          = "黑蛮地人"
     Orc                 = "奥克"
-    OrcArcher           = "奥克弓手"
+    OrcArcher           = "奥克投矛手"
     SiegeWorks          = "围城工事"
-    DragonOfMordor      = "魔多龙"
+    DragonOfMordor      = "魔多之龙"
     CorsairOfUmbar      = "昂巴海盗"
     ArmoredMumakil      = "披甲毛象"
     BlackNumernorian    = "黑努曼诺尔人"
@@ -238,10 +238,10 @@ class MonsterNames(object):
     Shelob              = "尸罗"
     Balrog              = "炎魔"
     Orc_II              = "奥克II"
-    OrcArcher_II        = "奥克弓手II"
+    OrcArcher_II        = "奥克投矛手II"
     Troll_II            = "食人妖II"
     BlackNumernorian_II = "黑努曼诺尔人II"
-    
+
 #怪物的描述
 class MonsterDescriptions(object):
     """包含指环王中怪物的描述。"""
@@ -272,84 +272,84 @@ class MonsterDescriptions(object):
     Shelob              = "乌苟立安特的最后一个子嗣。"
     Balrog              = "都林的祸根。"
     Orc_II              = "奥克之长。"
-    OrcArcher_II        = "奥克弓手之长。"
+    OrcArcher_II        = "奥克投矛手之长。"
     Troll_II            = "食人妖之长。"
     BlackNumernorian_II = "黑努曼诺尔人之长。"
-    
-#Monster attack strings
+
+#怪物攻击时显示的字符串
 class MonsterAttackStrings(object):
     """
-    Contains the attack strings of the monsters in LotR. For instance,
-    "Goblin *sliced and diced* %s for %s damage!"
+    包含指环王中的所有怪物攻击时显示的字符串。
+    例如："半兽人 *喊着切成片、切成丁* 并对 %s 造成 %s 伤害！"
     """
-    BarrowWight         = "sang a sad song"
-    Goblin              = "slice and diced"
-    GreatGoblin         = "slice and diced"
-    KingOfTheBarrows    = "sang a symphony of sadness"
-    Nazgul              = "slashed you with a Morgul knife"
-    Nazgul_II           = "slashed you with Scythe of Sorrow"
-    Nazgul_III          = "fire-breathing dragoned you"
-    Troll               = "slamed you with fists of malice"
-    WargRider           = "trampled around"
-    UrukHai             = "tried to out lift you"
-    UrukHaiArcher       = "tried to out lift you"
-    EliteUrukHai        = "tried to out lift you"
-    Dunlending          = "hacked and slashed"
-    Orc                 = "hacked"
-    OrcArcher           = "shot fiery darts"
-    SiegeWorks          = "did nothing"
-    DragonOfMordor      = "used hyperbeam"
-    CorsairOfUmbar      = "slashed"
-    ArmoredMumakil      = "got pissed and started trampling around"
-    BlackNumernorian    = "summon spiritual darkness"
-    EasterlingWarrior   = "tried to avenge his ancestors"
-    Sauroman            = "cast elemental spells"
-    MouthOfSauron       = "slashed you with an enchanted blade"
-    WitchKing           = "performed black magic"
-    Shelob              = "stung you"
-    Balrog              = "scourged you with whips of fire"
-    Orc_II              = "hacked"
-    OrcArcher_II        = "shot fiery darts"
-    Troll_II            = "slamed you with fists of malice"
-    BlackNumernorian_II = "summon spiritual darkness"
-    
+    BarrowWight         = "吟唱着悲伤的歌"
+    Goblin              = "喊着切成片、切成丁"
+    GreatGoblin         = "咆哮着切成片、切成丁"
+    KingOfTheBarrows    = "吟唱着悲伤的交响曲"
+    Nazgul              = "用魔古尔之刃挥砍"
+    Nazgul_II           = "用悲伤之镰挥砍"
+    Nazgul_III          = "驱使座下魔龙喷出火焰"
+    Troll               = "用恶意的拳头猛砸"
+    WargRider           = "驱使座狼践踏"
+    UrukHai             = "抱举猛摔"
+    UrukHaiArcher       = "射出箭矢"
+    EliteUrukHai        = "抱举大力猛摔"
+    Dunlending          = "持刀挥砍"
+    Orc                 = "举刀挥砍"
+    OrcArcher           = "投出长矛"
+    SiegeWorks          = "什么也没做"
+    DragonOfMordor      = "喷出一道烈火焰束"
+    CorsairOfUmbar      = "一刀划来"
+    ArmoredMumakil      = "愤怒地开始四处践踏"
+    BlackNumernorian    = "召唤黑暗界域的邪灵"
+    EasterlingWarrior   = "高喊着要为其先祖复仇"
+    Sauroman            = "施放元素法术"
+    MouthOfSauron       = "用附魔之刃挥砍"
+    WitchKing           = "施展了黑魔法"
+    Shelob              = "用利牙蜇刺"
+    Balrog              = "用火鞭鞭打"
+    Orc_II              = "举刀大力挥砍"
+    OrcArcher_II        = "投出尖端炽热的长矛"
+    Troll_II            = "用恶意的拳头大力猛砸"
+    BlackNumernorian_II = "召唤黑暗界域的恶灵"
+
 class MonsterDeathStrings(object):
     """
-    Contains the death strings of the monsters in LotR. These strings
-    are displayed as player kills monster.
+    包含指环王中的所有怪物死亡时显示的字符串。
+    这些字符串会在玩家杀死怪物时显示。
     """
-    BarrowWight         = "\"Good. I am going back to sleep now.\""
-    Goblin              = "\"I'm going back home now.\""
-    GreatGoblin         = "\"I'm going back home now too.\""
-    KingOfTheBarrows    = "\"I am going back to sleep now.\""
+    BarrowWight         = "\"太好了！我现在可以安歇了。\""
+    Goblin              = "\"我现在要回家了。\""
+    GreatGoblin         = "\"我现在也要回家了。\""
+    KingOfTheBarrows    = "\"我现在终于可以安歇了。\""
     Nazgul              = "\"AAAAEEEEEEEEEEE!!!\""
     Nazgul_II           = "\"...AAAAEEEEEEEEEEE!!!\""
     Nazgul_III          = "\"....\""
-    Troll               = "\"Merrily I troll away.\""
-    WargRider           = "[Whimpers] ...My warg...."
-    UrukHai             = "Well, back to the gym I guess...."
-    UrukHaiArcher       = "Leg lifts and suicides here I come...."
-    EliteUrukHai        = "[Walks back to the locker room depressed.]"
-    Dunlending          = "\"Why the heck am I even here?\""
-    Orc                 = "Orc was cut in two!"
-    OrcArcher           = "Orcish Archer was slain!"
+    Troll               = "\"我很高兴地走了。\""
+    WargRider           = "[啜泣声] \"...我的嘴....\""
+    UrukHai             = "\"好吧，我想回家了......\""
+    UrukHaiArcher       = "抬腿一跳，就此陨落。\"我来了....\""
+    EliteUrukHai        = "[沮丧地走了。]"
+    Dunlending          = "\"我为什么要来这里？\""
+    Orc                 = "奥克被砍成了两截！"
+    OrcArcher           = "奥克投矛手被杀了！"
     SiegeWorks          = "...."
-    DragonOfMordor      = "Dragon of Mordor was knocked out!"
-    CorsairOfUmbar      = "Corsair of Umbar went back home."
-    ArmoredMumakil      = "Armored Mumakil is going home to Africa now."
-    BlackNumernorian    = "[Black Numernorian returned to the shadows.]"
-    EasterlingWarrior   = "Easterling Warrior went back to China."
-    Sauroman            = "\"Wizards reincarnate you know....\""
-    MouthOfSauron       = "\"Rides off to fight another day.\""
-    WitchKing           = "\"Hmm....\""
-    Shelob              = "[Shelob retreats into the shadows.]"
-    Balrog              = "[The Balrog retreats into the shadows.']"
-    Orc_II              = "Orc was cut in two!"
-    OrcArcher_II        = "Orcish Archer was slain!"
-    Troll_II            = "\"Merrily I troll away.\""
-    BlackNumernorian_II = "[Black Numernorian returned to the shadows.]"
-    
-#Region monster distribution
+    DragonOfMordor      = "魔多之龙被击倒了！"
+    CorsairOfUmbar      = "昂巴的海盗船回家了。"
+    ArmoredMumakil      = "披甲毛象现在要返回它来的地方了。"
+    BlackNumernorian    = "[黑努曼诺尔人回到了阴影里。]"
+    EasterlingWarrior   = "伊斯特林战士回到了中国。"
+    Sauroman            = "\"巫师的转世你知道吗....\""
+    MouthOfSauron       = "\"这只不过是让我在另一天里再次骑马来战。\""
+    WitchKing           = "\"唔....\""
+    Shelob              = "[尸罗退到阴影中。]"
+    Balrog              = "[炎魔退到阴影里。']"
+    Orc_II              = "奥克之长被砍成了两截！"
+    OrcArcher_II        = "奥克投矛手之长被杀了！"
+    Troll_II            = "\"我很高兴地走了。\""
+    BlackNumernorian_II = "[黑努曼诺尔人之长回到了阴影里。]"
+
+#地区怪物分布情况
 """
 A dictionary of dictionaries where the higher-level keys are regions. 
 The inner set contains the monster class-probability pairs that are 
@@ -361,42 +361,42 @@ of that class is spawned.
 """
 REGIONAL_MONSTER_DISTRIBUTION = {
     RegionType.ERIADOR:      {Nazgul: [0, 1]},
-    RegionType.BARROW_DOWNS: {BarrowWight: [0, .9], 
+    RegionType.BARROW_DOWNS: {BarrowWight: [0, .9],
                               KingOfTheBarrows: [.9, 1]},
     RegionType.HIGH_PASS:    {Goblin: [0, 1]},
-    RegionType.ENEDWAITH:    {WargRider: [0, .3], 
-                              Dunlending: [.3, .6], 
-                              UrukHai: [.6, .8], 
-                              UrukHaiArcher: [.8, .9], 
+    RegionType.ENEDWAITH:    {WargRider: [0, .3],
+                              Dunlending: [.3, .6],
+                              UrukHai: [.6, .8],
+                              UrukHaiArcher: [.8, .9],
                               EliteUrukHai: [.9, 1]},
-     RegionType.MORIA:       {Orc: [0, .7], 
-                              OrcArcher: [.7, .925], 
-                              Troll: [.925, .98], 
+     RegionType.MORIA:       {Orc: [0, .7],
+                              OrcArcher: [.7, .925],
+                              Troll: [.925, .98],
                               Balrog: [.98, 1]},
-     RegionType.RHOVANION:   {Orc: [0, .5], 
-                              OrcArcher: [.5, .7], 
-                              Nazgul_II: [.7, .85], 
+     RegionType.RHOVANION:   {Orc: [0, .5],
+                              OrcArcher: [.5, .7],
+                              Nazgul_II: [.7, .85],
                               BlackNumernorian: [.85, 1]},
-     RegionType.ROHAN:       {UrukHai: [0, .5], 
-                              UrukHaiArcher: [.5, .7], 
-                              EliteUrukHai: [.7, .8], 
+     RegionType.ROHAN:       {UrukHai: [0, .5],
+                              UrukHaiArcher: [.5, .7],
+                              EliteUrukHai: [.7, .8],
                               WargRider: [.8, 1]},
-     RegionType.GONDOR:      {Orc: [0, .45], 
+     RegionType.GONDOR:      {Orc: [0, .45],
                               OrcArcher: [.45, .6],
                               EasterlingWarrior: [.6, .65],
-                              Troll: [.65, .75], 
-                              Nazgul_II: [.75, .785], 
-                              DragonOfMordor: [.785, .8], 
-                              CorsairOfUmbar: [.8, .85], 
-                              ArmoredMumakil: [.85, .9], 
-                              SiegeWorks: [.9, .95], 
+                              Troll: [.65, .75],
+                              Nazgul_II: [.75, .785],
+                              DragonOfMordor: [.785, .8],
+                              CorsairOfUmbar: [.8, .85],
+                              ArmoredMumakil: [.85, .9],
+                              SiegeWorks: [.9, .95],
                               BlackNumernorian: [.95, 1]},
-     RegionType.MORDOR:      {Orc_II: [0, .5], 
-                              OrcArcher_II: [.5, .7], 
-                              Troll_II: [.7, .8], 
-                              Nazgul_III: [.8, .85], 
-                              DragonOfMordor: [.85, .875], 
-                              BlackNumernorian_II: [.875, .95], 
+     RegionType.MORDOR:      {Orc_II: [0, .5],
+                              OrcArcher_II: [.5, .7],
+                              Troll_II: [.7, .8],
+                              Nazgul_III: [.8, .85],
+                              DragonOfMordor: [.85, .875],
+                              BlackNumernorian_II: [.875, .95],
                               SiegeWorks: [.95, 1]}
      }
 
@@ -435,7 +435,7 @@ MONSTER_STATS = {BarrowWight:          [18, 2, 6],
                  OrcArcher_II:         [66, 12, 40],
                  Troll_II:             [166, 16, 80],
                  BlackNumernorian_II:  [152, 24, 92]}
-    
+
 #Battle engine context
 class BattleEngineContext(object):
     """
@@ -444,7 +444,7 @@ class BattleEngineContext(object):
     RANDOM = 1
     STORY  = 2
 
-#Battle engine     
+#Battle engine
 class ItemFind(object):
     """
     Constants used for determining whether player has found items as a result 
@@ -453,7 +453,7 @@ class ItemFind(object):
     lowLevel   = [100, 5000, 300]
     highLevel  = [350, 5000, 600]
     eliteLevel = [500, 5000, 1000]
-    
+
 #Battle engine constants
 class BattleEngine(object):
     """
@@ -474,11 +474,11 @@ class ShopFactoryConstants(object):
     STANDARD_DEVIATION = 2.5 # 商品品质分布的标准差
     QUALITY_MINIMUM    = 0 # 商品品质的最低值
     QUALITY_MAXIMUM    = 20 # 商品品质的最高值
-    UNIQUE_QUALITY_REQ = 10 # 会生成高于该品质物品的商店才会生成低级独特物品
+    UNIQUE_QUALITY_REQ = 10 # 会生成高于该品质物品的商店才会生成独特物品
 
-#Unique Place constants
+#独特地点所用常数
 """
-Constants used for unique places.
+独特地点所用的常量。
 """
 WEATHERTOP_BATTLE_PROB = .5
 WEATHERTOP_WITCH_KING_PROB = .125
@@ -487,7 +487,7 @@ THARBAD_ITEM_FIND_PROB = .5
 ARGONATH_EXP_INCREASE = .1
 DERINGLE_EXP_INCREASE = .05
 GOBLIN_TOWN_EVASION_PROB = .4
-DOL_GULDUR_WITCH_KING_PROB = .125
+DOL_GULDUR_WITCH_KING_PROB = .125  # 多古尔都刷出安格玛巫王的概率 12.5%
 CIRITH_UNGOL_EVASION_PROB = .4
 CIRITH_UNGOL_SHELOB_PROB = .4
 MORIA_ITEM_FIND_PROB = .3

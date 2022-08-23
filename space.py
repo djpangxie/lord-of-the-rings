@@ -22,7 +22,7 @@ class Space(object):
                                        例如：如果奖励难度设置为0.5，该地区将产生50%更多具有150%基础属性的怪物
         @keyword items:                (可选)在地区中能找到的物品。可以是单个Item对象或Item对象列表或ItemSet对象
         @keyword city:                 (可选)地区中的城市。可以是单个对象或包含多个对象的列表
-        @keyword uniquePlace:          (可选)地区中独特的地点。可以是单个对象或包含多个对象的列表
+        @keyword uniquePlace:          (可选)地区中独特地点。可以是单个对象或包含多个对象的列表
         """
         self._exits = {Direction.NORTH : None,
                        Direction.SOUTH : None,

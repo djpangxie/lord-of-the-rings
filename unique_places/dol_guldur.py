@@ -18,28 +18,24 @@ import random
 
 class DolGuldur(UniquePlace):
     """
-    Dol Guldur is a unique place in Southern Mirkwood. In Tolkein's universe,
-    it is a fortress of sorcery. 
-    
-    If a player visits Dol Guldur, he has the opportunity to fight some 
-    difficult monsters and gain some loot.
+    多古尔都是黑森林南部的一个独特地点，其名称的意思是“妖术之山”。
+    如果玩家访问多古尔都，他有机会与一些困难的怪物战斗并获得一些战利品。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Dol Guldur.
+        初始化多古尔都。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
         
         self._wave = []
         self._wave2 = []
         self._wave3 = []
         
-        #Create monster wave #1 
+        #创造第一波怪物
         for monster in range(11):
             monster = Orc(constants.MONSTER_STATS[Orc])
             self._wave.append(monster)
@@ -50,7 +46,7 @@ class DolGuldur(UniquePlace):
             monster = Troll(constants.MONSTER_STATS[Troll])
             self._wave.append(monster)
         
-        #Create monster wave #2
+        #创造第二波怪物
         numberNazgul = random.randrange(0, 8)
         for monster in range(numberNazgul):
             nazgul = Nazgul_II(constants.MONSTER_STATS[Nazgul_II])
@@ -62,7 +58,7 @@ class DolGuldur(UniquePlace):
             monster = BlackNumernorian(constants.MONSTER_STATS[BlackNumernorian])
             self._wave2.append(monster)
             
-        #Create monster wave #3
+        #创造第三波怪物
         numberNazgul = random.randrange(0, 8)
         for monster in range(numberNazgul):
             nazgul = Nazgul_II(constants.MONSTER_STATS[Nazgul_II])
@@ -70,16 +66,16 @@ class DolGuldur(UniquePlace):
         for monster in range(6):
             monster = BlackNumernorian(constants.MONSTER_STATS[BlackNumernorian])
             self._wave3.append(monster)
-        self._wave3.append(monster)
-        
-        #Create loot
-        weapon = Weapon("Cursed Sword", "Fills you with fear", 5, 18, 18)
-        weapon2 = Weapon("Cursed Axe", 
-            "You lose confidence holding this", 5, 22, 16)
-        armor = Armor("Cursed Shield", "Gaping holes", 5, 12, 1)
-        potion = Potion("Cursed Elixir", "An unknown substance", 2, 0, -10)
-        item = Item("Cursed Mirror", "Odd distortions and shadows", 6, 18)
-        item2 = Item("Cursed Books", "Grimoires", 4, 72)
+
+        # self._wave3.append(monster)
+
+        #生成战利品
+        weapon = Weapon("诅咒之剑", "使你充满恐惧", 5, 18, 18)
+        weapon2 = Weapon("诅咒之斧", "你光拿着就已经失去了获胜的信心", 5, 22, 16)
+        armor = Armor("诅咒之盾", "其上布满了千疮百孔", 5, 12, 1)
+        potion = Potion("诅咒药剂", "一种不明物质", 2, 0, -10)
+        item = Item("被诅咒的镜子", "只见奇怪的扭曲和阴影", 6, 18)
+        item2 = Item("被诅咒的书籍", "魔典", 4, 72)
         self._loot = [weapon, weapon2, armor, potion, item, item2]
         
     def enter(self, player):

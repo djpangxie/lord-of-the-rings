@@ -2,7 +2,7 @@
 
 class Place(object):
     """
-    城市和独特的地点类的父类。
+    城市和独特地点类的父类。
     """
 
     def __init__(self, name, description, greetings):

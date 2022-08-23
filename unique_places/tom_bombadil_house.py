@@ -6,7 +6,7 @@ from items.potion import Potion
 
 class TomBombadilHouse(UniquePlace):
     """
-    汤姆·邦巴迪尔的家是一所位于老林子中的独特的地点
+    汤姆·邦巴迪尔的家是一所位于老林子中的独特地点
     在托尔金的宇宙中，汤姆·邦巴迪尔是一个隐秘的神秘主义者，他的身份和目的从未被完全解释过。
     如果玩家拜访汤姆·邦巴迪尔，他就有机会对话并获得一些物品。
     """
@@ -14,9 +14,9 @@ class TomBombadilHouse(UniquePlace):
         """
         初始化汤姆·邦巴迪尔的家
         
-        @param name:            独特的地点名称
-        @param description:     独特的地点的描述
-        @param greetings:       玩家进入该独特的地点时得到的问候
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
         UniquePlace.__init__(self, name, description, greetings)
         
