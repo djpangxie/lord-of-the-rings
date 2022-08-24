@@ -39,16 +39,15 @@ thePitItems = {"库茹芬": water, "戴隆": elvenRum}
 sweetNewElvenWare = Armor("崭新的精灵甲","来自黑森林的最新款式", 4, 52, 3)
 elvenkingsThroneItems = {"贝烈格·库沙理安": sweetNewElvenWare}
 
-# Prancing Pony
-tea = Potion("Tea", "Left by Dudo", 1, 3, 1)
-bulletin = Item("Nazgul Bulletin", "Details Nazgul sightings", 0, 0)
-prancingPonyItems = {"Harry Goatleaf": bulletin, "Dudo Baggins": tea}
+# 跃马客栈
+tea = Potion("茶", "杜多留下的", 1, 3, 1)
+bulletin = Item("告示", "有关黑骑手的详细目击情况", 0, 0)
+prancingPonyItems = {"哈里·金银花": bulletin, "杜多·巴金斯": tea}
 
-# Galadriel's Mirror
-elvenCloak = Armor("Elven Cloak", "A gift from Galadriel", 4, 62, 3)
-phialOfGaladriel = Item("Phial of Galadriel",
-                        "\"May it be a light for you in dark places\"", 1, 92)
-galadrielsMirrorItems = {"Galadriel": [elvenCloak, phialOfGaladriel]}
+# 加拉德瑞尔之镜
+elvenCloak = Armor("精灵斗篷", "加拉德瑞尔的礼物", 4, 62, 3)
+phialOfGaladriel = Item("加拉德瑞尔的水晶瓶", "\"愿它在黑暗中成为你的光\"", 1, 92)
+galadrielsMirrorItems = {"加拉德瑞尔": [elvenCloak, phialOfGaladriel]}
 
 # Helm's Deep Commons
 vodka = Potion("Koskenkorva", "Rohirric Poisons", 1, 12, 32)

@@ -225,151 +225,115 @@ def getWorld():
     southernMirkwood = Space("黑森林南部", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.southernMirkwood, battleBonusDifficulty = constants.SpaceBonusDiff.southernMirkwood, uniquePlace = dolGuldur)
 
     #布理地区 - 布理
-    #Inn
-    description = "A quiet inn, tucked away in the outskirts of Bree."
-    greeting = "\"Hi I'm Linda, the innkeeper.\""
-    lindasInn = Inn("Linda's Inn", description, greeting, 5)
-    #Shop
-    description = "COME GET YOUR ORC-KILLING GEAR HERE!"
-    greeting = "HI I'M HANK!!! KILL ORCS!!!!!"
-    hanksBattleGear = Shop("Hank's Battle Gear", description, greeting, 
-        constants.RegionType.ERIADOR, 8, 2)
-    #Square
-    description = "A noisy hole in the wall known for quarrels."
-    greeting = ("You are greeted with silence. Two people stare at you briefly" 
-    " before turning back to their drinks.")
+    #旅店
+    description = "一家安静的旅店，隐藏在布理的郊区。"
+    greeting = "\"你们好，我是旅馆老板琳达。\""
+    lindasInn = Inn("琳达的旅店", description, greeting, 5)
+    #商店
+    description = "来这挑选你杀戮奥克的装备吧！"
+    greeting = "嗨，我是汉克！！！杀死奥克！！！！"
+    hanksBattleGear = Shop("汉克的战斗装备", description, greeting, constants.RegionType.ERIADOR, 8, 2)
+    #广场
+    description = "一座以争吵闻名的嘈杂的大型客栈。"
+    greeting = "迎接你的是一片寂静。两个人短暂地盯着你看，然后转身继续喝酒。"
     talk = {
-    "Bill Ferny": "I hear there's been Nazgul in these parts.", 
-    "Harry Goatleaf": "The entire town is scared of Nazgul....", 
-    "Henry Thistlewool": "The shadow has descended upon these parts....", 
-    "Dudo Baggins": "What am I even doing here?", 
-    "Estella Brandybuck": "Time to go home I think...."
+    "比尔·蕨尼": "我听说这一带有黑骑手出没。",
+    "哈里·金银花": "整个小镇上的人都被黑骑手吓坏了....",
+    "亨利·蓟羊毛": "阴影已经降临在这些地方......",
+    "杜多·巴金斯": "我在这儿做什么？",
+    "埃丝特拉·白兰地鹿": "是时候回家了，我想...."
     }
-    prancingPony = Square("Prancing Pony", description, greeting, talk, 
-    items.unique_items.prancingPonyItems)
-    #City
-    description = """Bree was settled in the early Third Age in the realm 
-    Cardolan. Though the Princes of Cardolan claimed it, Bree continued to 
-    thrive without any central authority or government for many centuries. 
+    prancingPony = Square("跃马客栈", description, greeting, talk, items.unique_items.prancingPonyItems)
+    #城市
+    description = """布理位于夏尔以东、佛诺斯特·埃莱因以南。它在第三纪元早期属于卡多蓝王国。然而，
+    尽管卡多蓝亲王声称拥有它，但布理在没有任何中央权威或政府的情况下持续繁荣发展了许多世纪。 
     """
-    greeting = "\"Nazgul have been visiting the area at night!\""
-    bree = City("Bree", description, greeting, [lindasInn, hanksBattleGear, 
-    prancingPony])
+    greeting = "\"戒灵一直在夜间造访这附近！\""
+    bree = City("布理", description, greeting, [lindasInn, hanksBattleGear, prancingPony])
     #布理地区
-    description = """Barrow-downs or Tyrn Gorthad is a series of low hills 
-    east of the Shire, behind the Old Forest and west of the village of Bree. 
-    Many of the hills are crowned with megaliths and barrows.
+    description = """布理地区指的是布理山周围所有的地区，包含布理，斯台多，库姆村和阿切特。
+    布理地区的人类居民来历不详。可以肯定的是，他们是伊甸人的后代，与黑蛮地人有亲缘关系。
     """
-    barrowDowns = Space("Barrow Downs", description, 
-        constants.RegionType.BARROW_DOWNS, 
-        battleProbability = constants.SpaceSpawnProb.barrowDowns, 
-        city = bree)
+    barrowDowns = Space("布理地区", description, constants.RegionType.BARROW_DOWNS, battleProbability = constants.SpaceSpawnProb.barrowDowns, city = bree)
 
     #布茹伊能河
-    description = """Bruinen or Loudwater is a river in eastern Eriador. It 
-    begins with two tributaries flowing from the western slopes of the Misty 
-    Mountains.
+    description = """布茹伊能河，又名响水河，是东伊利雅德的一条河流。
+    它发源于迷雾山脉西麓，最终汇入米斯艾塞尔河，其南翼流经埃尔隆德建立的避难所幽谷。
     """
-    bruinen = Space("Bruinen", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.bruinen)
+    bruinen = Space("布茹伊能河", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.bruinen)
 
-    #苍泉河 - 沙巴德
+    #米斯艾塞尔河 - 沙巴德
     #独特地点
-    description = ("Once a fortified town on the River Greyflood, Tharbad now" 
-    " lies in ruins.")
-    greeting = ("An eerie mist greets you as you enter the ruins of the once" 
-    " great Tharbad....")
-    tharbad = Tharbad("Tharbad", description, greeting)
-    #苍泉河
-    description = """Mitheithel is the long river that rises in a place in the 
-    icy north of Middle-earth called Hoarwell.
+    description = "沙巴德曾经是格瓦斯罗河上的一座要塞城镇，现在已成为废墟。"
+    greeting = "当你进入曾经伟大的沙巴德的废墟时，一股阴森的雾气迎面而来...."
+    tharbad = Tharbad("沙巴德", description, greeting)
+    #米斯艾塞尔河
+    description = """米斯艾塞尔河，又名苍泉河，是伊利雅德东部的一条河流。
+    它发源于迷雾山脉北部群山的西麓，距离幽谷以北大约一百英里。
     """
-    mitheithel = Space("Mitheithel", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.mitheithel, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.mitheithel, 
-        uniquePlace = tharbad)
+    mitheithel = Space("米斯艾塞尔河", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.mitheithel, battleBonusDifficulty = constants.SpaceBonusDiff.mitheithel, uniquePlace = tharbad)
 
-    #Swanfleet - Ost In Edhil
-    #Unique Place
-    description = """Once a great elven city, now destroyed by Sauron. The 
-    Rings of Power were forged by Celebrimbor here."""
-    greeting = """You arrive at a strange sight: the once great city of Ost In 
-    Edhil now an ancient ruin. Strange symbols cover the land."""
-    ostInEdhil = OstInEdhil("Ost In Edhil", description, greeting)
-    #Swanfleet
-    description = """The Swanfleet or Nin-in-Eilph is a marshy area in eastern 
-    Eriador where the lower reaches of the Glanduin flows before it joins 
-    Mitheithel. Swanfleet is an inland delta.
+    #天鹅泽 - 欧斯特-因-埃第尔
+    #独特地点
+    description = """这里曾经是一座埃瑞吉安的精灵工匠之城，现在已被索隆摧毁。
+    十九枚力量之戒都是在这里由凯勒布林博等精灵工匠铸造的。"""
+    greeting = """你会看到一个奇怪的景象：曾经的伟大城市欧斯特-因-埃第尔现在成了一个古老的废墟。奇怪的符号遍布在这片土地上。"""
+    ostInEdhil = OstInEdhil("欧斯特-因-埃第尔", description, greeting)
+    #天鹅泽
+    description = """天鹅泽，又称“宁-因-艾尔芙”，是位于伊利雅德东部、格蓝都因河与苍泉河汇流处的沼泽。
+    两条河流的交汇处形成了内陆三角洲，这里溪流诸多，水陆分界也不甚明确。
     """
-    swanfleet = Space("Swanfleet", description, constants.RegionType.ERIADOR, 
-        battleProbability = constants.SpaceSpawnProb.swanfleet, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.swanfleet, 
-        uniquePlace = ostInEdhil)
+    swanfleet = Space("天鹅泽", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.swanfleet, battleBonusDifficulty = constants.SpaceBonusDiff.swanfleet, uniquePlace = ostInEdhil)
     
-    #Dunland
-    description = """Dunland is the land of the Dunlendings. Dunland means 
-    \"Hill Land\" in the language of neighbouring Rohan, whose people named it 
-    after arriving in nearby Calenardhon in the later Third Age. It is a land 
-    of wild men.
+    #黑蛮地
+    description = """黑蛮地是一片山麓丘陵地区，面向迷雾山脉南部的西侧山坡。因其远离阿尔诺与刚铎的人口中心，居民多是被称为黑蛮地人的人类，一度也有流浪至此的矮人与霍比特人。
+    黑蛮地源于洛汗语，意为“山丘地域”，由第三纪元搬至卡伦纳松的洛希尔人所起，是片美丽丰饶的地区，一些未成组织的牧人与山间居民零星居住在黑蛮地南部，北部则无人居住。
     """
-    dunland = Space("Dunland", description, constants.RegionType.ENEDWAITH, 
-        battleProbability = constants.SpaceSpawnProb.dunland)
+    dunland = Space("黑蛮地", description, constants.RegionType.ENEDWAITH, battleProbability = constants.SpaceSpawnProb.dunland)
 
-    #Misty Mountains South
-    #Unique Place
-    description = """Moria consists of an enormous underground complex in
-    northwestern Middle Earth, comprising a vast network of tunnels, chambers, 
-    mines, halls, and mansions. 
+    #迷雾山脉南部
+    #独特地点
+    description = """墨瑞亚曾是中洲大地上最强大且最为著名的矮人王国。在那里矮人繁荣发展，建造了有史以来最伟大的一座城市。
+    它是坐落于迷雾山脉中南部的一个巨大的地下建筑群，横贯山脉的东西两侧，是穿越迷雾山脉的重要通道之一。
     """
-    greeting = "Eerie silence greets as you as you enter the mines."
-    moria = Moria("Moria", description, greeting)
-    #Misty Mountains South
-    description = """Khazad-dum, (also known as Moria, The Black Chasm, The 
-    Black Pit, Dwarrowdelf, Hadhodrond, Casarrondo, and Phurunargian) is the 
-    grandest and most famous of the dwarven cities. There, for many thousands 
-    of years, a thriving Dwarvish community created the greatest city ever 
-    known.
-    
-    ***Lorien is accessible to the east through Moria***
-    """
-    mistyMountainsSouth = Space("Misty Mountains", description, 
-        constants.RegionType.MORIA, uniquePlace = moria)
+    greeting = "当你进入墨瑞亚矿坑时，阴森恐怖的寂静迎面而来。"
+    moria = Moria("墨瑞亚", description, greeting)
+    #迷雾山脉南部
+    description = """迷雾山脉是中洲最大的山脉，由北向南绵延800公里，位于伊利雅德和安都因河之间，将伊利雅德与罗马尼安分隔开。
+    墨瑞亚群山指迷雾山脉的三座连峰凯勒布迪尔、卡拉兹拉斯和法努伊索尔，矮人城邦墨瑞亚就挖凿在三座大山的底部。
 
-    #Lorien - Caras Galadhon
-    #Inn
-    description = "Nested between the rivers Anduin and Silverlode."
-    greeting = "Elvenwaters is a truly beautiful inn, bathed in mist."
-    elvenWaters = Inn("ElvenWaters Inn", description, greeting, 5)
-    #Shop
-    description = "ElvenWares! Lots of great elven gear!"
-    greeting = "Welcome to ElvenWares! We have lots of rare collectibles!"
-    elvenWares = Shop("ElvenWares", description, greeting, 
-        constants.RegionType.RHOVANION, 8, 9)
-    #Square
-    description = "For prophesy as well as plain old-fashioned vanity."
-    greeting = "A strange sight: Galadriel herself!"
+    ***通过墨瑞亚可以向东进入罗瑞恩***
+    """
+    mistyMountainsSouth = Space("迷雾山脉南部", description, constants.RegionType.MORIA, uniquePlace = moria)
+
+    #罗瑞恩 - 卡拉斯加拉松
+    #旅店
+    description = "坐落在安都因河和凯勒布兰特河之间。"
+    greeting = "精灵水域是一家真正美丽的旅馆，沐浴在薄雾之中。"
+    elvenWaters = Inn("精灵水域旅馆", description, greeting, 5)
+    #商店
+    description = "精灵商店！很多很棒的精灵装备！"
+    greeting = "欢迎来到精灵商店！我们有很多稀有的收藏品！"
+    elvenWares = Shop("精灵商店", description, greeting, constants.RegionType.RHOVANION, 8, 9)
+    #广场
+    description = "为了预言以及简单的老式虚荣心。"
+    greeting = "一个道亮丽的风景线：加拉德瑞尔本人！"
     talk = {
-    "Galadriel": "Check out this new ElvenWare! How do you think I look?"
+    "加拉德瑞尔": "看看这水镜吧！它能展示过去、现在以及可能的未来。"
     }
-    galadrielsMirror = Square("Galadriel's Mirror", description, greeting, 
-    talk, items.unique_items.galadrielsMirrorItems)
-    #City
-    description = """Caras Galadhon is a city located in Lorien. Its 
-    inhabitants dwell in large flets in the trees, reachable by white ladders. 
-    On the top of the hill in the greatest of trees is the house of Celeborn 
-    and Galadriel.
+    galadrielsMirror = Square("加拉德瑞尔之镜", description, greeting, talk, items.unique_items.galadrielsMirrorItems)
+    #城市
+    description = """卡拉斯加拉松是洛丝罗瑞恩的都城，这块宽阔草地的南部有一棵无与伦比的巨大瑁珑树，树下设有可供攀爬的白色梯子。攀爬虽然辛苦，但大树的枝干上建有高高低低许多平台，可以随时休息。
+    在瑁珑接近树顶的极高处，有一座椭圆形殿堂绕树而造，这就是罗瑞恩领主凯勒博恩和领主夫人加拉德瑞尔的宫殿，两人的宝座在其中并排摆放，不分位次。
     """
-    greeting = "Welcome to Caras Galdhon! Celeborn and Galadriel reside here."
-    carasGaladhon = City("Caras Galadhon", description, greeting, 
-    [elvenWaters, elvenWares, galadrielsMirror])
-    #Lorien
-    description = """Lothlorien is a kingdom of Silvan Elves on the eastern 
-    side of the Hithaeglir. It is considered one of the most beautiful places 
-    in Middle-earth and has the only mallorn-trees east of the sea.
+    greeting = "欢迎来到卡拉斯加拉松！凯勒博恩和加拉德瑞尔住在这里。"
+    carasGaladhon = City("卡拉斯加拉松", description, greeting, [elvenWaters, elvenWares, galadrielsMirror])
+    #罗瑞恩
+    description = """洛丝罗瑞恩是位于迷雾山脉东面的西尔凡王国，简称罗瑞恩。
+    在第三纪元，它被认为是中洲最美丽也最富于精灵特色的地方。
+    在大海以东，洛丝罗瑞恩是瑁珑的唯一生长地点，只有夏尔的那棵例外。
     """
-    lorien = Space("Lorien", description, constants.RegionType.RHOVANION, 
-        battleProbability = constants.SpaceSpawnProb.lorien, 
-        city = carasGaladhon)
+    lorien = Space("罗瑞恩", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.lorien, city = carasGaladhon)
 
     #Fangorn - Derningle
     #Unique Place

@@ -11,38 +11,34 @@ import random
 
 class Tharbad(UniquePlace):
     """
-    Tharbad is a unique place in Mitheithel. It is the remains of an city that 
-    was once inhabited by men.
+    沙巴德是米斯艾塞尔河中的独特地点。这是一座曾经有人居住的城市的遗迹。
     
-    Here the user is given the option of exploring the ruins. Exploring the 
-    ruins grants the player the ability to find items at the risk of a chance 
-    encounter with Nazgul.
+    在这里，玩家可以选择探索废墟，探索废墟将使玩家能够冒着与戒灵遭遇的风险搜罗物品。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Tharbad.
+        初始化沙巴德。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
-        #Generates list of Nazgul that user may fight
+        #生成玩家可以战斗的戒灵的列表
         self._monsters = []
         numberNazgul = random.randrange(1, 5)
         for monster in range(numberNazgul):
             nazgul = Nazgul_II(constants.MONSTER_STATS[Nazgul_II])
             self._monsters.append(nazgul)
 
-        #Generate loot
-        description = "Ancient runes and symbols"
-        scroll = Item("Ancient Scroll", description, 1, 32)
-        description = "Looks like it can break at any second"
-        weapon = Weapon("Rotting Staff", description, 6, 3, 4)
-        description = "Maybe one or two hits and it's through"
-        armor = Armor("Rotting Shield", description, 4, 2, 1)
+        #生成战利品
+        description = "记载着古代的文字与符号"
+        scroll = Item("古代卷轴", description, 1, 32)
+        description = "看起来它随时都有可能断裂"
+        weapon = Weapon("腐烂的法杖", description, 6, 3, 4)
+        description = "也许被击打一两次就碎了"
+        armor = Armor("腐烂的盾牌", description, 4, 2, 1)
         self._loot = [scroll, weapon, armor]
         
     def enter(self, player):

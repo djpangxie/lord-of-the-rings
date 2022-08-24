@@ -147,7 +147,7 @@ class SpaceSpawnProb(object):
     mistyMountainsSouth = 0     # 迷雾山脉南部
     lorien              = .4    # 罗瑞恩
     fangorn             = .4    # 范贡森林
-    theWold             = .4
+    theWold             = .4    # 北高原
     fieldOfCelebrant    = .25
     calenardhon         = .95
     westfold            = .85

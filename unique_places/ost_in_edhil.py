@@ -4,20 +4,18 @@ from unique_place import UniquePlace
 
 class OstInEdhil(UniquePlace):
     """
-    OstInEdhil is a unique place in Anduin. OstInEdhil was once a great city 
-    that was inhabited by elves before Sauron destroyed it.
+    欧斯特-因-埃第尔是安都因河中的独特地点。这里曾经是一座伟大的城市，在索伦摧毁它之前，一直是精灵居住的地方。
 
-    If player visits OstInEdhil, he gets healed.
+    如果玩家访问这里，他将被治愈。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes OstInEdhil.
+        初始化欧斯特-因-埃第尔。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
     def enter(self, player):
