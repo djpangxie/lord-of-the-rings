@@ -15,7 +15,7 @@ class Orc(Monster):
         """
         初始化奥克怪物。
 
-        @param stats:     怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
         Monster.__init__(self, constants.MonsterNames.Orc,
                          constants.MonsterDescriptions.Orc, stats,

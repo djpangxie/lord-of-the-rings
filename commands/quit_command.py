@@ -3,28 +3,29 @@
 from .command import Command
 import constants
 
+
 class QuitCommand(Command):
     """
-    Quit command.
+    退出命令。
     """
+
     def __init__(self, name, explanation):
         """
-        Initializes quit command.
+        初始化退出命令。
 
-        @param name:          The name of the command.
-        @param explanation:   Explanation of the Command.
+        @param name:          命令名称
+        @param explanation:   命令的说明
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
     def execute(self):
         """
-        Run Help command.
+        运行退出命令。
         """
-        #Confirm quit
-        response = input( "Are you sure you want to quit? (yes/no): ")
+        # 确认退出
+        response = input("你确定你要退出吗？(yes/no): ")
         response = response.strip().lower()
 
         if 'yes' in response:
-            print("Exiting....")
+            print("退出....")
             exit(0)

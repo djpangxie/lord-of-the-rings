@@ -11,7 +11,7 @@ class Monster(object):
 
         @param name:          怪物名称
         @param description:   怪物的描述
-        @param stats:         怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
+        @param stats:         怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         @param attackString:  怪物攻击时显示的字符串。例如：“迈尔斯非常生气，开始四处冲锋。”
         @param deathString:   怪物死亡时显示的字符串。例如：“迈尔斯认为他受够了，就回家了。”
         """

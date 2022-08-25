@@ -2,16 +2,16 @@
 
 class Command(object):
     """
-    Parent class for all Command objects.
+    所有 Command 对象的父类。
     """
-    def __init__(self, name, explanation, time = False):
-        """
-        Initializes new command object.
 
-        @param name:          Command name.
-        @param explanation:   Explanation of command.
-        @param time:          True if time passes with command.
-                              False otherwise.
+    def __init__(self, name, explanation, time=False):
+        """
+        初始化新的命令对象。
+
+        @param name:          命令名称
+        @param explanation:   命令的说明
+        @param time:          如果该命令会造成时间流逝则为True，否则为False
         """
         self._name = name
         self._explanation = explanation
@@ -19,35 +19,32 @@ class Command(object):
 
     def getName(self):
         """
-        Returns command's name.
+        返回命令名称。
         
-        @return:    Command name.
+        @return:    命令名称
         """
         return self._name
 
     def getExplanation(self):
         """
-        Returns command's explanation.
+        返回命令的说明。
         
-        @return:    Command explanation.
+        @return:    命令的说明
         """
         return self._explanation
 
     def getTime(self):
         """
-        Returns time attribute of command.
+        如果该命令会造成时间流逝则返回True，否则返回False。
 
-        @return:   Time attribute of command. Represents
-                   whether time is passing with command
-                   execution.
+        @return:   如果该命令会造成时间流逝则为True，否则为False
         """
         return self._time
 
     def execute(self):
         """
-        Default execute method. By default,
-        does nothing.
+        默认执行方法。默认情况下，什么都不做。
 
-        This method should be overridden by child classes.
+        这个方法应该被子类重写。
         """
         pass

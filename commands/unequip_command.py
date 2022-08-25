@@ -4,17 +4,16 @@ from .command import Command
 
 class UnequipCommand(Command):
     """
-    Unequips player with currently equipped item.
+    卸下玩家当前装备的物品。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes unequip command.
+        初始化卸下命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

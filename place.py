@@ -43,12 +43,10 @@ class Place(object):
 
     def receiveSpaces(self, space, targetSpace):
         """
-        Helper method used to create references to the two spaces
-        used in quest-dependent port creation.
-        
-        @param space:         Player's current space.
-        @param targetSpace:   The space to be linked with the 
-                              current space.
+        创建该独特地点连接到的两个地区。
+
+        @param space:         玩家的当前地区
+        @param targetSpace:   通过该地点后将会去往的地区
         """
         self._space = space
         self._targetSpace = targetSpace

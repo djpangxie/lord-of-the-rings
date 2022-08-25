@@ -8,17 +8,16 @@ import constants
 
 class MapCommand(Command):
     """
-    Map command.
+    地图命令。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes Map command.
+        初始化地图命令。
 
-        @param name:            Command's name.
-        @param explanation:     Description of what command does.
-        @param player:          Reference to command.
+        @param name:            命令名称
+        @param explanation:     命令的说明
+        @param player:          玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

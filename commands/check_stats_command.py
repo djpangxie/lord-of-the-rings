@@ -7,17 +7,16 @@ from items.charm import Charm
 
 class CheckStatsCommand(Command):
     """
-    Displays player stats.
+    显示玩家统计数据。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes new check stats command.
+        初始化新的检查统计命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

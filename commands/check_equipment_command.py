@@ -7,17 +7,16 @@ from items.charm import Charm
 
 class CheckEquipmentCommand(Command):
     """
-    Displays player equipment and details equipment stats.
+    显示玩家装备和详细的装备统计信息。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes new check equipment command.
+        初始化新的检查装备命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
         
         self._player = player

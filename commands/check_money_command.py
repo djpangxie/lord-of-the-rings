@@ -5,17 +5,16 @@ import constants
 
 class CheckMoneyCommand(Command):
     """
-    Displays player money.
+    显示玩家金钱。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes new check money command.
+        初始化新的检查金钱命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

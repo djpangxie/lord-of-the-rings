@@ -76,7 +76,7 @@ class Space(object):
 
         @param item:    要添加的一件或多件物品
         """
-        #至尊魔戒的特别提醒
+        #至尊戒的特别提醒
         if item == theOneRing and self._name != "Orodruin":
             print("\n你看到一些奇怪的人走过。")
             return
@@ -142,10 +142,9 @@ class Space(object):
 
     def getBattleProbability(self):
         """
-        Returns probability of a random battle.
+        返回在该地区旅行时发生随机战斗的概率。
 
-        @return:    The probability that a random
-                    battle occurs.
+        @return:    随机战斗发生的概率
         """
         return self._battleProbability
 
@@ -159,40 +158,35 @@ class Space(object):
 
     def createExit(self, direction, space, outgoingOnly = False):
         """
-        Create an exit to another space. By default, the method creates the 
-        appropriate exit in the second space. (This can be suppressed, however, 
-        using I{outgoingOnly}).
-        
-        Spaces can have multiple spaces per direction.
+        创建通往另一个地区的出口。一个地区的每个方向都可以通向一个或多个地区。
+        默认情况下，该方法会在该出口连接的地区中同时创建适当的出口回到该地区。(然而，可以使用outgoingOnly参数来抑制这种情况)
 
-        @param direction:       Direction of exit.
-        @param space:           Adjacent space.
-        @keyword outgoingOnly:  By default, this method creates the appropriate
-                                exit in the second space. Set I{outgoingOnly}
-                                to False to suppress this behaviour.
+        @param direction:       出口方向
+        @param space:           连接的地区
+        @keyword outgoingOnly:  默认情况下，该方法会在该出口连接的地区中同时创建适当的出口回到该地区
+                                将outgoingOnly参数设置为True可以抑制这种情况
         """
-        #Make sure a valid direction has been specified
+        #确保指定的方向有效
         if not self._isExit(direction):
-            errorMsg = "Direction not valid: %s" % direction
+            errorMsg = "方向无效：%s" % direction
             raise AssertionError(errorMsg)
         
-        #Set exit to other space - if a space already exists
+        #设置出口连接的地区
         if self._exits[direction]:
             currentSpace = self._exits[direction]
-            #If multiple spaces already exist in that direction
-            if isinstance(self._exits[direction], list):
+            #如果该方向已存在多个地区
+            if isinstance(currentSpace, list):
                 currentSpace.append(space)
-            #If a single space exists in that direction
+            #如果该方向只存在一个地区
             else:
                 self._exits[direction] = [currentSpace, space]
-        #If no space already exists
+        #如果还没有连接到任何地区
         else:
             self._exits[direction] = space
 
-        #Create exit from other space to this space
+        #创建从其它地区到该地区的出口
         if not outgoingOnly:
             oppositeDirection = self._oppositeDirection(direction)
-            #outgoingOnly = True as to not create an infinite loop
             space.createExit(oppositeDirection, self, outgoingOnly = True)
 
     def clearExit(self, direction, outgoingOnly, space = None):
@@ -229,19 +223,13 @@ class Space(object):
 
     def getExit(self, direction):
         """
-        Returns a reference to an adjacent space.
-        Returns None if no space exists in given direction.
+        返回对相邻地区对象的引用。如果在给定方向的出口上不存在地区，则返回None。
 
-        @param direction:   Direction of adjacent space.
-                            Must be one of the directions defined in
-                            constants.Direction.
+        @param direction:   相邻地区的方向。必须是constants.Direction中定义的方向之一
         
-        @return:            Reference to space in given direction.
-                            (Returns None if no exit is defined
-                            for given direction).
+        @return:            给定方向的地区对象（如果给定方向没有地区则为None）
         """
-        space = self._exits[direction]
-        return space
+        return self._exits[direction]
 
     def getExits(self):
         """
@@ -253,11 +241,11 @@ class Space(object):
 
     def _isExit(self, exit):
         """
-        Makes sure that a string represents a valid exit.
+        确保出口字符串代表一个有效的出口。
 
-        @param direction:   Name of exit.
+        @param direction:   出口名称
 
-        @return:            True if valid exit, False otherwise.
+        @return:            如果有效则返回True，否则返回False
         """
         availableExits = list(self._exits.keys())
         if exit not in availableExits:
@@ -267,11 +255,11 @@ class Space(object):
 
     def _oppositeDirection(self, direction):
         """
-        Returns the opposite direction. (e.g. North is opposite of South)
+        返回相反的方向。(例如：北与南相反)
 
-        @param direction:   A direction (from constants.Direction)
+        @param direction:   一个方向
         
-        @return:            Opposite direction (from constants.Direction)
+        @return:            相反的方向
         """
         if direction == Direction.NORTH:
             return Direction.SOUTH
@@ -282,4 +270,4 @@ class Space(object):
         elif direction == Direction.WEST:
             return Direction.EAST
         else:
-            raise AssertionError("Not a valid direction: %s" % direction)
+            raise AssertionError("该方向无效：%s" % direction)

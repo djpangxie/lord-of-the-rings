@@ -8,17 +8,16 @@ from unique_place import UniquePlace
 
 class DescribeCommand(Command):
     """
-    Describes the current space to the user.
+    向用户描述当前所在地区。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes new describe command.
+        初始化新的描述命令。
 
-        @param name:         The name of player.
-        @param explanation:  Explanation of player.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
         
         self._player = player

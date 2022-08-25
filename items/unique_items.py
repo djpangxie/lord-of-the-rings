@@ -8,12 +8,12 @@ from items.charm import Charm
 import constants
 
 """
-以下是游戏中的一些独特物品。例如：“至尊魔戒”"
+以下是游戏中的一些独特物品。例如：“至尊戒”"
 """
 # 剧情物品
 # 初始库存
 sting = Weapon("刺叮", "精灵语：刚多林制造", 2, 22, 8)
-theOneRing = Item("至尊魔戒", "非常重要", 6, 540)
+theOneRing = Item("至尊戒", "非常重要", 6, 540)
 leatherCloak = Armor("皮斗篷", "旅行外衣", 3, 8, 1)
 vodka = Potion("伏特加", "有益健康", 1, 4, 4)
 startingInventory = [sting, theOneRing, leatherCloak, vodka]
@@ -92,10 +92,10 @@ flowersAndTrinkets = Charm("Flowers And Trinkets", "Mental health bonuses",
 beachItems = {"Gondorian bro #3": [draagz, vodka],
               "Gondorian bro #2": flowersAndTrinkets}
 
-# Elven Rings
-narya = Charm("Nanya", "Elven Ring of Fire", 0, 270, 100, 0, 0)
-nenya = Charm("Nenya", "Elven Ring of Water", 0, 280, 0, 0, 500)
-vilya = Charm("Vilya", "Elven Ring of Air", 0, 265, 0, 15, 0)
+# 精灵三戒
+narya = Charm("纳雅", "火之戒，精灵三戒之一", 0, 270, 100, 0, 0)
+nenya = Charm("能雅", "水之戒，精灵三戒之一", 0, 280, 0, 0, 500)
+vilya = Charm("维雅", "气之戒，精灵三戒之一", 0, 265, 0, 15, 0)
 elvenRings = [narya, nenya, vilya]
 
 # 商店武器

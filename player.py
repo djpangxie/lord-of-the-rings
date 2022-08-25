@@ -13,20 +13,19 @@ import constants
 
 class Player(object):
     """
-    Represents the (human) player.
+    代表玩家。
     """
     def __init__(self, name, location):
         """
-        Initializes the player.
+        初始化玩家对象。
         
-        @param name:             The name of the player (e.g. "Frodo").
-        @param location:         The location of player. When initialized,
-                                 given space "shire."
+        @param name:             玩家姓名（例如："弗罗多"）
+        @param location:         玩家当前所在地区。初始化时，默认为夏尔
         """
-        self._name      = name
-        self._location  = location
+        self._name      = name # 玩家姓名字符串
+        self._location  = location # 玩家当前所在地区
         
-        #Initialize player stats
+        #初始化玩家属性
         self._money      = constants.PlayerInitialization.MONEY
         self._experience = constants.PlayerInitialization.EXPERIENCE
         self._level      = constants.PlayerInitialization.LEVEL
@@ -36,11 +35,11 @@ class Player(object):
         self._attack      = constants.PlayerInitialization.ATTACK
         self._weightLimit = constants.PlayerInitialization.WEIGHT_LIMIT
         
-        #Initialize player inventory and equipment
-        self._inventory = ItemSet()
-        self._equipped  = ItemSet()
+        #初始化玩家库存和装备
+        self._inventory = ItemSet() # 玩家的库存
+        self._equipped  = ItemSet() # 玩家的当前装备
 
-        #Initialize item-based bonuses
+        #初始化玩家装备以及饰品的属性加值
         self._weaponAttack = constants.PlayerInitialization.WEAPON_ATTACK
         self._armorDefense = constants.PlayerInitialization.ARMOR_DEFENSE
         
@@ -48,17 +47,16 @@ class Player(object):
         self._charmDefense  = constants.PlayerInitialization.CHARM_DEFENSE
         self._charmHp       = constants.PlayerInitialization.CHARM_HP
 
-        #Update player stats for item-based bonuses
-        self._totalAttack    = (self._attack + self._weaponAttack + 
-            self._charmAttack)
+        #初始化玩家最终的攻击力、防御力和最大生命值
+        self._totalAttack    = self._attack + self._weaponAttack + self._charmAttack
         self._totalDefense   = self._armorDefense + self._charmDefense
         self._totalMaxHp     = self._maxHp + self._charmHp
         
     def getName(self):
         """
-        Returns player name.
+        返回玩家姓名。
 
-        @return:          The name of the player.
+        @return:          玩家姓名
         """
         return self._name
 
@@ -72,17 +70,17 @@ class Player(object):
         
     def getAttack(self):
         """
-        Gets a player's total attack power (excluding items).
+        返回玩家的基础攻击力。
         
-        @return:          Base player attack.
+        @return:          玩家的基础攻击力
         """
         return self._attack
 
     def getTotalAttack(self):
         """
-        Gets player's total attack power (including items).
+        返回玩家的最终攻击力。
 
-        @return:          Total player attack value.
+        @return:          玩家的最终攻击力
         """
         return self._totalAttack
 
@@ -96,49 +94,49 @@ class Player(object):
         
     def getTotalDefense(self):
         """
-        Returns player's total defense.
+        返回玩家的最终防御力。
         
-        @return:     Player's total defense stat.
+        @return:     玩家的最终防御力
         """
         return self._totalDefense
         
     def getCharmAttack(self):
         """
-        Returns player's charm attack.
+        返回玩家佩戴的饰品的攻击加值。
         
-        @return:     Player's charm attack stat.
+        @return:     玩家佩戴的饰品的攻击加值
         """
         return self._charmAttack
         
     def getCharmDefense(self):
         """
-        Returns player's charm defense.
+        返回玩家佩戴的饰品的防御加值。
         
-        @return:     Player's charm defense stat.
+        @return:     玩家佩戴的饰品的防御加值
         """
         return self._charmDefense
         
     def getCharmHp(self):
         """
-        Returns player's charm hp.
+        返回玩家佩戴的饰品的最大生命值加值。
         
-        @return:     Player's charm hp stat.
+        @return:     玩家佩戴的饰品的最大生命值加值
         """
         return self._charmHp
         
     def getWeightLimit(self):
         """
-        Returns player's weight limit.
+        返回玩家的负重上限。
         
-        @return:     Player weight limit.
+        @return:     玩家的负重上限
         """
         return self._weightLimit
         
     def getExperience(self):
         """
-        Return's player experience.
+        返回玩家的经验值。
         
-        @return:    Returns player experience.
+        @return:    玩家的经验值
         """
         return self._experience
 
@@ -156,9 +154,9 @@ class Player(object):
         
     def getLevel(self):
         """
-        Return's player level.
+        返回玩家的等级。
         
-        @return:      Player level.
+        @return:      玩家等级
         """
         return self._level
         
@@ -205,25 +203,25 @@ class Player(object):
             
     def getHp(self):
         """
-        Returns player hp.
+        返回玩家的当前生命值。
 
-        @return:    Player hp.
+        @return:    玩家的当前生命值
         """
         return self._hp
 
     def getMaxHp(self):
         """
-        Returns player maximum hp.
+        返回玩家的最大生命值。
 
-        @return:    Player maximum hp.
+        @return:    玩家的最大生命值
         """
         return self._maxHp
         
     def getTotalMaxHp(self):
         """
-        Returns player maximum hp, including charms.
+        返回玩家的最终最大生命值。
 
-        @return:    Player maximum hp.
+        @return:    玩家的最终最大生命值
         """
         return self._totalMaxHp
         
@@ -246,40 +244,38 @@ class Player(object):
 
     def equip(self, item):
         """
-        Allows a character to equip an item.
-        
-        Preconditions:
-        -Item in inventory.
-        -Item is instance of Armor, Weapon, or Charm.
-        -Item is not currently in self._equipped.
+        使角色装备一件物品。
 
-        @param item:    The item to be equipped.
+        前提条件：
+        -物品在库存中。
+        -物品必须是武器、盔甲或者饰品对象。
+        -物品对象本身不在装备栏中。
+
+        @param item:    要装备的物品
         """
-        #Check to see that preconditions are met
+        #检查是否满足先决条件
         if item not in self._inventory:
-            statement =  "%s not currently in inventory." % item.getName()
+            statement =  "%s 当前不在库存中！" % item.getName()
             return statement
-        if not (isinstance(item, Armor) or isinstance(item, Weapon) or 
-            isinstance(item, Charm)):
-            statement = "Item must be a weapon, armor, or charm."
+        if not (isinstance(item, Armor) or isinstance(item, Weapon) or isinstance(item, Charm)):
+            statement = "要装备的物品必须是武器、盔甲或者饰品。"
             return statement
         if item in self._equipped:
-            statement =  "%s already equipped." % item.getName()
+            statement =  "%s 已经装备好了。" % item.getName()
             return statement
         
-        #Unequip currently equipped armor/weapon if necessary
+        #卸下当前装备的盔甲或武器
         for currentItem in self._equipped:
             if isinstance(item, Weapon) and isinstance(currentItem, Weapon):  
                 self.unequip(currentItem)
             elif isinstance(item, Armor) and isinstance(currentItem, Armor):
                 self.unequip(currentItem)
 
-        #Equip new item
+        #装备新的盔甲或武器
         self._equipped.addItem(item)
         if isinstance(item, Weapon):
             self._weaponAttack = item.getAttack()
-            self._totalAttack = (self._attack + self._weaponAttack + 
-                self._charmAttack)
+            self._totalAttack = self._attack + self._weaponAttack + self._charmAttack
         elif isinstance(item, Armor):
             self._armorDefense = item.getDefense()
             self._totalDefense = self._armorDefense + self._charmDefense
@@ -287,37 +283,34 @@ class Player(object):
             self._charmAttack += item.getAttack()
             self._charmDefense += item.getDefense()
             self._charmHp += item.getHp()
-            self._totalAttack = (self._attack + self._weaponAttack + 
-                self._charmAttack)
+            self._totalAttack = self._attack + self._weaponAttack + self._charmAttack
             self._totalDefense = self._armorDefense + self._charmDefense
             self._totalMaxHp = self._maxHp + self._charmHp
-        
-        statement = "%s equipped %s." %(self._name, item.getName())
-        
-        #Sort self._equipped
-        equipped = self._equipped
-        sortItems(equipped)
-        
+
+        statement = "%s 装备上了 %s。" %(self._name, item.getName())
+
+        #为装备栏排序
+        sortItems(self._equipped)
+
         return statement
         
     def unequip(self, item):
         """
-        Allows a character to unequip a currently equipped item.
+        使角色卸下当前装备的物品。
 
-        @param item:    The item to be unequipped.
+        @param item:    要卸下的物品
         """
-        #Precondition - that item is currently equipped.
+        #前提 - 该物品已存在当前装备栏中。
         if item not in self._equipped:
-            statement = "%s not in equipped items." % item.getName()
+            statement = "%s 不在装备栏中。" % item.getName()
             return statement
-        
-        #Unequip item and update player stats
+
+        #卸下装备并更新玩家数据
         self._equipped.removeItem(item)
         
         if isinstance(item, Weapon):
             self._weaponAttack = 0
-            self._totalAttack = (self._attack + self._weaponAttack + 
-                self._charmAttack)
+            self._totalAttack = self._attack + self._weaponAttack + self._charmAttack
         if isinstance(item, Armor):
             self._armorDefense = 0
             self._totalDefense = self._armorDefense + self._charmDefense
@@ -330,54 +323,52 @@ class Player(object):
             self._charmDefense -= charmDefense
             self._charmHp -= charmHp
             
-            self._totalAttack = (self._attack + self._weaponAttack + 
-                self._charmAttack)
+            self._totalAttack = self._attack + self._weaponAttack + self._charmAttack
             self._totalDefense = self._armorDefense + self._charmDefense
             self._totalMaxHp = self._maxHp + self._charmHp
             
-        statement = "%s unequipped %s." % (self._name, item.getName())
+        statement = "%s 卸下了 %s。" % (self._name, item.getName())
         return statement
 
     def getEquipped(self):
         """
-        Returns the player's currently equipped equipment.
+        返回玩家当前装备的ItemSet对象。
 
-        @return:    Player's current gear.
+        @return:    玩家当前装备的ItemSet对象
         """
         return self._equipped
     
     def addToInventory(self, item):
         """
-        Adds an item to inventory.
+        将物品添加到玩家库存中。
 
-        @param item:   The item to be added to inventory.
+        @param item:   要添加到玩家库存的物品
         
-        @return:       True if execution suceeds, False 
-                       otherwise.
+        @return:       如果执行成功则返回True，否则返回False
         """
         inventory = self._inventory
         
-        #If user input is not an item
+        #如果该项目不是物品
         if not isinstance(item, Item):
-            errorMsg = "Not an item."
+            errorMsg = "不是一个物品对象。"
             raise AssertionError(errorMsg)
         
-        #Item cannot already be inventory
+        #物品不能已在库存中
         if item in inventory:
-            print("Item already in inventory.")
+            print("物品已在库存中。")
         
-        #Check inventory weight restriction
+        #检查库存重量限制
         itemWeight = item.getWeight()
         inventoryWeight = inventory.getWeight()
-        
+
         if itemWeight + inventoryWeight > self._weightLimit:
-            print("You are overburdened.")
+            print("你负担过重。")
             return False
-        
-        #Successful execution
+
+        #成功执行
         inventory.addItem(item)
         sortItems(inventory)
-        print("Added %s to inventory." % item.getName())
+        print("已将 %s 添加进库存！" % item.getName())
         return True
             
     def removeFromInventory(self, item):
@@ -399,17 +390,17 @@ class Player(object):
     
     def getInventory(self):
         """
-        Returns the player's inventory.
+        返回玩家的库存的ItemSet对象。
 
-        @return:    Player's inventory.
+        @return:    玩家的库存的ItemSet对象
         """
         return self._inventory
    
     def getMoney(self):
         """
-        Returns player's money.
+        返回玩家拥有的金钱数。
 
-        @return:    Player's money.
+        @return:    玩家拥有的金钱数
         """
         return self._money
 
@@ -435,67 +426,59 @@ class Player(object):
     
     def canMoveNorth(self):
         """
-        Determines if player can move north.
+        判断玩家是否可以向北旅行。
 
-        @return:    True if possible, False otherwise.
+        @return:    如果可以则为True，否则为False
         """
-        exit = self._location.getExit(constants.Direction.NORTH)
-
-        if exit:
+        if self._location.getExit(constants.Direction.NORTH):
             return True
-            
+
         return False
 
     def canMoveSouth(self):
         """
-        Determines if player can move south.
+        判断玩家是否可以向南旅行。
 
-        @return:    True if possible, False otherwise.
+        @return:    如果可以则为True，否则为False
         """
-        exit = self._location.getExit(constants.Direction.SOUTH)
-
-        if exit:
+        if self._location.getExit(constants.Direction.SOUTH):
             return True
-            
+
         return False
 
     def canMoveEast(self):
         """
-        Determines if player can move east.
+        判断玩家是否可以向东旅行。
 
-        @return:    True if possible, False otherwise.
+        @return:    如果可以则为True，否则为False
         """
-        exit = self._location.getExit(constants.Direction.EAST)
-
-        if exit:
+        if self._location.getExit(constants.Direction.EAST):
             return True
-            
+
         return False
 
     def canMoveWest(self):
         """
-        Determines if player can move west.
+        判断玩家是否可以向西旅行。
 
-        @return:    True if possible, False otherwise.
+        @return:    如果可以则为True，否则为False
         """
-        exit = self._location.getExit(constants.Direction.WEST)
-
-        if exit:
+        if self._location.getExit(constants.Direction.WEST):
             return True
-            
+
         return False
 
     def moveNorth(self):
         """
-        Moves player north one space.
+        将玩家向北移动到连接的地区。
         """
         northSpace = self._location.getExit(constants.Direction.NORTH) 
         
-        #If north space does not exist, do nothing
+        #如果北边的地区不存在，什么也不做
         if not northSpace:
             return
             
-        #...Otherwise, move to new space
+        #...否则，移动到新的地区
         if not isinstance(northSpace, list):
             self._location = northSpace
         else:
@@ -503,15 +486,15 @@ class Player(object):
 
     def moveSouth(self):
         """
-        Moves player south one space.
+        将玩家向南移动到连接的地区
         """
         southSpace = self._location.getExit(constants.Direction.SOUTH)
 
-        #If south space does not exist, do nothing
+        #如果南边的地区不存在，什么也不做
         if not southSpace:
             return
             
-        #...Otherwise, move to new space 
+        #...否则，移动到新的地区
         if not isinstance(southSpace, list):
             self._location = southSpace
         else:
@@ -519,15 +502,15 @@ class Player(object):
 
     def moveEast(self):
         """
-        Moves player east one space.
+        将玩家向东移动到连接的地区。
         """
         eastSpace = self._location.getExit(constants.Direction.EAST)
 
-        #If east space does not exist, do nothing
+        #如果东边的地区不存在，什么也不做
         if not eastSpace:
             return
             
-        #...Otherwise, move to new space 
+        #...否则，移动到新的地区
         if not isinstance(eastSpace, list):
             self._location = eastSpace
         else:
@@ -535,15 +518,15 @@ class Player(object):
 
     def moveWest(self):
         """
-        Moves player west one space.
+        将玩家向西移动到连接的地区。
         """
         westSpace = self._location.getExit(constants.Direction.WEST)
 
-        #If west space does not exist, do nothing
+        #如果西边的地区不存在，什么也不做
         if not westSpace:
             return
             
-        #...Otherwise, move to new space 
+        #...否则，移动到新的地区
         if not isinstance(westSpace, list):
             self._location = westSpace
         else:
@@ -551,23 +534,22 @@ class Player(object):
     
     def _moveList(self, spaces):
         """
-        Helper method for the four movement commands. Processes cases when 
-        there are multiple spaces available for a single direction.
+        四个移动命令的辅助方法。处理单个开口通向多个地区的情况。
         """
         acceptableChoices = {}
         choice = None
         
-        #Solicit user input
-        print("You may move to the following:")
+        #征求用户输入
+        print("您可以去往以下地区：")
         for space in spaces:
             print("\t-%s" % space.getName())
             acceptableChoices[space] = space.getName()
         print("")
         
         while choice not in list(acceptableChoices.values()):
-            choice = input("Where would you like to go? ")
+            choice = input("你想去哪里？（复制地名并输入）：")
 
-        #Move to new space
+        #移动到新的地区
         for pair in list(acceptableChoices.items()):
             if choice in pair:
                 space = pair[0]
@@ -576,8 +558,8 @@ class Player(object):
         
     def getLocation(self):
         """
-        Returns player's current location.
+        返回玩家当前所在地区。
 
-        @return:    Player current location.
+        @return:    玩家当前所在地区
         """
         return self._location

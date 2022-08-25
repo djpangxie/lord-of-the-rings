@@ -28,18 +28,18 @@ class Game(object):
         print("...")
 
         # 初始化游戏对象
-        self._world = game_loader.getWorld()
-        self._shire = self._world[0]
-        self._orodruin = self._world[26]
+        self._world = game_loader.getWorld()  # 包含所有地区对象的列表
+        self._shire = self._world[0]  # 夏尔的地区对象
+        self._orodruin = self._world[26]  # 末日山的地区对象
 
-        startingInventory = game_loader.getStartingInventory()
-        self._player = game_loader.getPlayer(self._shire, startingInventory)
-        self._commandList = game_loader.getCommandList(self._player)
+        startingInventory = game_loader.getStartingInventory()  # 初始物品的列表
+        self._player = game_loader.getPlayer(self._shire, startingInventory)  # 玩家对象
+        self._commandList = game_loader.getCommandList(self._player)  # 命令字典
 
         print("...")
         print("$$$加载完毕$$$")
 
-        # 创建解析器
+        # 创建命令解析器
         self._parser = Parser(self._commandList)
 
     def play(self):
@@ -49,11 +49,11 @@ class Game(object):
         splashScreen = """
         """
         print(splashScreen)
-        print("这是一款冒险游戏，你需要为你的英雄收集各种装备以对抗魔多。")
+        print("这是一款冒险游戏，你需要为你的角色收集各种装备以对抗魔多。")
         print("一路走来，亲爱的小拉德、迈尔斯、塞思和C-$提供了一点帮助。")
-        print("...~Money~...")
+        print("...~财源滚滚~...")
         print("")
-        print("(键入'help'来显示一个可用的命令列表)")
+        print("(键入 help 来显示一个可用的命令列表)")
         print("")
 
         while (True):
@@ -62,7 +62,7 @@ class Game(object):
     def _nextTurn(self):
         """
         从玩家那里获得下一个命令。如果nextCommand被成功执行，并且涉及到时间的流逝，那么在nextCommand被执行之后，有可能会发生一场随机的战斗。
-        有可能执行失败的指令：四个移动命令。
+        有可能执行失败的命令：四个移动命令。
         """
         # 执行下一个命令
         nextCommand = self._parser.getNextCommand()
@@ -70,7 +70,7 @@ class Game(object):
         if nextCommand is not None:
             # 检查命令的执行情况
             if self._executionCheck(nextCommand):
-                # 然后执行NextCommand
+                # 然后执行该命令
                 nextCommand.execute()
                 # 如果时间流逝......有可能发生随机的战斗
                 if nextCommand.getTime():
@@ -83,35 +83,35 @@ class Game(object):
 
         # 如果玩家已经赢得了游戏
         if self._winningConditions():
-            print(("尊敬的%s，恭喜你拯救了中土世界！" % self._player.getName()))
+            print(("尊敬的 %s 恭喜你拯救了中土世界！" % self._player.getName()))
             input("按下回车键退出。")
             sys.exit()
 
     def _executionCheck(self, nextCommand):
         """
-        检查用户的命令是否可以被执行。这只适用于四个移动命令。
-        这个方法是为了防止在不能执行命令的情况下发生随机战斗。
+        检查用户的命令是否可以被执行。这只适用于四个旅行命令。
+        这个检查是为了防止在不能执行命令的情况下发生随机战斗。
 
-        @return:              如果命令将被成功执行，则为"True"，否则为"False"
+        @return:              如果命令将被成功执行，则为True，否则为False
         """
         space = self._player.getLocation()
 
-        # 检查移动指令
+        # 检查旅行命令
         if isinstance(nextCommand, NorthCommand):
             if not self._player.canMoveNorth():
-                print("无法向北移动。")
+                print("无法向北旅行！")
                 return False
         elif isinstance(nextCommand, SouthCommand):
             if not self._player.canMoveSouth():
-                print("无法向南移动。")
+                print("无法向南旅行！")
                 return False
         elif isinstance(nextCommand, EastCommand):
             if not self._player.canMoveEast():
-                print("无法向东移动。")
+                print("无法向东旅行！")
                 return False
         elif isinstance(nextCommand, WestCommand):
             if not self._player.canMoveWest():
-                print("无法向西移动。")
+                print("无法向西旅行！")
                 return False
 
         return True
@@ -125,12 +125,12 @@ class Game(object):
 
         # 确定是否会发生随机战斗
         if random.random() < battleProbability:
-            # 呼唤战斗，解决战斗
+            # 发生战斗，结束战斗
             battle_engine.battle(self._player, constants.BattleEngineContext.RANDOM)
 
     def _winningConditions(self):
         """
-        评估玩家是否已经赢得游戏。赢得游戏的标准是至尊魔戒被丢在欧洛都因（末日火山）地区。
+        评估玩家是否已经赢得游戏。赢得游戏的标准是至尊戒被扔在欧洛都因（末日山）地区。
         """
         if self._orodruin.containsItem(theOneRing):
             return True

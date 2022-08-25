@@ -13,25 +13,20 @@ import constants
 
 def battle(player, context, monsters = None):
     """
-    The battle engine of Lord of the Rings.
+    指环王的战斗引擎。
 
-    @param player:     The player object.
-    @param context:    Context constant for battle engine. Battle engine 
-                       behaves differently
-                       in different contexts. Battles are either random battles 
-                       or story-based battles (e.g., boss battles).
-    @param monsters:   An optional parameter used for story-based battles. 
-                       Consists of the list of monsters to fight.
+    @param player:     玩家对象
+    @param context:    战斗引擎的模式，战斗引擎在不同模式下有不同的表现
+                       战斗要么是随机战斗，要么是基于故事的战斗（例如：BOSS战）
+    @param monsters:   用于基于故事的战斗的可选参数，包含要战斗的怪物列表
                        
-    @return:           True if battle was won; False otherwise.
+    @return:           如果战斗获胜则为True；否则为False
 
-    Differences between random battles and story-based battles:
-    -Random battles: monster factory called by battle engine and monsters are 
-    supplied by monster factory. Player can run successfully in random battles.
-    -Story-based battles: monsters must be supplied through the "monsters" 
-    parameter. Player cannot run from battle.
+    随机战斗和剧情战斗的区别：
+    -随机战斗：怪物工厂由战斗引擎调用，怪物由怪物工厂提供。玩家可以在随机战斗中成功奔跑。
+    -剧情战斗：怪物必须通过monsters参数提供。玩家不能从剧情战斗中逃跑。
     """
-    #Battle setup
+    #战斗设置
     output = _battleSetup(player, context)
     if context == constants.BattleEngineContext.RANDOM:
         bonusDifficulty = output[0]

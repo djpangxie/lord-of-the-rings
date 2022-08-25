@@ -6,17 +6,16 @@ from items.item_set import ItemSet
 
 class UsePotionCommand(Command):
     """
-    Allows player to use potion out of combat.
+    使玩家在战斗之外使用药水。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes use potion command.
+        初始化使用药水命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

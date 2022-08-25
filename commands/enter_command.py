@@ -6,17 +6,16 @@ from unique_place import UniquePlace
 
 class EnterCommand(Command):
     """
-    Allows player to enter a city or unique place.
+    使玩家进入城市或独特地点。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes enter command.
+        初始化进入命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation, time = False)
 
         self._player = player

@@ -14,7 +14,7 @@ class GreatGoblin(Monster):
         """
         初始化一个半兽人王。
 
-        @param stats:     怪物基础数据的三元列表，包括生命值、攻击力和经验值（按此顺序）
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
         Monster.__init__(self, constants.MonsterNames.GreatGoblin,
                          constants.MonsterDescriptions.GreatGoblin, stats,

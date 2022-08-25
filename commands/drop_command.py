@@ -4,17 +4,16 @@ from .command import Command
 
 class DropCommand(Command):
     """
-    Allows player to drop an item from inventory into space.
+    使玩家将物品从库存中放入当前地区。
     """
     def __init__(self, name, explanation, player):
         """
-        Initializes new pick up command.
+        初始化新的丢弃命令。
 
-        @param name:         Command name.
-        @param explanation:  Explanation of command.
-        @param player:       The player object.
+        @param name:         命令名称
+        @param explanation:  命令的说明
+        @param player:       玩家对象
         """
-        #Call parent's init method
         Command.__init__(self, name, explanation)
 
         self._player = player

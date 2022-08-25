@@ -35,22 +35,22 @@ from monsters.black_numernorian_ii import BlackNumernorian_II
 指环王中使用的常量。
 """
 #游戏常量
-COMMAND_PROMPT           = "> "
+COMMAND_PROMPT           = "> " # 命令输入提示符
 CURRENCY                 = "rubles"
-SPACES_WITH_UNIQUE_ITEMS = 4
-ELVEN_RING_PROB          = .3
+SPACES_WITH_UNIQUE_ITEMS = 4   # 初始化随机向某些地区中撒落独特物品的数量
+ELVEN_RING_PROB          = .3  # 初始化随机向某些地区中撒落精灵三戒的概率 30%
 
-#Player initialization
+#初始化玩家数据常量
 class PlayerInitialization(object):
     """
-    Constants used in player initialization.
+    初始化玩家对象时使用的常量。
     """
-    EXPERIENCE    = 0
-    LEVEL         = 1
-    MONEY         = 20
-    MAX_HP        = 20
-    ATTACK        = 5
-    WEIGHT_LIMIT  = 15
+    EXPERIENCE    = 0 # 经验值
+    LEVEL         = 1 # 等级
+    MONEY         = 20 # 启动资金
+    MAX_HP        = 20 # 最大生命值
+    ATTACK        = 5 # 攻击力
+    WEIGHT_LIMIT  = 15 # 负重上限
     WEAPON_ATTACK = 0
     ARMOR_DEFENSE = 0
     CHARM_ATTACK  = 0
@@ -148,8 +148,8 @@ class SpaceSpawnProb(object):
     lorien              = .4    # 罗瑞恩
     fangorn             = .4    # 范贡森林
     theWold             = .4    # 北高原
-    fieldOfCelebrant    = .25
-    calenardhon         = .95
+    fieldOfCelebrant    = .25   # 凯勒布兰特原野
+    calenardhon         = .95   # 卡伦纳松
     westfold            = .85
     westemnet           = .8
     eastemnet           = .6
@@ -159,7 +159,7 @@ class SpaceSpawnProb(object):
     deadMarshes         = .5
     udun                = .95
     cairAndros          = .8
-    orodruin            = .95   # 欧洛都因（末日火山）
+    orodruin            = .95   # 欧洛都因（末日山）
     anorien             = .75
     anduin              = .85
     ephelDuath          = .9
@@ -187,9 +187,9 @@ class SpaceBonusDiff(object):
     mistyMountainsSouth = 0     # 迷雾山脉南部
     lorien              = 0     # 罗瑞恩
     fangorn             = 0     # 范贡森林
-    theWold             = -.3
-    fieldOfCelebrant    = -.3
-    calenardhon         = .5
+    theWold             = -.3   # 北高原
+    fieldOfCelebrant    = -.3   # 凯勒布兰特原野
+    calenardhon         = .5    # 卡伦纳松
     westfold            = .3
     westemnet           = .15
     eastemnet           = 0
@@ -199,7 +199,7 @@ class SpaceBonusDiff(object):
     deadMarshes         = .2
     udun                = .3
     cairAndros          = .2
-    orodruin            = .3    # 欧洛都因（末日火山）
+    orodruin            = .3    # 欧洛都因（末日山）
     anorien             = .3
     anduin              = 0
     ephelDuath          = .2
@@ -232,7 +232,7 @@ class MonsterNames(object):
     ArmoredMumakil      = "披甲毛象"
     BlackNumernorian    = "黑努曼诺尔人"
     EasterlingWarrior   = "伊斯特林战士"
-    Sauroman            = "反叛的萨鲁曼"
+    Sauroman            = "萨鲁曼"
     MouthOfSauron       = "索隆之口"
     WitchKing           = "安格玛巫王"
     Shelob              = "尸罗"
@@ -254,7 +254,7 @@ class MonsterDescriptions(object):
     Nazgul_III          = "现在有了龙坐骑！"
     Troll               = "\"我快活地走着。\""
     WargRider           = "喜欢骑…座狼。"
-    UrukHai             = "\"你提起过兄弟我？\""
+    UrukHai             = "\"你提到了我的兄弟？\""
     UrukHaiArcher       = "拥有远程攻击的能力。"
     EliteUrukHai        = "卧推冠军。"
     Dunlending          = "中洲的原住民。。"
@@ -436,13 +436,13 @@ MONSTER_STATS = {BarrowWight:          [18, 2, 6],
                  Troll_II:             [166, 16, 80],
                  BlackNumernorian_II:  [152, 24, 92]}
 
-#Battle engine context
+#战斗引擎的常量
 class BattleEngineContext(object):
     """
-    Constants used for BattleEngine mode determination.
+    战斗引擎的模式。
     """
-    RANDOM = 1
-    STORY  = 2
+    RANDOM = 1 # 随机战斗
+    STORY  = 2 # 剧情战斗
 
 #Battle engine
 class ItemFind(object):

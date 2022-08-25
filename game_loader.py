@@ -335,63 +335,41 @@ def getWorld():
     """
     lorien = Space("罗瑞恩", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.lorien, city = carasGaladhon)
 
-    #Fangorn - Derningle
-    #Unique Place
-    description = "Derningle is the site of meeting for Fangorn's ents."
-    greeting = "\"Welcome to the Entmoot! Don't be so hasty.\""
-    derningle = Derningle("Derningle", description, greeting)
-    #Fangorn
-    description = """Fangorn Forest is a deep, dark woodland that grows
-    beneath the southern tips of the Misty Mountains under the eastern flanks
-    of that range. It is known for its Ents. The forest, known as Entwood in
-    Rohan, was named after its oldest Ent, Fangorn.
+    #范贡森林 - 秘林谷
+    #独特地点
+    description = "此处是恩特们举行会议的地点"
+    greeting = "\"欢迎来到恩特大会！不要那么着急。\""
+    derningle = Derningle("秘林谷", description, greeting)
+    #范贡森林
+    description = """范贡森林是一片深邃而黑暗的林地，位于迷雾山脉南部的下方，该山脉的东侧。
+    在洛汗，这片森林借用了老恩特范贡的名字，被洛汗人民称为“恩特森林”。
     """
-    fangorn = Space("Fangorn", description, constants.RegionType.ROHAN, 
-        battleProbability = constants.SpaceSpawnProb.fangorn, 
-        uniquePlace = derningle)
+    fangorn = Space("范贡森林", description, constants.RegionType.ROHAN, battleProbability = constants.SpaceSpawnProb.fangorn, uniquePlace = derningle)
 
-    #The Wold
-    description = """The Wold is the northernmost and least populated part of 
-    Rohan, lying between Fangorn Forest and the Anduin, bordered to the north 
-    by the Limlight.
+    #北高原
+    description = """北高原是洛汗的最北部，也是人口最少的地区，位于范贡森林和安都因河之间，军事划分上属于东马克。
+    此地适宜放牧，多风，但十分荒凉，很少有人居住。近年来，由于奥克的频繁出没，这里已经不再安全。
+    """
+    theWold = Space("北高原", description, constants.RegionType.MORDOR, battleProbability = constants.SpaceSpawnProb.theWold)
 
-    Its main inhabitants were nomadic Men of Rohan who use the land to graze
-    cattle. In recent years, these men have fled in response to frequent
-    attacks by orcish raiders.
+    #凯勒布兰特原野
+    description = """凯勒布兰特原野是凯勒布兰特河与利姆清河之间的大片土地，位于洛丝罗瑞恩的东南部。
+    第三纪元2510年，洛汗人奋起援助刚铎的凯勒布兰特原野之战在这里发生。
     """
-    theWold = Space("The Wold", description, constants.RegionType.MORDOR, 
-        battleProbability = constants.SpaceSpawnProb.theWold)
+    fieldOfCelebrant = Space("凯勒布兰特原野", description, constants.RegionType.MORDOR, battleProbability = constants.SpaceSpawnProb.fieldOfCelebrant)
 
-    #Field of Celebrant
-    description = """The Field of Celebrant lies between the Rivers Anduin and 
-    Limlight and southeast of Lothlorien. In T.A. 2510, the decisive Battle of 
-    the Field of Celebrant where the men of Rohan rose up to aid Gondor 
-    happened here.
+    #卡伦纳松 - 艾森加德
+    #独特地点
+    description = """艾森加德是一个坐落于迷雾山脉最南端山谷中的伟大要塞，靠近洛汗豁口；岩石环场的中央矗立着欧尔桑克石塔。
     """
-    fieldOfCelebrant = Space("Field of Celebrant", description, 
-        constants.RegionType.MORDOR, 
-        battleProbability = constants.SpaceSpawnProb.fieldOfCelebrant)
+    greetings = "当你接近艾森加德时，焦黑的天空在迎接你。"
+    isenguard = Isenguard("艾森加德", description, greetings)
+    #卡伦纳松
+    description = """卡伦纳松，意为“绿色行省”，位于迷雾山脉以东、白色山脉以北，是安都因河与艾森河之间的一片人烟稀少的广阔草原。
 
-    #Calenardhon - Isenguard
-    #Unique Place
-    description = """Isengard ("Iron Fortress" or Angrenost in Sindarin) is a 
-    great fortress located within a valley at the southern end of the Misty
-    Mountains near the Gap of Rohan. In the center of the Ring of Isengard
-    stands the stone tower of Orthanc.
+    ***通过艾森加德可以向南进入西伏尔德***
     """
-    greetings = "Charred skies greet you as you approach Isenguard...."
-    isenguard = Isenguard("Isenguard", description, greetings)
-    #Calenardhon
-    description = """Calenardhon contains Isengard, a great fortress located
-    within a valley at the southern end of the Misty Mountains.
-    
-    ***Westfold is accessible to the south through Isenguard***
-    """
-    calenardhon = Space("Calenardhon", description, 
-        constants.RegionType.ENEDWAITH, 
-        battleProbability = constants.SpaceSpawnProb.calenardhon, 
-        battleBonusDifficulty = constants.SpaceBonusDiff.calenardhon, 
-        uniquePlace = isenguard)
+    calenardhon = Space("卡伦纳松", description, constants.RegionType.ENEDWAITH, battleProbability = constants.SpaceSpawnProb.calenardhon, battleBonusDifficulty = constants.SpaceBonusDiff.calenardhon, uniquePlace = isenguard)
 
     #Westfold - Helm's Deep
     #Inn
@@ -581,8 +559,8 @@ def getWorld():
         battleProbability = constants.SpaceSpawnProb.cairAndros, 
         battleBonusDifficulty = constants.SpaceBonusDiff.cairAndros)
 
-    #欧洛都因（末日火山）
-    description = "末日火山，也被称为欧洛都因或阿蒙阿马斯，是魔多的火山，至尊魔戒是在这里锻造的。这是唯一可以摧毁至尊魔戒的地方。"
+    #欧洛都因（末日山）
+    description = "末日山，也被称为欧洛都因或阿蒙阿马斯，是魔多的火山，至尊戒是在这里锻造的。这是唯一可以摧毁至尊戒的地方。"
     orodruin = Space("欧洛都因", description, constants.RegionType.MORDOR,battleProbability = constants.SpaceSpawnProb.orodruin, battleBonusDifficulty = constants.SpaceBonusDiff.orodruin)
 
     #Anorien - Minas Tirith
@@ -798,9 +776,9 @@ def getWorld():
         battleProbability = constants.SpaceSpawnProb.ithilien, 
         battleBonusDifficulty = constants.SpaceBonusDiff.ithilien)
 
-    #Connections: East-West
+    #连接东西走向的所有地区
     shire.createExit("east", oldForest, outgoingOnly = False)
-    oldForest.createExit("east", weatherHills, outgoingOnly = False)
+    oldForest.createExit("east", barrowDowns, outgoingOnly = False) # 老林子的东出口应该连接古冢岗（尚无）
     weatherHills.createExit("east", trollshaws, outgoingOnly = False)
     trollshaws.createExit("east", mistyMountainsNorth, outgoingOnly = False)
     mistyMountainsNorth.createExit("east", highPass, outgoingOnly = False)
@@ -818,8 +796,8 @@ def getWorld():
     lossamarch.createExit("east", ithilien, outgoingOnly = False)
     orodruin.createExit("east", plateauOfGorgoth, outgoingOnly = False)
 
-    #Connections: North-South
-    oldForest.createExit("south", barrowDowns, outgoingOnly = False)
+    #连接南北走向的所有地区
+    barrowDowns.createExit("south", oldForest, outgoingOnly = False) # 布理地区的南出口应该连接古冢岗（这里没有）
     weatherHills.createExit("south", barrowDowns, outgoingOnly = False)
     trollshaws.createExit("south", bruinen, outgoingOnly = False)
     bruinen.createExit("south", mitheithel, outgoingOnly = False)
@@ -841,7 +819,7 @@ def getWorld():
     anorien.createExit("south", lossamarch, outgoingOnly = False)
     anduin.createExit("south", ithilien, outgoingOnly = False)
     
-    #For quest-dependent ports
+    #通过独特地点连接的两地
     goblinTown.receiveSpaces(highPass, mirkwood)
     moria.receiveSpaces(mistyMountainsSouth, lorien)
     isenguard.receiveSpaces(calenardhon, westfold)
@@ -850,7 +828,7 @@ def getWorld():
     minasMorgul.receiveSpaces(ephelDuath, plateauOfGorgoth)
     towerOfCirithUngol.receiveSpaces(cirithUngol, plateauOfGorgoth)
     
-    #Create list of spaces
+    #创建包含所有地区的列表
     spaces = [shire, oldForest, weatherHills, trollshaws, mistyMountainsNorth, 
     highPass, mirkwood, southernMirkwood, bruinen, mitheithel, swanfleet, 
     dunland, mistyMountainsSouth, lorien, fangorn, fieldOfCelebrant, 
@@ -858,25 +836,25 @@ def getWorld():
     deadMarshes, udun, cairAndros, orodruin, anorien, anduin, ephelDuath, 
     cirithUngol, plateauOfGorgoth, lossamarch, ithilien]
     
-    #Add low-level findable unique items to spaces
+    #初始化随机向某些地区撒落独特物品
     for space in range(constants.SPACES_WITH_UNIQUE_ITEMS):
         if items.unique_items.lowLevelFindableUniques:
-            #Determine which unique item
+            #确定撒落哪个独特物品
             item = random.choice(items.unique_items.lowLevelFindableUniques)
             items.unique_items.lowLevelFindableUniques.remove(item)
-            #Determine which space
+            #确定撒落在哪个地区
             space = random.choice(spaces)
-            #Add item to space
+            #将物品添加到该地区
             space.addItem(item)
-    
-    #Determine which elven rings to spawn
-    elvenRings = items.unique_items.elvenRings
+
+    # 初始化随机向某些地区撒落精灵三戒（也可能未撒落任何一枚）
+    #确定要撒落的戒指
     chosenRings = []
-    for ring in elvenRings:
+    for ring in items.unique_items.elvenRings:
         if random.random() < constants.ELVEN_RING_PROB:
             chosenRings.append(ring)
-            
-    #Add elven rings to spaces
+
+    #将戒指添加到随机地区
     for ring in chosenRings:
         space = random.choice(spaces)
         space.addItem(ring)
@@ -890,16 +868,16 @@ def getStartingInventory():
     @return:   库存的列表。
     """
     startingInventory = items.unique_items.startingInventory
-    
+
     return startingInventory
 
 def getPlayer(world, startingInventory):
     """
-    创建玩家并给玩家提供起始库存和装备。
+    创建玩家并给玩家起始装备。
 
     @return:     初始化完成的玩家对象
     """
-    player = Player("Russian", world)
+    player = Player("独角螃蟹", world)
 
     for item in startingInventory:
         player.addToInventory(item)
@@ -917,76 +895,59 @@ def getCommandList(player):
     #创建commandWords对象
     commandWords = CommandWords()
     
-    #Commands
-    checkEquipmentCmd = CheckEquipmentCommand("equipment", 
-    "Displays current equipment and equipment stats.", player)
+    #命令
+    checkEquipmentCmd = CheckEquipmentCommand("equipment", "查看当前装备和装备信息", player)
     commandWords.addCommand("equipment", checkEquipmentCmd)
     
-    checkInventoryCmd = CheckInventoryCommand("inventory", 
-    "Displays contents of inventory.", player)
+    checkInventoryCmd = CheckInventoryCommand("inventory", "查看当前库存", player)
     commandWords.addCommand("inventory", checkInventoryCmd)
 
-    checkMoneyCmd = CheckMoneyCommand("money", "Displays player money", 
-    player)
+    checkMoneyCmd = CheckMoneyCommand("money", "查看金钱数量", player)
     commandWords.addCommand("money", checkMoneyCmd)
 
-    checkStatsCmd = CheckStatsCommand("stats", 
-    "Displays current character stats.", player)
+    checkStatsCmd = CheckStatsCommand("stats", "查看当前状态", player)
     commandWords.addCommand("stats", checkStatsCmd)
     
-    descCmd = DescribeCommand("describe", 
-    "Gives description of current space", player)
+    descCmd = DescribeCommand("describe", "查看当前所在地区", player)
     commandWords.addCommand("describe", descCmd)
     
-    dropCmd = DropCommand("drop", 
-    "Drops an item from inventory into local environment.", player)
+    dropCmd = DropCommand("drop", "将库存中的物品放置到当前地区", player)
     commandWords.addCommand("drop", dropCmd)
     
-    eastCmd = EastCommand("east", 
-    "Moves the player to the space east of current space", player)
+    eastCmd = EastCommand("east", "向东旅行", player)
     commandWords.addCommand("east", eastCmd)
     
-    enterCmd = EnterCommand("enter", 
-    "Allows player to enter a building.", player)
+    enterCmd = EnterCommand("enter", "进入城市或独特地点", player)
     commandWords.addCommand("enter", enterCmd)
     
-    equipCmd = EquipCommand("equip", 
-    "Equips item in inventory.", player)
+    equipCmd = EquipCommand("equip", "装备物品", player)
     commandWords.addCommand("equip", equipCmd)
     
-    helpCmd = HelpCommand("help", 
-        "Provides help information for game.", commandWords)
+    helpCmd = HelpCommand("help", "命令帮助", commandWords)
     commandWords.addCommand("help", helpCmd)
     
-    mapCmd = MapCommand("map", 
-    "Displays map of current location", player)
+    mapCmd = MapCommand("map", "查看当前位置的地图", player)
     commandWords.addCommand("map", mapCmd)
     
-    northCmd = NorthCommand("north", 
-    "Moves the player to the space north of current space", player)
+    northCmd = NorthCommand("north", "向北旅行", player)
     commandWords.addCommand("north", northCmd)
     
-    pickupCmd = PickUpCommand("pick up", 
-    "Picks up an item from a location and adds to inventory.", player)
+    pickupCmd = PickUpCommand("pick up", "从当前地区中拾取物品", player)
     commandWords.addCommand("pick up", pickupCmd)
     
-    quitCmd = QuitCommand("quit", "Exits the game.")
+    quitCmd = QuitCommand("quit", "退出游戏")
     commandWords.addCommand("quit", quitCmd)
     
-    southCmd = SouthCommand("south", 
-    "Moves the player to the space south of current space", player)
+    southCmd = SouthCommand("south", "向南旅行", player)
     commandWords.addCommand("south", southCmd)
 
-    unequipCmd = UnequipCommand("unequip", 
-    "Unequips item that is currently equipped.", player)
+    unequipCmd = UnequipCommand("unequip", "卸下装备", player)
     commandWords.addCommand("unequip", unequipCmd)
 
-    usePotionCmd = UsePotionCommand("use potion", 
-    "Uses potion in inventory.", player)
+    usePotionCmd = UsePotionCommand("use potion", "使用药水", player)
     commandWords.addCommand("use potion", usePotionCmd)
 
-    westCmd = WestCommand("west", 
-    "Moves the player to the space west of current space", player)
+    westCmd = WestCommand("west", "向西旅行", player)
     commandWords.addCommand("west", westCmd)
     
     return commandWords

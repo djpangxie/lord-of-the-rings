@@ -6,28 +6,25 @@ import constants
 
 class Derningle(UniquePlace):
     """
-    Derningle (or Fangorn Forest) is a unique place in Fangorn. 
+    秘林谷是位于范贡森林中的独特地点。
 
-    If player visits Derningle, he has the opportunity to interact with 
-    Treebeard, gain items and experience.
+    如果玩家访问秘林谷，他有机会与树须互动，获得物品和经验。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Derningle.
+        初始化秘林谷。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
-        #Create gift
+        #创建礼物
         self._gift = []
-        description = ("A mysterious elixir with extremely powerful" 
-            " nourishing properties")
+        description = "一种恩特用河水酿制的有魔力的饮料。"
         for potion in range(3):
-            potion = Potion("Ent Draught", description, 2, 42, 100)
+            potion = Potion("恩特饮料", description, 2, 42, 100)
             self._gift.append(potion)
 
     def enter(self, player):

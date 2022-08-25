@@ -11,29 +11,26 @@ import constants
 
 class Isenguard(UniquePlace):
     """
-    Isenguard is a unique place in Calenardhon. It is Sauroman's fortress-city
-    and base of operations.
+    艾森加德是位于卡伦纳松的独特地点。它是萨鲁曼的要塞和基地。
     
-    If a player visits Isenguard, he is given the opportunity to fight waves of
-    enemies and gain some loot.
+    如果玩家访问艾森加德，他就有机会与一波又一波的敌人战斗，并获得一些战利品。
     """
     def __init__(self, name, description, greetings):
         """
-        Initializes Isenguard.
+        初始化艾森加德。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
 
-        #Create three waves of monsters
+        #这里有三波怪物
         self._wave = []
         self._wave2 = []
         self._wave3 = []
 
-        #Create monster wave #1
+        #创建第一波怪物
         for monster in range(6):
             urukHai = UrukHai(constants.MONSTER_STATS[UrukHai])
             self._wave.append(urukHai)
@@ -41,7 +38,7 @@ class Isenguard(UniquePlace):
             urukHaiArcher = UrukHaiArcher(constants.MONSTER_STATS[UrukHaiArcher])
             self._wave.append(urukHaiArcher)
         
-        #Create monster wave #2
+        #创建第二波怪物
         for monster in range(10):
             eliteUrukHai = EliteUrukHai(constants.MONSTER_STATS[EliteUrukHai])
             self._wave2.append(eliteUrukHai)
@@ -49,7 +46,7 @@ class Isenguard(UniquePlace):
             urukHaiArcher = UrukHaiArcher(constants.MONSTER_STATS[UrukHaiArcher])
             self._wave2.append(urukHaiArcher)
 
-        #Create monster wave #3 - elite Uruk Hai have increased stats
+        #创建第三波怪物 - 乌鲁克族精英的基础数据翻倍了
         BONUS = 3
         increasedStats = []
         for stat in constants.MONSTER_STATS[EliteUrukHai]:
@@ -57,15 +54,14 @@ class Isenguard(UniquePlace):
         for monster in range(2):
             eliteUrukHai = EliteUrukHai(increasedStats)
             self._wave3.append(eliteUrukHai)
-        #Create Sauroman
+        #创建萨鲁曼
         sauroman = Sauroman(constants.MONSTER_STATS[Sauroman])
         self._wave3.append(sauroman)
 
-        #Spawn loot
-        description = ("Two gigantic black keys needed to gain entry to the"
-        " Tower of Orthanc")
-        self._keysOfOrthanc = Item("Keys to Orthanc", description, 1, 104)
-        self._palatir = Item("Palatir", "Stones of Seeing", 6, 112)
+        #生成战利品
+        description = "进入欧尔桑克石塔所需的两把巨大的黑色钥匙"
+        self._keysOfOrthanc = Item("欧尔桑克的钥匙", description, 1, 104)
+        self._palatir = Item("帕蓝提尔", "真知晶石", 6, 112)
         self._loot = [self._keysOfOrthanc, self._palatir]
         
     def enter(self, player):

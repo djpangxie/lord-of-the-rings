@@ -2,45 +2,46 @@
 
 from .command import Command
 
+
 class WestCommand(Command):
     """
-    West command.
+    向西命令。
     """
+
     def __init__(self, name, explanation, player):
         """
-        Initializes west command.
+        初始化向西命令。
 
-        @param name:            Command's name.
-        @param explanation:     Description of what command does.
-        @param player:          Reference to command.
+        @param name:            命令名称
+        @param explanation:     命令的说明
+        @param player:          玩家对象
         """
-        #Call parent's init method
-        Command.__init__(self, name, explanation, time = True)
+        Command.__init__(self, name, explanation, time=True)
 
         self._player = player
 
     def execute(self):
         """
-        Run west command.
+        运行向西命令。
         """
-        #Make sure that exit exists
+        # 确保出口存在
         if not self._player.canMoveWest():
-            print("Cannot move west.")
+            print("无法向西旅行！")
             return
 
-        #User graphic
+        # 用户图形
         print("--------------------------------")
-        print("         Moving West")
+        print("           向西旅行")
         print("      <-----------------        ")
         print("")
         print("--------------------------------")
 
-        #Actual move execution and user output
+        # 实际执行移动并打印地区信息
         self._player.moveWest()
 
         space = self._player.getLocation()
         name = space.getName()
         description = space.getDescription()
-        
-        print("Welcome to %s." % name) 
+
+        print("你来到了 %s" % name)
         print(description)

@@ -27,26 +27,26 @@ def getItems(region, numItems, quality):
         randType = random.random()
 
         # 随机化物品品质
-        quality = qualityRandomizer(quality)
+        q = qualityRandomizer(quality)
 
         # 生成物品并附加到物品列表
         if randType < constants.ShopFactoryConstants.WEAPON_UPPER_LIMIT:
-            item = genWeapon(quality, region)
+            item = genWeapon(q, region)
             items.addItem(item)
         elif randType < constants.ShopFactoryConstants.ARMOR_UPPER_LIMIT:
-            item = genArmor(quality, region)
+            item = genArmor(q, region)
             items.addItem(item)
         elif randType < constants.ShopFactoryConstants.POTION_UPPER_LIMIT:
-            item = genPotion(quality, region)
+            item = genPotion(q, region)
             items.addItem(item)
         else:
             # 在游戏中只有高等级的商店才能生成独特的东西
-            if (constants.ShopFactoryConstants.UNIQUE_QUALITY_REQ <= quality and lowLevelFindableUniques):
+            if constants.ShopFactoryConstants.UNIQUE_QUALITY_REQ <= q and lowLevelFindableUniques:
                 item = random.choice(lowLevelFindableUniques)
                 items.addItem(item)
             # 低等级级的级商店则会生成额外的药剂
             else:
-                item = genPotion(quality, region)
+                item = genPotion(q, region)
                 items.addItem(item)
 
     return items
