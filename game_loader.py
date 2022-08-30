@@ -82,7 +82,8 @@ def getWorld():
     greeting = "\"你听说过这个消息吗？\""
     hobbiton = City("霍比屯", description, greeting, [sallyInn, sallyShop, hobbitonSquare])
     #夏尔
-    description = """夏尔分为北、南、东、西四个区；它的首府是位于西区的白岗上的大洞镇。大洞镇市长是夏尔的霍比特人当中唯一真正的官员。
+    description = """
+    夏尔分为北、南、东、西四个区；它的首府是位于西区的白岗上的大洞镇。大洞镇市长是夏尔的霍比特人当中唯一真正的官员。
     夏尔主要依赖农业，其土地非常适合耕种。它的主要产物之一是烟斗草，其特别适合在远南部的温暖地区种植。
     """
     shire = Space("夏尔", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.shire, city = hobbiton)
@@ -150,20 +151,23 @@ def getWorld():
     greeting = ("幽谷是一个让人眼花缭乱的地方，是真正的山中天堂。")
     rivendell = City("幽谷", description, greeting, [mistyInn, elvenWares, councilOfElrond])
     #迷雾山脉北部
-    description = """迷雾山脉是一座巨大的山脉，位于西部的伊利雅德和东部的安都因河之间。
+    description = """
+    迷雾山脉是一座巨大的山脉，位于西部的伊利雅德和东部的安都因河之间。
     它从最北边的贡达巴德山到南边的美塞德拉斯，长达795英里（1280公里）。
     """
     mistyMountainsNorth = Space("迷雾山脉北部", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.mistyMountainsNorth, city = rivendell)
 
     #高隘口 - 半兽人镇
     #独特地点
-    description = """半兽人镇是迷雾山脉中部山腹内的一座半兽人据点，一个被称作半兽人王的巨型半兽人统治着此地。
+    description = """
+    半兽人镇是迷雾山脉中部山腹内的一座半兽人据点，一个被称作半兽人王的巨型半兽人统治着此地。
     所谓半兽人镇，实际上是一系列错综复杂的洞窟和隧道系统，它们遍布于迷雾山脉的山腹之内，咕噜所待过的洞穴就位于其中深处。
     """
     greeting = "\"是潜伏过去还是直接攻入？\""
     goblinTown = GoblinTown("半兽人镇", description, greeting)
     #高隘口
-    description = """高隘口是少数几处可供跨越迷雾山脉的隘口之一，位于幽谷以东。
+    description = """
+    高隘口是少数几处可供跨越迷雾山脉的隘口之一，位于幽谷以东。
     它的范围向西止于幽谷，从那里东大道向上蜿蜒入山，途中经过半兽人镇。
 
     ***通过半兽人镇可以向南进入黑森林***
@@ -202,20 +206,23 @@ def getWorld():
     }
     elvenkingsThrone = Square("精灵王的宝座", description, greeting, talk, items.unique_items.elvenkingsThroneItems)
     #城市
-    description = """精灵国王的宫殿坐落在距离黑森林东北部边缘仅有几英里之处，它事实上是一座巨大而复杂的洞穴。
+    description = """
+    精灵国王的宫殿坐落在距离黑森林东北部边缘仅有几英里之处，它事实上是一座巨大而复杂的洞穴。
     这座宫殿是精灵国王瑟兰杜伊的住所、宝库和地牢，是黑森林王国对抗外敌的堡垒，但王国的臣民主要并不定居于此，而是生活在森林的深处。
     """
     greeting = "你来到这里后发现一个可供穿行且热闹非凡的洞穴网络。"
     elvenkingsHalls = City("精灵国王的宫殿", description, greeting, [sihirliMutfak, elvenWares, thePit, elvenkingsThrone])
     #黑森林
-    description = """黑森林在辛达语中被称为\"大恐怖之林\"，它是罗瓦尼安的一大片森林，其原名为大绿林；
+    description = """
+    黑森林在辛达语中被称为\"大恐怖之林\"，它是罗瓦尼安的一大片森林，其原名为大绿林；
     第三纪元末年，因为邪恶力量的入侵，大绿林才被人们称为黑森林。索隆战败后，这里又被重新命名为绿叶森林。
     """
     mirkwood = Space("黑森林", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.mirkwood, city = elvenkingsHalls)
 
     #黑森林南部 - 多古尔都
     #独特地点
-    description = """多古尔都是黑森林西南部的一座建有要塞的山丘，其周围裹着一片黑冷杉森林，那里的树木互相倾轧争斗，树枝腐败枯萎。
+    description = """
+    多古尔都是黑森林西南部的一座建有要塞的山丘，其周围裹着一片黑冷杉森林，那里的树木互相倾轧争斗，树枝腐败枯萎。
     第三纪元中，多古尔都要塞一度是魔君索隆的藏身巢穴；索隆离开多古尔都之后，此地依然是他在北方最主要的据点之一，驻扎着戒灵和大量军队。
     """
     greeting = "当你接近多古尔都要塞时，你被一种压倒性的恐惧感所折服。"
@@ -224,7 +231,7 @@ def getWorld():
     description = "在魔戒大战期间，黑森林南部被索隆的北方要塞多古尔都所占领。"
     southernMirkwood = Space("黑森林南部", description, constants.RegionType.RHOVANION, battleProbability = constants.SpaceSpawnProb.southernMirkwood, battleBonusDifficulty = constants.SpaceBonusDiff.southernMirkwood, uniquePlace = dolGuldur)
 
-    #布理地区 - 布理
+    #古冢岗-布理 - 布理
     #旅店
     description = "一家安静的旅店，隐藏在布理的郊区。"
     greeting = "\"你们好，我是旅馆老板琳达。\""
@@ -245,19 +252,22 @@ def getWorld():
     }
     prancingPony = Square("跃马客栈", description, greeting, talk, items.unique_items.prancingPonyItems)
     #城市
-    description = """布理位于夏尔以东、佛诺斯特·埃莱因以南。它在第三纪元早期属于卡多蓝王国。然而，
+    description = """
+    布理位于夏尔以东、佛诺斯特·埃莱因以南。它在第三纪元早期属于卡多蓝王国。然而，
     尽管卡多蓝亲王声称拥有它，但布理在没有任何中央权威或政府的情况下持续繁荣发展了许多世纪。 
     """
     greeting = "\"戒灵一直在夜间造访这附近！\""
     bree = City("布理", description, greeting, [lindasInn, hanksBattleGear, prancingPony])
-    #布理地区
-    description = """布理地区指的是布理山周围所有的地区，包含布理，斯台多，库姆村和阿切特。
-    布理地区的人类居民来历不详。可以肯定的是，他们是伊甸人的后代，与黑蛮地人有亲缘关系。
+    #古冢岗-布理
+    description = """
+    古冢岗是坐落于夏尔东部的连绵矮山丘，在老林子的北部，布理村庄的西南部。
+    山脉中的许多丘陵巨石遍布，坟冢到处可见，这也是其名由来。
     """
-    barrowDowns = Space("布理地区", description, constants.RegionType.BARROW_DOWNS, battleProbability = constants.SpaceSpawnProb.barrowDowns, city = bree)
+    barrowDowns = Space("古冢岗-布理", description, constants.RegionType.BARROW_DOWNS, battleProbability = constants.SpaceSpawnProb.barrowDowns, city = bree)
 
     #布茹伊能河
-    description = """布茹伊能河，又名响水河，是东伊利雅德的一条河流。
+    description = """
+    布茹伊能河，又名响水河，是东伊利雅德的一条河流。
     它发源于迷雾山脉西麓，最终汇入米斯艾塞尔河，其南翼流经埃尔隆德建立的避难所幽谷。
     """
     bruinen = Space("布茹伊能河", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.bruinen)
@@ -268,38 +278,45 @@ def getWorld():
     greeting = "当你进入曾经伟大的沙巴德的废墟时，一股阴森的雾气迎面而来...."
     tharbad = Tharbad("沙巴德", description, greeting)
     #米斯艾塞尔河
-    description = """米斯艾塞尔河，又名苍泉河，是伊利雅德东部的一条河流。
+    description = """
+    米斯艾塞尔河，又名苍泉河，是伊利雅德东部的一条河流。
     它发源于迷雾山脉北部群山的西麓，距离幽谷以北大约一百英里。
     """
     mitheithel = Space("米斯艾塞尔河", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.mitheithel, battleBonusDifficulty = constants.SpaceBonusDiff.mitheithel, uniquePlace = tharbad)
 
     #天鹅泽 - 欧斯特-因-埃第尔
     #独特地点
-    description = """这里曾经是一座埃瑞吉安的精灵工匠之城，现在已被索隆摧毁。
-    十九枚力量之戒都是在这里由凯勒布林博等精灵工匠铸造的。"""
+    description = """
+    这里曾经是一座埃瑞吉安的精灵工匠之城，现在已被索隆摧毁。
+    十九枚力量之戒都是在这里由凯勒布林博等精灵工匠铸造的。
+    """
     greeting = """你会看到一个奇怪的景象：曾经的伟大城市欧斯特-因-埃第尔现在成了一个古老的废墟。奇怪的符号遍布在这片土地上。"""
     ostInEdhil = OstInEdhil("欧斯特-因-埃第尔", description, greeting)
     #天鹅泽
-    description = """天鹅泽，又称“宁-因-艾尔芙”，是位于伊利雅德东部、格蓝都因河与苍泉河汇流处的沼泽。
+    description = """
+    天鹅泽，又称“宁-因-艾尔芙”，是位于伊利雅德东部、格蓝都因河与苍泉河汇流处的沼泽。
     两条河流的交汇处形成了内陆三角洲，这里溪流诸多，水陆分界也不甚明确。
     """
     swanfleet = Space("天鹅泽", description, constants.RegionType.ERIADOR, battleProbability = constants.SpaceSpawnProb.swanfleet, battleBonusDifficulty = constants.SpaceBonusDiff.swanfleet, uniquePlace = ostInEdhil)
     
     #黑蛮地
-    description = """黑蛮地是一片山麓丘陵地区，面向迷雾山脉南部的西侧山坡。因其远离阿尔诺与刚铎的人口中心，居民多是被称为黑蛮地人的人类，一度也有流浪至此的矮人与霍比特人。
+    description = """
+    黑蛮地是一片山麓丘陵地区，面向迷雾山脉南部的西侧山坡。因其远离阿尔诺与刚铎的人口中心，居民多是被称为黑蛮地人的人类，一度也有流浪至此的矮人与霍比特人。
     黑蛮地源于洛汗语，意为“山丘地域”，由第三纪元搬至卡伦纳松的洛希尔人所起，是片美丽丰饶的地区，一些未成组织的牧人与山间居民零星居住在黑蛮地南部，北部则无人居住。
     """
     dunland = Space("黑蛮地", description, constants.RegionType.ENEDWAITH, battleProbability = constants.SpaceSpawnProb.dunland)
 
     #迷雾山脉南部
     #独特地点
-    description = """墨瑞亚曾是中洲大地上最强大且最为著名的矮人王国。在那里矮人繁荣发展，建造了有史以来最伟大的一座城市。
+    description = """
+    墨瑞亚曾是中洲大地上最强大且最为著名的矮人王国。在那里矮人繁荣发展，建造了有史以来最伟大的一座城市。
     它是坐落于迷雾山脉中南部的一个巨大的地下建筑群，横贯山脉的东西两侧，是穿越迷雾山脉的重要通道之一。
     """
     greeting = "当你进入墨瑞亚矿坑时，阴森恐怖的寂静迎面而来。"
     moria = Moria("墨瑞亚", description, greeting)
     #迷雾山脉南部
-    description = """迷雾山脉是中洲最大的山脉，由北向南绵延800公里，位于伊利雅德和安都因河之间，将伊利雅德与罗马尼安分隔开。
+    description = """
+    迷雾山脉是中洲最大的山脉，由北向南绵延800公里，位于伊利雅德和安都因河之间，将伊利雅德与罗马尼安分隔开。
     墨瑞亚群山指迷雾山脉的三座连峰凯勒布迪尔、卡拉兹拉斯和法努伊索尔，矮人城邦墨瑞亚就挖凿在三座大山的底部。
 
     ***通过墨瑞亚可以向东进入罗瑞恩***
@@ -323,13 +340,15 @@ def getWorld():
     }
     galadrielsMirror = Square("加拉德瑞尔之镜", description, greeting, talk, items.unique_items.galadrielsMirrorItems)
     #城市
-    description = """卡拉斯加拉松是洛丝罗瑞恩的都城，这块宽阔草地的南部有一棵无与伦比的巨大瑁珑树，树下设有可供攀爬的白色梯子。攀爬虽然辛苦，但大树的枝干上建有高高低低许多平台，可以随时休息。
+    description = """
+    卡拉斯加拉松是洛丝罗瑞恩的都城，这块宽阔草地的南部有一棵无与伦比的巨大瑁珑树，树下设有可供攀爬的白色梯子。攀爬虽然辛苦，但大树的枝干上建有高高低低许多平台，可以随时休息。
     在瑁珑接近树顶的极高处，有一座椭圆形殿堂绕树而造，这就是罗瑞恩领主凯勒博恩和领主夫人加拉德瑞尔的宫殿，两人的宝座在其中并排摆放，不分位次。
     """
     greeting = "欢迎来到卡拉斯加拉松！凯勒博恩和加拉德瑞尔住在这里。"
     carasGaladhon = City("卡拉斯加拉松", description, greeting, [elvenWaters, elvenWares, galadrielsMirror])
     #罗瑞恩
-    description = """洛丝罗瑞恩是位于迷雾山脉东面的西尔凡王国，简称罗瑞恩。
+    description = """
+    洛丝罗瑞恩是位于迷雾山脉东面的西尔凡王国，简称罗瑞恩。
     在第三纪元，它被认为是中洲最美丽也最富于精灵特色的地方。
     在大海以东，洛丝罗瑞恩是瑁珑的唯一生长地点，只有夏尔的那棵例外。
     """
@@ -338,34 +357,39 @@ def getWorld():
     #范贡森林 - 秘林谷
     #独特地点
     description = "此处是恩特们举行会议的地点"
-    greeting = "\"欢迎来到恩特大会！不要那么着急。\""
+    greeting = "\"欢迎来到恩特大会！不必那么着急。\""
     derningle = Derningle("秘林谷", description, greeting)
     #范贡森林
-    description = """范贡森林是一片深邃而黑暗的林地，位于迷雾山脉南部的下方，该山脉的东侧。
+    description = """
+    范贡森林是一片深邃而黑暗的林地，位于迷雾山脉南部的下方，该山脉的东侧。
     在洛汗，这片森林借用了老恩特范贡的名字，被洛汗人民称为“恩特森林”。
     """
     fangorn = Space("范贡森林", description, constants.RegionType.ROHAN, battleProbability = constants.SpaceSpawnProb.fangorn, uniquePlace = derningle)
 
     #北高原
-    description = """北高原是洛汗的最北部，也是人口最少的地区，位于范贡森林和安都因河之间，军事划分上属于东马克。
+    description = """
+    北高原是洛汗的最北部，也是人口最少的地区，位于范贡森林和安都因河之间，军事划分上属于东马克。
     此地适宜放牧，多风，但十分荒凉，很少有人居住。近年来，由于奥克的频繁出没，这里已经不再安全。
     """
     theWold = Space("北高原", description, constants.RegionType.MORDOR, battleProbability = constants.SpaceSpawnProb.theWold)
 
     #凯勒布兰特原野
-    description = """凯勒布兰特原野是凯勒布兰特河与利姆清河之间的大片土地，位于洛丝罗瑞恩的东南部。
+    description = """
+    凯勒布兰特原野是凯勒布兰特河与利姆清河之间的大片土地，位于洛丝罗瑞恩的东南部。
     第三纪元2510年，洛汗人奋起援助刚铎的凯勒布兰特原野之战在这里发生。
     """
     fieldOfCelebrant = Space("凯勒布兰特原野", description, constants.RegionType.MORDOR, battleProbability = constants.SpaceSpawnProb.fieldOfCelebrant)
 
     #卡伦纳松 - 艾森加德
     #独特地点
-    description = """艾森加德是一个坐落于迷雾山脉最南端山谷中的伟大要塞，靠近洛汗豁口；岩石环场的中央矗立着欧尔桑克石塔。
+    description = """
+    艾森加德是一个坐落于迷雾山脉最南端山谷中的伟大要塞，靠近洛汗豁口；岩石环场的中央矗立着欧尔桑克石塔。
     """
     greetings = "当你接近艾森加德时，焦黑的天空在迎接你。"
     isenguard = Isenguard("艾森加德", description, greetings)
     #卡伦纳松
-    description = """卡伦纳松，意为“绿色行省”，位于迷雾山脉以东、白色山脉以北，是安都因河与艾森河之间的一片人烟稀少的广阔草原。
+    description = """
+    卡伦纳松，意为“绿色行省”，位于迷雾山脉以东、白色山脉以北，是安都因河与艾森河之间的一片人烟稀少的广阔草原。
 
     ***通过艾森加德可以向南进入西伏尔德***
     """
@@ -778,7 +802,6 @@ def getWorld():
 
     #连接东西走向的所有地区
     shire.createExit("east", oldForest, outgoingOnly = False)
-    oldForest.createExit("east", barrowDowns, outgoingOnly = False) # 老林子的东出口应该连接古冢岗（尚无）
     weatherHills.createExit("east", trollshaws, outgoingOnly = False)
     trollshaws.createExit("east", mistyMountainsNorth, outgoingOnly = False)
     mistyMountainsNorth.createExit("east", highPass, outgoingOnly = False)
@@ -797,7 +820,7 @@ def getWorld():
     orodruin.createExit("east", plateauOfGorgoth, outgoingOnly = False)
 
     #连接南北走向的所有地区
-    barrowDowns.createExit("south", oldForest, outgoingOnly = False) # 布理地区的南出口应该连接古冢岗（这里没有）
+    barrowDowns.createExit("south", oldForest, outgoingOnly = False)
     weatherHills.createExit("south", barrowDowns, outgoingOnly = False)
     trollshaws.createExit("south", bruinen, outgoingOnly = False)
     bruinen.createExit("south", mitheithel, outgoingOnly = False)
@@ -896,7 +919,7 @@ def getCommandList(player):
     commandWords = CommandWords()
     
     #命令
-    checkEquipmentCmd = CheckEquipmentCommand("equipment", "查看当前装备和装备信息", player)
+    checkEquipmentCmd = CheckEquipmentCommand("equipment", "查看当前装备", player)
     commandWords.addCommand("equipment", checkEquipmentCmd)
     
     checkInventoryCmd = CheckInventoryCommand("inventory", "查看当前库存", player)
@@ -908,16 +931,16 @@ def getCommandList(player):
     checkStatsCmd = CheckStatsCommand("stats", "查看当前状态", player)
     commandWords.addCommand("stats", checkStatsCmd)
     
-    descCmd = DescribeCommand("describe", "查看当前所在地区", player)
+    descCmd = DescribeCommand("describe", "查看当前地区", player)
     commandWords.addCommand("describe", descCmd)
     
-    dropCmd = DropCommand("drop", "将库存中的物品放置到当前地区", player)
+    dropCmd = DropCommand("drop", "丢弃物品", player)
     commandWords.addCommand("drop", dropCmd)
     
     eastCmd = EastCommand("east", "向东旅行", player)
     commandWords.addCommand("east", eastCmd)
     
-    enterCmd = EnterCommand("enter", "进入城市或独特地点", player)
+    enterCmd = EnterCommand("enter", "进入地点", player)
     commandWords.addCommand("enter", enterCmd)
     
     equipCmd = EquipCommand("equip", "装备物品", player)
@@ -926,13 +949,13 @@ def getCommandList(player):
     helpCmd = HelpCommand("help", "命令帮助", commandWords)
     commandWords.addCommand("help", helpCmd)
     
-    mapCmd = MapCommand("map", "查看当前位置的地图", player)
+    mapCmd = MapCommand("map", "查看地图", player)
     commandWords.addCommand("map", mapCmd)
     
     northCmd = NorthCommand("north", "向北旅行", player)
     commandWords.addCommand("north", northCmd)
     
-    pickupCmd = PickUpCommand("pick up", "从当前地区中拾取物品", player)
+    pickupCmd = PickUpCommand("pick up", "拾取物品", player)
     commandWords.addCommand("pick up", pickupCmd)
     
     quitCmd = QuitCommand("quit", "退出游戏")

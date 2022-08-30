@@ -29,7 +29,7 @@ class Parser(object):
         userInput = userInput.strip().lower()
 
         while not self._commandRecognized(userInput):
-            print(("命令 %s 无法识别。键入 help 查看帮助" % userInput))
+            print("命令 %s 无法识别。键入 help 查看帮助" % userInput)
             print("")
 
             userInput = input(constants.COMMAND_PROMPT)

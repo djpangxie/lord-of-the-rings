@@ -4,10 +4,12 @@ from .command import Command
 from items.potion import Potion
 from items.item_set import ItemSet
 
+
 class UsePotionCommand(Command):
     """
     使玩家在战斗之外使用药水。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化使用药水命令。
@@ -22,46 +24,46 @@ class UsePotionCommand(Command):
 
     def execute(self):
         """
-        Uses potion in inventory to heal player.
+        使用库存中的药水来治疗玩家。
         """
-        #Check that potions in inventory
+        # 检查库存中的药水
         inventory = self._player.getInventory()
         potions = ItemSet()
-        
+
         for item in inventory:
             if isinstance(item, Potion):
                 potions.addItem(item)
         if potions.count() == 0:
-            print("%s has no potions." % self._player.getName())
+            print("%s 的库存中没有药水。" % self._player.getName())
             return
-        
-        #User prompt
-        print("%s currently has:" % self._player.getName())
-        for potion in potions:
-            print("\t%s with %s healing power." % (potion.getName(), 
-            potion.getHealing()))
+
+        # 用户提示
+        print("%s 可以使用：" % self._player.getName())
+        for num, potion in enumerate(potions, 1):
+            print("\t%d.%-15s%s点治疗量" % (num, potion.getName(), potion.getHealing()))
         print("")
-    
-        choice = None
+
         while True:
-            choice = input("Which potion would you like to use? ")
-            if potions.containsItemWithName(choice):
+            try:
+                choice = input("输入药水的整数序号值：")
+                choice = int(choice)
+            except ValueError:
+                choice = -1
+            if 1 <= choice <= potions.count():
                 break
             else:
-                print("%s does not have that potion." % self._player.getName())
-                print("")
+                print("药水序号输入有误！")
 
-        #Healing mechanics
-        potionChoice = potions.getItemByName(choice)
+        # 治疗机制
+        potionChoice = potions.getItems()[choice - 1]
         healing = potionChoice.getHealing()
-        
+
         preHealedHealth = self._player.getHp()
         self._player.heal(healing)
         postHealedHealth = self._player.getHp()
         healed = postHealedHealth - preHealedHealth
-        
+
         inventory.removeItem(potionChoice)
-        
-        print("%s was healed by %s! %s's health is now %s." \
-        % (self._player.getName(), healed, self._player.getName(), 
-        self._player.getHp()))
+
+        print("%s 恢复了 %s 点生命值！ %s 的当前生命值为 %s " % (
+            self._player.getName(), healed, self._player.getName(), self._player.getHp()))

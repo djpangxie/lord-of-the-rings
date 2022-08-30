@@ -100,12 +100,11 @@ def sortItems(itemSet):
     
 def triangular(stats):
     """
-    Generates a random number using a triangle distribution.
+    使用三角分布生成一个随机数。
     
-    @param stats:   A three-element list whose elements are used to calculate 
-                    the triangular distribution.
+    @param stats:   一个三元素列表，其元素用于计算三角分布
     
-    @return:        The randomly generated number.
+    @return:        随机生成的数字
     """
     import random
     

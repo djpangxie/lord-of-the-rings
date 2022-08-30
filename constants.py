@@ -57,16 +57,15 @@ class PlayerInitialization(object):
     CHARM_DEFENSE = 0
     CHARM_HP      = 0
 
-#Character stats constants
-HP_STAT           = 1.2
-ATTACK_STAT       = 1.2
-MAX_LEVEL         = 20
-WEIGHT_LIMIT_STAT = 1.15
+#角色统计常数
+HP_STAT           = 1.2  # 玩家每升一级时基础最大生命值变为原来的120%
+ATTACK_STAT       = 1.2  # 玩家每升一级时基础攻击力变为原来的120%
+MAX_LEVEL         = 20  # 角色所能达到的最高等级
+WEIGHT_LIMIT_STAT = 1.15  # 玩家每升一级时基础负重上限变为原来的115%
 
-#Player levels
+#玩家等级
 """
-Keys are player levels; values are the experience required to obtain its paired
-level.
+键是玩家等级；值是获得其配对水平所需的经验。
 """
 LEVEL_EXP_REQUIREMENT = {1: 0, 2: 20, 3: 44, 4: 72, 5: 105, 6: 144, 7: 190,
 8: 245, 9: 311, 10: 390, 11: 484, 12: 596, 13: 730, 14:890 , 15: 1082,
@@ -104,29 +103,29 @@ class RegionType(object):
     中土世界的地区类型。
     """
     ERIADOR       = 1 # 伊利雅德
-    BARROW_DOWNS  = 2 # 布理地区
+    BARROW_DOWNS  = 2 # 古冢岗-布理
     HIGH_PASS     = 3 # 高隘口
     ENEDWAITH     = 4 # 伊宁威治
     MORIA         = 5 # 墨瑞亚
     RHOVANION     = 6 # 罗马尼安
     ROHAN         = 7 # 洛汗
     GONDOR        = 8 # 刚铎
-    MORDOR        = 8 # 魔多
+    MORDOR        = 9 # 魔多
 
-#Region base spawn
+#地区怪物基础生成量
 class RegionBaseSpawn(object):
     """
-    Regional base spawn per random battle for space in region.
+    一场随机战斗中各个地区的基础怪物生成数量。
     """
-    ERIADOR       = 1
-    BARROW_DOWNS  = 4
-    HIGH_PASS     = 0
-    ENEDWAITH     = 6
-    MORIA         = 5
-    RHOVANION     = 6
-    ROHAN         = 6
-    GONDOR        = 8
-    MORDOR        = 8
+    ERIADOR       = 1 # 伊利雅德
+    BARROW_DOWNS  = 4 # 古冢岗-布理
+    HIGH_PASS     = 0 # 高隘口
+    ENEDWAITH     = 6 # 伊宁威治
+    MORIA         = 5 # 墨瑞亚
+    RHOVANION     = 6 # 罗马尼安
+    ROHAN         = 6 # 洛汗
+    GONDOR        = 8 # 刚铎
+    MORDOR        = 8 # 魔多
 
 #在地区中时发生随机战斗的概率
 class SpaceSpawnProb(object):
@@ -139,7 +138,7 @@ class SpaceSpawnProb(object):
     highPass            = 0     # 高隘口
     mirkwood            = .4    # 黑森林
     southernMirkwood    = .9    # 黑森林南部
-    barrowDowns         = .85   # 布理地区
+    barrowDowns         = .85   # 古冢岗-布理
     bruinen             = .75   # 布茹伊能河（响水河）
     mitheithel          = .75   # 米斯艾塞尔河（苍泉河）
     swanfleet           = .75   # 天鹅泽
@@ -168,9 +167,9 @@ class SpaceSpawnProb(object):
     lossamarch          = .6
     ithilien            = .85
 
-#地区的奖励难度
+#地区的难度加成
 class SpaceBonusDiff(object):
-    """用于存储地区的奖励难度。"""
+    """用于存储地区的难度加成。"""
     shire               = 0     # 夏尔
     oldForest           = 0     # 老林子
     weatherHills        = 0     # 风云丘陵
@@ -179,7 +178,7 @@ class SpaceBonusDiff(object):
     highPass            = 0     # 高隘口
     mirkwood            = 0     # 黑森林
     southernMirkwood    = .2    # 黑森林南部
-    barrowDowns         = 0     # 布理地区
+    barrowDowns         = 0     # 古冢岗-布理
     bruinen             = 0     # 布茹伊能河（响水河）
     mitheithel          = .2    # 米斯艾塞尔河（苍泉河）
     swanfleet           = .2    # 天鹅泽
@@ -263,7 +262,7 @@ class MonsterDescriptions(object):
     SiegeWorks          = "在这种情况下完全没用。"
     DragonOfMordor      = "恶龙的远亲。"
     CorsairOfUmbar      = "基本上就是海盗。"
-    ArmoredMumakil      = "载有弓箭手的装甲大象。"
+    ArmoredMumakil      = "载有弓箭手的巨象。"
     BlackNumernorian    = "极为强大的巫师。"
     EasterlingWarrior   = "来自中国。"
     Sauroman            = "白道会的首领。"
@@ -280,7 +279,7 @@ class MonsterDescriptions(object):
 class MonsterAttackStrings(object):
     """
     包含指环王中的所有怪物攻击时显示的字符串。
-    例如："半兽人 *喊着切成片、切成丁* 并对 %s 造成 %s 伤害！"
+    例如："半兽人 *喊着切成片、切成丁* 并对 %s 造成 %s 点伤害！"
     """
     BarrowWight         = "吟唱着悲伤的歌"
     Goblin              = "喊着切成片、切成丁"
@@ -351,13 +350,9 @@ class MonsterDeathStrings(object):
 
 #地区怪物分布情况
 """
-A dictionary of dictionaries where the higher-level keys are regions. 
-The inner set contains the monster class-probability pairs that are 
-used as probability distribution functions for monster spawn.
-
-monster_factory's getMonsters() generates a random number between [0, 1). If 
-the randomly generated number falls within the range of each class, a monster 
-of that class is spawned.
+一个值是字典的字典，最高层的键是地区类型。内层字典中包含了怪物类名-生成概率的键值对。
+monster_factory模块中的getMonsters()函数会生成一个[0, 1)之间的随机数。
+如果随机生成的数字落在怪物类的键所对的范围值内，就会生成该类别的怪物。
 """
 REGIONAL_MONSTER_DISTRIBUTION = {
     RegionType.ERIADOR:      {Nazgul: [0, 1]},
@@ -444,24 +439,23 @@ class BattleEngineContext(object):
     RANDOM = 1 # 随机战斗
     STORY  = 2 # 剧情战斗
 
-#Battle engine
+#战斗引擎
 class ItemFind(object):
     """
-    Constants used for determining whether player has found items as a result 
-    of battle.
+    用于确定玩家是否在战斗中找到物品的常量。
     """
     lowLevel   = [100, 5000, 300]
     highLevel  = [350, 5000, 600]
     eliteLevel = [500, 5000, 1000]
 
-#Battle engine constants
+#战斗引擎常数
 class BattleEngine(object):
     """
-    Constants for battle engine.
+    战斗引擎的常数。
     """
-    RUN_PROBABILITY_SUCCESS = 1
-    STANDARD_DEVIATION      = 3
-    MONEY_CONSTANT          = 3
+    RUN_PROBABILITY_SUCCESS = .5 # 玩家的撤退成功率 50%
+    STANDARD_DEVIATION      = 3 # 该值越大，一次随机战斗碰到的敌人数量的正态分布随机波动就越小
+    MONEY_CONSTANT          = 3 # 杀死怪物获得的经验与金钱的比值，即每获得3点经验会得到1点金钱
 
 #商店的生成概率常数
 class ShopFactoryConstants(object):

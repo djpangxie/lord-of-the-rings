@@ -49,11 +49,13 @@ class Monster(object):
 
     def attack(self, target):
         """
-        模拟攻击给定目标。
+        攻击给定目标。
 
-        @param target: 攻击的目标
+        @param target:   攻击的目标对象
+
+        @return:         造成的伤害量
         """
-        target.takeAttack(self._attack)
+        return target.takeAttack(self._attack)
 
     def getAttack(self):
         """
@@ -65,7 +67,7 @@ class Monster(object):
 
     def takeAttack(self, attack):
         """
-        模拟攻击。HP不能小于零。
+        受到伤害。注意HP不能小于零。
 
         @param attack: 受到的攻击量
         """

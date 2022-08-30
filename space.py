@@ -7,7 +7,7 @@ from items.unique_items import theOneRing
 
 class Space(object):
     """
-    地图上的给定位置。与其他空间相连，形成更大的地理区域。
+    地图上的给定地区。与其他地区相连，形成更大的地理区域。
     """
     def __init__(self, name, description, region, battleProbability = 0, battleBonusDifficulty = 0, items = None, city = None, uniquePlace = None):
         """
@@ -17,10 +17,10 @@ class Space(object):
         @param description:            地区的描述
         @param region                  地区类型的列举常量
         @param battleProbability:      在连续的游戏命令执行之间发生随机战斗的概率。在区间[0,1]之间
-        @param battleBonusDifficulty:  该地区的奖励难度，用于调整战斗与奖励的加成。在区间[0,1]之间
-                                       此统计数据会导致任何给定区域的默认怪物统计数据和数量的百分比增加
-                                       例如：如果奖励难度设置为0.5，该地区将产生50%更多具有150%基础属性的怪物
-        @keyword items:                (可选)在地区中能找到的物品。可以是单个Item对象或Item对象列表或ItemSet对象
+        @param battleBonusDifficulty:  该地区的难度加成，用于调整怪物属性与数量。在区间[-1,1]之间
+                                       难度加成会使得该地区怪物的基础数据和基础生成量还有杀死其获得的经验、金钱按百分比加成。例如：
+                                       难度加成为0.5的地区将产生150%基础生成量的具有150%基础属性的怪物，它被杀死后获得150%经验、金钱
+        @keyword items:                (可选)地区中的物品。可以是单个Item对象或Item对象列表或ItemSet对象
         @keyword city:                 (可选)地区中的城市。可以是单个对象或包含多个对象的列表
         @keyword uniquePlace:          (可选)地区中独特地点。可以是单个对象或包含多个对象的列表
         """
@@ -77,7 +77,7 @@ class Space(object):
         @param item:    要添加的一件或多件物品
         """
         #至尊戒的特别提醒
-        if item == theOneRing and self._name != "Orodruin":
+        if item == theOneRing and self._name != "欧洛都因":
             print("\n你看到一些奇怪的人走过。")
             return
 
@@ -150,9 +150,9 @@ class Space(object):
 
     def getBattleBonusDifficulty(self):
         """
-        Returns bonus difficulty attribute of space.
+        返回该地区的难度加成。
 
-        @return:    The difficulty parameter of space.
+        @return:    地区的难度加成
         """
         return self._battleBonusDifficulty
 

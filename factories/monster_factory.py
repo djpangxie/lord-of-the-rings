@@ -3,16 +3,16 @@
 from math import floor
 import random
 
-from monsters.monster import Monster
 import constants
+
 
 def getMonsters(number, region, bonusDifficulty):
     """
-    Generates enemies for the battle sequence.
+    为战斗引擎生成怪物。
 
-    @param number:      The number of monsters to generate.
-    @param region:      The region of the map Player is currently in.
-    @param difficulty:  The number of enemies to generate.
+    @param number:           生成的怪物数量
+    @param region:           玩家当前所在的地区类型
+    @param bonusDifficulty:  该地区的难度加成
     """
     monsters = []
     monsterDistribution = constants.REGIONAL_MONSTER_DISTRIBUTION[region]
@@ -23,18 +23,17 @@ def getMonsters(number, region, bonusDifficulty):
             lowerLimit = monsterDistribution[Monster][0]
             upperLimit = monsterDistribution[Monster][1]
             if lowerLimit <= randomNum < upperLimit:
-                #Find monster stats
+                # 获取怪物基础数据
                 stats = constants.MONSTER_STATS[Monster]
-                #Modify monster stats for bonusDifficulty
+                # 修改怪物属性以符合难度加成
                 modifiedStats = []
                 for stat in stats:
                     modifiedStat = stat * (1 + bonusDifficulty)
                     modifiedStat = floor(modifiedStat)
                     modifiedStats.append(modifiedStat)
-                #Instantiate and append monster to monsters
+
                 monsterSpawn = Monster(modifiedStats)
                 monsters.append(monsterSpawn)
-                #There should only be one monster spawned per iteration
                 break
-    
+
     return monsters

@@ -11,7 +11,8 @@ from items.unique_items import highLevelFindableUniques
 from items.unique_items import eliteLevelFindableUniques
 import constants
 
-def battle(player, context, monsters = None):
+
+def battle(player, context, monsters=None):
     """
     指环王的战斗引擎。
 
@@ -23,137 +24,136 @@ def battle(player, context, monsters = None):
     @return:           如果战斗获胜则为True；否则为False
 
     随机战斗和剧情战斗的区别：
-    -随机战斗：怪物工厂由战斗引擎调用，怪物由怪物工厂提供。玩家可以在随机战斗中成功奔跑。
+    -随机战斗：调用monster_factory模块中的getMonsters()函数来生成怪物。玩家可以在随机战斗中成功奔跑。
     -剧情战斗：怪物必须通过monsters参数提供。玩家不能从剧情战斗中逃跑。
     """
-    #战斗设置
+    # 战斗设置
     output = _battleSetup(player, context)
     if context == constants.BattleEngineContext.RANDOM:
         bonusDifficulty = output[0]
         monsters = output[1]
-        #If no monsters are spawned
+        # 如果没有生成怪物
         if len(monsters) == 0:
             return
     else:
         bonusDifficulty = output
-        
+
     earnings = [0, 0]
-    
-    #Main battle sequence
-    while len(monsters) != 0:
-        #Display enemy monsters
-        print("Monsters:")
-        for monster in monsters:
-            print("\t%s: %s" % (monster.getName(), monster.getDescription()))
+
+    # 主要的战斗过程
+    while monsters:
+        # 显示敌方怪物
+        print("敌人：")
+        for num, monster in enumerate(monsters, 1):
+            print("\t%d.%-15s%s" % (num, monster.getName(), monster.getDescription()))
         print("")
-        
-        #Solicit user input
+
+        # 用户输入行动选项
         choice = None
         acceptable = ["attack", "use potion", "run", "explode"]
         while choice not in acceptable:
-            choice = input("You may: 'attack', 'use potion', 'run.' ")
-        
-        #Player attack option
+            choice = input("你可以：进攻(attack)、恢复(use potion)、撤退(run)> ")
+
+        # 玩家攻击选项
         if choice == 'attack':
             earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings)
-            
-        #Use potion option
+
+        # 使用药水选项
         elif choice == "use potion":
             _usePotion(player)
-            
-        #Run option
+
+        # 玩家撤退选项
         elif choice == "run":
             if context == constants.BattleEngineContext.RANDOM:
                 if random.random() < constants.BattleEngine.RUN_PROBABILITY_SUCCESS:
-                    print("You ran away succesfully!")
+                    print("你成功摆脱了敌人的追踪！")
                     print("")
-                    return True
+                    return False
                 else:
-                    print("Your path is blocked!")
+                    print("你被敌人追上了！")
             else:
-                print("Your path is blocked!")
-                
-        #Code - eliminates all enemies
+                print("你撤退的路被堵死了！")
+
+        # 作弊 - 消灭所有敌人
         elif choice == "explode":
             monsters = []
             earnings = [0, 0]
 
-        #Break between player and monster phases
-        input("Press enter to continue. ")
+        # 在玩家阶段和怪物阶段之间等待
+        input("按回车键继续。")
         print("")
 
-        #Monsters attack phase
+        # 怪物攻击阶段
         continueBattle = _monsterAttackPhase(player, monsters)
-        
-        #Escape sequence given battle loss
+
+        # 如果战斗失败的话
         if not continueBattle:
             print("")
-            print("Gandalf bails you out.")
+            print("甘道夫把你救了出来...")
             player.heal(1)
-            
+
             return False
-        
-    #Battle end sequence - loot received
+
+    # 战斗结束 - 获得战利品
     _endSequence(player, earnings)
-    
+
     return True
+
 
 def _battleSetup(player, context):
     """
-    Generates variables for battle engine and prints battle
-    splash screen.
+    为战斗引擎生成变量并打印战斗启动画面。
     """
-    #For random battles
+    # 对于随机战斗
     if context == constants.BattleEngineContext.RANDOM:
-        #Create variables
+        # 创建变量
         location = player.getLocation()
         region = location.getRegion()
         bonusDifficulty = location.getBattleBonusDifficulty()
 
-        #Spawn monsters
+        # 生成怪物
         monsterCount = _monsterNumGen(player)
-        monsters = factories.monster_factory.getMonsters(monsterCount, region, 
-        bonusDifficulty)
+        monsters = factories.monster_factory.getMonsters(monsterCount, region, bonusDifficulty)
 
-        #Declare battle
-        print("Zonkle-tronks! Wild monsters appeared!")
+        # 宣战信息
+        print("遭遇到随机战斗！")
         print("")
 
         return bonusDifficulty, monsters
-    
-    #For story-based battles
+
+    # 对于剧情战斗
     elif context == constants.BattleEngineContext.STORY:
-        #Create variables
+        # 创建变量
         location = player.getLocation()
         region = location.getRegion()
         bonusDifficulty = location.getBattleBonusDifficulty()
-    
-        #Display splash screen
+
+        # 剧情头幕
         print("""
 ()==[:::::::::::::> ()==[:::::::::::::> ()==[:::::::::::::>
 """)
         return bonusDifficulty
-    
+
     else:
-        errorMsg = "_battleSetup given invalid context parameter."
+        errorMsg = "传给_battleSetup()函数的战斗模式参数无效。"
         raise AssertionError(errorMsg)
+
 
 def _monsterNumGen(player):
     """
-    Helper function used to determine the number of monsters to spawn.
+    辅助函数，用于确定生成的怪物数量。
     
-    Default spawn comes from a parameter supplied by space. A normal 
-    distribution is applied to introduce variation.
+    首先是地区的基础怪物生成数量，然后算上该地区的难度加成，最后使用正态分布来制造波动。
     
-    @param player:     Player object.
+    @param player:     玩家对象
 
-    @return:           Number of monsters to spawn.
+    @return:           怪物数量的整数值
     """
     location = player.getLocation()
     region = location.getRegion()
     bonusDifficulty = location.getBattleBonusDifficulty()
 
-    #Calculate region spawn
+    # 计算区域生成量
     if region == constants.RegionType.ERIADOR:
         monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.ERIADOR
     elif region == constants.RegionType.BARROW_DOWNS:
@@ -165,179 +165,176 @@ def _monsterNumGen(player):
     elif region == constants.RegionType.MORIA:
         monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.MORIA
     elif region == constants.RegionType.RHOVANION:
-        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.RHOVANION   
+        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.RHOVANION
     elif region == constants.RegionType.ROHAN:
-        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.ROHAN       
+        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.ROHAN
     elif region == constants.RegionType.GONDOR:
-        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.GONDOR      
+        monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.GONDOR
     elif region == constants.RegionType.MORDOR:
         monsterCount = (1 + bonusDifficulty) * constants.RegionBaseSpawn.MORDOR
     else:
-        errorMsg = "Invalid region - region base monster determination."
+        errorMsg = "地区类型无效：找不到该地区类型。"
         raise AssertionError(errorMsg)
-        
-    #Apply normal distribution to introduce variation
-    standardDeviation = monsterCount/constants.BattleEngine.STANDARD_DEVIATION
-    
+
+    # 使用正态分布来制造波动
+    standardDeviation = monsterCount / constants.BattleEngine.STANDARD_DEVIATION
+
     monsterCount = random.normalvariate(monsterCount, standardDeviation)
     monsterCount = max(math.floor(monsterCount), 1)
     monsterCount = int(monsterCount)
-    
+
     return monsterCount
+
 
 def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
     """
-    When the user gets to attack a single monster object.
-    If monster health is reduced to zero, monster is removed
-    from battle.
+    当用户开始攻击单个怪物对象时，如果怪物的生命值降至零，则将怪物从战斗中移除。
 
-    Additionally, experience and money is calculated for winnings.
+    此外，经验和金钱是根据奖金计算的。
 
-    @param player:        The player object.
-    @param monsters:      The list of monster objects.
-    @param earnings:      2-element tuple caring battle earnings. First element
-                          is money earned and second is experience received. 
-                          Earnings needs to be passed in between successive 
-                          function calls to update battle earnings.
+    @param player:           玩家对象
+    @param monsters:         怪物对象列表
+    @param bonusDifficulty   当前地区的难度加成
+    @param earnings:         两个元素的列表，第一个是获得的金钱，第二个是获得的经验
+                             这两个值整场战斗中都会在函数间传递，并将积累所有的收益
     
-    @return:              2-element tuple carrying battle earnings.
-                          First element is money earned, second
-                          element is experience received.
+    @return:                 同上述的earnings参数引向的列表的中两个元素，第一个是获得的金钱，第二个是获得的经验
     """
-    #Starting battle earnings
-    money      = earnings[0]
+    # 开始战斗收益
+    money = earnings[0]
     experience = earnings[1]
 
-    #Solicit attack target
-    target = input("Whom? ")
-    print("")
-    #Find monster object
-    for monster in monsters:
-        if monster.getName() == target:
-            #Carry out attack
-            player.attack(monster)
-            print(("%s did %s damage to %s!" % (player.getName(), 
-            player.getTotalAttack(), monster.getName())))
-            #If monster is still alive
-            if monster.getHp() > 0:
-                print(("%s has %s hp remaining." % (monster.getName(), 
-                monster.getHp())))
-            #If monster has died
+    while True:
+        # 输入攻击目标
+        try:
+            target = input("输入怪物的整数序号值：")
+            target = int(target)
+        except ValueError:
+            target = -1
+        print("")
+
+        if 1 <= target <= len(monsters):
+            # 进行攻击
+            player.attack(monsters[target - 1])
+            print("%s 对 %d.%s 造成了 %s 点伤害！" % (
+                player.getName(), target, monsters[target - 1].getName(), player.getTotalAttack()))
+            # 如果怪物还活着
+            if monsters[target - 1].getHp() > 0:
+                print(
+                    "%d.%s 还剩 %s 点生命值。" % (target, monsters[target - 1].getName(), monsters[target - 1].getHp()))
+            # 如果怪物死了
             else:
-                print("%s" % monster.getDeathString())
-                #Generate earnings from winning battle
-                expIncrease = monster.getExperience() * (1 + bonusDifficulty)
-                experience += expIncrease
-                money += math.floor(expIncrease/constants.BattleEngine.MONEY_CONSTANT)
-                #Remove monster from monsters list
-                for monster in monsters:
-                    if monster.getName() == target:
-                        monsters.remove(monster)
-                        #No need to keep iterating through monsters
-                        break
-            #No need to keep iterating through monsters
+                print("%s" % monsters[target - 1].getDeathString())
+                # 从赢得战斗中获得收益
+                expIncrease = monsters[target - 1].getExperience() * (1 + bonusDifficulty)
+                experience += math.floor(expIncrease)
+                money += math.floor(expIncrease / constants.BattleEngine.MONEY_CONSTANT)
+                # 从怪物列表中移除怪物
+                monsters.pop(target - 1)
             break
-    else:
-        print("%s looks at you in confusion." % player.getName())
-        
+        else:
+            print("怪物序号输入有误！")
+
     return money, experience
+
 
 def _usePotion(player):
     """
-    Creates an additional UsePotionCommand object
-    for battle purposes only and then executes the 
-    action sequence of this usePotion.
+    创建一个特殊的UsePotionCommand命令对象（仅用于战斗中），然后执行其execute()方法。
 
-    @param player:   The player object.
+    @param player:   玩家对象
     """
     usePotionCmd = UsePotionCommand(" ", " ", player)
     usePotionCmd.execute()
 
+
 def _monsterAttackPhase(player, monsters):
     """
-    Monster attack phase - when monsters attack player.
+    怪物攻击阶段 - 当怪物攻击玩家时。
 
-    @param player:      The player object.
-    @param monsters:    The offending list of monsters.
+    @param player:      玩家对象
+    @param monsters:    怪物对象的列表
 
-    @return:            True if battle is to continue. False
-                        otherwise.
+    @return:            如果将要继续战斗则为True，否则为False
     """
-    #Monsters attack
-    for monster in monsters:
-        monster.attack(player)
-        print(("%s %s for %s damage!" % (monster.getName(), 
-        monster.getAttackString(), monster.getAttack())))
-        print("%s has %s HP remaining." % (player.getName(), player.getHp()))
-        
-        #Battle ends
-        if player.getHp() == 0:
+    # 怪物攻击
+    for num, monster in enumerate(monsters, 1):
+        damage = monster.attack(player)
+        if damage:
+            print("%d.%s *%s* 并对 %s 造成 %s 点伤害！" % (
+                num, monster.getName(), monster.getAttackString(), player.getName(), damage))
+        else:
+            print("%d.%s 的攻击被 %s 抵挡或闪避了。" % (num, monster.getName(), player.getName()))
+
+        # 玩家挂了
+        if not player.getHp():
             print("")
             return False
-    
+
+    print("\n%s 还剩 %s 点生命值。" % (player.getName(), player.getHp()))
+
     if monsters:
-        input("Press enter to continue. ")
+        input("按回车键继续。")
         print("")
-    
-    #Battle continuation
+
+    # 战斗继续
     return True
+
 
 def _itemFind(player, experience):
     """
-    Calculates whether player finds an item and which item he finds.
+    计算玩家是否获取物品以及获取哪件物品。
     
-    @param player:         The player object.
-    @param experience:     The experience gained from the battle.
+    @param player:         玩家对象
+    @param experience:     从战斗中获得的经验值
     """
     location = player.getLocation()
-    
-    #Item find for low-level uniques
+
+    # 有可能获取独特物品
     lowLevel = triangular(constants.ItemFind.lowLevel)
     if experience > lowLevel and lowLevelFindableUniques:
         item = random.choice(lowLevelFindableUniques)
-        print("You found %s!" % item.getName())
+        print("你找到了 %s ！" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
 
-    #Item find for high-level uniques
+    # 有可能获取精英级独特物品
     highLevel = triangular(constants.ItemFind.highLevel)
     if experience > highLevel and highLevelFindableUniques:
         item = random.choice(highLevelFindableUniques)
-        print("You found %s!" % item.getName())
+        print("你找到了 %s ！" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
-            
-    #Item find for elite-level uniques
+
+    # 有可能获取精英级独特宝物
     eliteLevel = triangular(constants.ItemFind.eliteLevel)
     if experience > eliteLevel and eliteLevelFindableUniques:
         item = random.choice(eliteLevelFindableUniques)
-        print("You found %s!" % item.getName())
+        print("你找到了 %s ！" % item.getName())
         if not player.addToInventory(item):
             location.addItem(item)
-    
+
+
 def _endSequence(player, earnings):
     """
-    Battle cleanup:
-    -Victory sequence displayed.
-    -Player experience and money increase.
+    战斗胜利后的扫尾工作：
+    -显示胜利信息。
+    -可能找到独特物品。
+    -增加角色的经验和金钱。
 
-    @param player:      The player object.
-    @param earnings:    2-element tuple: first element is 
-                        money and second is experience.
+    @param player:      玩家对象
+    @param earnings:    两个元素的列表，第一个是获得的金钱，第二个是获得的经验
     """
     money = earnings[0]
     experience = earnings[1]
-    
-    #Calculate splash screen variables
-    victoryDeclaration = "Enemies are vanguished!"
-    gainsDeclaration = ("%s gains %s %s and %s experience!" 
-    % (player.getName(), money, constants.CURRENCY, experience))
-    
+
+    victoryDeclaration = "敌人被消灭了！"
+    gainsDeclaration = "%s 总共获得 %s 金钱，以及 %s 经验值！" % (player.getName(), money, experience)
+
     lengthBar = len(gainsDeclaration)
     victoryDeclaration = victoryDeclaration.center(lengthBar)
-    bar = "$" * lengthBar
-    
-    #Victory sequence
+    bar = "——" * lengthBar
+
     print(bar)
     print(victoryDeclaration)
     print(gainsDeclaration)
