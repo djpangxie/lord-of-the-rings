@@ -8,10 +8,12 @@ from items.potion import Potion
 from items.charm import Charm
 from items.item import Item
 
+
 class CheckInventoryCommand(Command):
     """
     显示玩家库存和详细物品统计信息。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的检查库存命令。
@@ -26,21 +28,23 @@ class CheckInventoryCommand(Command):
 
     def execute(self):
         """
-        Displays character inventory.
+        显示角色库存。
         """
-        #Get basic player information
+        # 获取玩家基本信息
         playerName = self._player.getName()
         inventory = self._player.getInventory()
         inventoryList = inventory.getItems()
+        equipment = self._player.getEquipped()
+        equipmentList = equipment.getItems()
 
-        #Cycle through player's inventory, obtaining item stats
-        print("%s's inventory:\n" % playerName)
+        # 循环浏览玩家的库存，获取物品统计信息
+        print("%s的库存：\n" % playerName)
         for item in inventoryList:
             itemName = item.getName()
             itemDescription = item.getDescription()
             itemWeight = str(item.getWeight())
             itemCost = str(item.getCost())
-            
+
             if isinstance(item, Armor):
                 itemDefense = str(item.getDefense())
             elif isinstance(item, Weapon):
@@ -54,31 +58,30 @@ class CheckInventoryCommand(Command):
             elif isinstance(item, Item):
                 pass
             else:
-                errorMsg = "CheckInventoryCommand given invalid item type."
+                errorMsg = "某件物品的类型有误！"
                 raise AssertionError(errorMsg)
 
-            #Print stats of given item in inventory
-            print("\t%s: %s." % (itemName, itemDescription))
-
-            if isinstance(item, Armor):
-                print("\t%s has a defense of %s." % (itemName, itemDefense))
-            elif isinstance(item, Weapon):
-                print("\t%s has an attack value of %s." % (itemName, 
-                    itemAttack))
-            elif isinstance(item, Potion):
-                print("\t%s has a healing value of %s." % (itemName, itemHeal))
-            elif isinstance(item, Charm):
-                print(("\t%s has an attack bonus of %s, a defense bonus of %s," 
-                    " and a HP bonus of %s." % (itemName, itemAttack, 
-                    itemDefense, itemHp)))
-            elif isinstance(item, Item):
-                pass
+            # 打印库存中给定物品的信息
+            if item in equipmentList:
+                print("\t*", end='')
             else:
-                errorMsg = "CheckInventoryCommand given invalid item type."
-                raise AssertionError(errorMsg)
-            
-            print("\t%s weighs %s and costs %s." % (itemName, itemWeight, 
-                itemCost))
-            print("")
+                print("\t", end='')
+            print("%s\t\t%s" % (itemName, itemDescription))
 
-        print("\tTotal weight of inventory: %s." % inventory.getWeight())
+            if isinstance(item, Weapon):
+                print("\t攻击力：%-5s" % itemAttack, end='')
+            elif isinstance(item, Armor):
+                print("\t防御力：%-5s" % itemDefense, end='')
+            elif isinstance(item, Potion):
+                print("\t治疗量：%-5s" % itemHeal, end='')
+            elif isinstance(item, Charm):
+                print("\t攻击加值：%-5s防御加值：%-5sHP加值：%-5s" % (itemAttack, itemDefense, itemHp), end='')
+            elif isinstance(item, Item):
+                print("\t", end='')
+            else:
+                errorMsg = "某件物品的类型有误！"
+                raise AssertionError(errorMsg)
+
+            print("重量：%-5s价格：%s\n" % (itemWeight, itemCost))
+
+        print("当前库存总重量：%s" % inventory.getWeight())

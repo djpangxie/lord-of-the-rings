@@ -40,7 +40,7 @@ class UsePotionCommand(Command):
         # 用户提示
         print("%s 可以使用：" % self._player.getName())
         for num, potion in enumerate(potions, 1):
-            print("\t%d.%-15s%s点治疗量" % (num, potion.getName(), potion.getHealing()))
+            print("\t%d.%-10s%10s点治疗量" % (num, potion.getName(), potion.getHealing()))
         print("")
 
         while True:

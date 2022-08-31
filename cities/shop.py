@@ -161,7 +161,7 @@ class Shop(Building):
         for item in player.getInventory():
             sellValue = constants.SELL_LOSS_PERCENTAGE * item.getCost()
             itemValues[item] = sellValue
-            print("\t%s... with sell value: %s %s." % (item.getName(), 
+            print("\t%s... with sell value: %s%s." % (item.getName(),
             sellValue, constants.CURRENCY))
         itemToSell = input("\nWhich item would you like to sell? ")
         
@@ -171,7 +171,7 @@ class Shop(Building):
                 sellValue = itemValues[item]
                 
                 #Is user sure?
-                choice = input("Would you like to sell %s for %s %s?"
+                choice = input("Would you like to sell %s for %s%s?"
                 " Response: yes/no. " % (item.getName(), sellValue, 
                 constants.CURRENCY))
                 
@@ -226,7 +226,7 @@ class Shop(Building):
         for item in self._items:
             print("\t%s... with cost of %s." % (item.getName(), item.getCost()))
         print("")
-        print("%s has %s %s with which to spend." % (player.getName(), 
+        print("%s has %s%s with which to spend." % (player.getName(),
         player.getMoney(), constants.CURRENCY))
         print("")
         itemToPurchase = input("Which item would you like to purchase? ")

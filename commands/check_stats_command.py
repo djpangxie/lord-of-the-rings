@@ -5,10 +5,12 @@ from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
 
+
 class CheckStatsCommand(Command):
     """
     显示玩家统计数据。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的检查统计命令。
@@ -23,34 +25,34 @@ class CheckStatsCommand(Command):
 
     def execute(self):
         """
-        Displays player stats.
+        显示玩家状态。
         """
-        #Get player stats
+        # 获取玩家数据
         name = self._player.getName()
         experience = self._player.getExperience()
         level = self._player.getLevel()
         weightLimit = self._player.getWeightLimit()
-        
-        #Get HP stats
+
+        # 获取HP数据
         hp = self._player.getHp()
+        maxhp = self._player.getMaxHp()
         charmHp = self._player.getCharmHp()
         totalMaxHp = self._player.getTotalMaxHp()
-        
-        #Get attack stats
+
+        # 获取攻击数据
         attack = self._player.getAttack()
         charmAttack = self._player.getCharmAttack()
         totalAttack = self._player.getTotalAttack()
-        
-        #Get defense stats
+
+        # 获取防御数据
         charmDefense = self._player.getCharmDefense()
         totalDefense = self._player.getTotalDefense()
 
-        #Create defaults - for determining of weapon and armor exist
+        # 创建默认值 - 用于确定武器和盔甲是否存在
         weapon = None
         armor = None
-        charm = None
-        
-        #Get equipment bonuses
+
+        # 获得装备加值信息
         equipment = self._player.getEquipped()
         equipmentList = equipment.getItems()
         for item in equipmentList:
@@ -61,33 +63,12 @@ class CheckStatsCommand(Command):
                 armorDefense = item.getDefense()
                 armor = True
 
-        #Print player stats
-        print("%s's stats: \n" % name)
-        print("\t%s is level %s and has %s experience." % (name, level, 
-        experience))
-        print("\t%s's HP: %s/%s." % (name, hp, totalMaxHp))
-        print("\t%s gets a %s HP bonus from charms." % (name, charmHp))
-        print("")
-        
-        #For attack
-        print("\tCharacter-based attack is %s." % attack)
-        if weapon:
-            print(("\tWeapons bonus is %s and charm bonus is %s." 
-            % (weaponsAttack, charmAttack)))
-            print("\tTotal attack is %s." % totalAttack)
-        else:
-            print("\tWeapon: [Unequipped].")
-        print("")
-        
-        #For defense
-        if armor:
-            print("\tArmor-based defense is %s." % armorDefense)
-            print("\tCharm-based defense is %s." % charmDefense)
-            print("\tTotal defense is %s." % totalDefense)
-        else:
-            print("\tArmor:  [Unequipped]") 
-        print("")
-        
-        #Player weight limit
-        print("\tPlayer weight limit is %s." % weightLimit)
-        print("")
+        # 打印数据
+        print("%s的当前状态：\n" % name)
+        print("\tHP：%s/%s\t\t负重：%s/%s\t\t等级：%s\t\t经验值：%s" % (
+            hp, totalMaxHp, self._player.getInventory().getWeight(), weightLimit, level, experience))
+        print("\t攻击力：%-6s（基础攻击力：%-5s武器攻击力：%-5s总饰品攻击加值：%s）" % (
+            totalAttack, attack, weaponsAttack if weapon else 0, charmAttack))
+        print("\t防御力：%-6s（盔甲防御力：%-5s总饰品防御加值：%s）" % (
+            totalDefense, armorDefense if armor else 0, charmDefense))
+        print("\t最大HP：%-6s（基础最大HP：%-5s总饰品最大HP加值：%s）" % (totalMaxHp, maxhp, charmHp))

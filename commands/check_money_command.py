@@ -3,10 +3,12 @@
 from .command import Command
 import constants
 
+
 class CheckMoneyCommand(Command):
     """
     显示玩家金钱。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的检查金钱命令。
@@ -21,9 +23,9 @@ class CheckMoneyCommand(Command):
 
     def execute(self):
         """
-        Prints player money.
+        显示玩家金钱数。
         """
         money = self._player.getMoney()
         name = self._player.getName()
 
-        print("%s currently has %s %s!" % (name, money, constants.CURRENCY))
+        print("%s 当前拥有 %s%s" % (name, money, constants.CURRENCY))

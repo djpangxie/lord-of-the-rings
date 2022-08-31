@@ -2,10 +2,12 @@
 
 from .command import Command
 
+
 class PickUpCommand(Command):
     """
     使玩家从其当前地区中拾取物品。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化拾取命令。
@@ -20,25 +22,34 @@ class PickUpCommand(Command):
 
     def execute(self):
         """
-        Picks up an item from a room and adds it to inventory.
+        从地区中拾取物品并将其添加到库存中。
         """
         name = self._player.getName()
         location = self._player.getLocation()
         locationItems = location.getItems()
 
-        #User prompt
-        print("The following may be picked up by %s:" % name)
-        for item in locationItems:
-            print("\t%s" % item.getName())
-        print("")
-        
-        itemToAdd = input("Which item do you want to pick up? ")
-        item = locationItems.getItemByName(itemToAdd)
-        
-        if not item:
-            print("%s does not contain item." % location.getName())
+        # 如果没有可供拾取的物品
+        if locationItems.count() == 0:
+            print("地区中没有可拾取的物品。")
             return
 
-        #Successful execution
-        if self._player.addToInventory(item):
-            location.removeItem(item)
+        # 用户输入
+        print("%s 可以拾取：" % name)
+        for num, item in enumerate(locationItems, 1):
+            print("\t%d.%s" % (num, item.getName()))
+        print("")
+
+        while True:
+            try:
+                choice = input("输入物品的整数序号值：")
+                choice = int(choice)
+            except ValueError:
+                choice = -1
+            if 1 <= choice <= locationItems.count():
+                break
+            else:
+                print("物品序号输入有误！")
+
+        # 拾取物品
+        if self._player.addToInventory(locationItems.getItems()[choice - 1]):
+            location.removeItem(locationItems.getItems()[choice - 1])

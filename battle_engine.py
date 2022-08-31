@@ -45,18 +45,24 @@ def battle(player, context, monsters=None):
         # 显示敌方怪物
         print("敌人：")
         for num, monster in enumerate(monsters, 1):
-            print("\t%d.%-15s%s" % (num, monster.getName(), monster.getDescription()))
+            print("\t%d.%-20s%s" % (num, monster.getName(), monster.getDescription()))
         print("")
 
         # 用户输入行动选项
+        num = -1
         choice = None
         acceptable = ["attack", "use potion", "run", "explode"]
         while choice not in acceptable:
             choice = input("你可以：进攻(attack)、恢复(use potion)、撤退(run)> ")
+            try:
+                choice, num = choice.split(' ', 2)
+                num = int(num)
+            except ValueError:
+                num = -1
 
         # 玩家攻击选项
         if choice == 'attack':
-            earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings)
+            earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num)
 
         # 使用药水选项
         elif choice == "use potion":
@@ -186,7 +192,7 @@ def _monsterNumGen(player):
     return monsterCount
 
 
-def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
+def _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num):
     """
     当用户开始攻击单个怪物对象时，如果怪物的生命值降至零，则将怪物从战斗中移除。
 
@@ -197,6 +203,7 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
     @param bonusDifficulty   当前地区的难度加成
     @param earnings:         两个元素的列表，第一个是获得的金钱，第二个是获得的经验
                              这两个值整场战斗中都会在函数间传递，并将积累所有的收益
+    @param num:              一开始就传入的怪物序号
     
     @return:                 同上述的earnings参数引向的列表的中两个元素，第一个是获得的金钱，第二个是获得的经验
     """
@@ -206,11 +213,15 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings):
 
     while True:
         # 输入攻击目标
-        try:
-            target = input("输入怪物的整数序号值：")
-            target = int(target)
-        except ValueError:
-            target = -1
+        if num == -1:
+            try:
+                target = input("输入怪物的整数序号值：")
+                target = int(target)
+            except ValueError:
+                target = -1
+        else:
+            target = num
+            num = -1
         print("")
 
         if 1 <= target <= len(monsters):
@@ -268,14 +279,10 @@ def _monsterAttackPhase(player, monsters):
 
         # 玩家挂了
         if not player.getHp():
-            print("")
+            print("\n%d.%s 击败了 %s " % (num, monster.getName(), player.getName()))
             return False
 
-    print("\n%s 还剩 %s 点生命值。" % (player.getName(), player.getHp()))
-
-    if monsters:
-        input("按回车键继续。")
-        print("")
+    print("\n%s 还剩 %s 点生命值。\n" % (player.getName(), player.getHp()))
 
     # 战斗继续
     return True

@@ -36,7 +36,7 @@ from monsters.black_numernorian_ii import BlackNumernorian_II
 """
 #游戏常量
 COMMAND_PROMPT           = "> " # 命令输入提示符
-CURRENCY                 = "rubles"
+CURRENCY                 = "$"  # 金钱的单位
 SPACES_WITH_UNIQUE_ITEMS = 4   # 初始化随机向某些地区中撒落独特物品的数量
 ELVEN_RING_PROB          = .3  # 初始化随机向某些地区中撒落精灵三戒的概率 30%
 

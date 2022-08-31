@@ -5,10 +5,12 @@ from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
 
+
 class CheckEquipmentCommand(Command):
     """
     显示玩家装备和详细的装备统计信息。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的检查装备命令。
@@ -18,44 +20,41 @@ class CheckEquipmentCommand(Command):
         @param player:       玩家对象
         """
         Command.__init__(self, name, explanation)
-        
+
         self._player = player
 
     def execute(self):
         """
-        Equips player with item in inventory.
+        显示玩家装备栏中的物品。
         """
         playerName = self._player.getName()
         equipment = self._player.getEquipped()
-        
-        #Prints currently equipped items
-        print("%s's currently equipped items:\n" % playerName)
-        
+
+        # 打印当前装备的物品
+        print("%s 当前装备的物品：\n" % playerName)
+
         for item in equipment:
             itemName = item.getName()
             if isinstance(item, Weapon):
                 attack = item.getAttack()
-                print("\tWeapon: %s." % itemName)
-                print("\t%s yields a %s attack bonus." % (itemName, attack))
+                print("\t武器：%s" % itemName)
+                print("\t%s的攻击力为 %s 点" % (itemName, attack))
             elif isinstance(item, Armor):
                 defense = item.getDefense()
-                print("\tArmor: %s." % itemName)
-                print("\t%s yields a %s defense bonus." % (itemName, defense))
+                print("\t盔甲：%s" % itemName)
+                print("\t%s的防御力为 %s 点" % (itemName, defense))
             elif isinstance(item, Charm):
                 attack = item.getAttack()
                 defense = item.getDefense()
                 hp = item.getHp()
-                print("\tCharm: %s:" % itemName)
+                print("\t饰品：%s:" % itemName)
                 if item.getAttack():
-                    print("\t%s yields a %s attack bonus." % (itemName, 
-                    attack))
+                    print("\t%s有 %s 点攻击加值" % (itemName, attack))
                 if item.getDefense():
-                    print("\t%s yields a %s defense bonus." % (itemName, 
-                    defense))
+                    print("\t%s有 %s 点防御加值" % (itemName, defense))
                 if item.getHp():
-                    print("\t%s yields a %s HP bonus." % (itemName, hp))
+                    print("\t%s有 %s 点最大生命加值" % (itemName, hp))
             else:
-                errorMsg = ("CheckEquipmentCommand command given invalid item" 
-                " type.")
+                errorMsg = "某件装备的类型不是武器、盔甲或饰品！"
                 raise AssertionError(errorMsg)
             print("")

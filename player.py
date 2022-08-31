@@ -279,7 +279,7 @@ class Player(object):
             self._totalDefense = self._armorDefense + self._charmDefense
             self._totalMaxHp = self._maxHp + self._charmHp
 
-        statement = "%s 装备上了 %s。" % (self._name, item.getName())
+        statement = "%s 装备上了 %s" % (self._name, item.getName())
 
         # 为装备栏排序
         sortItems(self._equipped)
@@ -319,7 +319,7 @@ class Player(object):
             self._totalDefense = self._armorDefense + self._charmDefense
             self._totalMaxHp = self._maxHp + self._charmHp
 
-        statement = "%s 卸下了 %s。" % (self._name, item.getName())
+        statement = "%s 卸下了 %s" % (self._name, item.getName())
         return statement
 
     def getEquipped(self):

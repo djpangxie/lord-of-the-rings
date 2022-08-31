@@ -85,7 +85,7 @@ class ItemSet(object):
         """
         移除ItemSet中的某件物品。
 
-        @param item:    此物品集合中的某件物品
+        @param item:    此物品集中的某件物品
         """
         self._items.remove(item)
         self._weight -= int(item.getWeight())

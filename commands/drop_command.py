@@ -1,11 +1,14 @@
 #!/usr/bin/python
 
 from .command import Command
+from items.item_set import ItemSet
+
 
 class DropCommand(Command):
     """
     使玩家将物品从库存中放入当前地区。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的丢弃命令。
@@ -20,38 +23,41 @@ class DropCommand(Command):
 
     def execute(self):
         """
-        Drops an item from inventory into space.
+        将物品从库存中放入地区。
         """
         name = self._player.getName()
-        inventory = self._player.getInventory()
-        
-        #Display inventory contents
-        print("The following may be dropped by %s:" % name)
-        for item in inventory:
-            print("\t%s" % item.getName())
-        print("")
-        
-        itemToRemove = input("Which item do you want to drop? \n")
-        print("")
-        
-        #Create references
+        location = self._player.getLocation()
         equipped = self._player.getEquipped()
-        item = inventory.getItemByName(itemToRemove)
+        inventory = self._player.getInventory()
+        inventoryble = ItemSet()
 
-        #Check if item is in inventory
-        if not item:
-            print("%s is not in your inventory!" % itemToRemove)
+        # 创建可丢弃物品清单
+        for item in inventory:
+            if not equipped.containsItem(item):
+                inventoryble.addItem(item)
+
+        # 如果没有可供丢弃的物品
+        if inventoryble.count() == 0:
+            print("库存中没有可丢弃的物品。")
             return
 
-        print("Dropping %s" % itemToRemove)
-        print("Unequipping %s" % itemToRemove)
-        
-        inventory.removeItem(item)
-        
-        #If item is currently equipped
-        if equipped.containsItem(item):
-            equipped.removeItem(item)
-        
-        #Add item to space
-        location = self._player.getLocation()
-        location.addItem(item)
+        # 用户输入
+        print("%s 可以丢弃：" % name)
+        for num, item in enumerate(inventoryble, 1):
+            print("\t%d.%s" % (num, item.getName()))
+        print("")
+
+        while True:
+            try:
+                choice = input("输入物品的整数序号值：")
+                choice = int(choice)
+            except ValueError:
+                choice = -1
+            if 1 <= choice <= inventoryble.count():
+                break
+            else:
+                print("物品序号输入有误！")
+
+        # 丢弃物品
+        inventory.removeItem(inventoryble.getItems()[choice - 1])
+        location.addItem(inventoryble.getItems()[choice - 1])

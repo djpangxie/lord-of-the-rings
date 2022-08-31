@@ -2,10 +2,12 @@
 
 from .command import Command
 
+
 class UnequipCommand(Command):
     """
     卸下玩家当前装备的物品。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化卸下命令。
@@ -20,30 +22,32 @@ class UnequipCommand(Command):
 
     def execute(self):
         """
-        Unequips player with item in inventory.
+        使玩家卸下装备栏中装备的物品。
         """
         equipped = self._player.getEquipped()
 
-        #If no items to unequip
+        # 如果没有装备任何物品
         if equipped.count() == 0:
-            print("No items to unequip.")
+            print("没有装备任何物品。")
             return
 
-        #User prompt
-        print("%s may unequip:" % self._player.getName())
-        for item in equipped:
-            print("\t%s" % item.getName())
+        # 用户输入
+        print("%s 可以卸下：" % self._player.getName())
+        for num, item in enumerate(equipped, 1):
+            print("\t%d.%s" % (num, item.getName()))
         print("")
-        
-        itemToUnequip = input("Which item do you want to unequip? \n")
-        itemEquipment = equipped.getItemByName(itemToUnequip)
-        
-        #Check if item is currently equipped
-        if not itemEquipment:
-            print("")
-            print("%s is not currently equipped!" % itemToUnequip)
-            return
 
-        #Unequips player with item
-        statement = self._player.unequip(itemEquipment)
+        while True:
+            try:
+                choice = input("输入装备的整数序号值：")
+                choice = int(choice)
+            except ValueError:
+                choice = -1
+            if 1 <= choice <= equipped.count():
+                break
+            else:
+                print("装备序号输入有误！")
+
+        # 卸下装备
+        statement = self._player.unequip(equipped.getItems()[choice - 1])
         print(statement)

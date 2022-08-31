@@ -22,7 +22,7 @@ class Space(object):
                                        难度加成为0.5的地区将产生150%基础生成量的具有150%基础属性的怪物，它被杀死后获得150%经验、金钱
         @keyword items:                (可选)地区中的物品。可以是单个Item对象或Item对象列表或ItemSet对象
         @keyword city:                 (可选)地区中的城市。可以是单个对象或包含多个对象的列表
-        @keyword uniquePlace:          (可选)地区中独特地点。可以是单个对象或包含多个对象的列表
+        @keyword uniquePlace:          (可选)地区中的独特地点。可以是单个对象或包含多个对象的列表
         """
         self._exits = {Direction.NORTH : None,
                        Direction.SOUTH : None,
@@ -123,20 +123,17 @@ class Space(object):
     
     def getCity(self):
         """
-        Returns city object/objects.
+        返回地区中的城市。
 
-        @return:    Reference to cit(ies).
-                    May refer to a single city or list of cities.
+        @return:    城市对象或包含多个城市对象的列表
         """
         return self._city
 
     def getUniquePlace(self):
         """
-        Returns uniquePlace object(s).
+        返回地区中的独特地点。
 
-        @return:    Reference to unique place(s).
-                    May be reference to a single unique
-                    place or a list of unique places.
+        @return:    独特地点对象或包含多个独特地点对象的列表
         """
         return self._uniquePlace
 
@@ -233,9 +230,9 @@ class Space(object):
 
     def getExits(self):
         """
-        Returns dictionary of direction-space pairs.
+        返回该地区所有方向连接的字典。
 
-        @return:            Dictionary of direction-space pairs.
+        @return:            方向连接的字典
         """
         return self._exits
 

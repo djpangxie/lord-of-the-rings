@@ -48,7 +48,7 @@ class Inn(Building):
                     player.decreaseMoney(cost)
                     #Actual healing operation
                     self._heal(player)
-                    print("%s was healed at %s cost! %s has %s %s remaining." \
+                    print("%s was healed at %s cost! %s has %s%s remaining." \
                           % (player.getName(), cost, player.getName(), 
                           player.getMoney(), constants.CURRENCY))
                 #Not enough money

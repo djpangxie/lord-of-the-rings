@@ -6,10 +6,12 @@ from player import Player
 from cities.city import City
 from unique_place import UniquePlace
 
+
 class DescribeCommand(Command):
     """
     向用户描述当前所在地区。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化新的描述命令。
@@ -19,14 +21,14 @@ class DescribeCommand(Command):
         @param player:       玩家对象
         """
         Command.__init__(self, name, explanation)
-        
+
         self._player = player
 
     def execute(self):
         """
-        Command execution.
+        命令执行。
         """
-        #Create variables
+        # 创建变量
         location = self._player.getLocation()
         locationName = location.getName()
         locationDescription = location.getDescription()
@@ -34,44 +36,42 @@ class DescribeCommand(Command):
         itemsList = items.getItems()
         city = location.getCity()
         uniquePlace = location.getUniquePlace()
-        
-        #Print space name and description
-        print("%s: %s" % (locationName, locationDescription))
 
-        #If there are no cities or uniquePlaces in space
+        # 打印地区名称和描述
+        print("%s：%s" % (locationName, locationDescription))
+
+        # 如果地区中没有城市或独特地点
         if not city and not uniquePlace:
-            print("%s has no places for you to enter." % locationName)
+            print("%s中没有地点可供探索。" % locationName)
 
-        #If there is at least one city or uniquePlace
+        # 如果至少有一个城市或独特地点
         else:
-            print("\nThe following are contained in %s:\n" % locationName)
-            
-            #If space has one city:
+            print("%s中存在下列地点：" % locationName)
+
+            # 如果地区中有一个城市：
             if isinstance(city, City):
                 cityName = city.getName()
-                print("%s:\n%s" % (cityName, city.getDescription()))
-            
-            #If space has multiple cities:
+                print("\t%s：%s" % (cityName, city.getDescription()))
+
+            # 如果地区中有多个城市：
             elif isinstance(city, list):
                 for eachCity in city:
                     eachCityName = eachCity.getName()
-                    print("%s:\n%s" % (eachCityName, eachCity.getDescription()))
+                    print("\t%s：%s" % (eachCityName, eachCity.getDescription()))
 
-            #If space has one uniquePlace object
+            # 如果地区中有一个独特地点
             if isinstance(uniquePlace, UniquePlace):
-                uniquePlaceName = uniquePlace.getName() 
-                print("%s:\n%s" % (uniquePlaceName, 
-                uniquePlace.getDescription()))
-            
-            #If space has multiple uniquePlaces
+                uniquePlaceName = uniquePlace.getName()
+                print("\t%s：%s" % (uniquePlaceName, uniquePlace.getDescription()))
+
+            # 如果地区中有多个独特地点
             if isinstance(uniquePlace, list):
                 for eachUniquePlace in uniquePlace:
                     eachUniquePlaceName = eachUniquePlace.getName()
-                    print("%s:\n%s" % (eachUniquePlaceName, 
-                    eachUniquePlace.getDescription()))
-        
-        #If space has items
-        if len(itemsList) > 0:
-            print("The following items are in %s:" % locationName)
+                    print("\t%s：%s" % (eachUniquePlaceName, eachUniquePlace.getDescription()))
+
+        # 如果地区中含有物品
+        if itemsList:
+            print("%s中存在下列物品：" % locationName)
             for item in itemsList:
-                print("\t--%s." % item.getName())
+                print("\t%s" % item.getName())

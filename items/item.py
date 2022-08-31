@@ -16,6 +16,7 @@ class Item(object):
         @param name:          物品的名字
         @param description:   物品的描述
         @param weight:        物品的重量
+        @param cost:          物品的价格
         """
         if (not name) or (not description):
             raise AssertionError("物品必须有名称和描述。")
@@ -23,7 +24,7 @@ class Item(object):
             errorMsg = ("物品重量无效 (%s); 重量不能为负数。" % weight)
             raise AssertionError(errorMsg)
         if cost < 0:
-            errorMsg = ("无效的物品费用 (%s); 费用不能是负数。" % cost)
+            errorMsg = ("无效的物品价格 (%s); 价格不能是负数。" % cost)
             raise AssertionError(errorMsg)
 
         self._name = name

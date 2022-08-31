@@ -6,10 +6,12 @@ from cities.city import City
 from unique_place import UniquePlace
 import constants
 
+
 class MapCommand(Command):
     """
     地图命令。
     """
+
     def __init__(self, name, explanation, player):
         """
         初始化地图命令。
@@ -24,95 +26,86 @@ class MapCommand(Command):
 
     def execute(self):
         """
-        Calls self._printInformation on each of the spaces that are connected
-        to the player's current space.
+        显示连接到玩家当前地区的每个地区及其中的地点。
         """
-        #Generate variables for map locations
+        # 为地图位置生成变量
         location = self._player.getLocation()
         exits = location.getExits()
 
-        print("Your map is more a set of notes and instructions....")
-        print("")
-        print("From %s, you may go to the following:" % location.getName())
-        
-        #List details for each space in NSEW order
+        print("由 %s 可以去往：" % location.getName())
+
+        # 按北、南、东、西的顺序列出每个地区的详细信息
         if exits[constants.Direction.NORTH]:
             space = exits[constants.Direction.NORTH]
-            #For single spaces
+            # 对于单个地区
             if not isinstance(space, list):
                 self._printInformation(space, constants.Direction.NORTH)
-            #For lists of spaces
+            # 对于多个地区
             else:
                 for individualSpace in space:
-                    self._printInformation(individualSpace, 
-                        constants.Direction.NORTH)
-                        
+                    self._printInformation(individualSpace, constants.Direction.NORTH)
+
         if exits[constants.Direction.SOUTH]:
             space = exits[constants.Direction.SOUTH]
-            #For single spaces
+            # 对于单个地区
             if not isinstance(space, list):
                 self._printInformation(space, constants.Direction.SOUTH)
-            #For lists of spaces
+            # 对于多个地区
             else:
                 for individualSpace in space:
-                    self._printInformation(individualSpace, 
-                        constants.Direction.SOUTH)
-                        
+                    self._printInformation(individualSpace, constants.Direction.SOUTH)
+
         if exits[constants.Direction.EAST]:
             space = exits[constants.Direction.EAST]
-            #For single spaces
+            # 对于单个地区
             if not isinstance(space, list):
                 self._printInformation(space, constants.Direction.EAST)
-            #For lists of spaces
+            # 对于多个地区
             else:
                 for individualSpace in space:
-                    self._printInformation(individualSpace, 
-                        constants.Direction.EAST)
-                        
+                    self._printInformation(individualSpace, constants.Direction.EAST)
+
         if exits[constants.Direction.WEST]:
             space = exits[constants.Direction.WEST]
-            #For single spaces
+            # 对于单个地区
             if not isinstance(space, list):
                 self._printInformation(space, constants.Direction.WEST)
-            #For lists of spaces
+            # 对于多个地区
             else:
                 for individualSpace in space:
-                    self._printInformation(individualSpace, 
-                        constants.Direction.WEST)
-            
+                    self._printInformation(individualSpace, constants.Direction.WEST)
+
     def _printInformation(self, space, direction):
         """
-        Prints the name of the space and lists any cities and unique places
-        that it may have.
+        打印地区的名称，并列出它可能拥有的任何城市和独特地点。
         
-        @param space:               The space that is currently being 
-                                    detailed.
-        @param direction:           The direction of the space with 
-                                    respect to player's current location.
+        @param space:               地区对象
+        @param direction:           地区相对于玩家当前位置的方向
         """
-        #For current space
+        # 指出地区
         spaceName = space.getName()
-        print("\tTo the %s: %s." % (direction, spaceName))
-        
-        #If a city/cities exist for a particular space
-        if space.getCity():
-            cities = space.getCity()
+        print("\t%-10s地区：%s" % (direction, spaceName), end='')
+
+        # 如果地区中存在城市
+        cities = space.getCity()
+        if cities:
             if isinstance(cities, City):
                 cityName = cities.getName()
-                print("\t--%s is in %s." % (cityName, spaceName))
+                print("\t\t城市：%s" % cityName, end='')
             elif isinstance(cities, list):
                 for city in cities:
                     cityName = city.getName()
-                    print("\t--%s is in %s." % (cityName, spaceName))
-                    
-        #If a unique place/unique places exist for a particular space
+                    print("\t\t城市：%s" % cityName, end='')
+
+        # 如果地区中存在独特地点
         if space.getUniquePlace():
             uniquePlaces = space.getUniquePlace()
             if isinstance(uniquePlaces, UniquePlace):
                 uniquePlaceName = uniquePlaces.getName()
-                print("\t--%s is in %s." % (uniquePlaceName, spaceName))
+                print("\t\t地点：%s" % uniquePlaceName, end='')
             elif isinstance(uniquePlaces, list):
                 for uniquePlace in uniquePlaces:
                     uniquePlaceName = uniquePlace.getName()
-                    print("\t--%s is in %s." % (uniquePlaceName, spaceName))
+                    print("\t\t地点：%s" % uniquePlaceName, end='')
+
         print("")
