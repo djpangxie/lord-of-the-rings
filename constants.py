@@ -453,7 +453,7 @@ class BattleEngine(object):
     """
     战斗引擎的常数。
     """
-    RUN_PROBABILITY_SUCCESS = .5 # 玩家的撤退成功率 50%
+    RUN_PROBABILITY_SUCCESS = .5 # 玩家撤退的基础成功率 50%
     STANDARD_DEVIATION      = 3 # 该值越大，一次随机战斗碰到的敌人数量的正态分布随机波动就越小
     MONEY_CONSTANT          = 3 # 杀死怪物获得的经验与金钱的比值，即每获得3点经验会得到1点金钱
 

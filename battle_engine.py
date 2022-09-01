@@ -38,7 +38,9 @@ def battle(player, context, monsters=None):
     else:
         bonusDifficulty = output
 
+    quick = False
     earnings = [0, 0]
+    acceptable = ["quick", "attack", "use potion", "run"]
 
     # 主要的战斗过程
     while monsters:
@@ -49,11 +51,15 @@ def battle(player, context, monsters=None):
         print("")
 
         # 用户输入行动选项
-        num = -1
-        choice = None
-        acceptable = ["attack", "use potion", "run", "explode"]
+        if quick:
+            num = 1
+            choice = "attack"
+        else:
+            num = -1
+            choice = None
+
         while choice not in acceptable:
-            choice = input("你可以：进攻(attack)、恢复(use potion)、撤退(run)> ")
+            choice = input("你可以：快进(quick)、进攻(attack)、恢复(use potion)、撤退(run)> ")
             try:
                 choice, num = choice.split(' ', 2)
                 num = int(num)
@@ -71,7 +77,7 @@ def battle(player, context, monsters=None):
         # 玩家撤退选项
         elif choice == "run":
             if context == constants.BattleEngineContext.RANDOM:
-                if random.random() < constants.BattleEngine.RUN_PROBABILITY_SUCCESS:
+                if random.random() > constants.BattleEngine.RUN_PROBABILITY_SUCCESS * (1 + bonusDifficulty):
                     print("你成功摆脱了敌人的追踪！")
                     print("")
                     return False
@@ -80,13 +86,14 @@ def battle(player, context, monsters=None):
             else:
                 print("你撤退的路被堵死了！")
 
-        # 作弊 - 消灭所有敌人
-        elif choice == "explode":
-            monsters = []
-            earnings = [0, 0]
+        # 快进 - 玩家依次按顺序砍倒敌人直到被敌人砍倒或胜利
+        elif choice == "quick":
+            quick = True
+            earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings, 1)
 
         # 在玩家阶段和怪物阶段之间等待
-        input("按回车键继续。")
+        if not quick:
+            input("按回车键继续。")
         print("")
 
         # 怪物攻击阶段

@@ -43,7 +43,7 @@ class Building(object):
 
     def enter(self, player):
         """
-        默认的输入方法。默认情况下，不做任何事情。这个方法应该被子类所重写。
+        默认的进入方法。默认情况下，不做任何事情。这个方法应该被子类所重写。
 
         @param player:   玩家对象
         """

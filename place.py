@@ -82,8 +82,8 @@ class Place(object):
 
     def enter(self, player):
         """
-        Parent enter method. Should be overridden by child classes.
+        进入地点的方法，子类应该重写它。
         
-        @param player:  The current player.
+        @param player:  玩家对象
         """
-        print("This enter method should be overridden by child class.")
+        print("这个enter方法应该被子类重写。")

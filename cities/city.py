@@ -53,77 +53,62 @@ class City(Place):
         else:
             return None
 
-    def _createDictionaryOfBuildings(self):
-        """
-        Creates a dictionary of building objects. Name-pairs are 
-        building names and the objects they correspond to.
-        
-        @return:    A dictionary of buildings name and their 
-                    corresponding objects.
-        """
-        buildingDictionary = {}
-        buildings = self.getBuildings()
-        # If there is one building
-        if isinstance(buildings, Building):
-            buildingDictionary[buildings.getName()] = buildings
-        # If there are multiple buildings
-        elif isinstance(buildings, list):
-            for building in buildings:
-                buildingDictionary[building.getName()] = building
-
-        return buildingDictionary
-
     def _printBuildings(self):
         """
-        Helper method that prints the building contained in city.
+        打印城市中包含的建筑物并创建包含这些建筑的列表。
         """
+        table = []
         buildings = self.getBuildings()
-        # If there is one building
+        # 如果只有一个建筑
         if isinstance(buildings, Building):
-            print("\t%s" % buildings.getName())
-        # If there are multiple buildings
+            print("\t%d.%s" % (1, buildings.getName()))
+            table.append(buildings)
+        # 如果有多个建筑物
         elif isinstance(buildings, list):
-            for building in buildings:
-                print("\t%s" % building.getName())
+            for num, building in enumerate(buildings, 1):
+                print("\t%d.%s" % (num, building.getName()))
+                table.append(building)
         print("")
+        return table
 
     def enter(self, player):
         """
-        The action sequence for city.
+        城市的动作序列。
 
-        @param player:       The current player
+        @param player:       玩家对象
         """
-        buildingDictionary = self._createDictionaryOfBuildings()
-
-        print("Entering %s!" % self.getName())
+        print("你进入了%s：" % self.getName(), end='')
         print("%s" % self.getDescription())
-        print("%s" % self.getGreetings())
-        input("Press enter to continue. ")
+        print("\n%s\n" % self.getGreetings())
+        input("按回车键继续。")
         print("")
 
         while True:
-            print("You have found the following:")
+            print("这里有下列去处：")
 
-            # Print list of buildings
-            self._printBuildings()
+            # 打印建筑物清单
+            print("\t0.离开")
+            table = self._printBuildings()
 
-            print("To go to a building type its name. Otherwise, type 'leave'")
-            command = input("Where would you like to go?\n")
+            # 用户输入
+            while True:
+                try:
+                    choice = input("输入去处的整数序号值：")
+                    choice = int(choice)
+                except ValueError:
+                    choice = -1
+                if 0 <= choice <= len(table):
+                    break
+                else:
+                    print("去处序号输入有误！")
 
-            # If player chooses to leave the city
-            if command == 'leave':
-                print("")
-                print("Leaving %s." % self.getName())
+            # 如果玩家选择离开城市
+            if choice == 0:
+                print("\n你离开了%s" % self.getName())
                 return
 
-            # For other choices
-            if command in list(buildingDictionary.keys()):
+            # 进入建筑
+            table[choice - 1].enter(player)
 
-                # Enter building
-                buildingDictionary[command].enter(player)
-
-                # Prompt for next action
-                print("\nYou are now back in %s." % self.getName())
-                print("")
-            else:
-                print("\nI did not recognize %s. Try again.\n" % command)
+            # 提示下一步操作
+            print("\n你回到了%s：%s\n" % (self.getName(), self.getDescription()))

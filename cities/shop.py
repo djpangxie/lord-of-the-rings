@@ -11,11 +11,13 @@ from items.unique_items import theOneRing
 from util.helpers import sortItems
 import constants
 
+
 class Shop(Building):
     """
     商店派生自建筑。
     商店是游戏中的市场。
     """
+
     def __init__(self, name, description, greetings, region, numItems, quality):
         """
         初始化商店
@@ -29,16 +31,16 @@ class Shop(Building):
         """
         Building.__init__(self, name, description, greetings)
 
-        #创建物品属性并生成物品对象
+        # 创建物品属性并生成物品对象
         self._region = region
         self._numItems = numItems
         self._quality = quality
-        
+
         self._items = factories.shop_factory.getItems(region, numItems, quality)
-        
-        #分类物品
+
+        # 分类物品
         sortItems(self._items)
-    
+
     def enter(self, player):
         """
         商店的行动序列。
@@ -49,20 +51,20 @@ class Shop(Building):
         print("- - - %s - - -" % self._name)
         print("%s" % self._greetings)
 
-        #确定并执行玩家的选择
+        # 确定并执行玩家的选择
         choice = None
         while choice != "quit":
             print("""
-你的选择是？
-\t查看物品信息              - 'check'
-\t查看物品统计              - 'check stats'
-\t出售库存物品              - 'sell'
-\t购买物品                 - 'purchase'
-\t退出                    - 'quit'
+在这里你可以：
+\t查看物品信息            - 'check'
+\t查看物品统计            - 'check stats'
+\t出售库存物品            - 'sell'
+\t购买物品               - 'purchase'
+\t退出                  - 'quit'
 """)
             choice = input("你想做什么？")
             print("")
-            
+
             if choice == "check":
                 self.checkItems()
             elif choice == "check stats":
@@ -76,18 +78,18 @@ class Shop(Building):
                 break
             else:
                 print("\"嗯？\"")
-                
+
             print("")
             input("按回车键继续。")
-            
-    #提供物品的基本描述
+
+    # 提供物品的基本描述
     def checkItems(self):
         """
-        简要列出商店的物品。
+        列出商店售卖的物品。
         """
         print("这里是我们的商品：")
         for item in self._items:
-            print("\t%s: %s." % (item.getName(), item.getDescription()))
+            print("\t%s: %s" % (item.getName(), item.getDescription()))
             if isinstance(item, Weapon):
                 print("\t\tAttack: %s" % item.getAttack())
             elif isinstance(item, Armor):
@@ -104,19 +106,19 @@ class Shop(Building):
             else:
                 errorMsg = "Invalid item - shop_factory, checkItems()"
                 raise AssertionError(errorMsg)
-                
-    #Gives advanced descriptions of items 
+
+    # Gives advanced descriptions of items
     def checkItemsStats(self):
         """
         Lists shop items in detail.
         """
-        #Generate list of items without duplicates
+        # Generate list of items without duplicates
         uniqueItems = []
         for item in self._items:
             if item not in uniqueItems:
                 uniqueItems.append(item)
-                
-        #Print stats
+
+        # Print stats
         print("Item stats:")
         for item in uniqueItems:
             print("\t%s: %s." % (item.getName(), item.getDescription()))
@@ -144,8 +146,8 @@ class Shop(Building):
             else:
                 errorMsg = "Invalid item - shop_factory, checkItemsStats()"
                 raise AssertionError(errorMsg)
-                
-    #For selling items in inventory to shop
+
+    # For selling items in inventory to shop
     def sellItems(self, player):
         """
         Allows for player to sell items to shop. After each sale,
@@ -155,49 +157,49 @@ class Shop(Building):
         """
         inventory = player.getInventory()
         itemValues = {}
-        
-        #User prompt
+
+        # User prompt
         print("Current inventory:")
         for item in player.getInventory():
             sellValue = constants.SELL_LOSS_PERCENTAGE * item.getCost()
             itemValues[item] = sellValue
             print("\t%s... with sell value: %s%s." % (item.getName(),
-            sellValue, constants.CURRENCY))
+                                                      sellValue, constants.CURRENCY))
         itemToSell = input("\nWhich item would you like to sell? ")
-        
-        #Find if item exists in inventory
+
+        # Find if item exists in inventory
         for item in inventory:
             if item.getName() == itemToSell:
                 sellValue = itemValues[item]
-                
-                #Is user sure?
+
+                # Is user sure?
                 choice = input("Would you like to sell %s for %s%s?"
-                " Response: yes/no. " % (item.getName(), sellValue, 
-                constants.CURRENCY))
-                
-                #Sale execution - with affirmative
+                               " Response: yes/no. " % (item.getName(), sellValue,
+                                                        constants.CURRENCY))
+
+                # Sale execution - with affirmative
                 if choice.lower() == "yes":
                     player.removeFromInventory(item)
                     player.increaseMoney(sellValue)
                     self._items.addItem(item)
                     print("Sold %s for %s." % (item.getName(), sellValue))
-                    
-                    #Check to see if item sold was theOneRing
+
+                    # Check to see if item sold was theOneRing
                     result = self._checkTheOneRingSale(item)
-                    #If it is, then theOneRing is removed from shop wares
+                    # If it is, then theOneRing is removed from shop wares
                     if result:
                         print("\nSome strange men come and take The One Ring.")
                         self._items.removeItem(item)
-                
-                #Player changes mind
+
+                # Player changes mind
                 elif choice.lower() == "no":
                     print("Didn't sell item.")
-                
-                #Invalid choice
+
+                # Invalid choice
                 else:
                     print("Invalid choice.")
-                    
-    #Checks if sold item was theOneRing
+
+    # Checks if sold item was theOneRing
     def _checkTheOneRingSale(self, item):
         """
         Helper method for item sales. 
@@ -210,10 +212,10 @@ class Shop(Building):
         """
         if item is theOneRing:
             return True
-        
+
         return False
-        
-    #For buying items from shop
+
+    # For buying items from shop
     def buyItems(self, player):
         """
         Allows for items to buy items from shop wares. As player buys items,
@@ -221,24 +223,24 @@ class Shop(Building):
         
         @param player:     The player object.
         """
-        #User prompt
+        # User prompt
         print("Items available for purchase:")
         for item in self._items:
             print("\t%s... with cost of %s." % (item.getName(), item.getCost()))
         print("")
         print("%s has %s%s with which to spend." % (player.getName(),
-        player.getMoney(), constants.CURRENCY))
+                                                    player.getMoney(), constants.CURRENCY))
         print("")
         itemToPurchase = input("Which item would you like to purchase? ")
-        #Check to find object associated with user-given string
+        # Check to find object associated with user-given string
         for item in self._items:
             if itemToPurchase == item.getName():
-                #Check to see if player has enough money to purchase item
+                # Check to see if player has enough money to purchase item
                 if player.getMoney() <= item.getCost():
                     print("Not enough money to purchase item.")
                     return
                 print("")
-                #Actual purchase execution
+                # Actual purchase execution
                 if not player.addToInventory(item):
                     return
                 self._items.removeItem(item)
@@ -248,6 +250,6 @@ class Shop(Building):
         else:
             print("Can't purchase this item.")
 
-    #离开商店
+    # 离开商店
     def leaveShop(self):
-        print("%s离开了。" % self._name)
+        print("你离开了%s。" % self._name)

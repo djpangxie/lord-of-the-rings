@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+import random
+import constants
+import battle_engine
 from .command import Command
 
 
@@ -51,5 +54,29 @@ class PickUpCommand(Command):
                 print("物品序号输入有误！")
 
         # 拾取物品
-        if self._player.addToInventory(locationItems.getItems()[choice - 1]):
-            location.removeItem(locationItems.getItems()[choice - 1])
+        result = self._battlePhase()
+        if result:
+            if self._player.addToInventory(locationItems.getItems()[choice - 1]):
+                location.removeItem(locationItems.getItems()[choice - 1])
+        else:
+            bonusDifficulty = location.getBattleBonusDifficulty()
+            if bonusDifficulty > 0 and random.random() < bonusDifficulty:
+                location.removeItem(locationItems.getItems()[choice - 1])
+            elif bonusDifficulty < 0 and random.random() < -bonusDifficulty:
+                if self._player.addToInventory(locationItems.getItems()[choice - 1]):
+                    location.removeItem(locationItems.getItems()[choice - 1])
+
+    def _battlePhase(self):
+        """
+        评估是否会发生随机战斗。如果是的话，将调用battle_engine.battle()来执行战斗，并返回战斗结果。
+        """
+        currentLocation = self._player.getLocation()
+        battleProbability = currentLocation.getBattleProbability()
+
+        # 确定是否会发生随机战斗
+        if random.random() < battleProbability:
+            # 发生战斗，结束战斗，返回战斗结果
+            return battle_engine.battle(self._player, constants.BattleEngineContext.RANDOM)
+        else:
+            # 没有发生战斗，战斗结果也算作赢了
+            return True
