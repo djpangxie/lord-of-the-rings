@@ -55,24 +55,18 @@ class Shop(Building):
         choice = None
         while choice != "quit":
             print("""
-在这里你可以：
-\t查看物品信息            - 'check'
-\t查看物品统计            - 'check stats'
-\t出售库存物品            - 'sell'
-\t购买物品               - 'purchase'
-\t退出                  - 'quit'
+你可以：
+\t购买商品               -purchase
+\t出售库存               -sell
+\t退出                  -quit
 """)
             choice = input("你想做什么？")
             print("")
 
-            if choice == "check":
-                self.checkItems()
-            elif choice == "check stats":
-                self.checkItemsStats()
+            if choice == "purchase":
+                self.buyItems(player)
             elif choice == "sell":
                 self.sellItems(player)
-            elif choice == "purchase":
-                self.buyItems(player)
             elif choice == "quit":
                 self.leaveShop()
                 break
@@ -80,175 +74,181 @@ class Shop(Building):
                 print("\"嗯？\"")
 
             print("")
-            input("按回车键继续。")
 
-    # 提供物品的基本描述
-    def checkItems(self):
-        """
-        列出商店售卖的物品。
-        """
-        print("这里是我们的商品：")
-        for item in self._items:
-            print("\t%s: %s" % (item.getName(), item.getDescription()))
-            if isinstance(item, Weapon):
-                print("\t\tAttack: %s" % item.getAttack())
-            elif isinstance(item, Armor):
-                print("\t\tDefense: %s" % item.getDefense())
-            elif isinstance(item, Charm):
-                if item.getAttack():
-                    print("\t\tAttack: %s" % item.getAttack())
-                if item.getDefense():
-                    print("\t\tDefense: %s" % item.getDefense())
-                if item.getHp():
-                    print("\t\tHP Bonus: %s" % item.getHp())
-            elif isinstance(item, Potion):
-                print("\t\tHealing: %s" % item.getHealing())
-            else:
-                errorMsg = "Invalid item - shop_factory, checkItems()"
-                raise AssertionError(errorMsg)
-
-    # Gives advanced descriptions of items
-    def checkItemsStats(self):
-        """
-        Lists shop items in detail.
-        """
-        # Generate list of items without duplicates
-        uniqueItems = []
-        for item in self._items:
-            if item not in uniqueItems:
-                uniqueItems.append(item)
-
-        # Print stats
-        print("Item stats:")
-        for item in uniqueItems:
-            print("\t%s: %s." % (item.getName(), item.getDescription()))
-            if isinstance(item, Weapon):
-                print("\t\t-Attack: %s" % item.getAttack())
-                print("\t\t-Weight: %s" % item.getWeight())
-                print("\t\t-Cost: %s" % item.getCost())
-            elif isinstance(item, Armor):
-                print("\t\t-Defense: %s" % item.getDefense())
-                print("\t\t-Weight: %s" % item.getWeight())
-                print("\t\t-Cost: %s" % item.getCost())
-            elif isinstance(item, Charm):
-                if item.getAttack():
-                    print("\t\t-Attack: %s" % item.getAttack())
-                if item.getDefense():
-                    print("\t\t-Defense: %s" % item.getDefense())
-                if item.getHp():
-                    print("\t\t-HP Bonus: %s" % item.getHp())
-                print("\t\t-Weight: %s" % item.getWeight())
-                print("\t\t-Cost: %s" % item.getCost())
-            elif isinstance(item, Potion):
-                print("\t\t-Healing: %s" % item.getHealing())
-                print("\t\t-Weight: %s" % item.getWeight())
-                print("\t\t-Cost: %s" % item.getCost())
-            else:
-                errorMsg = "Invalid item - shop_factory, checkItemsStats()"
-                raise AssertionError(errorMsg)
-
-    # For selling items in inventory to shop
-    def sellItems(self, player):
-        """
-        Allows for player to sell items to shop. After each sale,
-        the sold item gets added to shop wares.
-        
-        @param player:    The player object.
-        """
-        inventory = player.getInventory()
-        itemValues = {}
-
-        # User prompt
-        print("Current inventory:")
-        for item in player.getInventory():
-            sellValue = constants.SELL_LOSS_PERCENTAGE * item.getCost()
-            itemValues[item] = sellValue
-            print("\t%s... with sell value: %s%s." % (item.getName(),
-                                                      sellValue, constants.CURRENCY))
-        itemToSell = input("\nWhich item would you like to sell? ")
-
-        # Find if item exists in inventory
-        for item in inventory:
-            if item.getName() == itemToSell:
-                sellValue = itemValues[item]
-
-                # Is user sure?
-                choice = input("Would you like to sell %s for %s%s?"
-                               " Response: yes/no. " % (item.getName(), sellValue,
-                                                        constants.CURRENCY))
-
-                # Sale execution - with affirmative
-                if choice.lower() == "yes":
-                    player.removeFromInventory(item)
-                    player.increaseMoney(sellValue)
-                    self._items.addItem(item)
-                    print("Sold %s for %s." % (item.getName(), sellValue))
-
-                    # Check to see if item sold was theOneRing
-                    result = self._checkTheOneRingSale(item)
-                    # If it is, then theOneRing is removed from shop wares
-                    if result:
-                        print("\nSome strange men come and take The One Ring.")
-                        self._items.removeItem(item)
-
-                # Player changes mind
-                elif choice.lower() == "no":
-                    print("Didn't sell item.")
-
-                # Invalid choice
-                else:
-                    print("Invalid choice.")
-
-    # Checks if sold item was theOneRing
-    def _checkTheOneRingSale(self, item):
-        """
-        Helper method for item sales. 
-        
-        Checks to see if item sold was theOneRing.
-        
-        @param item:    The sold item.
-        
-        @return:        True if item is theOneRing; False otherwise.
-        """
-        if item is theOneRing:
-            return True
-
-        return False
-
-    # For buying items from shop
     def buyItems(self, player):
         """
-        Allows for items to buy items from shop wares. As player buys items,
-        these items get removed from shop wares.
-        
-        @param player:     The player object.
+        从商店中购买物品。当商品被玩家买走后会从商店的商品列表中移除。
+
+        @param player:     玩家对象
         """
-        # User prompt
-        print("Items available for purchase:")
-        for item in self._items:
-            print("\t%s... with cost of %s." % (item.getName(), item.getCost()))
-        print("")
-        print("%s has %s%s with which to spend." % (player.getName(),
-                                                    player.getMoney(), constants.CURRENCY))
-        print("")
-        itemToPurchase = input("Which item would you like to purchase? ")
-        # Check to find object associated with user-given string
-        for item in self._items:
-            if itemToPurchase == item.getName():
-                # Check to see if player has enough money to purchase item
-                if player.getMoney() <= item.getCost():
-                    print("Not enough money to purchase item.")
+        while True:
+            # 如果商品已经售卖一空
+            if self._items.count() == 0:
+                print("商品已经售卖一空。")
+                return
+
+            # 列出商品
+            print("可供购买的物品：")
+            for num, item in enumerate(self._items, 1):
+                itemName = item.getName()
+                itemDescription = item.getDescription()
+                itemWeight = str(item.getWeight())
+                itemCost = str(item.getCost())
+
+                if isinstance(item, Armor):
+                    itemDefense = str(item.getDefense())
+                elif isinstance(item, Weapon):
+                    itemAttack = str(item.getAttack())
+                elif isinstance(item, Potion):
+                    itemHeal = str(item.getHealing())
+                elif isinstance(item, Charm):
+                    itemDefense = str(item.getDefense())
+                    itemAttack = str(item.getAttack())
+                    itemHp = str(item.getHp())
+                elif isinstance(item, Item):
+                    pass
+                else:
+                    errorMsg = "某件物品的类型有误！"
+                    raise AssertionError(errorMsg)
+
+                # 打印商店中所有商品的信息
+                print("\t%d.%s\t\t%s" % (num, itemName, itemDescription))
+
+                if isinstance(item, Weapon):
+                    print("\t攻击力：%-5s" % itemAttack, end='')
+                elif isinstance(item, Armor):
+                    print("\t防御力：%-5s" % itemDefense, end='')
+                elif isinstance(item, Potion):
+                    print("\t治疗量：%-5s" % itemHeal, end='')
+                elif isinstance(item, Charm):
+                    print("\t攻击加值：%-5s防御加值：%-5sHP加值：%-5s" % (itemAttack, itemDefense, itemHp), end='')
+                elif isinstance(item, Item):
+                    print("\t", end='')
+                else:
+                    errorMsg = "某件物品的类型有误！"
+                    raise AssertionError(errorMsg)
+
+                print("重量：%-5s售价：%s\n" % (itemWeight, itemCost))
+
+            print(
+                "%s 目前拥有 %s%s 用来购买，取消购买请输入0" % (player.getName(), player.getMoney(), constants.CURRENCY))
+            print("")
+
+            # 用户输入
+            while True:
+                try:
+                    choice = input("输入商品的整数序号值：")
+                    choice = int(choice)
+                except ValueError:
+                    choice = -1
+                if 1 <= choice <= self._items.count():
+                    if player.getMoney() < self._items.getItems()[choice - 1].getCost():
+                        print("你没有足够的金钱！")
+                        continue
+                    elif not player.addToInventory(self._items.getItems()[choice - 1]):
+                        print("你不能背负该物品！")
+                        continue
+                    print("%s 购买了 %s" % (player.getName(), self._items.getItems()[choice - 1].getName()))
+                    player.decreaseMoney(self._items.getItems()[choice - 1].getCost())
+                    self._items.removeItem(self._items.getItems()[choice - 1])
+                    break
+                elif choice == 0:
                     return
-                print("")
-                # Actual purchase execution
-                if not player.addToInventory(item):
+                else:
+                    print("商品序号输入有误！")
+
+    def sellItems(self, player):
+        """
+        将玩家库存中的物品出售给商店。售出的物品都会添加到该商店的商品列表中。
+        
+        @param player:    玩家对象
+        """
+        inventory = player.getInventory()
+        equipment = player.getEquipped()
+        bonusDifficulty = player.getLocation().getBattleBonusDifficulty()
+
+        while True:
+            # 如果库存已经出售一空
+            if inventory.count() == 0:
+                print("库存已经出售一空。")
+                return
+
+            # 列出库存
+            print("可以出售的物品：")
+            for num, item in enumerate(inventory, 1):
+                itemName = item.getName()
+                itemDescription = item.getDescription()
+                itemWeight = str(item.getWeight())
+                itemCost = str(int(item.getCost() * constants.SELL_LOSS_PERCENTAGE * (1 - bonusDifficulty)))
+
+                if isinstance(item, Armor):
+                    itemDefense = str(item.getDefense())
+                elif isinstance(item, Weapon):
+                    itemAttack = str(item.getAttack())
+                elif isinstance(item, Potion):
+                    itemHeal = str(item.getHealing())
+                elif isinstance(item, Charm):
+                    itemDefense = str(item.getDefense())
+                    itemAttack = str(item.getAttack())
+                    itemHp = str(item.getHp())
+                elif isinstance(item, Item):
+                    pass
+                else:
+                    errorMsg = "某件物品的类型有误！"
+                    raise AssertionError(errorMsg)
+
+                # 打印库存中所有物品的信息
+                if item in equipment.getItems():
+                    print("\t{:d}.*".format(num), end='')
+                else:
+                    print("\t{:d}.".format(num), end='')
+                print("%s\t\t%s" % (itemName, itemDescription))
+
+                if isinstance(item, Weapon):
+                    print("\t攻击力：%-5s" % itemAttack, end='')
+                elif isinstance(item, Armor):
+                    print("\t防御力：%-5s" % itemDefense, end='')
+                elif isinstance(item, Potion):
+                    print("\t治疗量：%-5s" % itemHeal, end='')
+                elif isinstance(item, Charm):
+                    print("\t攻击加值：%-5s防御加值：%-5sHP加值：%-5s" % (itemAttack, itemDefense, itemHp), end='')
+                elif isinstance(item, Item):
+                    print("\t", end='')
+                else:
+                    errorMsg = "某件物品的类型有误！"
+                    raise AssertionError(errorMsg)
+
+                print("重量：%-5s收价：%s\n" % (itemWeight, itemCost))
+
+            print(
+                "%s 的当前负重为 %s/%s，取消出售请输入0" % (
+                    player.getName(), inventory.getWeight(), player.getWeightLimit()))
+            print("")
+
+            # 用户输入
+            while True:
+                try:
+                    choice = input("输入物品的整数序号值：")
+                    choice = int(choice)
+                except ValueError:
+                    choice = -1
+                if 1 <= choice <= inventory.count():
+                    sellValue = int(inventory.getItems()[choice - 1].getCost() * constants.SELL_LOSS_PERCENTAGE * (
+                            1 - bonusDifficulty))
+                    print("%s 以 %s%s 售出了 %s" % (
+                        player.getName(), sellValue, constants.CURRENCY, inventory.getItems()[choice - 1].getName()))
+                    if inventory.getItems()[choice - 1] is theOneRing:
+                        print("\n一些奇怪的人过来拿走了至尊戒。")
+                    else:
+                        self._items.addItem(inventory.getItems()[choice - 1])
+                        sortItems(self._items)
+                    player.increaseMoney(sellValue)
+                    player.removeFromInventory(inventory.getItems()[choice - 1])
+                    break
+                elif choice == 0:
                     return
-                self._items.removeItem(item)
-                player.decreaseMoney(item.getCost())
-                print("%s puchased %s!" % (player.getName(), item.getName()))
-                break
-        else:
-            print("Can't purchase this item.")
+                else:
+                    print("物品序号输入有误！")
 
     # 离开商店
     def leaveShop(self):

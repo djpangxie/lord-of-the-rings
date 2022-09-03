@@ -59,5 +59,5 @@ class DropCommand(Command):
                 print("物品序号输入有误！")
 
         # 丢弃物品
-        inventory.removeItem(inventoryble.getItems()[choice - 1])
         location.addItem(inventoryble.getItems()[choice - 1])
+        inventory.removeItem(inventoryble.getItems()[choice - 1])

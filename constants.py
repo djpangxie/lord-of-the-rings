@@ -71,8 +71,8 @@ LEVEL_EXP_REQUIREMENT = {1: 0, 2: 20, 3: 44, 4: 72, 5: 105, 6: 144, 7: 190,
 8: 245, 9: 311, 10: 390, 11: 484, 12: 596, 13: 730, 14:890 , 15: 1082,
 16: 1312, 17: 1588, 18: 1919, 19: 2316, 20: 2792}
 
-#Item stat constants
-SELL_LOSS_PERCENTAGE = .5
+#物品售卖常量
+SELL_LOSS_PERCENTAGE = .5 # 当将物品售卖给商店时，所要打的基础折扣 50%
 WEAPON_COST          = 1
 ARMOR_COST           = 2
 

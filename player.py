@@ -345,10 +345,6 @@ class Player(object):
             errorMsg = "不是一个物品对象。"
             raise AssertionError(errorMsg)
 
-        # 物品不能已在库存中
-        if item in inventory:
-            print("物品已在库存中。")
-
         # 检查库存重量限制
         itemWeight = item.getWeight()
         inventoryWeight = inventory.getWeight()
