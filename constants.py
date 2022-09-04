@@ -60,8 +60,9 @@ class PlayerInitialization(object):
 #角色统计常数
 HP_STAT           = 1.2  # 玩家每升一级时基础最大生命值变为原来的120%
 ATTACK_STAT       = 1.2  # 玩家每升一级时基础攻击力变为原来的120%
-MAX_LEVEL         = 20  # 角色所能达到的最高等级
+MAX_LEVEL         = 28  # 角色所能达到的最高等级
 WEIGHT_LIMIT_STAT = 1.15  # 玩家每升一级时基础负重上限变为原来的115%
+LOSE_REDUCE_EXP   = 0.95  # 玩家输了一场战斗后其经验值减少到原来的95%
 
 #玩家等级
 """
@@ -69,7 +70,8 @@ WEIGHT_LIMIT_STAT = 1.15  # 玩家每升一级时基础负重上限变为原来�
 """
 LEVEL_EXP_REQUIREMENT = {1: 0, 2: 20, 3: 44, 4: 72, 5: 105, 6: 144, 7: 190,
 8: 245, 9: 311, 10: 390, 11: 484, 12: 596, 13: 730, 14:890 , 15: 1082,
-16: 1312, 17: 1588, 18: 1919, 19: 2316, 20: 2792}
+16: 1312, 17: 1588, 18: 1919, 19: 2316, 20: 2792, 21:3360, 22:4038,
+23:4841, 24:5790, 25:6904, 26:8205, 27:9715, 28:11456}
 
 #物品售卖常量
 SELL_LOSS_PERCENTAGE = .5 # 当将物品售卖给商店时，所要打的基础折扣 50%
@@ -474,7 +476,7 @@ class ShopFactoryConstants(object):
 """
 独特地点所用的常量。
 """
-WEATHERTOP_BATTLE_PROB = .5
+WEATHERTOP_BATTLE_PROB = .5  # 风云顶扎营遭遇戒灵的概率 50%
 WEATHERTOP_WITCH_KING_PROB = .125
 THARBAD_BATTLE_PROB = .2
 THARBAD_ITEM_FIND_PROB = .5

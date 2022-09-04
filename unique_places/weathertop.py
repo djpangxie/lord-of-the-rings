@@ -6,11 +6,13 @@ from battle_engine import battle
 import constants
 import random
 
+
 class Weathertop(UniquePlace):
     """
-    风云丘陵中的独特地点。在这里，用户可以选择露营。
-    如果用户决定扎营，他就有可能受到戒灵的攻击；如果这没有发生，玩家将被恢复到完全健康。
+    风云丘陵中的独特地点。在这里，玩家可以选择扎营。
+    如果玩家决定扎营，他就有可能受到戒灵的攻击；如果这没有发生，玩家将被恢复到完全健康。
     """
+
     def __init__(self, name, description, greetings):
         """
         初始化风云顶。
@@ -21,77 +23,71 @@ class Weathertop(UniquePlace):
         """
         UniquePlace.__init__(self, name, description, greetings)
 
-        #生成多只戒灵
+        # 生成多只戒灵
         self._monsters = []
         numberNazgul = random.randrange(1, 8)
         for monster in range(numberNazgul):
             nazgul = Nazgul(constants.MONSTER_STATS[Nazgul])
             self._monsters.append(nazgul)
-                
+
     def enter(self, player):
         """
-        Enter Weathertop.
+        进入风云顶。
 
-        @param player:  The current player.
+        @param player:  玩家对象
         """
         print(self._greetings)
         print("")
-        
-        print ("Even though you have no personal connection with the place,"
-        " you \nfeel a strong sense of nostalgia at Weathertop.")
-        input("Press enter to continue. ")
 
-        #Solicit user input
+        print("尽管你实际对这个地方比较陌生，但你身处风云顶上时仍有一种强烈的似曾相识感。")
+        input("按回车键继续。")
+
+        # 征求用户输入
         choice = self._choice()
-            
-        #Run user-dependent sequence
+
+        # 运行用户相关序列
         if choice == "camp":
             self._camp(player)
         elif choice == "keep moving":
-            print("You continue in your quest.")
+            print("你继续前行。")
             print("")
 
     def _choice(self):
         """
-        Solicits user choice
+        征求用户选择
         """
         print("""
-You are spent after a day of travel. Would you like
-to camp the night at Weathertop?
-\t\"Yes I would like to camp.\"       - 'camp'
-\t\"No I would like to keep moving.\" - 'keep moving'
-""") 
+经过一天的旅行，你已经疲惫不堪。你想在风云顶扎营过夜吗？
+\t“是的，我想扎营。”        - camp
+\t“不，我将继续前行。”      - keep moving
+""")
         choice = None
         acceptable = ["camp", "keep moving"]
         while choice not in acceptable:
-            choice = input("Choice? ")
+            choice = input("你的选择是？ ")
         print("")
-        
+
         return choice
-        
+
     def _camp(self, player):
         """
-        The camping action sequence. One of two things happen:
-        -User gets attacked by a group of Nazgul.
-        -Player spends the night undisturbed and gets fully healed.
+        扎营动作序列。发生以下两种情况之一：
+        -玩家被一群戒灵攻击。
+        -玩家整晚安然无恙并得到完全康复。
         """
-        #Nazgul encounter
+        # 遭遇戒灵
         if random.random() < constants.WEATHERTOP_BATTLE_PROB:
-            print ("As you prepare your camping gear, you hear some rustling" 
-            " in the \nshadows....")
-            result = battle(player, constants.BattleEngineContext.STORY, 
-                self._monsters)
+            print("当你准备好你的扎营用具时，你听到阴影中的一些沙沙声....")
+            result = battle(player, constants.BattleEngineContext.STORY, self._monsters.copy())
             if not result:
                 return
-                
-            print ("Alas, peaceful rest was never to be. After all, you are a" 
-            " man \nhunted.")
+
+            print("唉，这下你不再敢再多休息了。")
             print("")
-            
-        #Peaceful rest
+
+        # 安静的休息
         else:
-            print("You enjoy a relaxing stay among ancient ruins.")
-            amountHealing = player.getMaxHp() - player.getHp()
-            player.heal(amountHealing)
-            print("You wake up relaxed and ready to go!")
+            print("你在古老的废墟中安静地休息了一晚。")
+            player.heal(player.getTotalMaxHp() - player.getHp())
+            print("你醒来放松，准备出发！")
             print("")

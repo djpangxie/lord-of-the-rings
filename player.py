@@ -155,6 +155,12 @@ class Player(object):
         self._experience += newExperience
         self._updateLevel()
 
+    def reduceExperience(self):
+        """
+        使玩家减少经验，这会在输掉一场战斗后执行。
+        """
+        self._experience = floor(self._experience * constants.LOSE_REDUCE_EXP)
+
     def getLevel(self):
         """
         返回玩家的等级。
@@ -184,10 +190,10 @@ class Player(object):
         potentialNewLevel = max(potentialLevels)
 
         # 如果玩家的等级提高了
-        if currentLevel != potentialNewLevel:
+        if currentLevel < potentialNewLevel:
             numberLevelUp = potentialNewLevel - currentLevel
             self._level = potentialNewLevel
-            print("\n%s 升到了等级 %s ！" % (self._name, self._level))
+            print("\n%s 升到了 %s 级！" % (self._name, self._level))
 
             # 更新玩家等级和数据
             for level in range(numberLevelUp):

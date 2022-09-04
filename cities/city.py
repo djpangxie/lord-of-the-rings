@@ -80,8 +80,6 @@ class City(Place):
         print("你进入了%s：" % self.getName(), end='')
         print("%s" % self.getDescription())
         print("\n%s\n" % self.getGreetings())
-        input("按回车键继续。")
-        print("")
 
         while True:
             print("这里有下列去处：")

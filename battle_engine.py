@@ -40,7 +40,7 @@ def battle(player, context, monsters=None):
 
     quick = False
     earnings = [0, 0]
-    acceptable = ["quick", "attack", "use potion", "run"]
+    acceptable = ["quick", "attack", "recover", "run"]
 
     # 主要的战斗过程
     while monsters:
@@ -59,7 +59,7 @@ def battle(player, context, monsters=None):
             choice = None
 
         while choice not in acceptable:
-            choice = input("你可以：快进(quick)、进攻(attack)、恢复(use potion)、撤退(run)> ")
+            choice = input("你可以：快进(quick)、进攻(attack)、恢复(recover)、撤退(run)> ")
             try:
                 choice, num = choice.split(' ', 2)
                 num = int(num)
@@ -71,7 +71,7 @@ def battle(player, context, monsters=None):
             earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num)
 
         # 使用药水选项
-        elif choice == "use potion":
+        elif choice == "recover":
             _usePotion(player)
 
         # 玩家撤退选项
@@ -104,7 +104,7 @@ def battle(player, context, monsters=None):
             print("")
             print("甘道夫把你救了出来...")
             player.heal(1)
-
+            player.reduceExperience()
             return False
 
     # 战斗结束 - 获得战利品

@@ -12,11 +12,11 @@ import constants
 """
 # 剧情物品
 # 初始库存
-sting = Weapon("刺叮", "精灵语：刚多林制造", 2, 22, 8)
-theOneRing = Item("至尊戒", "非常重要", 6, 540)
+staff = Weapon("短杖", "有一个秘密的锋利的刀口", 4, 2, 2)
 leatherCloak = Armor("皮斗篷", "旅行外衣", 3, 8, 1)
+theOneRing = Item("至尊戒", "非常重要", 6, 540)
 vodka = Potion("伏特加", "有益健康", 1, 4, 4)
-startingInventory = [sting, theOneRing, leatherCloak, vodka]
+startingInventory = [staff, leatherCloak, theOneRing, vodka]
 
 # 霍比屯广场
 walkingCane = Item("手杖", "帮助作用值得怀疑", 2, 2)
@@ -46,7 +46,7 @@ prancingPonyItems = {"哈里·金银花": bulletin, "杜多·巴金斯": tea}
 
 # 加拉德瑞尔之镜
 elvenCloak = Armor("精灵斗篷", "加拉德瑞尔的礼物", 4, 62, 3)
-phialOfGaladriel = Item("加拉德瑞尔的水晶瓶", "\"愿它在黑暗中成为你的光\"", 1, 92)
+phialOfGaladriel = Item("加拉德瑞尔的水晶瓶", "“愿它在黑暗中成为你的光”", 1, 92)
 galadrielsMirrorItems = {"加拉德瑞尔": [elvenCloak, phialOfGaladriel]}
 
 # Helm's Deep Commons

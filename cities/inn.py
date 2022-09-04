@@ -79,7 +79,7 @@ class Inn(Building):
 
         @param player:    玩家对象
         """
-        maxHp = player.getMaxHp()
+        maxHp = player.getTotalMaxHp()
         hp = player.getHp()
         amountToHeal = maxHp - hp
 

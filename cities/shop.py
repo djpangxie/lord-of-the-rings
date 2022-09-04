@@ -56,9 +56,9 @@ class Shop(Building):
         while choice != "quit":
             print("""
 你可以：
-\t购买商品               -purchase
-\t出售库存               -sell
-\t退出                  -quit
+\t购买商品               - purchase
+\t出售库存               - sell
+\t退出                  - quit
 """)
             choice = input("你想做什么？")
             print("")
@@ -71,7 +71,7 @@ class Shop(Building):
                 self.leaveShop()
                 break
             else:
-                print("\"嗯？\"")
+                print("“嗯？”")
 
             print("")
 
