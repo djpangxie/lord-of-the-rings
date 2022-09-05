@@ -247,15 +247,15 @@ class MonsterNames(object):
 class MonsterDescriptions(object):
     """包含指环王中怪物的描述。"""
     BarrowWight         = "一个悲伤的灵魂萦绕在此。"
-    Goblin              = "\"把你所有的东西都给我！\""
-    GreatGoblin         = "\"把你所有的东西都给我！！！\""
+    Goblin              = "“把你所有的东西都给我！”"
+    GreatGoblin         = "“把你所有的东西都给我！！！”"
     KingOfTheBarrows    = "一个极强的恶灵。"
-    Nazgul              = "\"AAAAEEEEEEEEEEE!!!\""
+    Nazgul              = "“AAAAEEEEEEEEEEE!!!”"
     Nazgul_II           = "戒灵之长。"
     Nazgul_III          = "现在有了龙坐骑！"
-    Troll               = "\"我快活地走着。\""
+    Troll               = "“我快活地走着。”"
     WargRider           = "喜欢骑…座狼。"
-    UrukHai             = "\"你提到了我的兄弟？\""
+    UrukHai             = "“你提到了我的兄弟？”"
     UrukHaiArcher       = "拥有远程攻击的能力。"
     EliteUrukHai        = "卧推冠军。"
     Dunlending          = "中洲的原住民。。"
@@ -319,19 +319,19 @@ class MonsterDeathStrings(object):
     包含指环王中的所有怪物死亡时显示的字符串。
     这些字符串会在玩家杀死怪物时显示。
     """
-    BarrowWight         = "\"太好了！我现在可以安歇了。\""
-    Goblin              = "\"我现在要回家了。\""
-    GreatGoblin         = "\"我现在也要回家了。\""
-    KingOfTheBarrows    = "\"我现在终于可以安歇了。\""
-    Nazgul              = "\"AAAAEEEEEEEEEEE!!!\""
-    Nazgul_II           = "\"...AAAAEEEEEEEEEEE!!!\""
-    Nazgul_III          = "\"....\""
-    Troll               = "\"我很高兴地走了。\""
-    WargRider           = "[啜泣声] \"...我的嘴....\""
-    UrukHai             = "\"好吧，我想回家了......\""
-    UrukHaiArcher       = "抬腿一跳，就此陨落。\"我来了....\""
+    BarrowWight         = "“太好了！我现在可以安歇了。”"
+    Goblin              = "“我现在要回家了。”"
+    GreatGoblin         = "“我现在也要回家了。”"
+    KingOfTheBarrows    = "“我现在终于可以安歇了。”"
+    Nazgul              = "“AAAAEEEEEEEEEEE!!!”"
+    Nazgul_II           = "“...AAAAEEEEEEEEEEE!!!”"
+    Nazgul_III          = "“....”"
+    Troll               = "“我很高兴地走了。”"
+    WargRider           = "[啜泣声] “...我的嘴....”"
+    UrukHai             = "“好吧，我想回家了......”"
+    UrukHaiArcher       = "抬腿一跳，就此陨落。“我来了....”"
     EliteUrukHai        = "[沮丧地走了。]"
-    Dunlending          = "\"我为什么要来这里？\""
+    Dunlending          = "“我为什么要来这里？”"
     Orc                 = "奥克被砍成了两截！"
     OrcArcher           = "奥克投矛手被杀了！"
     SiegeWorks          = "...."
@@ -340,14 +340,14 @@ class MonsterDeathStrings(object):
     ArmoredMumakil      = "披甲毛象现在要返回它来的地方了。"
     BlackNumernorian    = "[黑努曼诺尔人回到了阴影里。]"
     EasterlingWarrior   = "伊斯特林战士回到了中国。"
-    Sauroman            = "\"巫师的转世你知道吗....\""
-    MouthOfSauron       = "\"这只不过是让我在另一天里再次骑马来战。\""
-    WitchKing           = "\"唔....\""
+    Sauroman            = "“巫师的转世你知道吗....”"
+    MouthOfSauron       = "“这只不过是让我在另一天里再次骑马来战。”"
+    WitchKing           = "“唔....”"
     Shelob              = "[尸罗退到阴影中。]"
     Balrog              = "[炎魔退到阴影里。']"
     Orc_II              = "奥克之长被砍成了两截！"
     OrcArcher_II        = "奥克投矛手之长被杀了！"
-    Troll_II            = "\"我很高兴地走了。\""
+    Troll_II            = "“我很高兴地走了。”"
     BlackNumernorian_II = "[黑努曼诺尔人之长回到了阴影里。]"
 
 #地区怪物分布情况
@@ -478,19 +478,24 @@ class ShopFactoryConstants(object):
 """
 WEATHERTOP_BATTLE_PROB = .5  # 风云顶扎营遭遇戒灵的概率 50%
 WEATHERTOP_WITCH_KING_PROB = .125
-THARBAD_BATTLE_PROB = .2
-THARBAD_ITEM_FIND_PROB = .5
+THARBAD_BATTLE_PROB = .2  # 玩家在沙巴德探索时碰到戒灵的概率 20%
+THARBAD_ITEM_FIND_PROB = .5  # 玩家在沙巴德探索时找到物品的概率 50%
 ARGONATH_EXP_INCREASE = .1
 DERINGLE_EXP_INCREASE = .05
-GOBLIN_TOWN_EVASION_PROB = .4
+GOBLIN_TOWN_EVASION_PROB = .4  # 玩家在高隘口偷偷从咕噜的洞穴溜过去的概率 40%
 DOL_GULDUR_WITCH_KING_PROB = .125  # 多古尔都刷出安格玛巫王的概率 12.5%
 CIRITH_UNGOL_EVASION_PROB = .4
 CIRITH_UNGOL_SHELOB_PROB = .4
-MORIA_ITEM_FIND_PROB = .3
-MORIA_LOW_RISK_UPPER_LIMIT = 1
-MORIA_MED_RISK_UPPER_LIMIT = 3
-MORIA_LOW_RISK_SNEAK_UPPER_LIMIT = .65
-MORIA_LOW_RISK_NEUTRAL_UPPER_LIMIT = .9
-MORIA_MED_RISK_SNEAK_UPPER_LIMIT = .3
-MORIA_MED_RISK_NEUTRAL_UPPER_LIMIT = .7
-MORIA_HIGH_RISK_NEUTRAL_UPPER_LIMIT = .2
+MORIA_WATCHER_IN_THE_WATER = .4 # 玩家在都林之门前输错密语时受到水中监视者攻击的概率 40%
+WATCHER_IN_THE_WATER_ATTACK = 37 # 水中监视者的攻击力
+MORIA_ITEM_FIND_PROB = .3  # 玩家在墨瑞亚中的每次能找到物品的概率 30%
+MORIA_LOW_RISK_UPPER_LIMIT = 1  # 玩家在墨瑞亚从低风险旅行转向中风险旅行的临界值
+MORIA_MED_RISK_UPPER_LIMIT = 3  # 玩家在墨瑞亚从中风险旅行转向高风险旅行的临界值
+MORIA_LOW_RISK_SNEAK_UPPER_LIMIT = .65   # 玩家在墨瑞亚进行低风险旅行时遭遇低风险活动的概率 65%
+MORIA_LOW_RISK_NEUTRAL_UPPER_LIMIT = .9  # 玩家在墨瑞亚进行低风险旅行时遭遇中风险活动的概率 25%
+                                         # 玩家在墨瑞亚进行低风险旅行时遭遇战斗的概率 10%
+MORIA_MED_RISK_SNEAK_UPPER_LIMIT = .3    # 玩家在墨瑞亚进行中风险旅行时遭遇低风险活动的概率 30%
+MORIA_MED_RISK_NEUTRAL_UPPER_LIMIT = .7  # 玩家在墨瑞亚进行中风险旅行时遭遇中风险活动的概率 40%
+                                         # 玩家在墨瑞亚进行中风险旅行时遭遇战斗的概率 30%
+MORIA_HIGH_RISK_NEUTRAL_UPPER_LIMIT = .2 # 玩家在墨瑞亚进行高风险旅行时遭遇中风险活动的概率 20%
+                                         # 玩家在墨瑞亚进行高风险旅行时遭遇战斗的概率 80%

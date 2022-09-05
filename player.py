@@ -240,6 +240,9 @@ class Player(object):
 
         self._hp += amountHealed
 
+        if self._hp <= 0:
+            self._hp = 1
+
     def equip(self, item):
         """
         使角色装备一件物品。

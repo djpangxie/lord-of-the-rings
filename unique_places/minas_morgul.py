@@ -125,8 +125,8 @@ class MinasMorgul(UniquePlace):
         @param player:   The current player.
         """
         #Wave 1
-        print ("Witch-King: \"Time for tea and crumpets. Please keep to the" 
-            " left and don't \ntouch any of the artifacts.\" ")
+        print ("Witch-King: “Time for tea and crumpets. Please keep to the" 
+            " left and don't \ntouch any of the artifacts.”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -134,12 +134,12 @@ class MinasMorgul(UniquePlace):
         if not result:
             return
         
-        print("Witch-King: \"Hmm. You appear to not like my tea. How Rude....\"") 
+        print("Witch-King: “Hmm. You appear to not like my tea. How Rude....”")
         input("Press enter to continue. ")
         print("")
         
         #Wave 2
-        print("Witch-King: \"Perhaps you will like this instead....\"")
+        print("Witch-King: “Perhaps you will like this instead....”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 

@@ -9,12 +9,14 @@ from items.item import Item
 import constants
 import random
 
+
 class Tharbad(UniquePlace):
     """
     沙巴德是米斯艾塞尔河中的独特地点。这是一座曾经有人居住的城市的遗迹。
     
     在这里，玩家可以选择探索废墟，探索废墟将使玩家能够冒着与戒灵遭遇的风险搜罗物品。
     """
+
     def __init__(self, name, description, greetings):
         """
         初始化沙巴德。
@@ -25,14 +27,14 @@ class Tharbad(UniquePlace):
         """
         UniquePlace.__init__(self, name, description, greetings)
 
-        #生成玩家可以战斗的戒灵的列表
+        # 生成玩家可以战斗的戒灵的列表
         self._monsters = []
         numberNazgul = random.randrange(1, 5)
         for monster in range(numberNazgul):
             nazgul = Nazgul_II(constants.MONSTER_STATS[Nazgul_II])
             self._monsters.append(nazgul)
 
-        #生成战利品
+        # 生成战利品
         description = "记载着古代的文字与符号"
         scroll = Item("古代卷轴", description, 1, 32)
         description = "看起来它随时都有可能断裂"
@@ -40,114 +42,107 @@ class Tharbad(UniquePlace):
         description = "也许被击打一两次就碎了"
         armor = Armor("腐烂的盾牌", description, 4, 2, 1)
         self._loot = [scroll, weapon, armor]
-        
+
     def enter(self, player):
         """
-        Enter Tharbad.
+        进入沙巴德。
 
-        @param player:  The current player.
+        @param player:  玩家对象
         """
-        #Story
+        # 剧情
         print(self._greetings)
         print("")
-        
-        print ("You gaze upon the ancient ruins of the once great city of" 
-            " Tharbad and see some very strange sights.")
-        input("Press enter to continue. ")
+
+        print("你凝视着曾经的伟大城市沙巴德的古老遗迹，看到一些非常奇怪的景象。")
+        input("按回车键继续。")
         print("")
 
-        #Solicit user input
+        # 征求用户输入
         choice = None
         acceptable = ["explore", "leave"]
         while choice not in acceptable:
-            choice = input("What would you like to do? Choices: 'explore'"
-                " and 'leave.' ")
-            print("")
-        
-        #Execute user-dependent scripts
+            choice = input("你想要做什么？选择：探索(explore)、离开(leave) ")
+        print("")
+
+        # 执行与用户相关的脚本
         if choice == "explore":
             self._explore(player)
         else:
-            print ("You bid farewell to the ruins of Tharbad and continue on" 
-                " your journey.")
+            print("你告别了沙巴德的废墟，继续你的旅程。")
             print("")
 
     def _explore(self, player):
         """
-        Action sequence for exploring Tharbad.
+        探索沙巴德的动作序列。
 
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Solicit user input
+        # 征求用户输入
         choice = None
         acceptable = ["ruined mill", "ancient bridge"]
         while choice not in acceptable:
-            choice = input("Where would you like to explore? Options:"
-                " 'ruined mill' and 'ancient bridge.' ")
+            choice = input("你想去哪里探索？选项：毁坏的磨坊(ruined mill)、古老的桥梁(ancient bridge) ")
         print("")
 
-        #If user chooses to explore ruined mill
+        # 如果用户选择探索毁坏的磨坊
         if choice == "ruined mill":
-            print ("You find lots of rotting instruments and the remains of"
-                " farming equipment.")
-            input("Press enter to continue. ")
+            print("你发现很多腐烂的器具和农具的残骸。")
+            input("按回车键继续。")
             print("")
             self._itemFind(player)
-            self._chanceBattle(player)
-
-        #If user choose to explore ancient bridge
+            if not self._chanceBattle(player):
+                return
+        # 如果用户选择探索古老的桥梁
         elif choice == "ancient bridge":
-            print ("You find the ruins of the ancient North-South Road bridge"
-                " crossing. This was \nonce one of the greatest causeways in all"
-                " of Middle Earth.")
-            input("Press enter to continue. ")
+            print("你发现了在古代横跨南北的桥梁废墟。桥下是整个中土世界最伟大的堤道之一。")
+            input("按回车键继续。")
             print("")
             self._itemFind(player)
-            self._chanceBattle(player)
+            if not self._chanceBattle(player):
+                return
 
-        #Give player option to keep exploring
+        # 让玩家选择继续探索
         choice = None
         acceptable = ["yes", "no"]
         while choice not in acceptable:
-            choice = input("Would you like to keep exploring? Options:"
-                " 'yes' and 'no.' ")
+            choice = input("你想继续探索吗？选项：是(yes)、否(no) ")
         print("")
-        
+
         if choice == "yes":
             self._explore(player)
         else:
-            print("You leave Tharbad with a sense of loss.")
+            print("你带着失落离开了沙巴德。")
             print("")
-            
+
     def _chanceBattle(self, player):
         """
-        Determines if a random battle is to occur.
+        决定是否要发生战斗。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        if random.random() < constants.THARBAD_BATTLE_PROB and self._monsters:
-            print("You hear some rustling in the shadows....")
-            input("Press enter to continue. ")
+        if random.random() < constants.THARBAD_BATTLE_PROB:
+            print("你听到阴影中的一些沙沙声......")
+            input("按回车键继续。")
             print("")
-            result = battle(player, constants.BattleEngineContext.STORY, 
-                self._monsters)
-            if not result:
-                return
-            
+            return battle(player, constants.BattleEngineContext.STORY, self._monsters.copy())
+        else:
+            return True
+
     def _itemFind(self, player):
         """
-        Determines if player finds an item and then gives player that item.
+        判断玩家是否找到物品，然后给玩家该物品。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #If there are no items to find
-        if len(self._loot) == 0:
+        # 如果没有任何物品可供寻找
+        if not self._loot:
+            print("这里已经没什么有价值的东西了.....")
+            print("")
             return
-        
-        chance = random.random()
-        #Determines if player finds item and which item player receives
-        if chance < constants.THARBAD_ITEM_FIND_PROB:
-            print("You find something that may be of some value!")
+
+        # 确定玩家是否找到物品以及玩家收到的物品
+        if random.random() < constants.THARBAD_ITEM_FIND_PROB:
+            print("你找到了一些可能有价值的东西！")
             item = random.choice(self._loot)
             if player.addToInventory(item):
                 self._loot.remove(item)

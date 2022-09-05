@@ -17,6 +17,7 @@ class Monster(object):
         """
         self._name = name
         self._description = description
+        self._stats = stats
         self._hp = stats[0]
         self._attack = stats[1]
         self._experience = stats[2]
@@ -72,6 +73,12 @@ class Monster(object):
         @param attack: 受到的攻击量
         """
         self._hp = max(self._hp - attack, 0)
+
+    def recoverHp(self):
+        """
+        将怪物的生命恢复到初始最大值
+        """
+        self._hp = self._stats[0]
 
     def getExperience(self):
         """

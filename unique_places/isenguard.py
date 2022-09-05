@@ -109,8 +109,8 @@ class Isenguard(UniquePlace):
         input("Press enter to continue. ")
         print("")
         
-        print ("Sauroman: \"You shouldn't have come, foolish one. Were you" 
-            " haughty enough to think that you could take the Orthanc?\"")
+        print ("Sauroman: “You shouldn't have come, foolish one. Were you" 
+            " haughty enough to think that you could take the Orthanc?”")
         input("Press enter to continue. ")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave2)
@@ -119,7 +119,7 @@ class Isenguard(UniquePlace):
         print("")
         
         #Wave 3
-        print("Sauroman: \"You stupid fool....\"")
+        print("Sauroman: “You stupid fool....”")
         input("Press enter to continue. ")
         result = battle(player, constants.BattleEngineContext.STORY, 
             self._wave3)

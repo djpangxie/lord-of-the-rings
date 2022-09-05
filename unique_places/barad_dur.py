@@ -120,7 +120,7 @@ class BaradDur(UniquePlace):
         
         @param player:   The player object.
         """
-        print("Orc Commander I: \"We're having a blast upstairs! Slumber party!\"")
+        print("Orc Commander I: “We're having a blast upstairs! Slumber party!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -128,8 +128,8 @@ class BaradDur(UniquePlace):
         if not result:
             return
             
-        print(("Orc Commander II: \"Didn't you read the sign? No %ss" 
-            " allowed.\"" % player.getName()))
+        print(("Orc Commander II: “Didn't you read the sign? No %ss" 
+            " allowed.”" % player.getName()))
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -137,7 +137,7 @@ class BaradDur(UniquePlace):
         if not result:
             return
             
-        print("Mouth of Sauron: \"You want ANOTHER slumber party?!\"")
+        print("Mouth of Sauron: “You want ANOTHER slumber party?!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -145,7 +145,7 @@ class BaradDur(UniquePlace):
         if not result:
             return
             
-        print("Nazgul: \"AAAAEEEEEEEEEEE!!!\"")
+        print("Nazgul: “AAAAEEEEEEEEEEE!!!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -153,8 +153,8 @@ class BaradDur(UniquePlace):
         if not result:
             return
             
-        print(("Lance of the Elite Four: \"I've been waiting for you, %s! I" 
-            " knew \nthat you, with your skills, would eventually reach me here.\"" 
+        print(("Lance of the Elite Four: “I've been waiting for you, %s! I" 
+            " knew \nthat you, with your skills, would eventually reach me here.”"
             % player.getName()))
         input("Press enter to continue. ")
         print("")

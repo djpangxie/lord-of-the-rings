@@ -140,18 +140,18 @@ class Derningle(UniquePlace):
         input("Press enter to continue. ")
         print("")
 
-        print("Treebeard: \"Are you a little orc?\"")
+        print("Treebeard: “Are you a little orc?”")
         input("Press enter to continue. ")
         print("")
 
-        print ("\"Ah I see. Please continue fighting for what is right and" 
-            " receive this blessing \nfrom us.\"")
+        print ("“Ah I see. Please continue fighting for what is right and" 
+            " receive this blessing \nfrom us.”")
         input("Press enter to continue. ")
         print("")
         
         #Player receives gift
-        print ("\"Received three ent-draughts! These are legendary elixirs of" 
-            " incredible power.\"")
+        print ("“Received three ent-draughts! These are legendary elixirs of" 
+            " incredible power.”")
         for item in self._gift:
             if player.addToInventory(item):
                 self._gift.remove(item)

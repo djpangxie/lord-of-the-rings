@@ -80,7 +80,7 @@ def getWorld():
     hobbitonSquare = Square("霍比屯广场", description, greeting, talk, items.unique_items.hobbitonSquareItems)
     # 城市
     description = "霍比屯是夏尔中部西区界内的一个村庄。它坐落在小河的两岸，距离东南方的邻村傍水镇约一英里。"
-    greeting = "\"你听说过这个消息吗？\""
+    greeting = "“你听说过这个消息吗？”"
     hobbiton = City("霍比屯", description, greeting, [sallyInn, sallyShop, hobbitonSquare])
     # 夏尔
     description = """
@@ -94,8 +94,8 @@ def getWorld():
     # 独特地点
     description = "一所居住在柳条河山谷的神秘而强大的存在的房子。"
     greeting = """
-    \"老汤姆·邦巴迪尔是个快乐的人；
-    他的夹克是亮蓝色的，他的靴子是黄色的。\"
+    “老汤姆·邦巴迪尔是个快乐的人；
+    他的夹克是亮蓝色的，他的靴子是黄色的。”
     """
     tomBombadil = TomBombadilHouse("汤姆·邦巴迪尔的家", description, greeting)
     # 老林子
@@ -170,7 +170,7 @@ def getWorld():
     半兽人镇是迷雾山脉中部山腹内的一座半兽人据点，一个被称作半兽人王的巨型半兽人统治着此地。
     所谓半兽人镇，实际上是一系列错综复杂的洞窟和隧道系统，它们遍布于迷雾山脉的山腹之内，咕噜所待过的洞穴就位于其中深处。
     """
-    greeting = "\"是潜伏过去还是直接攻入？\""
+    greeting = "“是潜伏过去还是直接攻入？”"
     goblinTown = GoblinTown("半兽人镇", description, greeting)
     # 高隘口
     description = """
@@ -192,7 +192,7 @@ def getWorld():
     greeting = "提供各种各样的精灵小玩意！"
     elvenWares = Shop("精灵商店", description, greeting, constants.RegionType.RHOVANION, 7, 10)
     # 广场
-    description = "\"瑟兰杜伊的酒宴！\""
+    description = "“瑟兰杜伊的酒宴！”"
     greeting = "你到达时发现有一大群喝得醉醺醺的精灵。"
     talk = {
         "卡兰希尔": "嘎啦嘎……",
@@ -204,13 +204,13 @@ def getWorld():
     thePit = Square("坑洞", description, greeting, talk, items.unique_items.thePitItems)
     # 广场
     description = "瑟兰杜伊的金銮殿。"
-    greeting = "\"是什么让你觉得你属于这里？\""
+    greeting = "“是什么让你觉得你属于这里？”"
     talk = {
         "瑟兰杜伊": "哼！我是统治黑森林王国的精灵王！",
-        "安格罗德": "这里的人对你几乎咬牙切齿，具体的原因你问问就知道了。",
+        "安格罗德": "这里的人对你的打扮气得几乎咬牙切齿。",
         "阿瑞蒂尔": "哼！人类！",
-        "阿尔巩": "哼！你不知道你身上的精灵甲已经落伍了吗？",
-        "贝烈格·库沙理安": "哼！你应该穿上更好的精灵甲！"
+        "阿尔巩": "哼！你不知道你身上的着装已经落伍了吗？",
+        "贝烈格·库沙理安": "哼！你应该穿着的更体面一点！"
     }
     elvenkingsThrone = Square("精灵王的宝座", description, greeting, talk, items.unique_items.elvenkingsThroneItems)
     # 城市
@@ -223,7 +223,7 @@ def getWorld():
                            [sihirliMutfak, elvenWares, thePit, elvenkingsThrone])
     # 黑森林
     description = """
-    黑森林在辛达语中被称为\"大恐怖之林\"，它是罗瓦尼安的一大片森林，其原名为大绿林；
+    黑森林在辛达语中被称为“大恐怖之林”，它是罗瓦尼安的一大片森林，其原名为大绿林；
     第三纪元末年，因为邪恶力量的入侵，大绿林才被人们称为黑森林。索隆战败后，这里又被重新命名为绿叶森林。
     """
     mirkwood = Space("黑森林", description, constants.RegionType.RHOVANION,
@@ -246,7 +246,7 @@ def getWorld():
     # 古冢岗-布理 - 布理
     # 旅店
     description = "一家安静的旅店，隐藏在布理的郊区。"
-    greeting = "\"你们好，我是旅馆老板琳达。\""
+    greeting = "“你们好，我是旅馆老板琳达。”"
     lindasInn = Inn("琳达的旅店", description, greeting, 5)
     # 商店
     description = "来这挑选你杀戮奥克的装备吧！"
@@ -268,7 +268,7 @@ def getWorld():
     布理位于夏尔以东、佛诺斯特·埃莱因以南。它在第三纪元早期属于卡多蓝王国。然而，
     尽管卡多蓝亲王声称拥有它，但布理在没有任何中央权威或政府的情况下持续繁荣发展了许多世纪。 
     """
-    greeting = "\"戒灵一直在夜间造访这附近！\""
+    greeting = "“戒灵一直在夜间造访这附近！”"
     bree = City("布理", description, greeting, [lindasInn, hanksBattleGear, prancingPony])
     # 古冢岗-布理
     description = """
@@ -325,7 +325,7 @@ def getWorld():
     dunland = Space("黑蛮地", description, constants.RegionType.ENEDWAITH,
                     battleProbability=constants.SpaceSpawnProb.dunland)
 
-    # 迷雾山脉南部
+    # 迷雾山脉南部 - 墨瑞亚
     # 独特地点
     description = """
     墨瑞亚曾是中洲大地上最强大且最为著名的矮人王国。在那里矮人繁荣发展，建造了有史以来最伟大的一座城市。
@@ -338,7 +338,7 @@ def getWorld():
     迷雾山脉是中洲最大的山脉，由北向南绵延800公里，位于伊利雅德和安都因河之间，将伊利雅德与罗马尼安分隔开。
     墨瑞亚群山指迷雾山脉的三座连峰凯勒布迪尔、卡拉兹拉斯和法努伊索尔，矮人城邦墨瑞亚就挖凿在三座大山的底部。
 
-    ***通过墨瑞亚可以向东进入罗瑞恩***
+    ***要向东进入罗瑞恩则必须通过墨瑞亚***
     """
     mistyMountainsSouth = Space("迷雾山脉南部", description, constants.RegionType.MORIA, uniquePlace=moria)
 
@@ -370,6 +370,8 @@ def getWorld():
     洛丝罗瑞恩是位于迷雾山脉东面的西尔凡王国，简称罗瑞恩。
     在第三纪元，它被认为是中洲最美丽也最富于精灵特色的地方。
     在大海以东，洛丝罗瑞恩是瑁珑的唯一生长地点，只有夏尔的那棵例外。
+
+    ***要向西进入迷雾山脉南部则必须通过墨瑞亚***
     """
     lorien = Space("罗瑞恩", description, constants.RegionType.RHOVANION,
                    battleProbability=constants.SpaceSpawnProb.lorien, city=carasGaladhon)
@@ -377,7 +379,7 @@ def getWorld():
     # 范贡森林 - 秘林谷
     # 独特地点
     description = "此处是恩特们举行会议的地点"
-    greeting = "\"欢迎来到恩特大会！不必那么着急。\""
+    greeting = "“欢迎来到恩特大会！不必那么着急。”"
     derningle = Derningle("秘林谷", description, greeting)
     # 范贡森林
     description = """
@@ -444,7 +446,7 @@ def getWorld():
     Nimrais below the Thrihyrne. It consists of a massive defensive system 
     called the Hornburg.
     """
-    greeting = "\"Welcome to Helm's Deep! WHOOO!!! PARTY!\""
+    greeting = "“Welcome to Helm's Deep! WHOOO!!! PARTY!”"
     helmsDeep = City("Helm's Deep", description, greeting,
                      [sobrietyRoom, theArmory, helmsDeepCommons])
     # Westfold
@@ -484,7 +486,7 @@ def getWorld():
     # Eastfold - Edoras
     # Inn
     description = "A quaint inn settled on an open plain."
-    greeting = "\"Travelers! We'd be glad to have you for the night.\""
+    greeting = "“Travelers! We'd be glad to have you for the night.”"
     sunsetVillage = Inn("Prairie View", description, greeting, 5)
     # Shop
     description = "Crafts and various collectibles."
@@ -493,7 +495,7 @@ def getWorld():
                            constants.RegionType.ROHAN, 10, 8)
     # Square
     description = "A country square full of mostly older folk."
-    greeting = "\"We love our lands.\""
+    greeting = "“We love our lands.”"
     talk = {
         "Helm Gammerhand": "I wish you the best on your journey.",
         "Brytta Leofa": "I have several daughters your age.",
@@ -509,25 +511,25 @@ def getWorld():
     Young's son Brego built Edoras. It is Rohan's only real city and holds the 
     Golden Hall of Meduseld.
     """
-    greeting = "\"Welcome to Edoras!\""
+    greeting = "“Welcome to Edoras!”"
     edoras = City("Edoras", description, greeting, [sunsetVillage,
                                                     twiceRemembered, edorasCommons])
     # Eastfold - Aldburg
     # Inn
     description = "Innkeeper is a man by the name of Seth."
-    greeting = "\"We'd be glad to have you for the night.\""
+    greeting = "“We'd be glad to have you for the night.”"
     sethsHostel = Inn("Seth's Hostel", description, greeting, 5)
     # Shop
     description = "Other items too."
-    greeting = "\"Would you like some samples?\""
+    greeting = "“Would you like some samples?”"
     milesCookieFactory = Shop("Miles' Cookie Factory", description, greeting,
                               constants.RegionType.ROHAN, 10, 12)
     # Square
     description = "Many interesting discussions."
-    greeting = "\"I wonder how this works...?\""
+    greeting = "“I wonder how this works...?”"
     talk = {
         "Dmitriy": "Dante.",
-        "Jim \"The Dear Ladd\" Jr.": "Let's fobrinicate the fobazz!",
+        "Jim “The Dear Ladd” Jr.": "Let's fobrinicate the fobazz!",
         "Chris": "I am from China."
     }
     auburnSquare = Square("Auburn Square Commons", description, greeting,
@@ -537,7 +539,7 @@ def getWorld():
     Folde, east of Edoras. The Kings of Rohan moved to Edoras after Brego, son 
     of Eorl, completed the Golden Hall.
     """
-    greeting = "\"Welcome to Aldburg!\""
+    greeting = "“Welcome to Aldburg!”"
     aldburg = City("Aldburg", description, greeting, [sethsHostel,
                                                       milesCookieFactory, auburnSquare])
     # Eastfold
@@ -564,7 +566,7 @@ def getWorld():
     prevent invasion through the Pass of Cirith Gorgor, the gap between the 
     Ered Lithui and the Ephel Duath.
     """
-    greetings = "\"One does not simply walk into Mordor.\""
+    greetings = "“One does not simply walk into Mordor.”"
     blackGate = BlackGate("Black Gate", description, greetings)
     # Dead Marshes
     description = """The Dead Marshes are an area of swampland east of the
@@ -583,7 +585,7 @@ def getWorld():
     
     The pass is heavily guarded with fortresses and watchtowers.
     """
-    greetings = "\"One does not simply walk into Mordor part II.\""
+    greetings = "“One does not simply walk into Mordor part II.”"
     isenmouthe = Isenmouthe("Isenmouthe", description, greetings)
     # Valley of Udun
     description = """Udun is a depressed valley in northwestern Mordor. It 
@@ -617,7 +619,7 @@ def getWorld():
     # Anorien - Minas Tirith
     # Inn
     description = "Where elite Gondorian healers do their work."
-    greeting = "\"Welcome to the Houses of Healing. What can I do for you?\""
+    greeting = "“Welcome to the Houses of Healing. What can I do for you?”"
     housesOfHealing = Inn("Houses of Healing", description, greeting, 5)
     # Shop
     description = "An elite armory, used by the best Gondorian troops."
@@ -655,7 +657,7 @@ def getWorld():
     Anor. From T.A. 1640 onwards it became the capital of the South-kingdom 
     and the seat of its Kings and ruling Stewards.
     """
-    greeting = "\"Welcome to the last stronghold of the West, Minas Tirith.\""
+    greeting = "“Welcome to the last stronghold of the West, Minas Tirith.”"
     minasTirith = City("Minas Tirith", description, greeting,
                        [housesOfHealing, marketSquare, towerOfEcthelion, smithyOfKings])
     # Anorien
@@ -670,13 +672,13 @@ def getWorld():
     # Anduin - Argonath
     # Unique Place
     description = "Great for dates."
-    greeting = ("\"Welcome to Argonath! Stay within the designated areas and"
-                " listen to your guide.\"")
+    greeting = ("“Welcome to Argonath! Stay within the designated areas and"
+                " listen to your guide.”")
     argonath = Argonath("Argonath", description, greeting)
     # Anduin - Osgiliath
     # Inn
     description = "A place to rest in the midst of battle."
-    greeting = "\"Your cot is on the top left.\""
+    greeting = "“Your cot is on the top left.”"
     soldierBarracks = Inn("Soldier Barracks", description, greeting, 5)
     # Shop
     description = "Rapidly depleting inventories."
@@ -694,7 +696,7 @@ def getWorld():
     Gondor. Depopulated during the Third Age, it gradually fell into ruin. 
     Osgiliath has strategic importance as a crossing point over the Anduin.
     """
-    greeting = "\"Be on your guard. We are constantly under attack.\""
+    greeting = "“Be on your guard. We are constantly under attack.”"
     osgiliath = City("Osgiliath", description, greeting, [soldierBarracks,
                                                           osgiliathArmory, osgiliathCommons])
     # Anduin
@@ -718,7 +720,7 @@ def getWorld():
 
     Minas Morgul is home to the Nazgul.
     """
-    greeting = "\"One does not simply walk into Mordor.\""
+    greeting = "“One does not simply walk into Mordor.”"
     minasMorgul = MinasMorgul("Minas Morgul", description, greeting)
     # Ephel Duath
     description = """The Ephel Dúath, or the Mountains of Shadow, is a range of
@@ -740,7 +742,7 @@ def getWorld():
     to return to Mordor. Similar fates suffered the mountain fortress of 
     Durthang in northwestern Mordor and the Towers of the Teeth at Morannon.
     """
-    greeting = "\"May it be a light to you in dark places.\""
+    greeting = "“May it be a light to you in dark places.”"
     towerOfCirithUngol = TowerOfCirithUngol("Tower of Cirith Ungol",
                                             description, greeting)
     # Cirith Ungol
@@ -763,9 +765,9 @@ def getWorld():
     Mordor and serves as his base of operations. Over 1400 meters high and 
     held together by dark magic, it is the largest fortress in Middle-earth.
     """
-    greeting = """\"Rising black, blacker and darker than the vast shades amid 
+    greeting = """“Rising black, blacker and darker than the vast shades amid 
     which it stood, the cruel pinnacles and iron crown of the topmost tower of 
-    Barad-dur....\""""
+    Barad-dur....”"""
     baradDur = BaradDur("Barad Dur", description, greeting)
     # Plateau of Gorgoth
     description = """Plateau of Gorgoroth is a region in the northwestern 
@@ -781,16 +783,16 @@ def getWorld():
     # Lossamarch - Pelargir
     # Inn
     description = "Beach resort along one of Gondor's finest coasts!"
-    greeting = "\"Hey bro! Welcome to Sunnyside Inn!\""
+    greeting = "“Hey bro! Welcome to Sunnyside Inn!”"
     sunnysideInn = Inn("Sunnyside Inn", description, greeting, 5)
     # Shop
     description = "Beach accessories and paraphernalia."
-    greeting = "\"Hey what's up, bro?\""
+    greeting = "“Hey what's up, bro?”"
     palmTreeHut = Shop("Palm Tree Hut", description, greeting,
                        constants.RegionType.GONDOR, 6, 14)
     # Square
     description = "Class-three waves!"
-    greeting = "\"Bro, did you see those waves?\""
+    greeting = "“Bro, did you see those waves?”"
     talk = {
         "Gondorian bro #1": "Bro, let's hit the beach!",
         "Gondorian bro #2": "Bro! Let's just chill for awhile....",

@@ -12,7 +12,7 @@ import constants
 """
 # 剧情物品
 # 初始库存
-staff = Weapon("短杖", "有一个秘密的锋利的刀口", 4, 2, 2)
+staff = Weapon("短杖", "隐藏着锋利的刀口", 4, 2, 2)
 leatherCloak = Armor("皮斗篷", "旅行外衣", 3, 8, 1)
 theOneRing = Item("至尊戒", "非常重要", 6, 540)
 vodka = Potion("伏特加", "有益健康", 1, 4, 4)
@@ -36,7 +36,7 @@ elvenRum = Potion("精灵朗姆酒", "对所有其他种族有毒", 1, 6, -5)
 thePitItems = {"库茹芬": water, "戴隆": elvenRum}
 
 # 精灵王的宝座
-sweetNewElvenWare = Armor("崭新的精灵甲","来自黑森林的最新款式", 4, 52, 3)
+sweetNewElvenWare = Armor("华贵的精灵甲", "来自黑森林的最新款式", 4, 52, 3)
 elvenkingsThroneItems = {"贝烈格·库沙理安": sweetNewElvenWare}
 
 # 跃马客栈

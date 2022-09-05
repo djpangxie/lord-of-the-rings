@@ -9,6 +9,7 @@ import constants
 
 import random
 
+
 class GoblinTown(UniquePlace):
     """
     半兽人镇是高隘口中的独特地点。
@@ -16,6 +17,7 @@ class GoblinTown(UniquePlace):
     玩家有机会尝试从半兽人镇周围潜伏过去或直接攻入。
     如果潜伏的尝试不成功，玩家必须同时与大量的怪物作战。
     """
+
     def __init__(self, name, description, greetings):
         """
         初始化半兽人镇。
@@ -25,183 +27,185 @@ class GoblinTown(UniquePlace):
         @param greetings:       玩家进入该独特地点时得到的问候
         """
         UniquePlace.__init__(self, name, description, greetings)
+        self._executed = False  # 通关记录
 
-        #生成战利品
+        # 生成战利品
         weapon1 = Weapon("半兽人砍刀", "对精怪有益，对人类有害", 3, 5, 6)
         weapon2 = Weapon("矮人战斧", "从孤山偷来的", 4, 8, 12)
         weapon3 = Weapon("长柄斧", "看起来是从刚铎人那偷来的赃物", 6, 12, 14)
         self._loot = [weapon1, weapon2, weapon3]
 
-        #我们将有四波怪物
+        # 我们将有三波怪物
         self._wave = []
         self._wave2 = []
         self._wave3 = []
 
-        #创造第一波怪物
+        # 创造第一波怪物
         for monster in range(2):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave.append(monster)
-            
-        #创造第二波怪物
+
+        # 创造第二波怪物
         for monster in range(8):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave2.append(monster)
 
-        #创造第三波怪物
+        # 创造第三波怪物
         for monster in range(4):
             monster = Goblin(constants.MONSTER_STATS[Goblin])
             self._wave3.append(monster)
         monster = GreatGoblin(constants.MONSTER_STATS[GreatGoblin])
         self._wave3.append(monster)
-    
-        #将前三波合为第四波怪物
+
+        # 穿过咕噜的洞穴失败时的怪物
         self._wave4 = self._wave + self._wave2 + self._wave3
 
     def enter(self, player):
         """
-        Action sequence for GoblinTown.
+        半兽人镇的动作序列。
 
-        @param player:  The current player.
+        @param player:  玩家对象
         """
         print(self._greetings)
         print("")
-        
-        #Fight wave 1
-        print ("As you creep along High Pass hoping to avoid detection, you" 
-            " hear some creeping \nin the shadows....")
-        input("Press enter to continue. ")
+
+        # 第一波战斗
+        print("当你沿着高隘口攀爬，希望避免被发现时，你听到了一些在阴影中爬行的声音....")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave.copy())
         if not result:
             return
-            
-        #Story
-        print ("You have defeated some unsuspecting goblins! Escaping" 
-            " detection now may \nstill be an option!")
-        input("Press enter to continue. ")
-        print("")
-    
-        #Solicit user choice
-        print ("As you think ahead, you have two options. You may attempt to" 
-            " sneak through \nGollum's Cave taking the risk getting trapped " 
-            " or go straight into Goblin Town.")
-        print("")
-        choice = self._choice()
 
-        #Run choice-dependent scripts
-        if choice == "cave":
-            self._cave(player)
+        # 已经通关了半兽人镇
+        if self._executed:
+            print("你上次来时已经扫平了这里！")
+            input("按回车键继续。")
+            print("")
+        # 尚未通关半兽人镇
         else:
-            self._frontalAssault(player)
-        
+            print("你打败了一些毫无戒心的半兽人！现在，你有机会尝试偷偷溜过去或直接攻入。")
+            input("按回车键继续。")
+            print("")
+
+            # 征求用户选择
+            print("一个选择是尝试冒着被围困的风险从咕噜的洞穴偷偷穿过去，另一个则是直接进入半兽人镇。")
+            print("")
+            choice = self._choice()
+
+            # 运行与选择相关的脚本
+            if choice == "cave":
+                self._cave(player)
+            else:
+                self._frontalAssault(player)
+
     def _choice(self):
         """
-        Solicit user choice.
+        征求用户的选择。
         
-        @param player:  The current player.
+        @return:     "cave" 或 "straight"
         """
         choice = None
         acceptable = ["cave", "straight"]
         while choice not in acceptable:
-            choice = input("What would you like to do? Choices: try to" 
-                " sneak through the 'cave' or go 'straight' in. ")
+            choice = input("你打算怎么做？选择：偷偷溜过(cave)、直接进入(straight) ")
         print("")
-        
+
         return choice
-        
+
     def _cave(self, player):
         """
-        Action sequence for Gollum's cave.
+        咕噜洞穴的动作序列。
         
-        @param player:  The current player.
+        @param player:  玩家对象
         """
-        print("You try to sneak through Gollum's Cave.")
-        input("Press enter to continue. ")
+        print("你试图潜入咕噜的洞穴。")
+        input("按回车键继续。")
         print("")
 
-        #If player ventures through undetected
+        # 如果玩家冒险通过未被发现
         if random.random() < constants.GOBLIN_TOWN_EVASION_PROB:
-            print("You make it through the mountains safely!")
-            input("Press enter to continue. ")
+            print("你安全地穿过了山脉！")
+            input("按回车键继续。")
             print("")
-            
-        #If player gets  trapped in cave.
+
+        # 如果玩家被困在咕噜的洞穴中
         else:
-            #Story
-            print ("Great Goblin: \"You fool... did you really think you could" 
-                " make it through my territory \nwithout me knowing?\"")
-            input("Press enter to continue. ")
+            # 剧情
+            print("半兽人王：“你这个笨蛋……你真的以为你能在我不知情的情况下闯过我的地盘吗？”")
+            input("按回车键继续。")
             print("")
-            
-            #Fight wave 4
-            print("Great Goblin: \"Now I will feast on your flesh....\"")
-            input("Press enter to continue. ")
+
+            # 遭到围困
+            print("半兽人王：“现在我要吃你的肉……”")
+            input("按回车键继续。")
             print("")
-            result = battle(player, constants.BattleEngineContext.STORY, 
-                self._wave4)
+            result = battle(player, constants.BattleEngineContext.STORY, self._wave4.copy())
             if not result:
                 return
-            
-            #Call victory sequence
-            self._victorySequence(player)
-            
+
+            # 通关
+            self._executed = True
+
+        # 成功通过
+        self._victorySequence(player)
+
     def _frontalAssault(self, player):
         """
-        Action sequence for frontal assault choice.
+        正面进攻。
         
-        @param player:  The current player.
+        @param player:  玩家对象
         """
-        #Story
-        print("Time to slay some goblins! On to Goblin Town!")
-        input("Press enter to continue. ")
-        print("")
-        
-        print("You see some primitive huts, all uninhabited.") 
-        input("Press enter to continue. ")
-        print("")
-        
-        print("Suddenly, goblins circle you from all directions!")
-        input("Press enter to continue. ")
+        # 剧情
+        print("是时候杀死一些半兽人了! 前往半兽人镇!")
+        input("按回车键继续。")
         print("")
 
-        #Frontal assault wave 1
-        print ("Great Goblin: \"What makes you think that you can just charge" 
-            " into my city?\"")
-        input("Press enter to continue. ")
+        print("你看到了一些破败的小屋，都已无人居住。")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave2)
+
+        print("突然间，半兽人们从四面八方包围了你！")
+        input("按回车键继续。")
+        print("")
+
+        # 正面突击第一波
+        print("半兽人王：“谁给你的勇气直接冲进我的地盘？”")
+        input("按回车键继续。")
+        print("")
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave2.copy())
         if not result:
             return
-            
-        #Frontal assault wave 2
-        print("Great Goblin: \"You stupid fool it is now time to DIE!\" ")
-        input("Press enter to continue. ")
+
+        # 正面突击第二波
+        print("半兽人王：“你这个愚蠢的傻瓜，现在你的死期到了！”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave3)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave3.copy())
         if not result:
             return
-            
-        #Call victory sequence
+
+        # 通关
+        self._executed = True
+
+        # 成功通过
         self._victorySequence(player)
-        
+
     def _victorySequence(self, player):
         """
-        Victory sequence for making it through Goblin Town.
+        成功通过半兽人镇。
         
-        @param player:  The current player.
+        @param player:  玩家对象
         """
-        print ("As you gaze over the corpses of your enemies, you decide that" 
-            " it is time to take your winnings and leave.")
-        input("Press enter to continue. ")
+        location = player.getLocation()
+
+        print("当你凝视着敌人的尸体时，你决定是时候带着你的战利品离开了。")
+        input("按回车键继续。")
         print("")
 
-        #Give player items
         for item in self._loot:
-            if player.addToInventory(item):
-                self._loot.remove(item)
+            if not player.addToInventory(item):
+                location.addItem(item)
         print("")
-        
+
         self._createPort("south")

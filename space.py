@@ -5,11 +5,14 @@ from items.item_set import ItemSet
 from constants import Direction, RegionType
 from items.unique_items import theOneRing
 
+
 class Space(object):
     """
     地图上的给定地区。与其他地区相连，形成更大的地理区域。
     """
-    def __init__(self, name, description, region, battleProbability = 0, battleBonusDifficulty = 0, items = None, city = None, uniquePlace = None):
+
+    def __init__(self, name, description, region, battleProbability=0, battleBonusDifficulty=0, items=None, city=None,
+                 uniquePlace=None):
         """
         初始化地区对象
 
@@ -24,10 +27,10 @@ class Space(object):
         @keyword city:                 (可选)地区中的城市。可以是单个对象或包含多个对象的列表
         @keyword uniquePlace:          (可选)地区中的独特地点。可以是单个对象或包含多个对象的列表
         """
-        self._exits = {Direction.NORTH : None,
-                       Direction.SOUTH : None,
-                       Direction.EAST : None,
-                       Direction.WEST : None}
+        self._exits = {Direction.NORTH: None,
+                       Direction.SOUTH: None,
+                       Direction.EAST: None,
+                       Direction.WEST: None}
 
         self._name = name
         self._description = description
@@ -53,7 +56,7 @@ class Space(object):
         @return:    地区的描述
         """
         return self._description
-        
+
     def getRegion(self):
         """
         返回地区类型的列举常量。
@@ -61,7 +64,7 @@ class Space(object):
         @return:    地区类型的列举常量
         """
         return self._region
-        
+
     def getItems(self):
         """
         返回在地区中能找到的物品。
@@ -69,14 +72,14 @@ class Space(object):
         @return:    在地区中能找到的物品的ItemSet对象
         """
         return self._items
-        
+
     def addItem(self, item):
         """
         添加一件或多件物品到该地区中。
 
         @param item:    要添加的一件或多件物品
         """
-        #至尊戒的特别提醒
+        # 至尊戒的特别提醒
         if item == theOneRing and self._name != "欧洛都因":
             print("\n你看到一些奇怪的人走过。")
             return
@@ -111,16 +114,14 @@ class Space(object):
 
     def containsItemString(self, string):
         """
-        Determines if space contains an item.
+        判断地区中是否包含某个物品。
 
-        @param string:   The name-string of 
-                         the target item.
+        @param string:   物品名称的字符串
 
-        @return:    True if item is contained 
-                    in space, False otherwise.
-        """ 
-        return        self._items.containsItemWithName(string)
-    
+        @return:    如果地区中包含物品则为True，否则为False
+        """
+        return self._items.containsItemWithName(string)
+
     def getCity(self):
         """
         返回地区中的城市。
@@ -153,7 +154,7 @@ class Space(object):
         """
         return self._battleBonusDifficulty
 
-    def createExit(self, direction, space, outgoingOnly = False):
+    def createExit(self, direction, space, outgoingOnly=False):
         """
         创建通往另一个地区的出口。一个地区的每个方向都可以通向一个或多个地区。
         默认情况下，该方法会在该出口连接的地区中同时创建适当的出口回到该地区。(然而，可以使用outgoingOnly参数来抑制这种情况)
@@ -163,60 +164,59 @@ class Space(object):
         @keyword outgoingOnly:  默认情况下，该方法会在该出口连接的地区中同时创建适当的出口回到该地区
                                 将outgoingOnly参数设置为True可以抑制这种情况
         """
-        #确保指定的方向有效
+        # 确保指定的方向有效
         if not self._isExit(direction):
             errorMsg = "方向无效：%s" % direction
             raise AssertionError(errorMsg)
-        
-        #设置出口连接的地区
+
+        # 设置出口连接的地区
         if self._exits[direction]:
             currentSpace = self._exits[direction]
-            #如果该方向已存在多个地区
+            # 如果该方向已存在多个地区
             if isinstance(currentSpace, list):
                 currentSpace.append(space)
-            #如果该方向只存在一个地区
+            # 如果该方向只存在一个地区
             else:
                 self._exits[direction] = [currentSpace, space]
-        #如果还没有连接到任何地区
+        # 如果还没有连接到任何地区
         else:
             self._exits[direction] = space
 
-        #创建从其它地区到该地区的出口
+        # 创建从其它地区到该地区的出口
         if not outgoingOnly:
             oppositeDirection = self._oppositeDirection(direction)
-            space.createExit(oppositeDirection, self, outgoingOnly = True)
+            space.createExit(oppositeDirection, self, outgoingOnly=True)
 
-    def clearExit(self, direction, outgoingOnly, space = None):
+    def clearExit(self, direction, outgoingOnly, space=None):
         """
-        Removes an exit to another space. By default, the method removes the 
-        appropriate exit from the second space. (This can be suppressed, 
-        however, using I{outgoingOnly}).
+        移除通往另一个地区的出口。
+        默认情况下，该方法会在该出口连接的地区中同时删除回到该地区的出口。(然而，可以使用outgoingOnly参数来抑制这种情况)
 
-        @param direction:       Direction of exit.
-        @keyword outgoingOnly:  By default, this method removes the appropriate
-                                exit from the second space. Set I{outgoingOnly}
-                                to False to suppress this behavior.
+        @param direction:       出口方向
+        @param space:           连接的地区
+        @keyword outgoingOnly:  默认情况下，该方法会在该出口连接的地区中同时删除回到该地区的出口
+                                将outgoingOnly参数设置为True可以抑制这种情况
         """
-        #Make sure a valid direction has been specified
+        # 确保已经指定了一个有效的方向
         if not self._isExit(direction):
-            errorMsg = "Direction not valid: %s" % direction
+            errorMsg = "方向无效：%s" % direction
             raise AssertionError(errorMsg)
 
-        #If exit has not been set, there is nothing to do
+        # 如果没有设置出口，则无事可做
         if self._exits[direction] == None:
             return
-    
-        #Create a temporary copy of adjacent space
+
+        # 创建一个相邻地区的临时副本
         adjSpace = self._exits[direction]
-        
+
         if isinstance(self._exits[direction], list):
             self._exits[direction].remove(space)
         else:
             self._exits[direction] = None
-            
+
         if not outgoingOnly:
             oppositeDirection = self._oppositeDirection(direction)
-            adjSpace.clearExit(oppositeDirection, True, space = self)
+            adjSpace.clearExit(oppositeDirection, True, space=self)
 
     def getExit(self, direction):
         """
@@ -247,7 +247,7 @@ class Space(object):
         availableExits = list(self._exits.keys())
         if exit not in availableExits:
             return False
-            
+
         return True
 
     def _oppositeDirection(self, direction):

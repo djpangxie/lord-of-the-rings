@@ -111,8 +111,8 @@ class BlackGate(UniquePlace):
         #Story
         print(self._greetings)
         print("")
-        print ("\"Several armies rise up to meet you as you approach the Black" 
-            " Gate.\"")
+        print ("“Several armies rise up to meet you as you approach the Black" 
+            " Gate.”")
         input("Press enter to continue. ")
         print("")
         
@@ -147,7 +147,7 @@ class BlackGate(UniquePlace):
         @param player:   The player object.
         """
         #Battle wave 1
-        print("Mouth of Sauron: \"I'm so glad you came! Slumber party!\"")
+        print("Mouth of Sauron: “I'm so glad you came! Slumber party!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -156,7 +156,7 @@ class BlackGate(UniquePlace):
             return
             
         #Battle wave 2
-        print("Mouth of Sauron: \"Hmm. You appear to not like our house.\"")
+        print("Mouth of Sauron: “Hmm. You appear to not like our house.”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -165,7 +165,7 @@ class BlackGate(UniquePlace):
             return
             
         #Battle wave 3
-        print("Mouth of Sauron: \"Time to DIE!\"")
+        print("Mouth of Sauron: “Time to DIE!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 

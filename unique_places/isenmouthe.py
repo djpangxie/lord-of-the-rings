@@ -100,7 +100,7 @@ class Isenmouthe(UniquePlace):
         @param player:   The current player.
         """
         #Wave 1
-        print("Mouth of Sauron: \"You have overstayed your welcome.\"")
+        print("Mouth of Sauron: “You have overstayed your welcome.”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 
@@ -109,7 +109,7 @@ class Isenmouthe(UniquePlace):
             return
         
         #Wave 2
-        print("Mouth of Sauron: \"Time... to... DIE!!!\"")
+        print("Mouth of Sauron: “Time... to... DIE!!!”")
         input("Press enter to continue. ")
         print("")
         result = battle(player, constants.BattleEngineContext.STORY, 

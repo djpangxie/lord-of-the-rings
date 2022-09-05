@@ -28,7 +28,7 @@ def battle(player, context, monsters=None):
     -剧情战斗：怪物必须通过monsters参数提供。玩家不能从剧情战斗中逃跑。
     """
     # 战斗设置
-    output = _battleSetup(player, context)
+    output = _battleSetup(player, context, monsters)
     if context == constants.BattleEngineContext.RANDOM:
         bonusDifficulty = output[0]
         monsters = output[1]
@@ -86,7 +86,7 @@ def battle(player, context, monsters=None):
             else:
                 print("你撤退的路被堵死了！")
 
-        # 快进 - 玩家依次按顺序砍倒敌人直到被敌人砍倒或胜利
+        # 快进 - 玩家依次按顺序砍倒敌人直到被敌人砍倒或获得胜利
         elif choice == "quick":
             quick = True
             earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings, 1)
@@ -113,7 +113,7 @@ def battle(player, context, monsters=None):
     return True
 
 
-def _battleSetup(player, context):
+def _battleSetup(player, context, monsters):
     """
     为战斗引擎生成变量并打印战斗启动画面。
     """
@@ -140,6 +140,10 @@ def _battleSetup(player, context):
         location = player.getLocation()
         region = location.getRegion()
         bonusDifficulty = location.getBattleBonusDifficulty()
+
+        # 为剧情怪物补满生命值
+        for monster in monsters:
+            monster.recoverHp()
 
         # 剧情头幕
         print("""

@@ -51,34 +51,18 @@ class Place(object):
         self._space = space
         self._targetSpace = targetSpace
 
-    def _createPort(self, direction, executed=False):
+    def _createPort(self, direction):
         """
-        Creates a port between the space and targetSpace. In this
-        construction, targetSpace is to the direction of space.
+        在该地区和目标地区之间创建一个连接。在这个方法中，目标地区是指向的方向。
+        在指环王中，这被用来解锁新的地区连接，作为通关剧情的奖励。
         
-        In LotR, this is used to unlock new space connections as a  
-        reward for quest completion.
-        
-        @param direction:     The direction targetSpace is in with 
-                              respect to space.
-        @param executed:      If this method has been executed. False by 
-                              default.
+        @param direction:     "east"、"west"、"north"、"south"表示的目标地区的方向
+        @param executed:      如果这个方法已经被执行过则为True，默认情况下为False
         """
-        # If already executed, no need to create additional port
-        self._executed = executed
-        if self._executed:
-            return
-
-        # Create port and print accompanying user text
-        self._space.createExit(direction, self._targetSpace,
-                               outgoingOnly=False)
-        string = "%s is now accessible to the %s" % (self._targetSpace.getName(),
-                                                     direction)
-        print(string.upper())
+        # 创建连接并打印附带的用户文本
+        self._space.createExit(direction, self._targetSpace, outgoingOnly=False)
+        print("%s 现在可以通往 %s" % (self._space.getName(), self._targetSpace.getName()))
         print("")
-
-        # Update self._executed
-        self._executed = True
 
     def enter(self, player):
         """
