@@ -10,6 +10,7 @@ from items.charm import Charm
 from items.item_set import ItemSet
 from util.helpers import sortItems
 import constants
+import random
 
 
 class Player(object):
@@ -67,8 +68,13 @@ class Player(object):
         使玩家攻击怪物。
 
         @param target:    怪物对象
+
+        @return:          实际对怪物造成的伤害(正态波动)
         """
-        target.takeAttack(self._totalAttack)
+        damage = random.normalvariate(self._totalAttack, self._totalAttack / constants.BattleEngine.ATTACK_VOLATILITY)
+        damage = max(int(damage), 0)
+        target.takeAttack(damage)
+        return damage
 
     def getAttack(self):
         """

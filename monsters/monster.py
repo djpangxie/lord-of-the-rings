@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+import constants
+import random
+
+
 class Monster(object):
     """
     一个通用怪物类，用作特定怪物子类的父类。
@@ -54,9 +58,11 @@ class Monster(object):
 
         @param target:   攻击的目标对象
 
-        @return:         造成的伤害量
+        @return:         实际对目标造成的伤害(正态波动)
         """
-        return target.takeAttack(self._attack)
+        damage = random.normalvariate(self._attack, self._attack / constants.BattleEngine.ATTACK_VOLATILITY)
+        damage = max(int(damage), 0)
+        return target.takeAttack(damage)
 
     def getAttack(self):
         """

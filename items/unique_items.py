@@ -36,7 +36,7 @@ elvenRum = Potion("精灵朗姆酒", "对所有其他种族有毒", 1, 6, -5)
 thePitItems = {"库茹芬": water, "戴隆": elvenRum}
 
 # 精灵王的宝座
-sweetNewElvenWare = Armor("华贵的精灵甲", "来自黑森林的最新款式", 4, 52, 3)
+sweetNewElvenWare = Armor("华丽的精灵甲", "来自黑森林的最新款式", 4, 52, 3)
 elvenkingsThroneItems = {"贝烈格·库沙理安": sweetNewElvenWare}
 
 # 跃马客栈

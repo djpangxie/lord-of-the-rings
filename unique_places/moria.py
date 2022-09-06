@@ -111,7 +111,7 @@ class Moria(UniquePlace):
             choice = input("请输入开门密语(英文的)或者离开(leave)：")
             if choice in acceptable:
                 break
-            elif random.random() < constants.MORIA_WATCHER_IN_THE_WATER:
+            else:
                 damage = player.takeAttack(constants.WATCHER_IN_THE_WATER_ATTACK)
                 print("\n水中监视者从湖里伸出的强壮触手对 %s 造成 %s 点伤害！" % (player.getName(), damage))
                 if not player.getHp():

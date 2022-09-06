@@ -40,7 +40,7 @@ def battle(player, context, monsters=None):
 
     quick = False
     earnings = [0, 0]
-    acceptable = ["quick", "attack", "recover", "run"]
+    acceptable = ["quick", "attack", "use", "run"]
 
     # 主要的战斗过程
     while monsters:
@@ -59,7 +59,7 @@ def battle(player, context, monsters=None):
             choice = None
 
         while choice not in acceptable:
-            choice = input("你可以：快进(quick)、进攻(attack)、恢复(recover)、撤退(run)> ")
+            choice = input("你可以：快进(quick)、进攻(attack)、道具(use)、撤退(run)> ")
             try:
                 choice, num = choice.split(' ', 2)
                 num = int(num)
@@ -70,8 +70,8 @@ def battle(player, context, monsters=None):
         if choice == 'attack':
             earnings = _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num)
 
-        # 使用药水选项
-        elif choice == "recover":
+        # 使用物品选项
+        elif choice == "use":
             _usePotion(player)
 
         # 玩家撤退选项
@@ -237,9 +237,8 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num):
 
         if 1 <= target <= len(monsters):
             # 进行攻击
-            player.attack(monsters[target - 1])
             print("%s 对 %d.%s 造成了 %s 点伤害！" % (
-                player.getName(), target, monsters[target - 1].getName(), player.getTotalAttack()))
+                player.getName(), target, monsters[target - 1].getName(), player.attack(monsters[target - 1])))
             # 如果怪物还活着
             if monsters[target - 1].getHp() > 0:
                 print(
@@ -266,6 +265,7 @@ def _usePotion(player):
 
     @param player:   玩家对象
     """
+    # 这里不该使用喝药的命令，等会应该修改成在战斗中使用物品的函数
     usePotionCmd = UsePotionCommand(" ", " ", player)
     usePotionCmd.execute()
 
@@ -281,12 +281,8 @@ def _monsterAttackPhase(player, monsters):
     """
     # 怪物攻击
     for num, monster in enumerate(monsters, 1):
-        damage = monster.attack(player)
-        if damage:
-            print("%d.%s *%s* 并对 %s 造成 %s 点伤害！" % (
-                num, monster.getName(), monster.getAttackString(), player.getName(), damage))
-        else:
-            print("%d.%s 的攻击被 %s 抵挡或闪避了。" % (num, monster.getName(), player.getName()))
+        print("%d.%s *%s* 并对 %s 造成 %s 点伤害！" % (
+            num, monster.getName(), monster.getAttackString(), player.getName(), monster.attack(player)))
 
         # 玩家挂了
         if not player.getHp():
