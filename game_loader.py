@@ -88,7 +88,7 @@ def getWorld():
     夏尔主要依赖农业，其土地非常适合耕种。它的主要产物之一是烟斗草，其特别适合在远南部的温暖地区种植。
     """
     shire = Space("夏尔", description, constants.RegionType.ERIADOR, battleProbability=constants.SpaceSpawnProb.shire,
-                  city=hobbiton)
+                  battleBonusDifficulty=constants.SpaceBonusDiff.shire, city=hobbiton)
 
     # 老林子 - 汤姆·邦巴迪尔的家
     # 独特地点
@@ -104,7 +104,8 @@ def getWorld():
     众所周知，老林子因霍比屯居民对其边界的焚毁而变得不欢迎外界之人并经常捉弄游客。
     """
     oldForest = Space("老林子", description, constants.RegionType.ERIADOR,
-                      battleProbability=constants.SpaceSpawnProb.oldForest, uniquePlace=tomBombadil)
+                      battleProbability=constants.SpaceSpawnProb.oldForest,
+                      battleBonusDifficulty=constants.SpaceBonusDiff.oldForest, uniquePlace=tomBombadil)
 
     # 风云丘陵 - 风云顶
     # 独特地点
@@ -117,7 +118,8 @@ def getWorld():
     风云顶，即阿蒙苏尔，位于该山脉的南端。
     """
     weatherHills = Space("风云丘陵", description, constants.RegionType.ERIADOR,
-                         battleProbability=constants.SpaceSpawnProb.weatherHills, uniquePlace=weathertop)
+                         battleProbability=constants.SpaceSpawnProb.weatherHills,
+                         battleBonusDifficulty=constants.SpaceBonusDiff.weatherHills, uniquePlace=weathertop)
 
     # 食人妖森林
     description = """
@@ -162,7 +164,8 @@ def getWorld():
     它从最北边的贡达巴德山到南边的美塞德拉斯，长达795英里（1280公里）。
     """
     mistyMountainsNorth = Space("迷雾山脉北部", description, constants.RegionType.ERIADOR,
-                                battleProbability=constants.SpaceSpawnProb.mistyMountainsNorth, city=rivendell)
+                                battleProbability=constants.SpaceSpawnProb.mistyMountainsNorth,
+                                battleBonusDifficulty=constants.SpaceBonusDiff.mistyMountainsNorth, city=rivendell)
 
     # 高隘口 - 半兽人镇
     # 独特地点
@@ -180,7 +183,8 @@ def getWorld():
     ***通过半兽人镇可以向南进入黑森林***
     """
     highPass = Space("高隘口", description, constants.RegionType.HIGH_PASS,
-                     battleProbability=constants.SpaceSpawnProb.highPass, uniquePlace=goblinTown)
+                     battleProbability=constants.SpaceSpawnProb.highPass,
+                     battleBonusDifficulty=constants.SpaceBonusDiff.highPass, uniquePlace=goblinTown)
 
     # 黑森林 - 精灵国王的宫殿
     # 旅店
@@ -227,7 +231,8 @@ def getWorld():
     第三纪元末年，因为邪恶力量的入侵，大绿林才被人们称为黑森林。索隆战败后，这里又被重新命名为绿叶森林。
     """
     mirkwood = Space("黑森林", description, constants.RegionType.RHOVANION,
-                     battleProbability=constants.SpaceSpawnProb.mirkwood, city=elvenkingsHalls)
+                     battleProbability=constants.SpaceSpawnProb.mirkwood,
+                     battleBonusDifficulty=constants.SpaceBonusDiff.mirkwood, city=elvenkingsHalls)
 
     # 黑森林南部 - 多古尔都
     # 独特地点
@@ -276,7 +281,8 @@ def getWorld():
     山脉中的许多丘陵巨石遍布，坟冢到处可见，这也是其名由来。
     """
     barrowDowns = Space("古冢岗-布理", description, constants.RegionType.BARROW_DOWNS,
-                        battleProbability=constants.SpaceSpawnProb.barrowDowns, city=bree)
+                        battleProbability=constants.SpaceSpawnProb.barrowDowns,
+                        battleBonusDifficulty=constants.SpaceBonusDiff.barrowDowns, city=bree)
 
     # 布茹伊能河
     description = """
@@ -284,7 +290,8 @@ def getWorld():
     它发源于迷雾山脉西麓，最终汇入米斯艾塞尔河，其南翼流经埃尔隆德建立的避难所幽谷。
     """
     bruinen = Space("布茹伊能河", description, constants.RegionType.ERIADOR,
-                    battleProbability=constants.SpaceSpawnProb.bruinen)
+                    battleProbability=constants.SpaceSpawnProb.bruinen,
+                    battleBonusDifficulty=constants.SpaceBonusDiff.bruinen)
 
     # 米斯艾塞尔河 - 沙巴德
     # 独特地点
@@ -323,7 +330,8 @@ def getWorld():
     黑蛮地源于洛汗语，意为“山丘地域”，由第三纪元搬至卡伦纳松的洛希尔人所起，是片美丽丰饶的地区，一些未成组织的牧人与山间居民零星居住在黑蛮地南部，北部则无人居住。
     """
     dunland = Space("黑蛮地", description, constants.RegionType.ENEDWAITH,
-                    battleProbability=constants.SpaceSpawnProb.dunland)
+                    battleProbability=constants.SpaceSpawnProb.dunland,
+                    battleBonusDifficulty=constants.SpaceBonusDiff.dunland)
 
     # 迷雾山脉南部 - 墨瑞亚
     # 独特地点
@@ -340,7 +348,9 @@ def getWorld():
 
     ***要向东进入罗瑞恩则必须通过墨瑞亚***
     """
-    mistyMountainsSouth = Space("迷雾山脉南部", description, constants.RegionType.MORIA, uniquePlace=moria)
+    mistyMountainsSouth = Space("迷雾山脉南部", description, constants.RegionType.MORIA,
+                                battleProbability=constants.SpaceSpawnProb.mistyMountainsSouth,
+                                battleBonusDifficulty=constants.SpaceBonusDiff.mistyMountainsSouth, uniquePlace=moria)
 
     # 罗瑞恩 - 卡拉斯加拉松
     # 旅店
@@ -374,7 +384,8 @@ def getWorld():
     ***要向西进入迷雾山脉南部则必须通过墨瑞亚***
     """
     lorien = Space("罗瑞恩", description, constants.RegionType.RHOVANION,
-                   battleProbability=constants.SpaceSpawnProb.lorien, city=carasGaladhon)
+                   battleProbability=constants.SpaceSpawnProb.lorien,
+                   battleBonusDifficulty=constants.SpaceBonusDiff.lorien, city=carasGaladhon)
 
     # 范贡森林 - 秘林谷
     # 独特地点
@@ -387,7 +398,8 @@ def getWorld():
     在洛汗，这片森林借用了老恩特范贡的名字，被洛汗人民称为“恩特森林”。
     """
     fangorn = Space("范贡森林", description, constants.RegionType.ROHAN,
-                    battleProbability=constants.SpaceSpawnProb.fangorn, uniquePlace=derningle)
+                    battleProbability=constants.SpaceSpawnProb.fangorn,
+                    battleBonusDifficulty=constants.SpaceBonusDiff.fangorn, uniquePlace=derningle)
 
     # 北高原
     description = """
@@ -395,7 +407,8 @@ def getWorld():
     此地适宜放牧，多风，但十分荒凉，很少有人居住。近年来，由于奥克的频繁出没，这里已经不再安全。
     """
     theWold = Space("北高原", description, constants.RegionType.MORDOR,
-                    battleProbability=constants.SpaceSpawnProb.theWold)
+                    battleProbability=constants.SpaceSpawnProb.theWold,
+                    battleBonusDifficulty=constants.SpaceBonusDiff.theWold)
 
     # 凯勒布兰特原野
     description = """
@@ -403,7 +416,8 @@ def getWorld():
     第三纪元2510年，洛汗人奋起援助刚铎的凯勒布兰特原野之战在这里发生。
     """
     fieldOfCelebrant = Space("凯勒布兰特原野", description, constants.RegionType.MORDOR,
-                             battleProbability=constants.SpaceSpawnProb.fieldOfCelebrant)
+                             battleProbability=constants.SpaceSpawnProb.fieldOfCelebrant,
+                             battleBonusDifficulty=constants.SpaceBonusDiff.fieldOfCelebrant)
 
     # 卡伦纳松 - 艾森加德
     # 独特地点
@@ -422,182 +436,167 @@ def getWorld():
                         battleProbability=constants.SpaceSpawnProb.calenardhon,
                         battleBonusDifficulty=constants.SpaceBonusDiff.calenardhon, uniquePlace=isenguard)
 
-    # Westfold - Helm's Deep
-    # Inn
-    description = "Where people go to sober up."
-    greeting = "No one is there to greet you."
-    sobrietyRoom = Inn("Sobriety Room", description, greeting, 0)
-    # Shop
-    description = "The Armory [read: booze shop]."
-    greeting = "We got every poison under the sun...."
-    theArmory = Shop("The Armory", description, greeting,
-                     constants.RegionType.ROHAN, 8, 6)
-    # Square
-    description = "Mass drunkenness."
-    greeting = "Everyone is passed out."
+    # 西伏尔德 - 海尔姆深谷
+    # 旅店
+    description = "人们来这里醒酒。"
+    greeting = "没有人来迎接你。"
+    sobrietyRoom = Inn("醒酒房", description, greeting, 0)
+    # 商店
+    description = "这里实际被称为酒铺"
+    greeting = "我们有太阳底下所有的毒药...."
+    theArmory = Shop("军械库", description, greeting, constants.RegionType.ROHAN, 8, 6)
+    # 广场
+    description = "这有大量喝醉的人。"
+    greeting = "每个人都醉倒了。"
     talk = {
-        "Erkenbrand": "Ughhhhhhh....",
-        "Gambling the Old": "Merrrrrrrrrrrrr...."
+        "埃肯布兰德": "呜呜呜……",
+        "老甘姆林": "呸呸呸呸呸……"
     }
-    helmsDeepCommons = Square("Helms Deep Commons", description, greeting,
-                              talk, items.unique_items.helmsDeepCommonsItems)
-    # City
-    description = """Helm's Deep is a large valley gorge in northwestern Ered 
-    Nimrais below the Thrihyrne. It consists of a massive defensive system 
-    called the Hornburg.
+    helmsDeepCommons = Square("海尔姆深谷广场", description, greeting, talk, items.unique_items.helmsDeepCommonsItems)
+    # 城市
+    description = """
+    海尔姆深谷是白色山脉以北，西伏尔德南部的一个峡谷地区，就在三峰山的底下，谷口地带左右是白色山脉的悬崖峭壁，而面前是深谷宽谷的广阔平地，深谷的背后是晶辉洞。
+    晶辉洞和深谷的存在使得此地成为了一个理想的防守处。山谷外围被海尔姆护墙与墙下的沟壑保护着，在高墙后面的是伟大的堡垒号角堡，有一条长长的斜坡从海尔姆护墙之后伸到号角堡的大门。
     """
-    greeting = "“Welcome to Helm's Deep! WHOOO!!! PARTY!”"
-    helmsDeep = City("Helm's Deep", description, greeting,
-                     [sobrietyRoom, theArmory, helmsDeepCommons])
-    # Westfold
-    description = """The Westfold is the western part of Rohan, close to the 
-    White Mountains and situated between the river Isen and the Folde. The 
-    North-South Road runs through the Westfold from the Fords of Isen to 
-    Edoras. Its strongpoint is Helm's Deep.
+    greeting = "“欢迎来到海尔姆深谷！哇哦！！！派对！”"
+    helmsDeep = City("海尔姆深谷", description, greeting, [sobrietyRoom, theArmory, helmsDeepCommons])
+    # 西伏尔德
+    description = """
+    西伏尔德位于洛汗的西部，指的是从洛汗隘口到埃多拉斯和白色山脉脚下的广阔土地，属于西马克。
+    西伏尔德的主要堡垒是海尔姆深谷处的号角堡，它的西部边界是洛汗隘口，也被认为是艾森河。
     """
-    westfold = Space("Westfold", description, constants.RegionType.ROHAN,
+    westfold = Space("西伏尔德", description, constants.RegionType.ROHAN,
                      battleProbability=constants.SpaceSpawnProb.westfold,
-                     battleBonusDifficulty=constants.SpaceBonusDiff.westfold,
-                     city=helmsDeep)
+                     battleBonusDifficulty=constants.SpaceBonusDiff.westfold, city=helmsDeep)
 
-    # Westemnet
-    description = """The Eastemnet is part of Rohan. It is an area of wide, 
-    grassy plains east of the Entwash River.
+    # 西埃姆内特
+    description = """
+    西埃姆内特是位于恩特河以西的大片洛汗草原的名称，其向东延伸至艾森河，北面则与范贡森林接壤。
     """
-    westemnet = Space("West Emmet", description, constants.RegionType.ROHAN,
+    westemnet = Space("西埃姆内特", description, constants.RegionType.ROHAN,
                       battleProbability=constants.SpaceSpawnProb.westemnet,
                       battleBonusDifficulty=constants.SpaceBonusDiff.westemnet)
 
-    # Eastemnet
-    description = """The Eastemnet is part of Rohan. It contains wide, grassy 
-    plains and is east of the Entwash and west of the Great River, Anduin.
+    # 东埃姆内特
+    description = """
+    东埃姆奈特是洛汗最东边的广袤土地，从恩特河以东一直延申至安都因河。
+    东埃姆奈特上只有些许固定居所，但是不少洛希尔人游牧民在这片土地上放牧。
     """
-    eastemnet = Space("East Emmet", description, constants.RegionType.ROHAN,
-                      battleProbability=constants.SpaceSpawnProb.eastemnet)
+    eastemnet = Space("东埃姆内特", description, constants.RegionType.ROHAN,
+                      battleProbability=constants.SpaceSpawnProb.eastemnet,
+                      battleBonusDifficulty=constants.SpaceBonusDiff.eastemnet)
 
-    # Emyn Muil
-    description = """Emyn Muil is a range of hills south of the Brown Lands 
-    and north of Nindalf. The Anduin cuts through these hills and pools in Nen 
-    Hithoel.
+    # 埃敏穆伊
+    description = """
+    埃敏穆伊是褐地以南、湿平野以北的一片崎岖的丘陵地带，安都因大河穿过其间深切的河谷，注入山区南端的能希斯艾尔湖。
     """
-    emynMuil = Space("Emyn Muil", description, constants.RegionType.MORDOR,
-                     battleProbability=constants.SpaceSpawnProb.emynMuil)
+    emynMuil = Space("埃敏穆伊", description, constants.RegionType.MORDOR,
+                     battleProbability=constants.SpaceSpawnProb.emynMuil,
+                     battleBonusDifficulty=constants.SpaceBonusDiff.emynMuil)
 
-    # Eastfold - Edoras
-    # Inn
-    description = "A quaint inn settled on an open plain."
-    greeting = "“Travelers! We'd be glad to have you for the night.”"
-    sunsetVillage = Inn("Prairie View", description, greeting, 5)
-    # Shop
-    description = "Crafts and various collectibles."
-    greeting = "We have items dating back from T.A. 1497!"
-    twiceRemembered = Shop("Twice Remembered", description, greeting,
-                           constants.RegionType.ROHAN, 10, 8)
-    # Square
-    description = "A country square full of mostly older folk."
-    greeting = "“We love our lands.”"
+    # 东伏尔德 - 埃多拉斯
+    # 旅店
+    description = "一家古色古香的客栈坐落在一片开阔的平原上。"
+    greeting = "“旅行者！我们很高兴你能在这里过夜。”"
+    sunsetVillage = Inn("草原风光", description, greeting, 5)
+    # 商店
+    description = "手工艺品和各种收藏品。"
+    greeting = "我们这里有可以追溯到T.A.1497的物品！"
+    twiceRemembered = Shop("双倍铭记", description, greeting, constants.RegionType.ROHAN, 10, 8)
+    # 广场
+    description = "一个乡村广场，里面大多是老年人。"
+    greeting = "“我们热爱我们的土地。”"
     talk = {
-        "Helm Gammerhand": "I wish you the best on your journey.",
-        "Brytta Leofa": "I have several daughters your age.",
-        "Morwen Steelsheen": ("I would love to teach you blacksmithing if you have"
-                              " the time."),
-        "Frealaf Hildeson": ("Mostly older folks here. My kids are off to work in"
-                             " the city.")
+        "海尔姆游击手": "我祝你在旅途中一切顺利。",
+        "布里塔": "我有好几个像你这么大的女儿。",
+        "“钢泽”墨玟": "如果你有时间，我很愿意教你锻造。",
+        "弗雷亚拉夫": "这里大多是老年人，我的孩子们都去城里工作了。"
     }
-    edorasCommons = Square("Edoras Commons", description, greeting, talk,
-                           items.unique_items.edorasCommonsItems)
-    # City
-    description = """Rohan's first capital was at Aldburg until Eorl the 
-    Young's son Brego built Edoras. It is Rohan's only real city and holds the 
-    Golden Hall of Meduseld.
+    edorasCommons = Square("埃多拉斯广场", description, greeting, talk, items.unique_items.edorasCommonsItems)
+    # 城市
+    description = """
+    埃多拉斯是洛汗王国的都城，它是洛汗初代国王年少的埃奥尔之子布雷戈建造的，他首先修筑了金殿美杜塞尔德，然后迁都于此地。
     """
-    greeting = "“Welcome to Edoras!”"
-    edoras = City("Edoras", description, greeting, [sunsetVillage,
-                                                    twiceRemembered, edorasCommons])
-    # Eastfold - Aldburg
-    # Inn
-    description = "Innkeeper is a man by the name of Seth."
-    greeting = "“We'd be glad to have you for the night.”"
-    sethsHostel = Inn("Seth's Hostel", description, greeting, 5)
-    # Shop
-    description = "Other items too."
-    greeting = "“Would you like some samples?”"
-    milesCookieFactory = Shop("Miles' Cookie Factory", description, greeting,
-                              constants.RegionType.ROHAN, 10, 12)
-    # Square
-    description = "Many interesting discussions."
-    greeting = "“I wonder how this works...?”"
+    greeting = "“欢迎来到埃多拉斯！”"
+    edoras = City("埃多拉斯", description, greeting, [sunsetVillage, twiceRemembered, edorasCommons])
+    # 东伏尔德 - 奥德堡
+    # 旅店
+    description = "旅店老板是一个叫塞思的人。"
+    greeting = "“我们很高兴你能在这里过夜。”"
+    sethsHostel = Inn("塞思的旅馆", description, greeting, 5)
+    # 商店
+    description = "不要走！除了饼干之外还有其他东西。"
+    greeting = "“你想来点饼干尝尝吗？”"
+    milesCookieFactory = Shop("迈尔斯的饼干工坊", description, greeting, constants.RegionType.ROHAN, 10, 12)
+    # 广场
+    description = "这里有许多有意思的讨论。"
+    greeting = "“我想知道这是怎么一回事......？”"
     talk = {
-        "Dmitriy": "Dante.",
-        "Jim “The Dear Ladd” Jr.": "Let's fobrinicate the fobazz!",
-        "Chris": "I am from China."
+        "德米特里": "淡定。",
+        "吉姆": "让我们把这一问题解决了吧！",
+        "克里斯": "我来自中国。"
     }
-    auburnSquare = Square("Auburn Square Commons", description, greeting,
-                          talk, items.unique_items.auburnSquareCommons)
-    # City
-    description = """Aldburg was built by Eorl in the region known as the 
-    Folde, east of Edoras. The Kings of Rohan moved to Edoras after Brego, son 
-    of Eorl, completed the Golden Hall.
+    auburnSquare = Square("奥德堡广场", description, greeting, talk, items.unique_items.auburnSquareCommons)
+    # 城市
+    description = """
+    奥德堡是洛汗历史最悠久的城镇之一，其建立于“年少的”埃奥尔统治时期。
+    当埃多拉斯的金殿尚未落成时，奥德堡是洛汗国王的居所、洛汗的首都。
     """
-    greeting = "“Welcome to Aldburg!”"
-    aldburg = City("Aldburg", description, greeting, [sethsHostel,
-                                                      milesCookieFactory, auburnSquare])
-    # Eastfold
-    description = """Eastfold is a part of the realm of Rohan. Bounded by the 
-    Mering Stream and Snowbourn River, it contains the cities of Aldburg and 
-    Edoras.
+    greeting = "“欢迎来到奥德堡！”"
+    aldburg = City("奥德堡", description, greeting, [sethsHostel, milesCookieFactory, auburnSquare])
+    # 东伏尔德
+    description = """
+    东伏尔德是洛汗东部的一个地区，其北临恩特河，南至白色山脉，东西边界分别为梅尔林溪和雪河。西大道横贯东伏尔德地区。
     """
-    eastfold = Space("Eastfold", description, constants.RegionType.ROHAN,
+    eastfold = Space("东伏尔德", description, constants.RegionType.ROHAN,
                      battleProbability=constants.SpaceSpawnProb.eastfold,
-                     city=[edoras, aldburg])
+                     battleBonusDifficulty=constants.SpaceBonusDiff.eastfold, city=[edoras, aldburg])
 
-    # Nindalf
-    description = """The swamps of Nindalf or Wetwang lie to the south of Emyn 
-    Muil and east of the Great River Anduin and are fed by the great inland 
-    delta of Entwash. The Dead Marshes lie further east and are an extension 
-    of Nindalf.
+    # 宁达尔夫
+    description = """
+    宁达尔夫又称湿平野，是埃敏穆伊丘陵南麓、安都因河东岸的一片广阔淤塞的沼泽。水流在沼地里曲曲绕绕，分支众多。
+    它的水源主要来自两处：从埃敏穆伊丘陵流泄而下的、安都因河的涝洛斯大瀑布，和先从西面汇入安都因河、然后经由诸多河口注入沼泽的恩特河。
     """
-    nindalf = Space("Nimdalf", description, constants.RegionType.MORDOR,
-                    battleProbability=constants.SpaceSpawnProb.nindalf)
+    nindalf = Space("宁达尔夫", description, constants.RegionType.MORDOR,
+                    battleProbability=constants.SpaceSpawnProb.nindalf,
+                    battleBonusDifficulty=constants.SpaceBonusDiff.nindalf)
 
-    # Dead Marshes - Black Gate
-    # Unique Place
-    description = """The Black Gate of Mordor is a gate built by Sauron to 
-    prevent invasion through the Pass of Cirith Gorgor, the gap between the 
-    Ered Lithui and the Ephel Duath.
+    # 死亡沼泽 - 魔栏农
+    # 独特地点
+    description = """
+    魔栏农也叫黑门、魔多之门，是由索隆运用至尊戒的力量于第二纪元在魔多建造的巨门。
+    其矗立在鬼影隘口，是一堵带有三个拱门的巨墙，四周有上百坑洞，面前是一片荒地和两座被恶臭的水潭和泥泽围绕的碎石荒山。
+    魔栏农两侧的山脉上各有一座古时人们建造的高塔，如今是黑门的守卫塔尖牙之塔，日夜有奥克在其中守卫。
     """
-    greetings = "“One does not simply walk into Mordor.”"
-    blackGate = BlackGate("Black Gate", description, greetings)
-    # Dead Marshes
-    description = """The Dead Marshes are an area of swampland east of the
-    Dagorlad plain. It is the site of the ancient Battle of Dagorlad.
+    greetings = "“一个人不可能这么简单地走进魔多。”"
+    blackGate = BlackGate("魔栏农", description, greetings)
+    # 死亡沼泽
+    description = """
+    死亡沼泽是达戈拉德平原西北方、埃敏穆伊丘陵东南方的一片广阔沼泽。它是无数水塘、软泥潭和水道纵横交错形成的大网。
     
-    ***Udun is accessible to the east through The Black Gate***
+    ***通过魔栏农可以向东进入乌顿***
     """
-    deadMarshes = Space("Dead Marshes", description,
-                        constants.RegionType.MORDOR,
-                        uniquePlace=blackGate)
+    deadMarshes = Space("死亡沼泽", description, constants.RegionType.MORDOR,
+                        battleProbability=constants.SpaceSpawnProb.deadMarshes,
+                        battleBonusDifficulty=constants.SpaceBonusDiff.deadMarshes, uniquePlace=blackGate)
 
-    # Valley of Udun - Isenmouthe
-    # Unique Place
-    description = """Isenmouthe or Carach Angren is a pass in the northeastern 
-    part of Mordor and guards the southern end of the valley, Udun.
-    
-    The pass is heavily guarded with fortresses and watchtowers.
+    # 乌顿山谷 - 艾森毛兹
+    # 独特地点
+    description = """
+    艾森毛兹是魔多西北的一处峡谷，由埃斐尔度阿斯与埃瑞德砾苏伊的山脉交汇形成，沟通北部的乌顿山谷与南方的戈埚洛斯平原。它在辛达语中被称为“铁山口”。
+    作为卫戍魔多北方的重要通道，艾森毛兹戒备森严，两侧的山坡上修筑了大量要塞和塔楼。在山口处修建了一堵土墙并挖了一条壕沟，其上只有一座桥将两端相连。
     """
-    greetings = "“One does not simply walk into Mordor part II.”"
-    isenmouthe = Isenmouthe("Isenmouthe", description, greetings)
-    # Valley of Udun
-    description = """Udun is a depressed valley in northwestern Mordor. It 
-    lies between Cirith Gorgor and Isenmouthe and is traversed by large armies 
-    of Sauron in times of war.
+    greetings = "“一个人不可能这么简单地走进魔多的第二部分。”"
+    isenmouthe = Isenmouthe("艾森毛兹", description, greetings)
+    # 乌顿山谷
+    description = """
+    乌顿是魔多西北部的一处山谷，由埃斐尔度阿斯与埃瑞德砾苏伊的山脉环抱而成，是魔多的重要入口，山谷中有大批邪恶生物打通了无数地道。
+    乌顿山谷的西北方有“黑门”魔栏农扼守，而南方则是“铁山口”艾森毛兹。杜尔桑堡垒位于埃斐尔度阿斯北坡，俯瞰着乌顿山谷。
     
-    ***Plateau of Gorgoth is accessible to the south through Isenmouthe***
+    ***通过艾森毛兹可以向南进入戈埚洛斯平原***
     """
-    udun = Space("Udun", description, constants.RegionType.MORDOR,
-                 battleProbability=constants.SpaceSpawnProb.udun,
-                 battleBonusDifficulty=constants.SpaceBonusDiff.udun,
-                 uniquePlace=isenmouthe)
+    udun = Space("乌顿", description, constants.RegionType.MORDOR, battleProbability=constants.SpaceSpawnProb.udun,
+                 battleBonusDifficulty=constants.SpaceBonusDiff.udun, uniquePlace=isenmouthe)
 
     # Cair Andros
     description = """Cair Andros, meaning "Ship of the Long-Foam," is an
@@ -759,26 +758,27 @@ def getWorld():
                         battleBonusDifficulty=constants.SpaceBonusDiff.cirithUngol,
                         uniquePlace=towerOfCirithUngol)
 
-    # Plateau of Gorgoth - Barad Dur
-    # Unique Place
-    description = """Barad-dur is the Dark Lord Sauron's sanctuary fortress in 
-    Mordor and serves as his base of operations. Over 1400 meters high and 
-    held together by dark magic, it is the largest fortress in Middle-earth.
+    # 戈埚洛斯平原 - 巴拉督尔
+    # 独特地点
+    description = """
+    巴拉督尔是索隆在魔多的要塞，位于魔多北部边界灰烬山脉的长山坡尽头。从塔上可以俯瞰戈埚洛斯平原。从巴拉督尔到西北面的黑门有一条100哩长的路。
+    巴拉督尔是一座高耸的大型堡垒，由铁和极其坚硬的石头搭建，大门则是由精钢铸成。索隆用阴影遮盖了这座漆黑的塔楼，并用大量的围墙，战斗器械和小塔楼将巴拉督尔搭建得非常高大。
+    塔楼的最顶端是一尊铁王冠，那里面的窗口中是索隆凝视中洲的巨眼。黑塔楼里有巨大的庭院、地牢和没有窗洞的监狱，而这之下是深深的矿坑。
     """
-    greeting = """“Rising black, blacker and darker than the vast shades amid 
-    which it stood, the cruel pinnacles and iron crown of the topmost tower of 
-    Barad-dur....”"""
-    baradDur = BaradDur("Barad Dur", description, greeting)
-    # Plateau of Gorgoth
-    description = """Plateau of Gorgoroth is a region in the northwestern 
-    region of Mordor. Gorgoroth is the location of the mines and forges which 
-    supply Mordor's armies with weapons and armor.
+    greeting = """
+    乌云翻滚，云中有高耸如山的塔楼和城垛，坐落在压住无数坑洞的强大山基之上；
+    巨大的庭院和地牢，没有窗洞的监狱如悬崖峭壁般耸立，牢不可破的钢门森然大张；
+    耸立的黑塔楼，比它所投下的巨大阴影更黑更暗，巴拉督尔塔顶的残酷尖峰和铁王冠......
     """
-    plateauOfGorgoth = Space("Plateau of Gorgoth", description,
-                             constants.RegionType.MORDOR,
+    baradDur = BaradDur("巴拉督尔", description, greeting)
+    # 戈埚洛斯平原
+    description = """
+    戈埚洛斯平原是魔多西北部的一片巨大荒漠。平原上布满了矿井和熔炉，用于锻造魔多军队的武器和盔甲，而周围则近乎四面环山，实乃要地之中的要地。
+    它的北面和西面分别是埃瑞德砾苏伊山脉和埃斐尔度阿斯山脉，这两座峻岭又各自延伸出一道支脉，围住了平原的东面和南面，只留有一个开往努尔恩地区的裂口。
+    """
+    plateauOfGorgoth = Space("戈埚洛斯平原", description, constants.RegionType.MORDOR,
                              battleProbability=constants.SpaceSpawnProb.plateauOfGorgoth,
-                             battleBonusDifficulty=constants.SpaceBonusDiff.plateauOfGorgoth,
-                             uniquePlace=baradDur)
+                             battleBonusDifficulty=constants.SpaceBonusDiff.plateauOfGorgoth, uniquePlace=baradDur)
 
     # Lossamarch - Pelargir
     # Inn

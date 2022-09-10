@@ -3,21 +3,22 @@
 from monsters.monster import Monster
 import constants
 
+
 class Nazgul_III(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, Nazgul pester the main characters throught the 
-    series. Nazgul_III are tougher Nazgul that appear later in the game.
+    派生自Monster父类。
+
+    在托尔金的宇宙中，戒灵在整个魔戒大战系列中都纠缠着主要人物弗罗多。
+    戒灵III是在游戏后期出现的更强的戒灵。
     """
+
     def __init__(self, stats):
         """
-        Initializes a Nazgul_III monster.
+        初始化戒灵III怪物。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.Nazgul_III, 
-        constants.MonsterDescriptions.Nazgul_III, stats, 
-        constants.MonsterAttackStrings.Nazgul_III, 
-        constants.MonsterDeathStrings.Nazgul_III)
+        Monster.__init__(self, constants.MonsterNames.Nazgul_III,
+                         constants.MonsterDescriptions.Nazgul_III, stats,
+                         constants.MonsterAttackStrings.Nazgul_III,
+                         constants.MonsterDeathStrings.Nazgul_III)

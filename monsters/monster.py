@@ -61,7 +61,7 @@ class Monster(object):
         @return:         实际对目标造成的伤害(正态波动)
         """
         damage = random.normalvariate(self._attack, self._attack / constants.BattleEngine.ATTACK_VOLATILITY)
-        damage = max(int(damage), 0)
+        damage = max(round(damage), 0)
         return target.takeAttack(damage)
 
     def getAttack(self):

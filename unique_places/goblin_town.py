@@ -69,14 +69,6 @@ class GoblinTown(UniquePlace):
         print(self._greetings)
         print("")
 
-        # 第一波战斗
-        print("当你沿着高隘口攀爬，希望避免被发现时，你听到了一些在阴影中爬行的声音....")
-        input("按回车键继续。")
-        print("")
-        result = battle(player, constants.BattleEngineContext.STORY, self._wave.copy())
-        if not result:
-            return
-
         # 已经通关了半兽人镇
         if self._executed:
             print("你上次来时已经扫平了这里！")
@@ -84,6 +76,13 @@ class GoblinTown(UniquePlace):
             print("")
         # 尚未通关半兽人镇
         else:
+            print("当你沿着高隘口攀爬，希望避免被发现时，你听到了一些在阴影中爬行的声音....")
+            input("按回车键继续。")
+            print("")
+            result = battle(player, constants.BattleEngineContext.STORY, self._wave.copy())
+            if not result:
+                return
+
             print("你打败了一些毫无戒心的半兽人！现在，你有机会尝试偷偷溜过去或直接攻入。")
             input("按回车键继续。")
             print("")

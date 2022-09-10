@@ -4,6 +4,8 @@ from .command import Command
 from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
+from constants import MAX_LEVEL
+from constants import LEVEL_EXP_REQUIREMENT
 
 
 class CheckStatsCommand(Command):
@@ -30,8 +32,11 @@ class CheckStatsCommand(Command):
         # 获取玩家数据
         name = self._player.getName()
         experience = self._player.getExperience()
-        level = self._player.getLevel()
         weightLimit = self._player.getWeightLimit()
+        level = self._player.getLevel()
+        nextlevel = level + 1
+        if nextlevel > MAX_LEVEL:
+            nextlevel = 1
 
         # 获取HP数据
         hp = self._player.getHp()
@@ -65,8 +70,9 @@ class CheckStatsCommand(Command):
 
         # 打印数据
         print("%s的当前状态：\n" % name)
-        print("\tHP：%s/%s\t\t负重：%s/%s\t\t等级：%s\t\t经验值：%s" % (
-            hp, totalMaxHp, self._player.getInventory().getWeight(), weightLimit, level, experience))
+        print("\tHP：%s/%s\t\t负重：%s/%s\t\t等级：%s\t\t经验值：%s/%s" % (
+            hp, totalMaxHp, self._player.getInventory().getWeight(), weightLimit, level, experience,
+            LEVEL_EXP_REQUIREMENT[nextlevel]))
         print("\t攻击力：%-6s（基础攻击力：%-5s武器攻击力：%-5s总饰品攻击加值：%s）" % (
             totalAttack, attack, weaponsAttack if weapon else 0, charmAttack))
         print("\t防御力：%-6s（盔甲防御力：%-5s总饰品防御加值：%s）" % (

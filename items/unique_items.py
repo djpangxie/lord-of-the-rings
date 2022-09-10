@@ -49,24 +49,22 @@ elvenCloak = Armor("精灵斗篷", "加拉德瑞尔的礼物", 4, 62, 3)
 phialOfGaladriel = Item("加拉德瑞尔的水晶瓶", "“愿它在黑暗中成为你的光”", 1, 92)
 galadrielsMirrorItems = {"加拉德瑞尔": [elvenCloak, phialOfGaladriel]}
 
-# Helm's Deep Commons
-vodka = Potion("Koskenkorva", "Rohirric Poisons", 1, 12, 32)
-vodka2 = Potion("Luksusowa", "Budget Vodka", 1, 10, 24)
-helmsDeepCommonsItems = {"Erkenbrand": vodka, "Gambling the Old": vodka2}
+# 海尔姆深谷广场
+vodka = Potion("洛汗伏特加", "驭马者的毒药", 1, 12, 32)
+vodka2 = Potion("生命之水", "廉价的伏特加", 1, 10, 24)
+helmsDeepCommonsItems = {"埃肯布兰德": vodka, "老甘姆林": vodka2}
 
-# Edoras Commons
-tea = Potion("Tea", "For sharing stories over", 1, 16, 46)
-tea2 = Potion("Tea", "Secret recipies", 1, 14, 42)
-newspaper = Item("Newspaper Clippins", "Mostly for reminiscing", 1, 0)
-edorasCommonsItems = {"Helm Gammerhand": tea, "Frealaf Hildeson": tea2,
-                      "Brytta Leofa": newspaper}
+# 埃多拉斯广场
+tea = Potion("茶", "用于分享故事", 1, 16, 46)
+tea2 = Potion("茶", "秘密配方", 1, 14, 42)
+newspaper = Item("剪报", "主要用于回忆过去", 1, 0)
+edorasCommonsItems = {"海尔姆游击手": tea, "弗雷亚拉夫": tea2, "布里塔": newspaper}
 
-# Auburn Square Commons
-russianTea = Potion("Russian Tea", "Only 30% alcohol by volume", 1, 8, 28)
-freePizza = Potion("Free Pizza", "Tombstones though", 1, 16, 52)
-chineseHandouts = Item("Chinese Handouts", "Poor quality", 14, 42)
-auburnSquareCommons = {"Dmitriy": russianTea, "Jim": freePizza,
-                       "Chris": chineseHandouts}
+# 奥德堡广场
+russianTea = Potion("下午茶", "酒精含量仅为 30%（按体积计）", 1, 8, 28)
+freePizza = Potion("免费披萨饼", "跟墓碑一样硬", 1, 16, 52)
+chineseHandouts = Item("中文讲义", "语句欠佳", 14, 42)
+auburnSquareCommons = {"德米特里": russianTea, "吉姆": freePizza, "克里斯": chineseHandouts}
 
 # Market Square
 fruitSamples = Potion("Fruit Samples", "Meagerly", 2, 18, 30)

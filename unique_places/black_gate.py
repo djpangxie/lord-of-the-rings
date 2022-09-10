@@ -14,33 +14,33 @@ from items.potion import Potion
 from items.item import Item
 import constants
 
+
 class BlackGate(UniquePlace):
     """
-    The Black Gate is a unique place in Dead Marshes.
+    魔栏农是死亡沼泽中的独特地点。
     
-    The Black Gate is the most obvious way into Mordor. If player visits the 
-    Black Gate, he is given the option of either fighting his way though the 
-    Gate or running. If he chooses to fight, he has to fight wave upon wave of 
-    enemies to gain access into the next space. If he chooses to run, he still 
-    has to fight a smaller amount of enemies.
+    魔栏农是进入魔多的最明确的途径。如果玩家访问黑门，他可以选择在黑门内战斗或逃跑。
+    如果选择战斗，则必须与一波又一波的敌人战斗，以获得进入下一个地区的机会。
+    如果选择逃跑，则仍然需要与少量的敌人战斗。
     """
+
     def __init__(self, name, description, greetings):
         """
-        Initialize UniquePlace object.
+        初始化独特地点对象。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
-        
+        self._executed = False  # 通关记录
+
         self._wave = []
         self._wave2 = []
         self._wave3 = []
         self._wave4 = []
-        
-        #Create monster wave #1 
+
+        # 创建第一波怪物
         for monster in range(11):
             monster = Orc_II(constants.MONSTER_STATS[Orc_II])
             self._wave.append(monster)
@@ -53,8 +53,8 @@ class BlackGate(UniquePlace):
         for monster in range(2):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave.append(monster)
-        
-        #Create monster wave #2
+
+        # 创建第二波怪物
         for monster in range(12):
             monster = Orc_II(constants.MONSTER_STATS[Orc_II])
             self._wave2.append(monster)
@@ -70,15 +70,15 @@ class BlackGate(UniquePlace):
         for monster in range(9):
             monster = Nazgul_III(constants.MONSTER_STATS[Nazgul_III])
             self._wave2.append(monster)
-            
-        #Create monster wave #3
+
+        # 创建第三波怪物
         for monster in range(6):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave3.append(monster)
         monster = MouthOfSauron(constants.MONSTER_STATS[MouthOfSauron])
         self._wave3.append(monster)
-         
-        #Create monster wave #4 
+
+        # 创建第四波怪物
         for monster in range(8):
             monster = Orc_II(constants.MONSTER_STATS[Orc_II])
             self._wave4.append(monster)
@@ -91,138 +91,131 @@ class BlackGate(UniquePlace):
         for monster in range(4):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave4.append(monster)
-        
-        #Create loot
-        weapon = Weapon("Orcish Knife", "Jagged and old", 4, 12, 8)
-        armor = Armor("Rotting Boots", "Completely useless", 4, 0, 0)
-        potion = Potion("Orc Draught", "May contain human flesh", 2, 0, -15)
-        potion2 = Potion("Orc Draught", 
-            "Basically the orcish version of Gatorade", 2, 0, -10)
-        item = Item("Orcish Pillow", "Basically, a rock", 3, 0)
-        item2 = Item("Orcish Blankets", "For slumber parties", 4, 2)
+
+        # 创建战利品
+        weapon = Weapon("奥克小刀", "老旧并成锯齿状", 4, 12, 8)
+        armor = Armor("腐烂的靴子", "完全无用", 4, 0, 0)
+        potion = Potion("奥克食物", "可能含有人肉", 2, 0, -15)
+        potion2 = Potion("奥克饮料", "不知道里面含有些什么", 2, 0, -10)
+        item = Item("奥克枕头", "就是一块石头", 3, 0)
+        item2 = Item("奥克毛毯", "就是野兽的毛皮", 4, 2)
         self._loot = [weapon, armor, potion, potion2, item, item2]
-        
+
     def enter(self, player):
         """
-        The Black Gate's action sequence.
+        黑门的动作序列。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Story
+        # 剧情
         print(self._greetings)
         print("")
-        print ("“Several armies rise up to meet you as you approach the Black" 
-            " Gate.”")
-        input("Press enter to continue. ")
-        print("")
-        
-        #Solicit user choice
-        choice = self._choice()
-        
-        #If player chooses to frontal assault
-        if choice == "frontal assault":
-            self._frontalAssault(player)
-            
-        #If player chooses to run
-        if choice == "run":
-            self._run(player)
-            
+
+        # 已经攻下了魔栏农
+        if self._executed:
+            print("黑门现下由刚铎的英勇士兵们把守着。")
+            input("按回车键继续。")
+            print("")
+        # 尚未攻下魔栏农
+        else:
+            print("“当你接近黑门时，几支奥克军队过来迎接你了！”")
+            input("按回车键继续。")
+            print("")
+
+            # 征求用户选择
+            choice = self._choice()
+
+            # 如果玩家选择正面攻击
+            if choice == "frontal assault":
+                self._frontalAssault(player)
+
+            # 如果玩家选择逃跑
+            if choice == "run":
+                self._run(player)
+
     def _choice(self):
         """
-        Determines if user wants to attack or run.
+        用户选择攻击或逃跑。
         """
         choice = None
         acceptable = ["frontal assault", "run"]
         while choice not in acceptable:
-            choice = input("What do you want to do? Choices: 'frontal" 
-                " assault' or 'run.' ")
+            choice = input("你想怎么做？选项：正面迎击(frontal assault)、逃跑(run) ")
         print("")
-        
+
         return choice
-        
+
     def _frontalAssault(self, player):
         """
-        The action sequence if the user decides to attack the Black Gate.
+        玩家正面迎击的动作序列。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Battle wave 1
-        print("Mouth of Sauron: “I'm so glad you came! Slumber party!”")
-        input("Press enter to continue. ")
+        # 第一波战斗
+        print("索隆之口：“我真高兴你来了！”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave.copy())
         if not result:
             return
-            
-        #Battle wave 2
-        print("Mouth of Sauron: “Hmm. You appear to not like our house.”")
-        input("Press enter to continue. ")
+
+        # 第二波战斗
+        print("索隆之口：“嗯，你似乎不喜欢我们的牢房？”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave2)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave2.copy())
         if not result:
             return
-            
-        #Battle wave 3
-        print("Mouth of Sauron: “Time to DIE!”")
-        input("Press enter to continue. ")
+
+        # 第三波战斗
+        print("索隆之口：“是时候去死了！”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave3)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave3.copy())
         if not result:
             return
-            
-        #Call the victory sequence
+
+        # 调用胜利序列
         self._victorySequence(player)
-        
+
     def _victorySequence(self, player):
         """
-        The victory sequence for securing the Black Gate.
+        玩家攻下了黑门的序列。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Story
-        print ("You have taken the Black Gate and secured part of the" 
-            " north-western route into \nMordor!")
-        input("Press enter to continue. ")
-        print("")
-        
-        #Give player loot
-        if len(self._loot) != 0:
-            print("While looting the battlefield, you find many items.")
-            input("Press enter to continue. ")
-            print("")
-            for item in self._loot:
-                if player.addToInventory(item):
-                    self._loot.remove(item)
-            print("")
-        
-        #Story
-        print("You continue your quest for better night-time entertainment.")
-        print("")
+        self._executed = True
         self._createPort("east")
-        
-        input("Press enter to leave. ")
+        location = player.getLocation()
+
+        print("你攻下了魔栏农，确保了进入魔多的西北路线畅通！")
+        input("按回车键继续。")
         print("")
-        
+
+        print("在打扫战场时，你发现了许多物品。")
+        input("按回车键继续。")
+        print("")
+
+        for item in self._loot:
+            if not player.addToInventory(item):
+                location.addItem(item)
+        print("")
+
     def _run(self, player):
         """
-        The action sequence given that the player tries to run. In this 
-        instance, a smaller chunk of enemies catch up to the player.
+        玩家尝试逃跑的动作序列。在这种情况下，一小部分敌人会追上玩家。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Battle wave 4
-        print("The leading army catches up with you.") 
-        input("Press enter to continue. ")
+        # 调用第四波敌军
+        print("先锋部队追上了你。")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave4)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave4.copy())
         if not result:
             return
-            
-        #Story
-        print("You escape the rest of your pursuers!")
-        input("Press enter to leave. ")
+
+        # 剧情
+        print("你躲过了其余的追兵！")
+        input("按回车键继续。")
         print("")

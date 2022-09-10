@@ -16,31 +16,32 @@ from items.potion import Potion
 from items.item import Item
 import constants
 
+
 class BaradDur(UniquePlace):
     """
-    Barad Dur is a unique place in Plateau of Gorgoth.
+    巴拉督尔是戈埚洛斯平原中的独特地点。
     
-    Barad Dur is an enormous fortress that that the player really has no
-    reason to visit. If he visits, he encounters wave after wave of enemies.
+    巴拉督尔是一个巨大的堡垒，玩家真的没有理由去参观。如果他去了，他就会遇到一波又一波的敌人。
     """
+
     def __init__(self, name, description, greetings):
         """
-        Initialize Barad Dur.
+        初始化巴拉督尔。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
-        
+        self._executed = False  # 通关记录
+
         self._wave = []
         self._wave2 = []
         self._wave3 = []
         self._wave4 = []
         self._wave5 = []
-        
-        #Create monster wave #1 
+
+        # 创建第一波怪物
         for monster in range(12):
             monster = Orc_II(constants.MONSTER_STATS[Orc_II])
             self._wave.append(monster)
@@ -53,8 +54,8 @@ class BaradDur(UniquePlace):
         for monster in range(3):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave.append(monster)
-        
-        #Create monster wave #2
+
+        # 创建第二波怪物
         for monster in range(15):
             monster = Orc_II(constants.MONSTER_STATS[Orc_II])
             self._wave2.append(monster)
@@ -67,132 +68,121 @@ class BaradDur(UniquePlace):
         for monster in range(4):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave2.append(monster)
-            
-        #Create monster wave #3
+
+        # 创建第三波怪物
         for monster in range(5):
             monster = BlackNumernorian_II(constants.MONSTER_STATS[BlackNumernorian_II])
             self._wave3.append(monster)
         monster = MouthOfSauron(constants.MONSTER_STATS[MouthOfSauron])
         self._wave3.append(monster)
-         
-        #Create monster wave #4 
+
+        # 创建第四波怪物
         for monster in range(8):
             monster = Nazgul_III(constants.MONSTER_STATS[Nazgul_III])
             self._wave4.append(monster)
         monster = WitchKing(constants.MONSTER_STATS[WitchKing])
         self._wave4.append(monster)
-            
-        #Create monster wave #5
+
+        # 创建第五波怪物
         for monster in range(14):
             monster = DragonOfMordor(constants.MONSTER_STATS[DragonOfMordor])
             self._wave5.append(monster)
-            
-        #Create loot
-        potion = Potion("Hyper Potion", "Extreme healing qualities", 2, 112, 
-            500)
-        potion2 = Potion("Super Potion", "Medium healing qualities", 2, 76, 350)
-        potion3 = Potion("Dragon Milk", "Healing qualities", 2, 142, 1000)
-        item = Item("Masterball", "Can catch any Pokemon", 4, 272)
-        item2 = Item("Moonstone", "Evolves normal Pokemon", 6, 196)
-        item3 = Item("Nugget", "High resale value", 12, 5000)
+
+        # 创建战利品
+        potion = Potion("亢奋药剂", "具有超高的兴奋作用", 2, 112, 500)
+        potion2 = Potion("超级药水", "超级奥克计划的产物", 2, 76, 350)
+        potion3 = Potion("龙奶", "索隆平常喝的饮料", 2, 142, 1000)
+        item = Item("大师球", "100%捕获任何宝可梦", 4, 272)
+        item2 = Item("月之石", "进化普通的宝可梦", 6, 196)
+        item3 = Item("金珠", "特别值钱", 12, 5000)
         self._loot = [potion, potion2, potion3, item, item2, item3]
-        
+
     def enter(self, player):
         """
-        Barad Dur's action sequence.
+        巴拉督尔的动作序列。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Story
-        print(self._greetings)
-        print("")
-        print ("A host of figures rise up to meet you as you approach Barad"
-            " Dur.")
-        input("Press enter to continue. ")
-        print("")
-        
-        #Calls the battle sequence
-        self._battle(player)
-        
+        # 已经清扫了巴拉督尔
+        if self._executed:
+            print("自你上次清扫过这里后，索隆似乎依旧蜷缩塔中。")
+            input("按回车键继续。")
+            print("")
+        # 尚未清扫巴拉督尔
+        else:
+            print(self._greetings)
+            print("")
+            print("当你接近巴拉督尔时，成群的敌军如山呼海啸般向你压来！")
+            input("按回车键继续。")
+            print("")
+            self._battle(player)
+
     def _battle(self, player):
         """
-        Barad Dur's battle sequence. Player fights five waves of enemies.
+        巴拉督尔的战斗序列。玩家与五波敌人战斗。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        print("Orc Commander I: “We're having a blast upstairs! Slumber party!”")
-        input("Press enter to continue. ")
+        print("奥克指挥官I：“这里没有你能通过的路！”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave.copy())
         if not result:
             return
-            
-        print(("Orc Commander II: “Didn't you read the sign? No %ss" 
-            " allowed.”" % player.getName()))
-        input("Press enter to continue. ")
+
+        print("奥克指挥官II：“%s，你不准再靠近了！”" % player.getName())
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave2)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave2.copy())
         if not result:
             return
-            
-        print("Mouth of Sauron: “You want ANOTHER slumber party?!”")
-        input("Press enter to continue. ")
+
+        print("索隆之口：“你难道想成为邪黑塔的新主子？！”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave3)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave3.copy())
         if not result:
             return
-            
-        print("Nazgul: “AAAAEEEEEEEEEEE!!!”")
-        input("Press enter to continue. ")
+
+        print("九戒灵：“AAAAEEEEEEEEEEE!!!”")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave4)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave4.copy())
         if not result:
             return
-            
-        print(("Lance of the Elite Four: “I've been waiting for you, %s! I" 
-            " knew \nthat you, with your skills, would eventually reach me here.”"
-            % player.getName()))
-        input("Press enter to continue. ")
+
+        print("密密麻麻的魔多龙从四面八的上空朝你扑来！")
+        input("按回车键继续。")
         print("")
-        result = battle(player, constants.BattleEngineContext.STORY, 
-            self._wave5)
+        result = battle(player, constants.BattleEngineContext.STORY, self._wave5.copy())
         if not result:
             return
-            
-        #Call _victorySequence
+
+        # 调用胜利序列
         self._victorySequence(player)
-        
+
     def _victorySequence(self, player):
         """
-        Barad Dur's victory sequence. Player gets loot.
+        巴拉督尔的胜利序列。玩家获得战利品。
         
-        @param player:   The player object.
+        @param player:   玩家对象
         """
-        #Story
-        print("You have defeated Lance, the Pokemon League champion!")
-        input("Press enter to continue. ")
+        self._executed = True
+        location = player.getLocation()
+
+        print("你来到了邪黑塔下，只见大门紧锁，毫无将要开启的迹象！")
+        input("按回车键继续。")
         print("")
-        
-        print("Congratulations on your accomplishments!")
-        input("Press enter to continue. ")
+
+        print("黑暗魔君看来是选择了暂避锋芒，龟缩在塔楼之中....")
+        input("按回车键继续。")
         print("")
-        
-        #Give player loot
-        if len(self._loot) != 0:
-            print ("While looting the battlefield, you find several" 
-                " interesting items. The tower itself remains locked, however.")
-            input("Press enter to continue. ")
-            print("")
-            for item in self._loot:
-                if player.addToInventory(item):
-                    self._loot.remove(item)
-            print("")
-        
-        #Story
-        print("You set off for other ventures within the Dark Land.")
-        input("Press enter to leave. ")
+
+        print("在清扫战场时，你发现了几个有趣的物品，但邪黑塔依然紧闭着。")
+        input("按回车键继续。")
+        print("")
+
+        for item in self._loot:
+            if not player.addToInventory(item):
+                location.addItem(item)
         print("")

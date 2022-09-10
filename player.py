@@ -72,7 +72,7 @@ class Player(object):
         @return:          实际对怪物造成的伤害(正态波动)
         """
         damage = random.normalvariate(self._totalAttack, self._totalAttack / constants.BattleEngine.ATTACK_VOLATILITY)
-        damage = max(int(damage), 0)
+        damage = max(round(damage), 0)
         target.takeAttack(damage)
         return damage
 
