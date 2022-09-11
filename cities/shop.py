@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
-from cities.building import Building
-import factories.shop_factory
-from items.item import Item
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-from items.charm import Charm
-from items.unique_items import theOneRing
-from util.helpers import sortItems
 import constants
+import factories.shop_factory
+from cities.building import Building
+from items.armor import Armor
+from items.charm import Charm
+from items.item import Item
+from items.potion import Potion
+from items.unique_items import theOneRing
+from items.weapon import Weapon
+from util.helpers import sortItems
 
 
 class Shop(Building):

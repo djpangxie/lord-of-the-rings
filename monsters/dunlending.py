@@ -1,22 +1,23 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class Dunlending(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, Dunlendings were the original men of Middle Earth.
+    派生自Monster父类。
+
+    在托尔金的宇宙中，黑蛮地人是中土世界的原始人。
     """
+
     def __init__(self, stats):
         """
-        Initializes a Dunlending monster.
+        初始化黑蛮地人。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.Dunlending, 
-        constants.MonsterDescriptions.Dunlending, stats, 
-        constants.MonsterAttackStrings.Dunlending, 
-        constants.MonsterDeathStrings.Dunlending)
+        Monster.__init__(self, constants.MonsterNames.Dunlending,
+                         constants.MonsterDescriptions.Dunlending, stats,
+                         constants.MonsterAttackStrings.Dunlending,
+                         constants.MonsterDeathStrings.Dunlending)

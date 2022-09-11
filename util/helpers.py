@@ -2,14 +2,14 @@
 
 def generateMenu(prompt, options, appendQuit=False):
     """
-    Generates menus and solicit and returns user choice.
+    生成菜单，征求并返回用户的选择。
 
-    @param prompt:       User prompt. For example: "You are in the store."
-    @param options:      List of options, stored as strings.
-    @param appendQuit:   Whether there should be the option to quit.
+    @param prompt:       用户提示。例如："你在商店里。"
+    @param options:      选项列表，元素为字符串
+    @param appendQuit:   是否应该有退出的选项
     
-    @return:             User choice.
-     """
+    @return:             用户选择
+    """
     print(prompt)
     print("")
 
@@ -18,10 +18,10 @@ def generateMenu(prompt, options, appendQuit=False):
 
     index = 1
     for option in options:
-        print("%s)\t%s" % (str(index), option))
+        print("%s\t%s" % (str(index), option))
         index += 1
 
-    choice = input("Choice: ")
+    choice = input("选项：")
 
     return choice
 
@@ -37,7 +37,6 @@ def sortItems(itemSet):
     from items.armor import Armor
     from items.charm import Charm
     from items.potion import Potion
-    from items.item import Item
 
     # 创建变量
     itemslist = itemSet.getItems()

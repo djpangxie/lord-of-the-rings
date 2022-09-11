@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from cities.building import Building
 import constants
+from cities.building import Building
 
 
 class Inn(Building):

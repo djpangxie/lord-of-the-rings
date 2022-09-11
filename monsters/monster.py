@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-import constants
 import random
+
+import constants
 
 
 class Monster(object):

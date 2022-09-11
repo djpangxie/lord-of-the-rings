@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from .command import Command
-import constants
 
 
 class QuitCommand(Command):

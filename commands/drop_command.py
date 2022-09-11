@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from .command import Command
 from items.item_set import ItemSet
+from .command import Command
 
 
 class DropCommand(Command):

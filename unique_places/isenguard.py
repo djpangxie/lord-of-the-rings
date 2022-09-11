@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
-from monsters.uruk_hai import UrukHai
-from monsters.uruk_hai_archer import UrukHaiArcher
-from monsters.elite_uruk_hai import EliteUrukHai
-from monsters.sauroman import Sauroman
+import random
+
+import constants
 from battle_engine import battle
 from items.item import Item
-import constants
-import random
+from monsters.elite_uruk_hai import EliteUrukHai
+from monsters.sauroman import Sauroman
+from monsters.uruk_hai import UrukHai
+from monsters.uruk_hai_archer import UrukHaiArcher
+from unique_place import UniquePlace
 
 
 class Isenguard(UniquePlace):
@@ -65,7 +66,7 @@ class Isenguard(UniquePlace):
         # 生成战利品
         description = "进入欧尔桑克石塔所需的两把巨大的黑色钥匙"
         self._keysOfOrthanc = Item("欧尔桑克的钥匙", description, 1, 104)
-        self._palatir = Item("帕蓝提尔", "真知晶石", 6, 112)
+        self._palatir = Item("欧尔桑克晶石", "名为帕蓝提尔，又叫真知晶石", 6, 112)
         self._loot = [self._keysOfOrthanc, self._palatir]
 
     def enter(self, player):
@@ -94,7 +95,11 @@ class Isenguard(UniquePlace):
 
         # 执行用户相关脚本
         if choice == "yes":
-            self._summitOrthanc(player)
+            # 如果玩家库存中包含欧尔桑克的钥匙
+            if self._keysOfOrthanc in player.getInventory():
+                self._summitOrthanc(player)
+            else:
+                print("你没有欧尔桑克的钥匙。")
         else:
             print("你继续你的旅程。")
 
@@ -152,8 +157,6 @@ class Isenguard(UniquePlace):
     def _summitPrompt(self):
         """
         征求用户的选择。玩家有机会登顶欧尔桑克石塔。
-
-        @param player:  玩家对象
         """
         choice = None
         acceptable = ["yes", "no"]
@@ -176,7 +179,7 @@ class Isenguard(UniquePlace):
 
         # 玩家有机会找到欧尔桑克中最贵重的宝物
         if self._palatir in self._loot and random.random() < 0.3:
-            print("你发现了欧尔桑克的晶石——帕蓝提尔")
+            print("你发现了欧尔桑克晶石")
             if player.addToInventory(self._palatir):
                 self._loot.remove(self._palatir)
         print("")

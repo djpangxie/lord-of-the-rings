@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-from .command import Command
-from items.potion import Potion
 from items.item_set import ItemSet
+from items.potion import Potion
+from .command import Command
 
 
 class UsePotionCommand(Command):

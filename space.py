@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
+from constants import Direction
 from items.item import Item
 from items.item_set import ItemSet
-from constants import Direction, RegionType
 from items.unique_items import theOneRing
 
 

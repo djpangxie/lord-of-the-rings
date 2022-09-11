@@ -1,20 +1,20 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
+import random
+
+import constants
+from battle_engine import battle
+from items.armor import Armor
+from items.item import Item
+from items.potion import Potion
+from items.weapon import Weapon
+from monsters.black_numernorian import BlackNumernorian
 from monsters.nazgul_ii import Nazgul_II
 from monsters.orc import Orc
 from monsters.orc_archer import OrcArcher
 from monsters.troll import Troll
-from monsters.black_numernorian import BlackNumernorian
 from monsters.witch_king import WitchKing
-from battle_engine import battle
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-from items.item import Item
-import constants
-
-import random
+from unique_place import UniquePlace
 
 
 class DolGuldur(UniquePlace):

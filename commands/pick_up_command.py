@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 import random
-import constants
+
 import battle_engine
+import constants
 from .command import Command
 
 

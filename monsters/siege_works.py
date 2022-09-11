@@ -1,22 +1,23 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class SiegeWorks(Monster):
     """
-    Inherits from Monster.
+    派生自Monster父类。
     
-    Sauron's siege work units.
+    索隆的攻城部队。
     """
+
     def __init__(self, stats):
         """
-        Initializes a SiegeWorks monster.
+        初始化攻城部队。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.SiegeWorks, 
-        constants.MonsterDescriptions.SiegeWorks, stats, 
-        constants.MonsterAttackStrings.SiegeWorks, 
-        constants.MonsterDeathStrings.SiegeWorks)
+        Monster.__init__(self, constants.MonsterNames.SiegeWorks,
+                         constants.MonsterDescriptions.SiegeWorks, stats,
+                         constants.MonsterAttackStrings.SiegeWorks,
+                         constants.MonsterDeathStrings.SiegeWorks)

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from items.item import Item
 from constants import ItemType
+from items.item import Item
 
 
 class Charm(Item):

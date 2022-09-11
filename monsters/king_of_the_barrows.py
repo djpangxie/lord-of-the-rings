@@ -1,22 +1,22 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class KingOfTheBarrows(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, the King of the Barrows is the Chief spirit over the Downs.
+    派生自Monster父类。
+    在托尔金的宇宙中，尸妖王是掌管古冢岗的恶灵之王。
     """
+
     def __init__(self, stats):
         """
-        Initializes a King of the Barrows monster.
+        初始化尸妖王。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.KingOfTheBarrows, 
-        constants.MonsterDescriptions.KingOfTheBarrows, stats, 
-        constants.MonsterAttackStrings.KingOfTheBarrows, 
-        constants.MonsterDeathStrings.KingOfTheBarrows)
+        Monster.__init__(self, constants.MonsterNames.KingOfTheBarrows,
+                         constants.MonsterDescriptions.KingOfTheBarrows, stats,
+                         constants.MonsterAttackStrings.KingOfTheBarrows,
+                         constants.MonsterDeathStrings.KingOfTheBarrows)

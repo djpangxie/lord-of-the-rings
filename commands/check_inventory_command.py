@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-from .command import Command
-from items.item import Item
-from items.weapon import Weapon
 from items.armor import Armor
-from items.potion import Potion
 from items.charm import Charm
 from items.item import Item
+from items.potion import Potion
+from items.weapon import Weapon
+from .command import Command
 
 
 class CheckInventoryCommand(Command):

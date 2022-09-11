@@ -1,23 +1,23 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class Shelob(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, Shelob is an enormous spider who 
-    lives in Cirith Ungol.
+    派生自Monster父类。
+
+    在托尔金的宇宙中，尸罗是一只巨大的蜘蛛，住在奇立斯乌苟的黑暗巢穴中。
     """
+
     def __init__(self, stats):
         """
-        Initializes a Shelob monster.
+        初始化尸罗怪物。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.Shelob, 
-        constants.MonsterDescriptions.Shelob, stats, 
-        constants.MonsterAttackStrings.Shelob, 
-        constants.MonsterDeathStrings.Shelob)
+        Monster.__init__(self, constants.MonsterNames.Shelob,
+                         constants.MonsterDescriptions.Shelob, stats,
+                         constants.MonsterAttackStrings.Shelob,
+                         constants.MonsterDeathStrings.Shelob)

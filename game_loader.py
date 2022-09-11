@@ -3,58 +3,53 @@
 
 import random
 
-from space import Space
-from player import Player
+import constants
+import items.unique_items
 from cities.city import City
 from cities.inn import Inn
-from cities.square import Square
 from cities.shop import Shop
-from unique_place import UniquePlace
-from items.item import Item
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-import items.unique_items
-from commands.command_words import CommandWords
-from commands.help_command import HelpCommand
-from commands.quit_command import QuitCommand
-from commands.describe_command import DescribeCommand
-from commands.drop_command import DropCommand
-from commands.enter_command import EnterCommand
-from commands.pick_up_command import PickUpCommand
-from commands.equip_command import EquipCommand
-from commands.unequip_command import UnequipCommand
-from commands.use_potion_command import UsePotionCommand
-from commands.check_inventory_command import CheckInventoryCommand
+from cities.square import Square
 from commands.check_equipment_command import CheckEquipmentCommand
+from commands.check_inventory_command import CheckInventoryCommand
 from commands.check_money_command import CheckMoneyCommand
 from commands.check_stats_command import CheckStatsCommand
+from commands.command_words import CommandWords
+from commands.describe_command import DescribeCommand
+from commands.drop_command import DropCommand
+from commands.east_command import EastCommand
+from commands.enter_command import EnterCommand
+from commands.equip_command import EquipCommand
+from commands.help_command import HelpCommand
 from commands.map_command import MapCommand
 from commands.north_command import NorthCommand
+from commands.pick_up_command import PickUpCommand
+from commands.quit_command import QuitCommand
 from commands.south_command import SouthCommand
-from commands.east_command import EastCommand
+from commands.unequip_command import UnequipCommand
+from commands.use_potion_command import UsePotionCommand
 from commands.west_command import WestCommand
-from unique_places.tom_bombadil_house import TomBombadilHouse
-from unique_places.weathertop import Weathertop
-from unique_places.isenguard import Isenguard
-from unique_places.tharbad import Tharbad
+from player import Player
+from space import Space
 from unique_places.argonath import Argonath
-from unique_places.ost_in_edhil import OstInEdhil
-from unique_places.goblin_town import GoblinTown
-from unique_places.minas_morgul import MinasMorgul
-from unique_places.black_gate import BlackGate
-from unique_places.isenmouthe import Isenmouthe
 from unique_places.barad_dur import BaradDur
-from unique_places.dol_guldur import DolGuldur
-from unique_places.tower_of_cirith_ungol import TowerOfCirithUngol
-from unique_places.moria import Moria
+from unique_places.black_gate import BlackGate
 from unique_places.derningle import Derningle
-import constants
+from unique_places.dol_guldur import DolGuldur
+from unique_places.goblin_town import GoblinTown
+from unique_places.isenguard import Isenguard
+from unique_places.isenmouthe import Isenmouthe
+from unique_places.minas_morgul import MinasMorgul
+from unique_places.moria import Moria
+from unique_places.ost_in_edhil import OstInEdhil
+from unique_places.tharbad import Tharbad
+from unique_places.tom_bombadil_house import TomBombadilHouse
+from unique_places.tower_of_cirith_ungol import TowerOfCirithUngol
+from unique_places.weathertop import Weathertop
 
 
 def getWorld():
     """
-    创造中土。中土由一系列相连的地区组成。地区中可能有城市和独特地点。城市中可能有旅馆、广场和商店。
+    创造中土世界。中洲由一系列相连的地区组成。地区中可能有城市和独特地点。城市中可能有旅馆、广场和商店。
 
     @return:    创建的地区列表。
     """
@@ -586,7 +581,7 @@ def getWorld():
     艾森毛兹是魔多西北的一处峡谷，由埃斐尔度阿斯与埃瑞德砾苏伊的山脉交汇形成，沟通北部的乌顿山谷与南方的戈埚洛斯平原。它在辛达语中被称为“铁山口”。
     作为卫戍魔多北方的重要通道，艾森毛兹戒备森严，两侧的山坡上修筑了大量要塞和塔楼。在山口处修建了一堵土墙并挖了一条壕沟，其上只有一座桥将两端相连。
     """
-    greetings = "“一个人不可能这么简单地走进魔多的第二部分。”"
+    greetings = "“一个人不可能这么简单地走进魔多的腹地。”"
     isenmouthe = Isenmouthe("艾森毛兹", description, greetings)
     # 乌顿山谷
     description = """
@@ -598,165 +593,151 @@ def getWorld():
     udun = Space("乌顿", description, constants.RegionType.MORDOR, battleProbability=constants.SpaceSpawnProb.udun,
                  battleBonusDifficulty=constants.SpaceBonusDiff.udun, uniquePlace=isenmouthe)
 
-    # Cair Andros
-    description = """Cair Andros, meaning "Ship of the Long-Foam," is an
-    island in the river Anduin, resting nearly forty miles to the north of 
-    Osgiliath. It is of paramount importance to Gondor because it prevents the 
-    enemy from crossing the river and entering into Anorien.
+    # 凯尔安德洛斯
+    description = """
+    凯尔安德洛斯是一个辛达语名称，意为“长沫之船”。是米那斯提力斯城以北的安都因河河段中的一座岛屿，岛上建有刚铎王国的防御工事。
+    凯尔安德洛斯的东面是黑暗魔君的巢穴魔多，西面是刚铎首都米那斯提力斯城的所在地阿诺瑞恩，它是少数能够允许一支大军渡过安都因河天险的渡口之一。
     """
-    cairAndros = Space("Cair Andros", description,
-                       constants.RegionType.GONDOR,
+    cairAndros = Space("凯尔安德洛斯", description, constants.RegionType.GONDOR,
                        battleProbability=constants.SpaceSpawnProb.cairAndros,
                        battleBonusDifficulty=constants.SpaceBonusDiff.cairAndros)
 
     # 欧洛都因（末日山）
-    description = "末日山，也被称为欧洛都因或阿蒙阿马斯，是魔多的火山，至尊戒是在这里锻造的。这是唯一可以摧毁至尊戒的地方。"
+    description = """
+    末日山是一座位于魔多境内的火山，又名“烈火之山”。其独自屹立在戈埚洛斯平原上，高约4500英尺，底部宽约3000英尺，通过索隆之路与邪黑塔相连。
+    在辛达语中，其名为欧洛都因或阿蒙阿马斯，在它的火山锥内，是通向末日裂罅的“烈火诸室”萨马斯瑙尔，至尊戒便是在此铸造而成，这里也是唯一可以摧毁至尊戒的地方。
+    """
     orodruin = Space("欧洛都因", description, constants.RegionType.MORDOR,
                      battleProbability=constants.SpaceSpawnProb.orodruin,
                      battleBonusDifficulty=constants.SpaceBonusDiff.orodruin)
 
-    # Anorien - Minas Tirith
-    # Inn
-    description = "Where elite Gondorian healers do their work."
-    greeting = "“Welcome to the Houses of Healing. What can I do for you?”"
-    housesOfHealing = Inn("Houses of Healing", description, greeting, 5)
-    # Shop
-    description = "An elite armory, used by the best Gondorian troops."
-    greeting = "Welcome to the Smithy of Kings! We have legendary blades...."
-    smithyOfKings = Shop("Smithy of Kings", description, greeting,
-                         constants.RegionType.GONDOR, 14, 14)
-    # Square
-    description = "Minas Tirith commons."
-    greeting = "Tension greets you as you enter Minas Tirith Commons."
+    # 阿诺瑞恩 - 米那斯提力斯
+    # 旅店
+    description = "刚铎全境最优秀的医护人员工作的地方。"
+    greeting = "“欢迎来到诊疗院。我能为你做什么？”"
+    housesOfHealing = Inn("诊疗院", description, greeting, 5)
+    # 商店
+    description = "精锐的军械库，供最优秀的刚铎军队使用。"
+    greeting = "欢迎来到国王铁匠铺！我们这的装备都闪耀着传奇功勋......"
+    smithyOfKings = Shop("国王铁匠铺", description, greeting, constants.RegionType.GONDOR, 14, 14)
+    # 广场
+    description = "这里是米那斯提力斯城的广场。"
+    greeting = "当你进入白城广场时，紧张的气氛迎面而来。"
     talk = {
-        "Calmacil": "Would you like to buy some fruit?",
-        "Castamir": "Everyone is afraid....",
-        "Ciryandil": "Orcish raids have been increasing in the outlying lands....",
-        "Minalcar": "I wonder what we can do with Mordor....",
-        "Narmacil": "I wonder if the king will return",
-        "Tarondor": "I hope Rohan will bring aid....",
-        "Atanatar": "Word has it that Mordor is preparing to attack...."
+        "卡尔马奇尔": "你想买点水果吗？",
+        "卡斯塔米尔": "每个人都在害怕....",
+        "奇尔扬迪尔": "边陲地区的奥克袭击正在不断增长......",
+        "罗门达奇尔": "我想知道我们能为抵挡魔多做些什么......",
+        "纳马奇尔": "我想知道国王是否会归来。",
+        "塔隆多": "我希望洛汗会带来援助....",
+        "阿塔那塔": "有消息说魔多正准备发动进攻...."
     }
-    marketSquare = Square("Market Square", description, greeting, talk,
-                          items.unique_items.marketSquareItems)
-    # Square
-    description = "Site of Gondorian royalty."
-    greeting = "Denethor would like to see you...."
+    marketSquare = Square("白城广场", description, greeting, talk, items.unique_items.marketSquareItems)
+    # 广场
+    description = "刚铎皇室所在地。"
+    greeting = "德内梭尔想要见你...."
     talk = {
-        "Denethor": "You are the true king of Gondor.",
-        "Faramir": "The lands recently stolen by Sauron should be retaken....",
-        "Boromir": "Nice ring. Give it to me!",
-        "Prince Imrahil": "Sauron plans on moving soon....",
-        "Swan Knight": "Here is a gift to help you fight!"
+        "德内梭尔": "给你，都给你！来，波洛米尔，堆起木柴。我们的时代结束了....",
+        "法拉米尔": "应该被夺回最近被索隆窃取的土地....",
+        "波洛米尔": "那戒指...尽管我知道这不可能，但我还是请求你把它给我！",
+        "伊姆拉希尔": "索隆计划不久后进军....",
+        "王城禁卫军": "这里有一份可以帮助你战斗的礼物！"
     }
-    towerOfEcthelion = Square("Tower of Ecthelion", description, greeting,
-                              talk, items.unique_items.towerOfEchelionItems)
-    # City
-    description = """Minas Tirith is a city of Gondor originally called Minas 
-    Anor. From T.A. 1640 onwards it became the capital of the South-kingdom 
-    and the seat of its Kings and ruling Stewards.
+    towerOfEcthelion = Square("埃克塞理安之塔", description, greeting, talk, items.unique_items.towerOfEchelionItems)
+    # 城市
+    description = """
+    米那斯提力斯是刚铎的一座城市，原名为米那斯阿诺尔，于第二纪元3320年由忠贞派努曼诺尔人所建。
+    它自第三纪元1640年起便是南方王国的首都，为诸王与宰相的居所。整座城市由白色的石块砌成，因此又常被称作“白城”。
     """
-    greeting = "“Welcome to the last stronghold of the West, Minas Tirith.”"
-    minasTirith = City("Minas Tirith", description, greeting,
+    greeting = "“欢迎来到刚铎最后的据点——米那斯提力斯。”"
+    minasTirith = City("米那斯提力斯", description, greeting,
                        [housesOfHealing, marketSquare, towerOfEcthelion, smithyOfKings])
-    # Anorien
-    description = """Anorien is the fiefdom of Gondor containing Minas Tirith, 
-    the capital of Gondor. Originally known as Minas Anor, it replaced 
-    Osgiliath as capital of Gondor as Osgiliath was lost to Sauron.
+    # 阿诺瑞恩
+    description = """
+    阿诺瑞恩是刚铎王国位于白色山脉以北、卡伦纳松以南的一块封地。刚铎的首都米那斯提力斯城就坐落在阿诺瑞恩的东南角。
+    阿诺瑞恩是刚铎王国最北方的封邑之一，自从刚铎放弃卡伦纳松之后，它就成为了王国仅有的一块完全位于白色山脉以北的领地。
     """
-    anorien = Space("Anorien", description, constants.RegionType.GONDOR,
+    anorien = Space("阿诺瑞恩", description, constants.RegionType.GONDOR,
                     battleProbability=constants.SpaceSpawnProb.anorien,
-                    city=minasTirith)
+                    battleBonusDifficulty=constants.SpaceBonusDiff.anorien, city=minasTirith)
 
-    # Anduin - Argonath
-    # Unique Place
-    description = "Great for dates."
-    greeting = ("“Welcome to Argonath! Stay within the designated areas and"
-                " listen to your guide.”")
-    argonath = Argonath("Argonath", description, greeting)
-    # Anduin - Osgiliath
-    # Inn
-    description = "A place to rest in the midst of battle."
-    greeting = "“Your cot is on the top left.”"
-    soldierBarracks = Inn("Soldier Barracks", description, greeting, 5)
-    # Shop
-    description = "Rapidly depleting inventories."
-    greeting = "What would you like? We are low on everything...."
-    osgiliathArmory = Shop("Osgiliath Armory", description, greeting,
-                           constants.RegionType.GONDOR, 4, 12)
-    # Square
-    description = "Once a glorious square in the capital of Gondor."
-    greeting = "You find the square in ruins and deserted."
+    # 安都因河 - 阿刚那斯
+    # 独特地点
+    description = """
+    阿刚那斯又名“王者双柱”、“双王之门”、“刚铎之门”，是刚铎北方边界的地标。
+    它是能希斯艾尔湖北端分列安都因河两岸的两座巨大的人像——伊熙尔杜与阿纳瑞安。
+    """
+    greeting = "“欢迎来到阿刚那斯！请呆在指定的区域内，并听从你的向导。”"
+    argonath = Argonath("阿刚那斯", description, greeting)
+    # 安都因河 - 欧斯吉利亚斯
+    # 旅店
+    description = "在战斗中休息的地方。"
+    greeting = "“你的小床在左上角。”"
+    soldierBarracks = Inn("兵营", description, greeting, 5)
+    # 商店
+    description = "存量正在迅速耗尽。"
+    greeting = "你想要什么？我们这什么都缺...."
+    osgiliathArmory = Shop("欧斯吉利亚斯军械库", description, greeting, constants.RegionType.GONDOR, 4, 12)
+    # 广场
+    description = "曾经是刚铎首都的辉煌广场。"
+    greeting = "你发现广场已成废墟，空无一人。"
     talk = {}
-    osgiliathCommons = Square("Osgiliath Commons", description, greeting,
-                              talk)
-    # City
-    description = """Osgiliath was the ancient capital of the Kingdom of 
-    Gondor. Depopulated during the Third Age, it gradually fell into ruin. 
-    Osgiliath has strategic importance as a crossing point over the Anduin.
+    osgiliathCommons = Square("欧斯吉利亚斯广场", description, greeting, talk)
+    # 城市
+    description = """
+    欧斯吉利亚斯是刚铎旧时的都城。它横跨安都因河，坐落于西南的米那斯阿诺尔与东北的米那斯伊希尔之间。
+    然而欧斯吉利亚斯城于第三纪元1437年被劫掠又烧毁，自那之后便开始衰败。但它仍具有重要的战略意义！
     """
-    greeting = "“Be on your guard. We are constantly under attack.”"
-    osgiliath = City("Osgiliath", description, greeting, [soldierBarracks,
-                                                          osgiliathArmory, osgiliathCommons])
-    # Anduin
-    description = """Anduin is a river that crosses most of Middle-Earth east
-    of the Misty Mountains. Passing through many lands, it has many names:
-    Langflood by the ancestors of the Rohirrim, the Great River of Wilderland 
-    in the Westron of Rivendell and the Shire, and simply the Great River in 
-    Gondor.
+    greeting = "“保持警惕。我们正不断遭受攻击。”"
+    osgiliath = City("欧斯吉利亚斯", description, greeting, [soldierBarracks, osgiliathArmory, osgiliathCommons])
+    # 安都因河
+    description = """
+    安都因河是中洲迷雾山脉以东的大河，第三纪元中洲最长的河流，也是中洲大陆东西疆域的界河。
+    安都因河发源于灰色山脉和迷雾山脉，流入埃希尔安都因，汇入贝烈盖尔，自北向南穿过广阔的土地，也因此获得各地居民对它的许多称呼。
+    洛汗人的祖先称它为长川，幽谷和夏尔的西部语中称其为荒地大河，在刚铎安都因河就被称为大河。这些名字都与安都因河极长的河流长度有关。
     """
-    anduin = Space("Anduin", description, constants.RegionType.GONDOR,
+    anduin = Space("安都因河", description, constants.RegionType.GONDOR,
                    battleProbability=constants.SpaceSpawnProb.anduin,
-                   battleBonusDifficulty=constants.SpaceBonusDiff.anduin,
-                   city=osgiliath, uniquePlace=argonath)
+                   battleBonusDifficulty=constants.SpaceBonusDiff.anduin, city=osgiliath, uniquePlace=argonath)
 
-    # Ephel Duath - Minas Morgul
-    # Unique Place
-    description = """Minas Morgul is a fortress-city in Mordor. Originally 
-    created as a Gondorian outpost and the sister city of Minas Anor, Minas 
-    Ithil safeguarded the eastern borders of the Kingdom of Gondor and its 
-    capital from the forces of Mordor during the early part of the Third Age.
-
-    Minas Morgul is home to the Nazgul.
+    # 埃斐尔度阿斯 - 米那斯魔古尔
+    # 独特地点
+    description = """
+    米那斯魔古尔原名米那斯伊希尔，位于魔古尔山谷，曾经是米那斯提力斯的姐妹城市，但第三纪元被索隆的势力攻占，成为戒灵的要塞。
+    米那斯魔古尔正门前的魔古尔路起自欧斯吉利亚斯，经过伊希利恩至魔古尔山谷，跨过阴影山脉进入魔多，将米那斯魔古尔和索隆的王国连接起来。
     """
-    greeting = "“One does not simply walk into Mordor.”"
-    minasMorgul = MinasMorgul("Minas Morgul", description, greeting)
-    # Ephel Duath
-    description = """The Ephel Dúath, or the Mountains of Shadow, is a range of
-    mountains that guards Mordor's western and southern borders.
+    greeting = "“一个人不可能这么简单地走进魔多。”"
+    minasMorgul = MinasMorgul("米那斯魔古尔", description, greeting)
+    # 埃斐尔度阿斯
+    description = """
+    埃斐尔度阿斯亦称“阴影山脉”，是环抱魔多西南边境的山脉。翻越埃斐尔度阿斯进入魔多的通路有两条：
+    其一为米那斯魔古尔要塞镇守的伊姆拉德魔古尔，另一处则是更为危险的“蜘蛛隘口”奇立斯乌苟。
     
-    ***Plateau of Gorgoth is accessible to the east through Minas Morgul***
+    ***通过米那斯魔古尔可以向东进入戈埚洛斯平原***
     """
-    ephelDuath = Space("Ephel Duath", description,
-                       constants.RegionType.MORDOR,
+    ephelDuath = Space("埃斐尔度阿斯", description, constants.RegionType.MORDOR,
                        battleProbability=constants.SpaceSpawnProb.ephelDuath,
-                       battleBonusDifficulty=constants.SpaceBonusDiff.ephelDuath,
-                       uniquePlace=minasMorgul)
+                       battleBonusDifficulty=constants.SpaceBonusDiff.ephelDuath, uniquePlace=minasMorgul)
 
-    # Cirith Ungol - Tower of Cirith Ungol
-    # Unique Place
-    description = """Gondor occupied the fortress until T.A. 1636 when the
-    Great Plague killed large parts of Gondor's population. After the plague,
-    Gondor never again manned the Tower of Cirith Ungol and evil was allowed
-    to return to Mordor. Similar fates suffered the mountain fortress of 
-    Durthang in northwestern Mordor and the Towers of the Teeth at Morannon.
+    # 奇立斯乌苟 - 奇立斯乌苟之塔
+    # 独特地点
+    description = """
+    奇立斯乌苟之塔是奇立斯乌苟隘口中的一道防御工事，矗立在魔多西侧边界之上。
+    要想到达这里，必须先穿过尸罗的巢穴，那里错综复杂且黑暗至极而且臭气熏天。
     """
-    greeting = "“May it be a light to you in dark places.”"
-    towerOfCirithUngol = TowerOfCirithUngol("Tower of Cirith Ungol",
-                                            description, greeting)
-    # Cirith Ungol
-    description = """Cirith Ungol is the pass through the western mountains of
-    Mordor and the only way towards the land from the west. It is guarded by 
-    the Tower of Cirith Ungol, built by the Men of Gondor after the War of the 
-    Last Alliance of Elves and Men.
+    greeting = "“愿你在黑暗之中有一盏明灯。”"
+    towerOfCirithUngol = TowerOfCirithUngol("奇立斯乌苟之塔", description, greeting)
+    # 奇立斯乌苟
+    description = """
+    奇立斯乌苟古称奇立斯度阿斯，是穿越埃斐尔度阿斯的隘口，这里是能从西方秘密进入魔多的唯一通路。
+    奇立斯乌苟被奇立斯乌苟之塔把守着，该塔由刚铎人于最后联盟之战后建造，本是用来监视魔多，盯防索隆。
+    但随后刚铎衰落，索隆东山再起，该塔便被其爪牙占据，成了米那斯魔古尔的前哨。
     
-    ***Plateau of Gorgoth is accessible to the east through Tower of Cirith Ungol***
+    ***要向东进入戈埚洛斯平原则必须通过奇立斯乌苟之塔（但之后无法返回）***
     """
-    cirithUngol = Space("Cirith Ungol", description,
-                        constants.RegionType.MORDOR,
+    cirithUngol = Space("奇立斯乌苟", description, constants.RegionType.MORDOR,
                         battleProbability=constants.SpaceSpawnProb.cirithUngol,
-                        battleBonusDifficulty=constants.SpaceBonusDiff.cirithUngol,
-                        uniquePlace=towerOfCirithUngol)
+                        battleBonusDifficulty=constants.SpaceBonusDiff.cirithUngol, uniquePlace=towerOfCirithUngol)
 
     # 戈埚洛斯平原 - 巴拉督尔
     # 独特地点
@@ -780,52 +761,48 @@ def getWorld():
                              battleProbability=constants.SpaceSpawnProb.plateauOfGorgoth,
                              battleBonusDifficulty=constants.SpaceBonusDiff.plateauOfGorgoth, uniquePlace=baradDur)
 
-    # Lossamarch - Pelargir
-    # Inn
-    description = "Beach resort along one of Gondor's finest coasts!"
-    greeting = "“Hey bro! Welcome to Sunnyside Inn!”"
-    sunnysideInn = Inn("Sunnyside Inn", description, greeting, 5)
-    # Shop
-    description = "Beach accessories and paraphernalia."
-    greeting = "“Hey what's up, bro?”"
-    palmTreeHut = Shop("Palm Tree Hut", description, greeting,
-                       constants.RegionType.GONDOR, 6, 14)
-    # Square
-    description = "Class-three waves!"
-    greeting = "“Bro, did you see those waves?”"
+    # 莱本宁 - 佩拉基尔
+    # 旅店
+    description = "刚铎沿海地区最好的海景度假胜地！"
+    greeting = "“嘿哥们儿！欢迎来到阳光之家！”"
+    sunnysideInn = Inn("阳光之家", description, greeting, 5)
+    # 商店
+    description = "海滩配件和用具。"
+    greeting = "“嘿，怎么了，兄弟？”"
+    palmTreeHut = Shop("棕榈之家", description, greeting, constants.RegionType.GONDOR, 6, 14)
+    # 广场
+    description = "三级浪！"
+    greeting = "“兄弟，你看到那些海浪了吗？”"
     talk = {
-        "Gondorian bro #1": "Bro, let's hit the beach!",
-        "Gondorian bro #2": "Bro! Let's just chill for awhile....",
-        "Gondorian bro #3": ("Bro! I hear there's going to be a party later"
-                             " tonight."),
-        "Gondorian chick #1": "Bro, I have a boyfriend....",
-        "Gondorian chick #2": "Bro, what are you doing later?"
+        "刚铎人一": "兄弟，我们去海滩吧！",
+        "刚铎人二": "兄弟！让我们冷静一会儿......",
+        "刚铎人三": "兄弟！我听说今天晚些时候会有一个聚会。",
+        "刚铎女人一": "不好意思，我有男朋友了....",
+        "刚铎女人二": "嘿！待会你想做些什么？"
     }
-    beach = Square("Pelargir Beach", description, greeting, talk,
-                   items.unique_items.beachItems)
-    # City
-    description = """One of the oldest cities in Middle Earth, Pelargir served
-    as chief haven of the faithful as Numenorians migrated to Middle Earth to
-    escape persecution. In later years, Pelargir served as chief port of 
-    Gondor.
+    beach = Square("佩拉基尔海滩", description, greeting, talk, items.unique_items.beachItems)
+    # 城市
+    description = """
+    佩拉基尔是位于安都因河口三角洲上游的一座城市，它是刚铎王国最古老和最重要的港口之一。
+    佩拉基尔港始建于第二纪元2350年，它是忠贞派的努门诺尔人在中洲建立的最主要的海港之一。
     """
-    greeting = "Enjoy a relaxing stay at Pelargir, port city of Gondor."
-    pelargir = City("Pelargir", description, greeting, [sunnysideInn,
-                                                        palmTreeHut, beach])
-    # Lossamarch
-    description = """Lossarnach is a region and fiefdom in Southern Gondor. 
-    Known as the Vale of Flowers, it is a fertile region lying south of the 
-    White Mountains.
+    greeting = "在刚铎港口城市佩拉基尔享受轻松的假期吧。"
+    pelargir = City("佩拉基尔", description, greeting, [sunnysideInn, palmTreeHut, beach])
+    # 莱本宁
+    description = """
+    莱本宁是刚铎王国的南方封地之一，它位于白色山脉以南，夹在吉尔莱恩河与安都因河之间。
+    它的别名是五河之地，因为埃茹伊河、西瑞斯河、色尔尼河、吉尔莱恩河与凯洛斯河均流经该封邑境内。
     """
-    lossamarch = Space("Lossamarch", description, constants.RegionType.GONDOR,
+    lossamarch = Space("莱本宁", description, constants.RegionType.GONDOR,
                        battleProbability=constants.SpaceSpawnProb.lossamarch,
-                       city=pelargir)
+                       battleBonusDifficulty=constants.SpaceBonusDiff.lossamarch, city=pelargir)
 
-    # Ithilien
-    description = """Ithilien is the fiefdom of Gondor bordering Mordor from 
-    the southwest.
+    # 伊希利恩
+    description = """
+    伊希利恩意为月亮之地，是刚铎王国历史最为悠久、地位最为重要的封邑之一。
+    它西临安都因大河，东面埃斐尔度阿斯山脉，北至死亡沼泽，南达波罗斯河，土地面积较大，地形整体十分狭长。
     """
-    ithilien = Space("Ithilien", description, constants.RegionType.GONDOR,
+    ithilien = Space("伊希利恩", description, constants.RegionType.GONDOR,
                      battleProbability=constants.SpaceSpawnProb.ithilien,
                      battleBonusDifficulty=constants.SpaceBonusDiff.ithilien)
 

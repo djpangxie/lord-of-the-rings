@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
 
 
 class Troll_II(Monster):

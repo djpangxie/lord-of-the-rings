@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
+import random
+
+import constants
 from battle_engine import battle
+from items.armor import Armor
 from items.item import Item
 from items.weapon import Weapon
-from items.armor import Armor
-import constants
-import random
+from unique_place import UniquePlace
 
 
 class Moria(UniquePlace):

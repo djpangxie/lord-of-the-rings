@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from .command import Command
 import constants
+from .command import Command
 
 
 class CheckMoneyCommand(Command):

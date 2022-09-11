@@ -1,23 +1,23 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class EasterlingWarrior(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, easterlings are the inhabitants of people east of
-    Middle Earth. 
+    派生自Monster父类。
+
+    在托尔金的宇宙中，伊斯特林人是中洲以东地区的居民。
     """
+
     def __init__(self, stats):
         """
-        Initializes a EasterlingWarrior monster.
+        初始化伊斯特林战士。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.EasterlingWarrior, 
-        constants.MonsterDescriptions.EasterlingWarrior, stats, 
-        constants.MonsterAttackStrings.EasterlingWarrior, 
-        constants.MonsterDeathStrings.EasterlingWarrior)
+        Monster.__init__(self, constants.MonsterNames.EasterlingWarrior,
+                         constants.MonsterDescriptions.EasterlingWarrior, stats,
+                         constants.MonsterAttackStrings.EasterlingWarrior,
+                         constants.MonsterDeathStrings.EasterlingWarrior)

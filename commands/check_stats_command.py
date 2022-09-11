@@ -1,11 +1,10 @@
 #!/usr/bin/python
 
-from .command import Command
-from items.weapon import Weapon
-from items.armor import Armor
-from items.charm import Charm
-from constants import MAX_LEVEL
 from constants import LEVEL_EXP_REQUIREMENT
+from constants import MAX_LEVEL
+from items.armor import Armor
+from items.weapon import Weapon
+from .command import Command
 
 
 class CheckStatsCommand(Command):

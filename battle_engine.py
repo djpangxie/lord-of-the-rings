@@ -3,13 +3,13 @@
 import math
 import random
 
+import constants
 import factories.monster_factory
 from commands.use_potion_command import UsePotionCommand
-from util.helpers import triangular
-from items.unique_items import lowLevelFindableUniques
-from items.unique_items import highLevelFindableUniques
 from items.unique_items import eliteLevelFindableUniques
-import constants
+from items.unique_items import highLevelFindableUniques
+from items.unique_items import lowLevelFindableUniques
+from util.helpers import triangular
 
 
 def battle(player, context, monsters=None):
@@ -241,8 +241,7 @@ def _playerAttackPhase(player, monsters, bonusDifficulty, earnings, num):
                 player.getName(), target, monsters[target - 1].getName(), player.attack(monsters[target - 1])))
             # 如果怪物还活着
             if monsters[target - 1].getHp() > 0:
-                print(
-                    "%d.%s 还剩 %s 点生命值。" % (target, monsters[target - 1].getName(), monsters[target - 1].getHp()))
+                print("%d.%s 还剩 %s 点生命值。" % (target, monsters[target - 1].getName(), monsters[target - 1].getHp()))
             # 如果怪物死了
             else:
                 print("%s" % monsters[target - 1].getDeathString())

@@ -3,12 +3,9 @@
 import math
 import random
 
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
+import constants
 from items.item_set import ItemSet
 from items.unique_items import lowLevelFindableUniques, shopWeaponDist, shopArmorDist, shopPotionDist
-import constants
 
 
 def getItems(region, numItems, quality):

@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import random
 
-from unique_place import UniquePlace
-from items.potion import Potion
 import constants
+from items.potion import Potion
+from unique_place import UniquePlace
 
 
 class Derningle(UniquePlace):

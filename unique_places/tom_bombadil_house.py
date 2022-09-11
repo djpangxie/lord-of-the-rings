@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-from items.unique_items import theOneRing
-from unique_place import UniquePlace
-from items.weapon import Weapon
 from items.potion import Potion
+from items.unique_items import theOneRing
+from items.weapon import Weapon
+from unique_place import UniquePlace
 
 
 class TomBombadilHouse(UniquePlace):
@@ -42,7 +42,8 @@ class TomBombadilHouse(UniquePlace):
         print("")
 
         if self._sting is not None and player.getInventory().containsItem(theOneRing):
-            print("“我看得出来，你正在进行一次长途旅行，并且携带着一件非常重要的东西。\n我想给你留一份礼物，如果你愿意接受的话。”")
+            print(
+                "“我看得出来，你正在进行一次长途旅行，并且携带着一件非常重要的东西。\n我想给你留一份礼物，如果你愿意接受的话。”")
             input("按回车键继续。")
             print("")
 

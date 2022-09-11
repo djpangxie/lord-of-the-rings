@@ -1,20 +1,18 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
-from monsters.nazgul_iii import Nazgul_III
-from monsters.orc_ii import Orc_II
-from monsters.orc_archer_ii import OrcArcher_II
-from monsters.troll_ii import Troll_II
+import constants
+from battle_engine import battle
+from items.item import Item
+from items.potion import Potion
 from monsters.black_numernorian_ii import BlackNumernorian_II
 from monsters.dragon_of_mordor import DragonOfMordor
-from monsters.witch_king import WitchKing
 from monsters.mouth_of_sauron import MouthOfSauron
-from battle_engine import battle
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-from items.item import Item
-import constants
+from monsters.nazgul_iii import Nazgul_III
+from monsters.orc_archer_ii import OrcArcher_II
+from monsters.orc_ii import Orc_II
+from monsters.troll_ii import Troll_II
+from monsters.witch_king import WitchKing
+from unique_place import UniquePlace
 
 
 class BaradDur(UniquePlace):

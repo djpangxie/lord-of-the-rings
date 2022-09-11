@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-from items.item import Item
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-from items.charm import Charm
 import constants
+from items.armor import Armor
+from items.charm import Charm
+from items.item import Item
+from items.potion import Potion
+from items.weapon import Weapon
 
 """
 以下是游戏中的一些独特物品。例如：“至尊戒”"
@@ -61,39 +61,33 @@ newspaper = Item("剪报", "主要用于回忆过去", 1, 0)
 edorasCommonsItems = {"海尔姆游击手": tea, "弗雷亚拉夫": tea2, "布里塔": newspaper}
 
 # 奥德堡广场
-russianTea = Potion("下午茶", "酒精含量仅为 30%（按体积计）", 1, 8, 28)
+russianTea = Potion("下午茶", "酒精含量仅为30%（按体积计）", 1, 8, 28)
 freePizza = Potion("免费披萨饼", "跟墓碑一样硬", 1, 16, 52)
 chineseHandouts = Item("中文讲义", "语句欠佳", 14, 42)
 auburnSquareCommons = {"德米特里": russianTea, "吉姆": freePizza, "克里斯": chineseHandouts}
 
-# Market Square
-fruitSamples = Potion("Fruit Samples", "Meagerly", 2, 18, 30)
-foodHoards = Potion("Spare Food Hoards", "Generously given", 4, 42, 85)
-negativeThinking = Charm("Negative Thinking", "Not something you want",
-                         35, 0, -15, -2, -40)
-marketSquareItems = {"Calmacil": fruitSamples, "Atanatar": foodHoards,
-                     "Castamir": negativeThinking}
+# 白城广场
+fruitSamples = Potion("试尝水果", "只有一点点", 2, 18, 30)
+foodHoards = Potion("备用食物", "慷慨的赠品", 4, 42, 85)
+negativeThinking = Charm("消极思想", "不是你想要的", 35, 0, -15, -2, -40)
+marketSquareItems = {"卡尔马奇尔": fruitSamples, "阿塔那塔": foodHoards, "卡斯塔米尔": negativeThinking}
 
-# Tower of Echelion
-palatir = Item("Palatir", "For seeing mysteries", 6, 112)
-windbeam = Charm("Windbeam", "Strengthens the hearts of men", 4, 116, 14, 1, 36)
-executorSword = Weapon("Executor Sword", "A gift from Prince Imrahil",
-                       12, 112, 26)
-towerOfEchelionItems = {"Denethor": [palatir, windbeam],
-                        "Prince Imrahil": executorSword}
+# 埃克塞理安之塔
+palatir = Item("阿诺尔晶石", "用于远望和两地之间交流的一种黑色晶石", 6, 112)
+windbeam = Charm("大号角", "用沃隆迪尔猎获的野牛牛角制成", 4, 116, 14, 1, 36)
+executorSword = Weapon("执行者之剑", "来自王城禁卫军的礼物", 12, 112, 26)
+towerOfEchelionItems = {"德内梭尔": [palatir, windbeam], "王城禁卫军": executorSword}
 
-# Beach
-draagz = Item("Draagz", "Bad for health", 2, 76)
-vodka = Potion("Vodka", "From the Gondorian heartland", 1, 52, 48)
-flowersAndTrinkets = Charm("Flowers And Trinkets", "Mental health bonuses",
-                           5, 72, 6, 0, 18)
-beachItems = {"Gondorian bro #3": [draagz, vodka],
-              "Gondorian bro #2": flowersAndTrinkets}
+# 佩拉基尔海滩
+draagz = Item("烟叶", "吸烟有害健康", 2, 76)
+vodka = Potion("伏特加佳酿", "来自刚铎的中心地带", 1, 52, 48)
+flowersAndTrinkets = Charm("别着鲜花的小饰品", "看起来让人心情舒畅", 5, 72, 6, 0, 18)
+beachItems = {"刚铎人三": [draagz, vodka], "刚铎人二": flowersAndTrinkets}
 
 # 精灵三戒
-narya = Charm("纳雅", "火之戒，精灵三戒之一", 0, 270, 100, 0, 0)
-nenya = Charm("能雅", "水之戒，精灵三戒之一", 0, 280, 0, 0, 500)
-vilya = Charm("维雅", "气之戒，精灵三戒之一", 0, 265, 0, 15, 0)
+narya = Charm("纳雅", "精灵三戒中的火之戒", 0, 270, 100, 0, 0)
+nenya = Charm("能雅", "精灵三戒中的水之戒", 0, 280, 0, 0, 500)
+vilya = Charm("维雅", "精灵三戒中的气之戒", 0, 265, 0, 15, 0)
 elvenRings = [narya, nenya, vilya]
 
 # 商店武器
@@ -113,11 +107,11 @@ eriadorWeaponsDist = {
 }
 
 # 洛汗的商店
-ironSword = Weapon("Iron Sword", "Strange markings", 6, 18, 12)
-mediumSword = Weapon("Medium Sword", "Battle tested", 8, 26, 14)
-rohirricBow = Weapon("Rohirric Bow", "Historic embroidery", 10, 30, 16)
-battleMace = Weapon("Battle Mace", "Classic for knights", 8, 42, 20)
-battleLance = Weapon("Battle Lance", "Knight esesential", 14, 62, 26)
+ironSword = Weapon("铁剑", "印有奇特的符号", 6, 18, 12)
+mediumSword = Weapon("阔剑", "久经战斗的考验", 8, 26, 14)
+rohirricBow = Weapon("洛希尔弓", "刻有古老的花纹", 10, 30, 16)
+battleMace = Weapon("战斗长矛", "骑手经典装备", 8, 42, 20)
+battleLance = Weapon("战斗长枪", "骑手必备", 14, 62, 26)
 
 rohanWeaponsDist = {
     ironSword: [0, 8],
@@ -145,11 +139,11 @@ rhovanionWeaponsDist = {
 }
 
 # 刚铎的商店
-soldiersSword = Weapon("Soldier's Sword", "Standard grade", 8, 30, 16)
-longSword = Weapon("Long Sword", "A Gondorian blade", 12, 52, 20)
-compoundBow = Weapon("Compound Bow", "Extreme range", 12, 56, 22)
-eliteLongSword = Weapon("Elite Long Sword", "A Numernorian blade", 10, 112, 25)
-gondorianLongbow = Weapon("Gondorian Longbow", "Extreme range", 14, 102, 30)
+soldiersSword = Weapon("士兵配剑", "标准级", 8, 30, 16)
+longSword = Weapon("长柄剑", "刚铎之刃", 12, 52, 20)
+compoundBow = Weapon("复合弓", "中规中矩", 12, 56, 22)
+eliteLongSword = Weapon("精英长剑", "努曼诺尔之刃", 10, 112, 25)
+gondorianLongbow = Weapon("刚铎长弓", "做工极致", 14, 102, 30)
 
 gondorWeaponsDist = {
     soldiersSword: [0, 12],
@@ -172,12 +166,10 @@ eriadorArmorDist = {
 }
 
 # 洛汗的商店
-leatherArmor = Armor("Leather Armor", "Light and lithe", 6, 18, 2)
-chainmail = Armor("Chainmail", "Took an incredibly long time to make", 10, 24, 4)
-suitOfArmor = Armor("Suit of Armor", "To become a knight in shining armor",
-                    25, 85, 6)
-rohirricBreastplate = Armor("Rohirric Breastplate", "Aged with dignity",
-                            16, 74, 5)
+leatherArmor = Armor("皮甲", "光洁柔软", 6, 18, 2)
+chainmail = Armor("锁子甲", "花了非常长的时间来制作", 10, 24, 4)
+suitOfArmor = Armor("全身盔甲", "成为穿着闪亮盔甲的骑士", 25, 85, 6)
+rohirricBreastplate = Armor("洛希尔胸甲", "老有所养", 16, 74, 5)
 
 rohanArmorDist = {
     leatherArmor: [0, 7],
@@ -200,12 +192,10 @@ rhovanionArmorDist = {
 }
 
 # 刚铎的商店
-standardSoldiersArmor = Armor("Standard Soldier's Armor", "Sells for a reason",
-                              12, 56, 3)
-platemail = Armor("Platemail", "Can take a wallop", 18, 84, 4)
-magneticArmor = Armor("Magnetic Armor", "Repels attacks", 16, 124, 5)
-eliteGondorianArmor = Armor("Elite Gondorian Armor", "Elite Platemail",
-                            18, 142, 6)
+standardSoldiersArmor = Armor("士兵盔甲", "出售这个是有原因的", 12, 56, 3)
+platemail = Armor("板甲", "能够承受重击", 18, 84, 4)
+magneticArmor = Armor("铠甲", "有效抵抗各种攻击", 16, 124, 5)
+eliteGondorianArmor = Armor("精英刚铎盔甲", "精英级板甲", 18, 142, 6)
 
 gondorArmorDist = {
     standardSoldiersArmor: [0, 12],
@@ -227,9 +217,9 @@ eriadorPotionDist = {
 }
 
 # 洛汗的商店
-adornWater = Potion("Adorn Water", "From the Adorn River", 1, 14, 22)
-rohirricTea = Potion("Rohirric Tea", "Calming effects", 1, 24, 30)
-fangornWater = Potion("Entwash Water", "Extreme restorative properties", 1, 48, 64)
+adornWater = Potion("阿多恩河河水", "来自阿多恩河", 1, 14, 22)
+rohirricTea = Potion("洛希尔茶", "具有镇定作用", 1, 24, 30)
+fangornWater = Potion("恩特河河水", "拥有极佳的治愈力", 1, 48, 64)
 
 rohanPotionDist = {
     adornWater: [0, 6],
@@ -249,9 +239,9 @@ rhovanionPotionDist = {
 }
 
 # 刚铎的商店
-anduinWater = Potion("Anduin Water", "All the way from the Anduin River", 1, 52, 72)
-snowmelt = Potion("Snowmelt", "From the White Mountains", 1, 64, 82)
-advancedElixir = Potion("Advanced Elixir", "From the Houses of Healing", 2, 102, 152)
+anduinWater = Potion("安都因河河水", "从安都因河一路运过来", 1, 52, 72)
+snowmelt = Potion("融化的雪水", "来自白色山脉", 1, 64, 82)
+advancedElixir = Potion("高级药剂", "来自诊疗院", 2, 102, 152)
 
 gondorPotionDist = {
     anduinWater: [0, 12],
@@ -293,7 +283,7 @@ nightsmoke = Armor("夜烟 — 扣带", "来自暗黑破坏神中的崔斯特瑞
 peasantCrown = Armor("粗野之冠 — 战帽", "来自暗黑破坏神中的崔斯特瑞姆", 4, 85, 4)
 crownOfThieves = Armor("盗贼皇冠", "来自暗黑破坏神中的崔斯特瑞姆", 5, 76, 3)
 
-# 精英级独特武器
+# 精锐独特武器
 glamdring = Weapon("格拉姆德凛", "西部语：击敌锤", 6, 162, 72)
 anglachel = Weapon("安格拉赫尔", "烈星之铁", 6, 170, 76)
 angrist = Weapon("安格锐斯特", "辛达语：劈铁者", 5, 174, 80)
@@ -302,13 +292,13 @@ belthronding = Weapon("贝尔斯隆丁", "贝烈格·库沙理安所使用的弓
 dramborleg = Weapon("德拉姆博烈格", "锋利的重击", 6, 160, 78)
 scepterOfAnnuminas = Weapon("安努米那斯的权杖", "由阿尔诺诸王持有", 6, 232, 96)
 
-# 精英级独特盔甲
+# 精锐独特盔甲
 helmOfHador = Armor("哈多头盔", "哈多家族的族长所佩戴的头盔", 5, 140, 12)
 harlequinCrestShako = Armor("谐角之冠军帽", "来自暗黑破坏神中的崔斯特瑞姆", 6, 162, 10)
 templarsMight = Armor("神圣盔甲", "来自暗黑破坏神中的崔斯特瑞姆", 6, 152, 12)
 tyraelsMight = Armor("泰瑞尔的力量", "来自暗黑破坏神中的崔斯特瑞姆", 6, 170, 14)
 
-# 精英级独特宝物
+# 传说中的宝物
 aeglos = Weapon("艾格洛斯", "埃睿尼安·吉尔-加拉德所挥舞的长矛", 6, 220, 152)
 ananruth = Weapon("阿兰如斯", "辛达语：王者之怒", 5, 242, 146)
 ringil = Weapon("凛吉尔", "冰冷的火花", 8, 248, 156)

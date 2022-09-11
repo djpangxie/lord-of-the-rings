@@ -1,35 +1,35 @@
 #!/usr/bin/python
 
+from monsters.armored_mumakil import ArmoredMumakil
+from monsters.balrog import Balrog
 from monsters.barrow_wight import BarrowWight
+from monsters.black_numernorian import BlackNumernorian
+from monsters.black_numernorian_ii import BlackNumernorian_II
+from monsters.corsair_of_umbar import CorsairOfUmbar
+from monsters.dragon_of_mordor import DragonOfMordor
+from monsters.dunlending import Dunlending
+from monsters.easterling_warrior import EasterlingWarrior
+from monsters.elite_uruk_hai import EliteUrukHai
 from monsters.goblin import Goblin
 from monsters.great_goblin import GreatGoblin
 from monsters.king_of_the_barrows import KingOfTheBarrows
+from monsters.mouth_of_sauron import MouthOfSauron
 from monsters.nazgul import Nazgul
 from monsters.nazgul_ii import Nazgul_II
 from monsters.nazgul_iii import Nazgul_III
-from monsters.troll import Troll
-from monsters.warg_rider import WargRider
-from monsters.uruk_hai import UrukHai
-from monsters.uruk_hai_archer import UrukHaiArcher
-from monsters.elite_uruk_hai import EliteUrukHai
-from monsters.dunlending import Dunlending
 from monsters.orc import Orc
 from monsters.orc_archer import OrcArcher
-from monsters.siege_works import SiegeWorks
-from monsters.dragon_of_mordor import DragonOfMordor
-from monsters.corsair_of_umbar import CorsairOfUmbar
-from monsters.armored_mumakil import ArmoredMumakil
-from monsters.black_numernorian import BlackNumernorian
-from monsters.easterling_warrior import EasterlingWarrior
-from monsters.sauroman import Sauroman
-from monsters.mouth_of_sauron import MouthOfSauron
-from monsters.witch_king import WitchKing
-from monsters.shelob import Shelob
-from monsters.balrog import Balrog
-from monsters.orc_ii import Orc_II
 from monsters.orc_archer_ii import OrcArcher_II
+from monsters.orc_ii import Orc_II
+from monsters.sauroman import Sauroman
+from monsters.shelob import Shelob
+from monsters.siege_works import SiegeWorks
+from monsters.troll import Troll
 from monsters.troll_ii import Troll_II
-from monsters.black_numernorian_ii import BlackNumernorian_II
+from monsters.uruk_hai import UrukHai
+from monsters.uruk_hai_archer import UrukHaiArcher
+from monsters.warg_rider import WargRider
+from monsters.witch_king import WitchKing
 
 """
 指环王中使用的常量。
@@ -64,7 +64,7 @@ HP_STAT = 1.2  # 玩家每升一级时基础最大生命值变为原来的120%
 ATTACK_STAT = 1.2  # 玩家每升一级时基础攻击力变为原来的120%
 MAX_LEVEL = 28  # 角色所能达到的最高等级
 WEIGHT_LIMIT_STAT = 1.15  # 玩家每升一级时基础负重上限变为原来的115%
-LOSE_REDUCE_EXP = 0.95  # 玩家输了一场战斗后其经验值减少到原来的95%
+LOSE_REDUCE_EXP = 0.9  # 玩家输了一场战斗后其经验值减少到原来的90%
 
 # 玩家等级
 """
@@ -166,15 +166,15 @@ class SpaceSpawnProb(object):
     nindalf = .8  # 宁达尔夫
     deadMarshes = .5  # 死亡沼泽
     udun = .95  # 乌顿
-    cairAndros = .8
+    cairAndros = .8  # 凯尔安德洛斯
     orodruin = .95  # 欧洛都因（末日山）
-    anorien = .75
-    anduin = .85
-    ephelDuath = .9
-    cirithUngol = .9
+    anorien = .75  # 阿诺瑞恩
+    anduin = .85  # 安都因河
+    ephelDuath = .9  # 埃斐尔度阿斯
+    cirithUngol = .9  # 奇立斯乌苟
     plateauOfGorgoth = .95  # 戈埚洛斯平原
-    lossamarch = .6
-    ithilien = .85
+    lossamarch = .6  # 莱本宁
+    ithilien = .85  # 伊希利恩
 
 
 # 地区的难度加成
@@ -207,15 +207,15 @@ class SpaceBonusDiff(object):
     nindalf = -.2  # 宁达尔夫
     deadMarshes = .2  # 死亡沼泽
     udun = .3  # 乌顿
-    cairAndros = .2
+    cairAndros = .2  # 凯尔安德洛斯
     orodruin = .3  # 欧洛都因（末日山）
-    anorien = .3
-    anduin = 0
-    ephelDuath = .2
-    cirithUngol = .2
+    anorien = .3  # 阿诺瑞恩
+    anduin = 0  # 安都因河
+    ephelDuath = .2  # 埃斐尔度阿斯
+    cirithUngol = .2  # 奇立斯乌苟
     plateauOfGorgoth = .2  # 戈埚洛斯平原
-    lossamarch = 0
-    ithilien = .2
+    lossamarch = 0  # 莱本宁
+    ithilien = .2  # 伊希利恩
 
 
 # 怪物名称
@@ -236,7 +236,7 @@ class MonsterNames(object):
     Dunlending = "黑蛮地人"
     Orc = "奥克"
     OrcArcher = "奥克投矛手"
-    SiegeWorks = "围城工事"
+    SiegeWorks = "攻城部队"
     DragonOfMordor = "魔多龙"
     CorsairOfUmbar = "昂巴海盗"
     ArmoredMumakil = "披甲毛象"
@@ -496,15 +496,14 @@ class ShopFactoryConstants(object):
 独特地点所用的常量。
 """
 WEATHERTOP_BATTLE_PROB = .5  # 风云顶扎营遭遇戒灵的概率 50%
-WEATHERTOP_WITCH_KING_PROB = .125
 THARBAD_BATTLE_PROB = .2  # 玩家在沙巴德探索时碰到戒灵的概率 20%
 THARBAD_ITEM_FIND_PROB = .5  # 玩家在沙巴德探索时找到物品的概率 50%
-ARGONATH_EXP_INCREASE = .1
+ARGONATH_EXP_INCREASE = .1  # 玩家进入阿刚那斯后的经验增长幅度 10%
 DERINGLE_EXP_INCREASE = .05  # 玩家在秘林谷选对路后的经验增长幅度 5%
 GOBLIN_TOWN_EVASION_PROB = .4  # 玩家在高隘口偷偷从咕噜的洞穴溜过去的概率 40%
 DOL_GULDUR_WITCH_KING_PROB = .125  # 多古尔都刷出安格玛巫王的概率 12.5%
-CIRITH_UNGOL_EVASION_PROB = .4
-CIRITH_UNGOL_SHELOB_PROB = .4
+CIRITH_UNGOL_EVASION_PROB = .4  # 玩家穿过尸罗的巢穴后溜过奇立斯乌苟之塔的概率 40%
+CIRITH_UNGOL_SHELOB_PROB = .4  # 玩家穿过尸罗的巢穴时每次与尸罗的潜在相遇的概率 40%
 WATCHER_IN_THE_WATER_ATTACK = 17  # 玩家在都林之门前输错密语时水中监视者的攻击力
 MORIA_ITEM_FIND_PROB = .3  # 玩家在墨瑞亚中的每次能找到物品的概率 30%
 MORIA_LOW_RISK_UPPER_LIMIT = 1  # 玩家在墨瑞亚从低风险旅行转向中风险旅行的临界值

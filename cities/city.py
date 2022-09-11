@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from place import Place
 from cities.building import Building
+from place import Place
 
 
 class City(Place):

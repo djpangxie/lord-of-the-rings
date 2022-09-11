@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
+import random
+
+import constants
+from battle_engine import battle
 from items.weapon import Weapon
 from monsters.goblin import Goblin
 from monsters.great_goblin import GreatGoblin
-from battle_engine import battle
-import constants
-
-import random
+from unique_place import UniquePlace
 
 
 class GoblinTown(UniquePlace):

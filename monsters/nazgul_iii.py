@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
 
 
 class Nazgul_III(Monster):
@@ -9,7 +9,7 @@ class Nazgul_III(Monster):
     派生自Monster父类。
 
     在托尔金的宇宙中，戒灵在整个魔戒大战系列中都纠缠着主要人物弗罗多。
-    戒灵III是在游戏后期出现的更强的戒灵。
+    戒灵III是在游戏后期出现的最强的戒灵。
     """
 
     def __init__(self, stats):

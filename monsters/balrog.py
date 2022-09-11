@@ -1,23 +1,23 @@
 #!/usr/bin/python
 
-from monsters.monster import Monster
 import constants
+from monsters.monster import Monster
+
 
 class Balrog(Monster):
     """
-    Inherits from Monster.
-    
-    In Tolkien's universe, Balrog were some of the deadliest beings in Middle 
-    Earth.
+    派生自Monster父类。
+
+    在托尔金的宇宙中，炎魔是中土世界最致命的生物之一。
     """
+
     def __init__(self, stats):
         """
-        Initializes a Balrog monster.
+        初始化炎魔怪物。
 
-        @param stats:     3-element list of Monster stats including attack, hp,
-                          and experience (in that order).
+        @param stats:     怪物基础数据的三元列表，包括最大生命值、攻击力和经验值（按此顺序）
         """
-        Monster.__init__(self, constants.MonsterNames.Balrog, 
-        constants.MonsterDescriptions.Balrog, stats, 
-        constants.MonsterAttackStrings.Balrog, 
-        constants.MonsterDeathStrings.Balrog)
+        Monster.__init__(self, constants.MonsterNames.Balrog,
+                         constants.MonsterDescriptions.Balrog, stats,
+                         constants.MonsterAttackStrings.Balrog,
+                         constants.MonsterDeathStrings.Balrog)

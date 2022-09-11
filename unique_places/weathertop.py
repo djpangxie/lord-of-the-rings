@@ -1,10 +1,11 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
-from monsters.nazgul import Nazgul
-from battle_engine import battle
-import constants
 import random
+
+import constants
+from battle_engine import battle
+from monsters.nazgul import Nazgul
+from unique_place import UniquePlace
 
 
 class Weathertop(UniquePlace):

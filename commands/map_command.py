@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
-from .command import Command
-from space import Space
+import constants
 from cities.city import City
 from unique_place import UniquePlace
-import constants
+from .command import Command
 
 
 class MapCommand(Command):

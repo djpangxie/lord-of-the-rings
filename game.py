@@ -3,16 +3,15 @@
 import random
 import sys
 
-import game_loader
 import battle_engine
-from parser import Parser
+import constants
+import game_loader
+from commands.east_command import EastCommand
 from commands.north_command import NorthCommand
 from commands.south_command import SouthCommand
-from commands.east_command import EastCommand
 from commands.west_command import WestCommand
-from commands.enter_command import EnterCommand
 from items.unique_items import theOneRing
-import constants
+from parser import Parser
 
 
 class Game(object):
@@ -49,7 +48,7 @@ class Game(object):
         splashScreen = """
         """
         print(splashScreen)
-        print("这是一款冒险游戏，你需要为你的角色收集各种装备以对抗魔多。")
+        print("这是一款冒险游戏，你需要为你的角色收集各种物品以对抗魔多。")
         print("一路走来，亲爱的小拉德、迈尔斯、塞思和C-$提供了一点帮助。")
         print("...~财源滚滚~...")
         print("")

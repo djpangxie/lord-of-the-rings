@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-from .command import Command
-from items.weapon import Weapon
 from items.armor import Armor
 from items.charm import Charm
+from items.weapon import Weapon
+from .command import Command
 
 
 class CheckEquipmentCommand(Command):

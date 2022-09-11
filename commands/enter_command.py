@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
 import random
-import constants
+
 import battle_engine
-from .command import Command
+import constants
 from cities.city import City
 from unique_place import UniquePlace
+from .command import Command
 
 
 class EnterCommand(Command):

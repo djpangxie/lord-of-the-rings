@@ -1,16 +1,15 @@
 #!/usr/bin/python
 
+import random
 from math import floor
 
-from items.item import Item
-from items.weapon import Weapon
-from items.armor import Armor
-from items.potion import Potion
-from items.charm import Charm
-from items.item_set import ItemSet
-from util.helpers import sortItems
 import constants
-import random
+from items.armor import Armor
+from items.charm import Charm
+from items.item import Item
+from items.item_set import ItemSet
+from items.weapon import Weapon
+from util.helpers import sortItems
 
 
 class Player(object):

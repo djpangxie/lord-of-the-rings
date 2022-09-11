@@ -1,53 +1,62 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
 import constants
+from unique_place import UniquePlace
+
 
 class Argonath(UniquePlace):
     """
-    Argonath is a unique place in Anduin. The Argonath consists of two
-    gigantic statues of Isildur and Elendil.
+    阿刚那斯是安都因河中的独特地点。
+    阿刚那斯由“两根巨大的石柱”组成，它们“庞大的灰色身影”“威势逼人”。
 
-    If player visits Argonath, he is healed and gains experience.
+    如果玩家访问阿刚那斯，他会被治愈并获得经验。
     """
+
     def __init__(self, name, description, greetings):
         """
-        Initializes Argonath.
+        初始化阿刚那斯。
         
-        @param name:            The name of the UniquePlace.
-        @param description:     A description of the UniquePlace.
-        @param greetings:       The greetings the user gets as he enters.
+        @param name:            独特地点名称
+        @param description:     独特地点的描述
+        @param greetings:       玩家进入该独特地点时得到的问候
         """
-        #Call parent class init function
         UniquePlace.__init__(self, name, description, greetings)
+
+        # 最多获得的经验值
+        self._exp = 500
 
     def enter(self, player):
         """
-        Argonath's action sequence.
+        阿刚那斯的动作序列。
 
-        @param player:  The player object.
+        @param player:  玩家对象
         """
-        #Generate reward
+        # 创建奖励
         name = player.getName()
+        maxHp = player.getTotalMaxHp()
         playerExperience = player.getExperience()
-        experienceIncrease = (playerExperience * 
-            constants.ARGONATH_EXP_INCREASE)
-        maxHp = player.getMaxHp()
-            
-        #Story
+        experienceIncrease = int(playerExperience * constants.ARGONATH_EXP_INCREASE)
+        if experienceIncrease <= self._exp:
+            self._exp -= experienceIncrease
+        else:
+            experienceIncrease = self._exp
+            self._exp = 0
+
+        # 剧情
         print(self._greetings)
         print("")
-        print ("As you gaze upon the kings of old, you think about the present"
-            " age and its \ncurrent darkness.")
-        input("Press enter to continue. ")
+        print("当你凝视古时的国王时，你想到现今的时代和它目前的黑暗。")
+        input("按回车键继续。")
         print("")
-            
-        #Player receives reward
-        print ("You draw up deep reserves of strength within yourself to" 
-            " finish the quest. \nMordor awaits.")
-        print("\n%s gains %s experience.\n" % (name, experienceIncrease))
-        player.increaseExperience(experienceIncrease)
+
+        # 玩家获得奖励
+        print("你在自己内心深处积蓄着力量，以坚定前往魔多完成任务的决心！")
+
+        if experienceIncrease:
+            print("\n%s 获得 %s 经验值。\n" % (name, experienceIncrease))
+            player.increaseExperience(experienceIncrease)
+
         player.heal(maxHp)
-        
-        input("Press enter to leave. ")
+
+        input("按回车键继续。")
         print("")

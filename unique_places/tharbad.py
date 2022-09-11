@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-from unique_place import UniquePlace
-from monsters.nazgul_ii import Nazgul_II
+import random
+
+import constants
 from battle_engine import battle
-from items.weapon import Weapon
 from items.armor import Armor
 from items.item import Item
-import constants
-import random
+from items.weapon import Weapon
+from monsters.nazgul_ii import Nazgul_II
+from unique_place import UniquePlace
 
 
 class Tharbad(UniquePlace):

@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
-from .command import Command
-from space import Space
-from player import Player
 from cities.city import City
 from unique_place import UniquePlace
+from .command import Command
 
 
 class DescribeCommand(Command):

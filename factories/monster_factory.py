@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from math import floor
 import random
+from math import floor
 
 import constants
 
