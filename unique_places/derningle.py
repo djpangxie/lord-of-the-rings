@@ -141,7 +141,7 @@ class Derningle(UniquePlace):
         input("按回车键继续。")
         print("")
 
-        print("树须：“你好 %s ！甘道夫跟我说起过你，我们知道你在这儿。”", player.getName())
+        print("树须：“你好 %s ！甘道夫跟我说起过你，我们知道你在这儿。”" % player.getName())
         input("按回车键继续。")
         print("")
 
